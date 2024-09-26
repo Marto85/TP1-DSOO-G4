@@ -13,6 +13,9 @@ namespace DSOO_Grupo4_TP1.Models
 
         private string Password;
         private List<Cliente> clientes;
+        private List<Socio> socios;
+        private List<NoSocio> noSocios;
+
         private List<Actividad> actividades;
 
         public ClubDeportivo()
@@ -65,21 +68,26 @@ namespace DSOO_Grupo4_TP1.Models
                 return "ACTIVIDAD INEXISTENTE";
             }
 
-            Cliente cliente = clientes.FirstOrDefault(c => c.IdCliente == idCliente);
+            Socio socio = socios.FirstOrDefault(c => c.IdCliente == idCliente);
+            NoSocio noSocio = noSocios.FirstOrDefault(c => c.IdCliente == idCliente);
 
-            if (cliente == null)
+            if (socio == null && noSocio == null)
             {
                 return "CLIENTE INEXISTENTE";
             }
 
-            if (cliente.Actividades.Count >= 3)
+            if (socio!=null && socio.Actividades.Count >= 3)
             {
                 return "TOPE DE ACTIVIDADES ALCANZADO";
             }
 
-            if (actividad.ReservaCupo())
-            {
-                cliente.Actividades.Add(actividad);
+            if (actividad.ChequearCupo())
+            {   
+                if(socio!=null) socio.Actividades.Add(actividad);
+                else if (noSocio != null) noSocio.Actividades.Add(actividad);
+
+                actividad.ReservaCupo();
+
                 return "INSCRIPCIÓN EXITOSA";
             }
 
