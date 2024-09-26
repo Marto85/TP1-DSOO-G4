@@ -60,14 +60,14 @@ namespace DSOO_Grupo4_TP1.Models
             return nuevoSocio;
         }
 
-        public NoSocio AltaNoSocio(int idCliente, string nombre, int dni, string apellido, bool activo, bool esApto)
+        public Cliente AltaCliente(int idCliente, string nombre, int dni, string apellido, bool activo, bool esApto)
         {
             if (clientes.Any(c => c.IdCliente == idCliente))
             {
                 throw new Exception("El cliente ya existe");
             }
 
-            NoSocio nuevo = new NoSocio(idCliente, nombre, apellido, activo, esApto);
+            Cliente nuevo = new Cliente(idCliente, nombre, apellido, activo, esApto);
             clientes.Add(nuevo);
             return nuevo;
         }
