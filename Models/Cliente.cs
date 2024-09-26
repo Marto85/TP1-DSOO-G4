@@ -33,7 +33,7 @@ namespace DSOO_Grupo4_TP1.Models
             actividades = new List<Actividad>();
         }
 
-        public Cliente(int idCliente, DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, DateTime fechaNacimiento, bool activo, bool esApto)
+        public Cliente(int idCliente, DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, DateTime fechaNacimiento, bool activo, bool esApto, List<Actividad>? actividades = null )
         {
             IdCliente = idCliente;
             FechaIngreso = fechaIngreso;
@@ -46,7 +46,7 @@ namespace DSOO_Grupo4_TP1.Models
             FechaNacimiento = fechaNacimiento;
             Activo = activo;
             EsApto = esApto;
-            actividades = new List<Actividad>();
+            actividades = actividades ?? new List<Actividad>();
         }
 
         public List<Actividad> Actividades

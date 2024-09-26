@@ -8,23 +8,23 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\marto\\.nuget\\packages\\": {},
+    "C:\\Users\\zampa\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marto\\source\\repos\\DSOO-Grupo4-TP1\\DSOO-Grupo4-TP1.csproj",
+      "projectUniqueName": "D:\\DESARROLLO\\ITFS29\\TP1-DSOO-G4\\DSOO-Grupo4-TP1.csproj",
       "projectName": "DSOO-Grupo4-TP1",
-      "projectPath": "C:\\Users\\marto\\source\\repos\\DSOO-Grupo4-TP1\\DSOO-Grupo4-TP1.csproj",
-      "packagesPath": "C:\\Users\\marto\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marto\\source\\repos\\DSOO-Grupo4-TP1\\obj\\",
+      "projectPath": "D:\\DESARROLLO\\ITFS29\\TP1-DSOO-G4\\DSOO-Grupo4-TP1.csproj",
+      "packagesPath": "C:\\Users\\zampa\\.nuget\\packages\\",
+      "outputPath": "D:\\DESARROLLO\\ITFS29\\TP1-DSOO-G4\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\marto\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\zampa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
