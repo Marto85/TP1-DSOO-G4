@@ -9,7 +9,7 @@ namespace DSOO_Grupo4_TP1.Models
     public class PagoActividad
     {
         public int Id { get; set; }
-        public int NoSocioId { get; set; } // Solo NoSocio
+        public int NoSocioId { get; set; }
         public int ActividadId { get; set; }
         public DateTime FechaPago { get; set; }
         public decimal Monto { get; set; }

@@ -54,7 +54,7 @@ namespace DSOO_Grupo4_TP1.Models
             get { return actividades; }
         }
 
-        public abstract decimal CalcularMontoPago();
+        //public abstract decimal CalcularMontoPago();
     }
 
 }

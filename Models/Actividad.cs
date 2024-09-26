@@ -11,7 +11,7 @@ namespace DSOO_Grupo4_TP1.Models
         public int Id { get; private set; }
         public string Nombre { get; private set; }
         public string Descripcion { get; private set; }
-        public decimal PrecioNoSocio { get; private set; } // Aplica solo para NoSocio
+        public decimal PrecioNoSocio { get; private set; }
         public string Horario { get; private set; }
         public int CuposDisponibles { get; private set; }
         public string Profesor { get; set; }

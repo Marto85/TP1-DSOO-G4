@@ -9,7 +9,7 @@ namespace DSOO_Grupo4_TP1.Models
     public class Pago
     {
         public int Id { get; private set; }
-        public int SocioId { get; private set; } // Cambiado a SocioId
+        public int SocioId { get; private set; }
         public decimal Monto { get; private set; }
         public DateTime FechaPago { get; private set; }
         public DateTime ProximoVencimiento { get; private set; }

@@ -18,11 +18,6 @@ namespace DSOO_Grupo4_TP1.Models
         {
         }
 
-        public override decimal CalcularMontoPago()
-        {
-            // Implementar lógica de cálculo de pagos para socios (descuento aplicado o cuotas específicas).
-            return 0;  // Implementación según el cálculo de pago para socios
-        }
     }
 
 }
