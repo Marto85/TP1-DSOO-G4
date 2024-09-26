@@ -13,11 +13,6 @@ namespace DSOO_Grupo4_TP1.Models
         {
         }
 
-        public Socio(int idCliente, DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, DateTime fechaNacimiento, bool activo, bool esApto)
-            : base(idCliente, fechaIngreso, nombre, apellido, dni, direccion, telefono, email, fechaNacimiento, activo, esApto)
-        {
-        }
-
     }
 
 }

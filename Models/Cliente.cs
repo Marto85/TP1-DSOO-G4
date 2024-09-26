@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DSOO_Grupo4_TP1.Models
 {
-    public abstract class Cliente
+    public class Cliente
     {
         public int IdCliente { get; private set; }
         public DateTime FechaIngreso { get; set; }
@@ -54,7 +54,6 @@ namespace DSOO_Grupo4_TP1.Models
             get { return actividades; }
         }
 
-        //public abstract decimal CalcularMontoPago();
     }
 
 }
