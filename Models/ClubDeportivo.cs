@@ -35,14 +35,29 @@ namespace DSOO_Grupo4_TP1.Models
 
         public Socio AltaSocio(int idCliente, string nombre, int dni, string apellido, bool activo, bool esApto)
         {
-            if (clientes.Any(c => c.IdCliente == idCliente))
+            Cliente cliente = clientes.FirstOrDefault(c => c.IdCliente == idCliente);
+
+            if (cliente is Socio )
             {
-                throw new Exception("El cliente ya existe");
+                throw new Exception("El Socio ya existe");
             }
 
-            Socio nuevo = new Socio(idCliente, nombre, apellido, activo, esApto);
-            clientes.Add(nuevo);
-            return nuevo;
+            Socio nuevoSocio;
+
+            //si ya existía como cliente, actualizar
+            if (cliente != null)
+            {
+                nuevoSocio = new Socio(cliente);
+                clientes.Remove(cliente);
+                clientes.Add(nuevoSocio);
+            }
+            else {
+                nuevoSocio = new Socio(idCliente, nombre, apellido, activo, esApto);
+                clientes.Add(nuevoSocio);
+            };
+
+      
+            return nuevoSocio;
         }
 
         public NoSocio AltaNoSocio(int idCliente, string nombre, int dni, string apellido, bool activo, bool esApto)
