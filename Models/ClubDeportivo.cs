@@ -44,7 +44,7 @@ namespace DSOO_Grupo4_TP1.Models
 
             Socio nuevoSocio;
 
-            //si ya existía como cliente, actualizar
+            //si ya existía como cliente, genera el socio y elimina la instancia de Cliente
             if (cliente != null)
             {
                 nuevoSocio = new Socio(cliente);
@@ -72,14 +72,19 @@ namespace DSOO_Grupo4_TP1.Models
             return nuevo;
         }
 
+        /*
+         * Permite inscribir un cliente o Socio en una actividad
+         */
         public string InscribirActividad(string nombreActividad, int idCliente)
         {
+            //Chequea que la actividad exista
             Actividad actividad = actividades.FirstOrDefault(a => a.Nombre == nombreActividad);
             if (actividad == null)
             {
                 return "ACTIVIDAD INEXISTENTE";
             }
 
+            //Chequea que el cliente exista
             Cliente cliente = clientes.FirstOrDefault(c => c.IdCliente == idCliente);
 
             if (cliente == null)
@@ -87,11 +92,13 @@ namespace DSOO_Grupo4_TP1.Models
                 return "CLIENTE INEXISTENTE";
             }
 
+            // Si el cliente existe y es socio, chequea la cantidad de actividades. Si no es socio, no. 
             if (cliente is Socio && cliente.Actividades.Count >= 3)
             {
                 return "TOPE DE ACTIVIDADES ALCANZADO";
             }
 
+            //Chequea si hay cupo y lo inscribe.
             if (actividad.ChequearCupo())
             {   
                 cliente.Actividades.Add(actividad);
