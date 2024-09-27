@@ -57,7 +57,7 @@ namespace DSOO_Grupo4_TP1
                         Socio nuevoSocio = club.AltaSocio(idCliente, nombre, apellido, dni, true, true);
                         Console.WriteLine($"Socio {nuevoSocio.Nombre} dado de alta.");
                         Console.WriteLine("Actualmente la lista de Socios es la siguiente: ");
-                        List<Cliente> socios = club.ObtenerClientesFiltrados(soloNoSocios: true);
+                        List<Cliente> socios = club.ObtenerClientesFiltrados(soloSocios: true);
                         
 
                         foreach (Cliente socio in socios)
@@ -74,9 +74,12 @@ namespace DSOO_Grupo4_TP1
                         {
                             Socio socioConvertido = club.ConvertirEnSocio(idCliente);
                             Console.WriteLine($"Cliente {socioConvertido.Nombre} convertido en socio.");
-                            Console.WriteLine("Actualmente la lista de socios es la siguiente: ");
-
-                            foreach (Cliente socio in club.ObtenerClientesFiltrados(soloSocios: true));
+                            Console.WriteLine("Actualmente la lista de socios es la siguiente: "); 
+                            List<Cliente> socioExCliente = club.ObtenerClientesFiltrados(soloSocios: true);
+                            foreach (Cliente socio in socioExCliente)
+                            {
+                                Console.WriteLine($"ID: {socio.IdCliente} - {socio.Nombre} {socio.Apellido}");
+                            }
                         }
                         catch (Exception e)
                         {
