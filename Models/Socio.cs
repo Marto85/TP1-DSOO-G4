@@ -8,13 +8,12 @@ namespace DSOO_Grupo4_TP1.Models
 {
     public class Socio : Cliente
     {
-        public Socio(int idCliente, string nombre, string apellido, bool activo, bool esApto)
-            : base(idCliente, nombre, apellido, activo, esApto)
+        public Socio(string nombre, string apellido, bool activo, bool esApto, int? idCliente = null)
+            : base(nombre, apellido, activo, esApto, idCliente)
         {
         }
 
         public Socio(Cliente cliente) : base(
-          cliente.IdCliente,
           cliente.FechaIngreso,
           cliente.Nombre,
           cliente.Apellido,
@@ -25,7 +24,8 @@ namespace DSOO_Grupo4_TP1.Models
           cliente.FechaNacimiento,
           cliente.Activo,
           cliente.EsApto,
-          cliente.Actividades)
+          cliente.Actividades,
+          cliente.IdCliente)
         {
         }
     }

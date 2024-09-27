@@ -29,37 +29,30 @@ namespace DSOO_Grupo4_TP1.Models
             Password = password;
         }
 
-        public Cliente AltaCliente(int idCliente, string nombre, string apellido, int dni, bool activo, bool esApto)
+        public Cliente AltaCliente(string nombre, string apellido, int dni, bool activo, bool esApto)
         {
-            if (clientes.Any(c => c.IdCliente == idCliente))
+            if (clientes.Any(c => c.DNI == dni))
             {
                 throw new Exception("El cliente ya existe");
             }
 
-            Cliente nuevo = new Cliente(idCliente, nombre, apellido, activo, esApto);
+            Cliente nuevo = new Cliente(nombre, apellido, activo, esApto);
             clientes.Add(nuevo);
             return nuevo;
         }
 
-        public Socio AltaSocio(int idCliente, string nombre, string apellido, int dni, bool activo, bool esApto)
+        public Socio AltaSocio(string nombre, string apellido, int dni, bool activo, bool esApto)
         {
-            try
+            Cliente cliente = clientes.FirstOrDefault(c => c.DNI == dni);
+            if (cliente == null)
             {
-                return ConvertirEnSocio(idCliente);
+                // Si no existe como cliente, creamos un socio desde cero
+                Socio nuevoSocio = new Socio(nombre, apellido, activo, esApto);
+                clientes.Add(nuevoSocio);
+                return nuevoSocio;
             }
-            catch (Exception ex)
-            {
-                if (ex.Message == "El cliente no existe.")
-                {
-                    // Si no existe como cliente, creamos un socio desde cero
-                    Socio nuevoSocio = new Socio(idCliente, nombre, apellido, activo, esApto);
-                    clientes.Add(nuevoSocio);
-                    return nuevoSocio;
-                }
-                else
-                {
-                    throw; 
-                }
+            else {
+                return ConvertirEnSocio(cliente.IdCliente);
             }
         }
 

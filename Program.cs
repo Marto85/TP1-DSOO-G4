@@ -33,11 +33,11 @@ namespace DSOO_Grupo4_TP1
                         string apellido = Console.ReadLine();
                         Console.Write("Ingrese DNI: ");
                         int dni = int.Parse(Console.ReadLine());
-                        Cliente nuevoCliente = club.AltaCliente(idCliente, nombre, apellido, dni, true, true);
+                        Cliente nuevoCliente = club.AltaCliente(nombre, apellido, dni, true, true);
                         Console.WriteLine($"Cliente {nuevoCliente.Nombre} {nuevoCliente.Apellido} dado de alta.");
                         Console.WriteLine("Actualmente la lista de clientes es la siguiente: ");
                         List<Cliente> clientes = club.ObtenerClientesFiltrados(soloNoSocios: true);
-                        
+
                         foreach (Cliente cliente in clientes)
                         {
                             Console.WriteLine($"ID: {cliente.IdCliente} - {cliente.Nombre} {cliente.Apellido}");
@@ -54,7 +54,7 @@ namespace DSOO_Grupo4_TP1
                         apellido = Console.ReadLine();
                         Console.Write("Ingrese DNI: ");
                         dni = int.Parse(Console.ReadLine());
-                        Socio nuevoSocio = club.AltaSocio(idCliente, nombre, apellido, dni, true, true);
+                        Socio nuevoSocio = club.AltaSocio(nombre, apellido, dni, true, true);
                         Console.WriteLine($"Socio {nuevoSocio.Nombre} dado de alta.");
                         Console.WriteLine("Actualmente la lista de Socios es la siguiente: ");
                         List<Cliente> socios = club.ObtenerClientesFiltrados(soloNoSocios: true);

@@ -8,6 +8,9 @@ namespace DSOO_Grupo4_TP1.Models
 {
     public class Cliente
     {
+        // Campo estático para autoincrementar el IdCliente
+        private static int idCounter = 0;
+
         public int IdCliente { get; private set; }
         public DateTime FechaIngreso { get; set; }
         public string Nombre { get; set; }
@@ -22,9 +25,10 @@ namespace DSOO_Grupo4_TP1.Models
 
         protected List<Actividad> actividades;
 
-        public Cliente(int idCliente, string nombre, string apellido, bool activo, bool esApto)
+        public Cliente(string nombre, string apellido, bool activo, bool esApto, int? idCliente = null)
         {
-            IdCliente = idCliente;
+            IdCliente = idCliente ?? idCounter++;
+
             FechaIngreso = DateTime.Now;
             Nombre = nombre;
             Apellido = apellido;
@@ -33,9 +37,9 @@ namespace DSOO_Grupo4_TP1.Models
             actividades = new List<Actividad>();
         }
 
-        public Cliente(int idCliente, DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, DateTime fechaNacimiento, bool activo, bool esApto, List<Actividad>? actividades = null )
+        public Cliente(DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, DateTime fechaNacimiento, bool activo, bool esApto, List<Actividad>? actividades = null, int? idCliente = null  )
         {
-            IdCliente = idCliente;
+            IdCliente = idCliente ?? idCounter++;
             FechaIngreso = fechaIngreso;
             Nombre = nombre;
             Apellido = apellido;
