@@ -1,5 +1,10 @@
 ﻿.vs/
 *.suo
 *.user
-obj/
+obj
+Debug
 bin
+/obj/Debug/net6.0/DSOO-Grupo4-TP1.AssemblyInfo.cs
+/obj/Debug/net6.0/DSOO-Grupo4-TP1.AssemblyInfoInputs.cache
+/obj/Debug/net6.0/DSOO-Grupo4-TP1.assets.cache
+/obj/Debug/net6.0/DSOO-Grupo4-TP1.GeneratedMSBuildEditorConfig.editorconfig
