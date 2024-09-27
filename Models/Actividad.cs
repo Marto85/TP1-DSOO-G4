@@ -15,6 +15,7 @@ namespace DSOO_Grupo4_TP1.Models
         public string Horario { get; private set; }
         public int CuposDisponibles { get; private set; }
         public string Profesor { get; set; }
+        private List<Cliente> inscriptos;
 
         public Actividad(int id, string nombre, string descripcion, decimal precioNoSocio, string horario, int cuposDisponibles, string profesor)
         {
@@ -25,11 +26,12 @@ namespace DSOO_Grupo4_TP1.Models
             Horario = horario;
             CuposDisponibles = cuposDisponibles;
             Profesor = profesor;
+            inscriptos = new List<Cliente>();
         }
 
         public bool ChequearCupo()
         {
-            if (CuposDisponibles >= 0)
+            if (CuposDisponibles > 0)
             {
                 return true;
             }
@@ -51,6 +53,8 @@ namespace DSOO_Grupo4_TP1.Models
         {
             CuposDisponibles++;
         }
+
+        
     }
 
 
