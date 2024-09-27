@@ -126,9 +126,9 @@ namespace DSOO_Grupo4_TP1.Models
 
         public List<Cliente> ObtenerClientesFiltrados(bool soloSocios = false, bool soloNoSocios = false)
         {
-            if(soloSocios) return clientes.Where(c => c is Socio).ToList();
+            if(soloSocios && !soloNoSocios) return clientes.Where(c => c is Socio).ToList();
 
-            else if (soloNoSocios) return clientes.Where(c => !(c is Socio)).ToList();
+            else if (soloNoSocios && !soloSocios) return clientes.Where(c => !(c is Socio)).ToList();
 
             else return clientes.ToList();
         }
