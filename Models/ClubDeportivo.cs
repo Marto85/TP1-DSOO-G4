@@ -135,7 +135,7 @@ namespace DSOO_Grupo4_TP1.Models
         {
             if(soloSocios) return clientes.Where(c => c is Socio).ToList();
 
-            else if (soloNoSocios) return clientes.Where(c => (c is Cliente)).ToList();
+            else if (soloNoSocios) return clientes.Where(c => !(c is Socio)).ToList();
 
             else return clientes.ToList();
         }
