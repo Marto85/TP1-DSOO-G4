@@ -25,8 +25,6 @@ namespace DSOO_Grupo4_TP1
                 {
                     case "1":
                         // Alta de cliente
-                        Console.Write("Ingrese ID Cliente: ");
-                        int idCliente = int.Parse(Console.ReadLine());
                         Console.Write("Ingrese Nombre: ");
                         string nombre = Console.ReadLine();
                         Console.Write("Ingrese Apellido: ");
@@ -36,9 +34,9 @@ namespace DSOO_Grupo4_TP1
                         Cliente nuevoCliente = club.AltaCliente(nombre, apellido, dni, true, true);
                         Console.WriteLine($"Cliente {nuevoCliente.Nombre} {nuevoCliente.Apellido} dado de alta.");
                         Console.WriteLine("Actualmente la lista de clientes es la siguiente: ");
-                        List<Cliente> clientes = club.ObtenerClientesFiltrados(soloNoSocios: true);
+                        List<Cliente> clientesF = club.ObtenerClientesFiltrados(soloNoSocios: true);
 
-                        foreach (Cliente cliente in clientes)
+                        foreach (Cliente cliente in clientesF)
                         {
                             Console.WriteLine($"ID: {cliente.IdCliente} - {cliente.Nombre} {cliente.Apellido}");
                         }
@@ -46,8 +44,6 @@ namespace DSOO_Grupo4_TP1
 
                     case "2":
                         // Alta de socio
-                        Console.Write("Ingrese ID Socio: ");
-                        idCliente = int.Parse(Console.ReadLine());
                         Console.Write("Ingrese Nombre: ");
                         nombre = Console.ReadLine();
                         Console.Write("Ingrese Apellido: ");
@@ -69,7 +65,8 @@ namespace DSOO_Grupo4_TP1
                     case "3":
                         // Convertir cliente en socio
                         Console.Write("Ingrese ID del cliente a convertir: ");
-                        idCliente = int.Parse(Console.ReadLine());
+                        int idCliente = int.Parse(Console.ReadLine());
+
                         try
                         {
                             Socio socioConvertido = club.ConvertirEnSocio(idCliente);
@@ -91,6 +88,10 @@ namespace DSOO_Grupo4_TP1
                         // Inscribir en actividad
                         Console.Write("Ingrese ID Cliente: ");
                         idCliente = int.Parse(Console.ReadLine());
+
+                        Cliente clienteCheck = club.ObtenerClientesFiltrados(true, true).FirstOrDefault(c => c.IdCliente == idCliente);
+                        if (clienteCheck == null) { Console.Write("El id ingresado no corresponde a ningún cliente o socio. "); break;  }
+
                         Console.Write("Ingrese nombre de la actividad: ");
                         string actividad = Console.ReadLine();
                         string resultado = club.InscribirActividad(actividad, idCliente);
