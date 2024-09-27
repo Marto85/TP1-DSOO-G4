@@ -74,6 +74,9 @@ namespace DSOO_Grupo4_TP1
                         {
                             Socio socioConvertido = club.ConvertirEnSocio(idCliente);
                             Console.WriteLine($"Cliente {socioConvertido.Nombre} convertido en socio.");
+                            Console.WriteLine("Actualmente la lista de socios es la siguiente: ");
+
+                            foreach (Cliente socio in club.ObtenerClientesFiltrados(soloSocios: true));
                         }
                         catch (Exception e)
                         {
