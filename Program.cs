@@ -69,13 +69,25 @@ namespace DSOO_Grupo4_TP1
 
                         try
                         {
-                            Socio socioConvertido = club.ConvertirEnSocio(idCliente);
-                            Console.WriteLine($"Cliente {socioConvertido.Nombre} convertido en socio.");
-                            Console.WriteLine("Actualmente la lista de socios es la siguiente: "); 
-                            List<Cliente> socioExCliente = club.ObtenerClientesFiltrados(soloSocios: true);
-                            foreach (Cliente socio in socioExCliente)
+                            // Buscar el cliente por ID
+                            Cliente cliente = club.ObtenerClientePorId(idCliente);
+
+                            // Verificar que el cliente exista
+                            if (cliente == null)
                             {
-                                Console.WriteLine($"ID: {socio.IdCliente} - {socio.Nombre} {socio.Apellido}");
+                                Console.WriteLine("El cliente no existe.");
+                            }
+                            else
+                            {
+                                // Convertir el cliente en socio
+                                club.ConvertirEnSocio(cliente);
+                                Console.WriteLine($"Cliente {cliente.Nombre} convertido en socio.");
+                                Console.WriteLine("Actualmente la lista de socios es la siguiente: ");
+                                List<Cliente> socioExCliente = club.ObtenerClientesFiltrados(soloSocios: true);
+                                foreach (Cliente socio in socioExCliente)
+                                {
+                                    Console.WriteLine($"ID: {socio.IdCliente} - {socio.Nombre} {socio.Apellido}");
+                                }
                             }
                         }
                         catch (Exception e)
@@ -83,6 +95,7 @@ namespace DSOO_Grupo4_TP1
                             Console.WriteLine(e.Message);
                         }
                         break;
+
 
                     case "4":
                         // Inscribir en actividad

@@ -54,7 +54,12 @@ namespace DSOO_Grupo4_TP1.Models
             CuposDisponibles++;
         }
 
-        
+        public void AgregarInscripto(Cliente cliente)
+        {
+            inscriptos.Add(cliente);
+        }
+
+
     }
 
 

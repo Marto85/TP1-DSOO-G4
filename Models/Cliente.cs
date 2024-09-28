@@ -9,7 +9,7 @@ namespace DSOO_Grupo4_TP1.Models
     public class Cliente
     {
         // Campo estático para autoincrementar el IdCliente
-        private static int idCounter = 0;
+        private static int idCounter = 1;
 
         public int IdCliente { get; private set; }
         public DateTime FechaIngreso { get; set; }
