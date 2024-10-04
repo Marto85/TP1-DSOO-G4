@@ -1,13 +1,13 @@
-﻿.vs/
-/.vs
-*.suo
-*.user
-**/bin/*
-**/obj/*
-bin
-obj
-packages
-/obj/
+﻿#.vs/
+#/.vs
+#*.suo
+#*.user
+#**/bin/*
+#**/obj/*
+#bin
+#obj
+#packages
+#/obj/
 
 # User-specific files
 *.suo
@@ -246,3 +246,8 @@ Logs
 # jfm file
 *.jfm
 .jfm
+
+/obj/Debug/net6.0/DSOO-Grupo4-TP1.AssemblyInfo.cs
+/obj/Debug/net6.0/DSOO-Grupo4-TP1.AssemblyInfoInputs.cache
+/obj/Debug/net6.0/DSOO-Grupo4-TP1.assets.cache
+/obj/Debug/net6.0/DSOO-Grupo4-TP1.GeneratedMSBuildEditorConfig.editorconfig
