@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DSOO-Grupo4-TP1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5bf1186ef4c08da33ecce6fcba37f701ac8cb736")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+382b7af6aad9cc97802b2e5b0f1073f874af7fc8")]
 [assembly: System.Reflection.AssemblyProductAttribute("DSOO-Grupo4-TP1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DSOO-Grupo4-TP1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

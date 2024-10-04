@@ -98,8 +98,15 @@ namespace DSOO_Grupo4_TP1
 
 
                     case "4":
-                        // Inscribir en actividad
-                        Console.Write("Ingrese ID Cliente: ");
+                        // Inscribir en actividad               
+                        List<Actividad> actividades = club.ObtenerActividades();
+                        Console.WriteLine("Actualmente las actividades que puedes elegir son las siguientes: ");
+                        foreach (Actividad actividadDisponible in actividades)
+                        {
+                            Console.WriteLine(actividadDisponible.Nombre);
+                        }
+                        
+                        Console.Write("Ingrese ID Cliente que desea inscribir: ");
                         idCliente = int.Parse(Console.ReadLine());
 
                         Cliente clienteCheck = club.ObtenerClientesFiltrados(true, true).FirstOrDefault(c => c.IdCliente == idCliente);

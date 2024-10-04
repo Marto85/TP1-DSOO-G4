@@ -24,8 +24,8 @@ namespace DSOO_Grupo4_TP1.Models
                 new Actividad(2, "Pilates", "Pilates intermedio", 600, "Martes 17:00", 8, "Carlos Pérez"),
                 new Actividad(3, "Zumba", "Clase de zumba energizante", 400, "Miércoles 19:00", 12, "María Gómez"),
                 new Actividad(4, "Crossfit", "Entrenamiento de alta intensidad", 700, "Jueves 18:00", 5, "Juan Martínez"),
-                new Actividad(5, "Natación", "Clase de natación", 800, "Viernes 17:00", 6, "Lucía Fernández"),
-                new Actividad(6, "Fútbol", "Partido de fútbol amistoso", 300, "Sábado 16:00", 20, "Pedro González")
+                new Actividad(5, "Natacion", "Clase de natación", 800, "Viernes 17:00", 6, "Lucía Fernández"),
+                new Actividad(6, "Futbol", "Partido de fútbol amistoso", 300, "Sábado 16:00", 20, "Pedro González")
             };
         }
 
@@ -184,7 +184,10 @@ namespace DSOO_Grupo4_TP1.Models
             return "INSCRIPCIÓN EXITOSA";
         }
 
-
+        public List<Actividad> ObtenerActividades()
+        {
+            return actividades;
+        }
         public List<Cliente> ObtenerClientesFiltrados(bool soloSocios = false, bool soloNoSocios = false)
         {
             if(soloSocios && !soloNoSocios) return clientes.Where(c => c is Socio).ToList();

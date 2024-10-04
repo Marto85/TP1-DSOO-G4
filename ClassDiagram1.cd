@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DSOO_Grupo4_TP1.Models.Actividad">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAGAQAAAAACIAAAAAAAgIABAAAgAAAAAAAAADAAAAA=</HashCode>
+      <FileName>Models\Actividad.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DSOO_Grupo4_TP1.Models.Cliente">
+    <Position X="6.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAACACBAAAAEACAAgAAQAAEAAAAgAAQABgAEAAA=</HashCode>
+      <FileName>Models\Cliente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DSOO_Grupo4_TP1.Models.ClubDeportivo">
+    <Position X="3" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEAAAAAAAgAAAgAQAAEAAAAAACIIUAABAAQAA=</HashCode>
+      <FileName>Models\ClubDeportivo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DSOO_Grupo4_TP1.Models.Socio">
+    <Position X="9.5" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Socio.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
