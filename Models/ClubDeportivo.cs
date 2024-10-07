@@ -38,14 +38,31 @@ namespace DSOO_Grupo4_TP1.Models
             Password = password;
         }
 
-        public decimal obtenerAbonoMensualSocios()
+        public decimal ObtenerAbonoMensualSociosBase()
         {
             return abonoMensualSocios;
         }
 
-        public void modificarAbonoMensualSocios(decimal nuevoAbono)
+        public void ModificarAbonoMensualSocios(decimal nuevoAbono)
         {
             abonoMensualSocios = nuevoAbono;
+        }
+
+        public decimal ObtenerAbonoMensualSociosConDescuento(int frecuenciaPago)
+        {
+            switch (frecuenciaPago)
+            {
+                case 1:
+                    return abonoMensualSocios;
+                case 2:
+                    return abonoMensualSocios * 0.95m;
+                case 3:
+                    return abonoMensualSocios * 6 * 0.85m;
+                case 4:
+                    return abonoMensualSocios * 12 * 0.75m;
+                default:
+                    return abonoMensualSocios;
+            }
         }
 
         public Cliente AltaCliente(string nombre, string apellido, int dni, bool activo, bool esApto)
@@ -66,7 +83,7 @@ namespace DSOO_Grupo4_TP1.Models
             if (cliente == null)
             {
                 // Si no existe como cliente, creamos un socio desde cero
-                Socio nuevoSocio = new Socio(nombre, apellido, activo, esApto);
+                Socio nuevoSocio = new Socio(nombre, apellido, activo, esApto, this);
                 clientes.Add(nuevoSocio);
                 return nuevoSocio;
             }
@@ -85,7 +102,7 @@ namespace DSOO_Grupo4_TP1.Models
             }
 
             // Convertir el cliente en socio
-            Socio nuevoSocio = new Socio (cliente.Nombre, cliente.Apellido, true, true, cliente.IdCliente);
+            Socio nuevoSocio = new Socio (cliente.Nombre, cliente.Apellido, true, true, this, cliente.IdCliente);
             clientes.Remove(cliente);  // Eliminar el cliente original
             clientes.Add(nuevoSocio);  // Añadir el nuevo socio
 
