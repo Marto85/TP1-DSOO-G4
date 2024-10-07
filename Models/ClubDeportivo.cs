@@ -12,6 +12,7 @@ namespace DSOO_Grupo4_TP1.Models
         public string NombreUsuario { get; set; }
 
         private string Password;
+        private decimal abonoMensualSocios = 5000; // abono inicial socios
         private List<Cliente> clientes;
         private List<Actividad> actividades;
 
@@ -35,6 +36,16 @@ namespace DSOO_Grupo4_TP1.Models
             Id = id;
             NombreUsuario = nombreUsuario;
             Password = password;
+        }
+
+        public decimal obtenerAbonoMensualSocios()
+        {
+            return abonoMensualSocios;
+        }
+
+        public void modificarAbonoMensualSocios(decimal nuevoAbono)
+        {
+            abonoMensualSocios = nuevoAbono;
         }
 
         public Cliente AltaCliente(string nombre, string apellido, int dni, bool activo, bool esApto)
@@ -64,31 +75,6 @@ namespace DSOO_Grupo4_TP1.Models
                 return (Socio)cliente;
             }
         }
-
-        /*
-        * Convierte un cliente existente en socio
-        */
-
-        /*public Socio ConvertirEnSocio(int idCliente)
-        {
-            Cliente cliente = clientes.FirstOrDefault(c => c.IdCliente == idCliente);
-
-            if (cliente is Socio)
-            {
-                throw new Exception("El cliente ya es un socio.");
-            }
-
-            if (cliente == null)
-            {
-                throw new Exception("El cliente no existe.");
-            }
-
-            clientes.Remove(cliente);
-            Socio nuevoSocio = new Socio(cliente);
-            clientes.Add(nuevoSocio);
-
-            return nuevoSocio;
-        }*/
 
         public void ConvertirEnSocio(Cliente cliente)
         {

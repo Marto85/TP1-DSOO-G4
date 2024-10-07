@@ -16,7 +16,8 @@ namespace DSOO_Grupo4_TP1
                 Console.WriteLine("2) Dar de alta un socio");
                 Console.WriteLine("3) Convertir cliente en socio");
                 Console.WriteLine("4) Inscribirse en una actividad");
-                Console.WriteLine("5) Salir");
+                Console.WriteLine("5) Recibir pago de un socio");
+                Console.WriteLine("6) Salir");
                 Console.Write("Seleccione una opción: ");
 
                 string opcion = Console.ReadLine();
@@ -119,6 +120,10 @@ namespace DSOO_Grupo4_TP1
                         break;
 
                     case "5":
+                        // Recibir pago de un socio
+                        break;
+
+                    case "6":
                         continuar = false;
                         break;
 

@@ -8,9 +8,12 @@ namespace DSOO_Grupo4_TP1.Models
 {
     public class Socio : Cliente
     {
+        private List<Pago> pagos;
+
         public Socio(string nombre, string apellido, bool activo, bool esApto, int? idCliente = null)
             : base(nombre, apellido, activo, esApto, idCliente)
         {
+            pagos = new List<Pago>();
         }
 
         public Socio(Cliente cliente) : base(
@@ -27,6 +30,7 @@ namespace DSOO_Grupo4_TP1.Models
           cliente.Actividades,
           cliente.IdCliente)
         {
+            pagos = new List<Pago>();
         }
     }
 
