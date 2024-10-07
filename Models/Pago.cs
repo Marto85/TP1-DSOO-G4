@@ -26,7 +26,7 @@ namespace DSOO_Grupo4_TP1.Models
                 throw new ArgumentException("La cantidad de cuotas debe ser mayor a 0");
             }
 
-            Id = id;
+            Id = Guid.NewGuid.().ToString();
             SocioId = socioId;
             Monto = monto;
             FechaPago = fechaPago;
@@ -39,6 +39,4 @@ namespace DSOO_Grupo4_TP1.Models
             ProximoVencimiento = FechaPago.AddMonths(Cuotas);
         }
     }
-
-
 }

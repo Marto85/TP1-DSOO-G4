@@ -36,6 +36,29 @@ namespace DSOO_Grupo4_TP1.Models
             this.club = club;
         }
 
+        public void AgregarPago(Pago pago)
+        {
+            pagos.Add(pago);
+        }
+
+        // Método para listar todos los pagos del socio
+        public void MostrarPagos(int idSocio)
+        {
+            Console.WriteLine("Pagos del socio:");
+
+            if (pagos.Count == 0)
+            {
+                Console.WriteLine("Este socio no tiene pagos registrados.");
+            }
+            else
+            {
+                foreach (var pago in pagos)
+                {
+                    Console.WriteLine($"ID: {pago.Id}, Monto: {pago.Monto}, Fecha: {pago.FechaPago}");
+                }
+            }
+        }
+
         public decimal CalcularAbonoTotalAPagar()
         {
             Console.WriteLine("Seleccione el periodo que desea abonar. Utilice los números para elegir la opción deseada");
@@ -65,8 +88,6 @@ namespace DSOO_Grupo4_TP1.Models
 
             return abonoConDescuento; // este return cubre el caso que se seleccione mensual y evitamos poner un default que no es necesario por estar el while
         }
-    }
-
-    
+    }   
 
 }

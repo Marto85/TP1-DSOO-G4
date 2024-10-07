@@ -41,7 +41,7 @@ namespace DSOO_Grupo4_TP1.Models
         public decimal ObtenerAbonoMensualSociosBase()
         {
             return abonoMensualSocios;
-        }
+        }   
 
         public void ModificarAbonoMensualSocios(decimal nuevoAbono)
         {
@@ -57,12 +57,38 @@ namespace DSOO_Grupo4_TP1.Models
                 case 2:
                     return abonoMensualSocios * 0.95m;
                 case 3:
-                    return abonoMensualSocios * 6 * 0.85m;
+                    return abonoMensualSocios * 0.85m;
                 case 4:
-                    return abonoMensualSocios * 12 * 0.75m;
+                    return abonoMensualSocios  * 0.75m;
                 default:
                     return abonoMensualSocios;
             }
+        }
+
+        public void ProcesarPago(int idSocio)
+        {
+           Socio SocioPagador = (Socio)clientes.FirstOrDefault(c => c.IdCliente == idSocio);
+
+            if (SocioPagador == null)
+            {
+                throw new Exception("El socio no existe");
+            }
+            else if (SocioPagador.Activo == true)
+            {
+                Console.WriteLine("Su cuota se encuentra al dia");
+            }
+            else
+            {
+                Console.WriteLine("Vamos a procesar tu pago");
+                decimal montoTotalAbonado = SocioPagador.CalcularAbonoTotalAPagar();
+                SocioPagador.Activo = true;
+                Pago nuevoPago = new Pago(1, idSocio, montoTotalAbonado, DateTime.Now, 1);
+                SocioPagador.AgregarPago(nuevoPago);
+                Console.WriteLine("Tu pago se ha procesado con exito");
+                Console.WriteLine($"Los Pagos realizados por el socio {SocioPagador.Nombre} {SocioPagador.Apellido} son:");
+                SocioPagador.MostrarPagos(SocioPagador.IdCliente);
+            }
+
         }
 
         public Cliente AltaCliente(string nombre, string apellido, int dni, bool activo, bool esApto)
