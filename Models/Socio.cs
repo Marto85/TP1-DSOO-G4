@@ -52,9 +52,11 @@ namespace DSOO_Grupo4_TP1.Models
             }
             else
             {
+                Console.WriteLine($"El socio {Nombre} {Apellido} ha realizado los siguientes pagos:");
                 foreach (var pago in pagos)
-                {
-                    Console.WriteLine($"ID: {pago.Id}, Monto: {pago.Monto}, Fecha: {pago.FechaPago}");
+                {                
+                    Console.WriteLine($"ID: {pago.Id} -- Monto: {pago.Monto} -- Fecha: {pago.FechaPago}");
+                    Console.WriteLine();
                 }
             }
         }

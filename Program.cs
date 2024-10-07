@@ -1,4 +1,5 @@
 ﻿using DSOO_Grupo4_TP1.Models;
+using System.Reflection.PortableExecutable;
 
 namespace DSOO_Grupo4_TP1
 {
@@ -121,8 +122,32 @@ namespace DSOO_Grupo4_TP1
 
                     case "5":
                         // Recibir pago de un socio
-                        break;
+                        Console.Write("Ingrese ID del socio que desea pagar: ");
+                        int idSocio = int.Parse(Console.ReadLine());
 
+                        try
+                        {
+                            // Buscar el socio por ID
+                            Socio socio = (Socio)club.ObtenerClientePorId(idSocio);
+
+                            // Verificar que el socio exista
+                            if (socio == null)
+                            {
+                                Console.WriteLine("El socio no existe.");
+                            }
+                            else
+                            {
+                                // Pagar el socio
+                                club.ProcesarPago(idSocio);
+                                socio.MostrarPagos(idSocio);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        break;
+                        
                     case "6":
                         continuar = false;
                         break;
