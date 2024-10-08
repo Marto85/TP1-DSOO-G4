@@ -16,5 +16,10 @@ namespace DSOO_Grupo4_TP1
         {
             InitializeComponent();
         }
+
+        private void AltaSocio_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

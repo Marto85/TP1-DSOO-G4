@@ -31,57 +31,63 @@ namespace DSOO_Grupo4_TP1
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            AltaCliente = new Button();
+            AltaSocio = new Button();
+            ConvertirEnSocio = new Button();
             button4 = new Button();
             button5 = new Button();
             button6 = new Button();
             button7 = new Button();
             SuspendLayout();
             // 
-            // button1
+            // AltaCliente
             // 
-            button1.Location = new Point(82, 94);
-            button1.Name = "button1";
-            button1.Size = new Size(152, 23);
-            button1.TabIndex = 0;
-            button1.Text = "Dar de alta un Cliente";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += this.button1_Click;
+            AltaCliente.Location = new Point(199, 257);
+            AltaCliente.Margin = new Padding(7, 8, 7, 8);
+            AltaCliente.Name = "AltaCliente";
+            AltaCliente.Size = new Size(369, 63);
+            AltaCliente.TabIndex = 0;
+            AltaCliente.Text = "Dar de alta un Cliente";
+            AltaCliente.UseVisualStyleBackColor = true;
+            AltaCliente.Click += button1_Click;
             // 
-            // button2
+            // AltaSocio
             // 
-            button2.Location = new Point(82, 136);
-            button2.Name = "button2";
-            button2.Size = new Size(152, 23);
-            button2.TabIndex = 1;
-            button2.Text = "Dar de alta un Socio";
-            button2.UseVisualStyleBackColor = true;
+            AltaSocio.Location = new Point(199, 372);
+            AltaSocio.Margin = new Padding(7, 8, 7, 8);
+            AltaSocio.Name = "AltaSocio";
+            AltaSocio.Size = new Size(369, 63);
+            AltaSocio.TabIndex = 1;
+            AltaSocio.Text = "Dar de alta un Socio";
+            AltaSocio.UseVisualStyleBackColor = true;
+            AltaSocio.Click += AltaSocio_Click;
             // 
-            // button3
+            // ConvertirEnSocio
             // 
-            button3.Location = new Point(82, 179);
-            button3.Name = "button3";
-            button3.Size = new Size(152, 23);
-            button3.TabIndex = 2;
-            button3.Text = "Convertir Cliente en Socio";
-            button3.UseVisualStyleBackColor = true;
+            ConvertirEnSocio.Location = new Point(199, 489);
+            ConvertirEnSocio.Margin = new Padding(7, 8, 7, 8);
+            ConvertirEnSocio.Name = "ConvertirEnSocio";
+            ConvertirEnSocio.Size = new Size(369, 63);
+            ConvertirEnSocio.TabIndex = 2;
+            ConvertirEnSocio.Text = "Convertir Cliente en Socio";
+            ConvertirEnSocio.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            button4.Location = new Point(82, 219);
+            button4.Location = new Point(199, 599);
+            button4.Margin = new Padding(7, 8, 7, 8);
             button4.Name = "button4";
-            button4.Size = new Size(152, 23);
+            button4.Size = new Size(369, 63);
             button4.TabIndex = 3;
             button4.Text = "Inscribir en Actividad";
             button4.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            button5.Location = new Point(274, 94);
+            button5.Location = new Point(665, 257);
+            button5.Margin = new Padding(7, 8, 7, 8);
             button5.Name = "button5";
-            button5.Size = new Size(152, 23);
+            button5.Size = new Size(369, 63);
             button5.TabIndex = 4;
             button5.Text = "Cobrar";
             button5.UseVisualStyleBackColor = true;
@@ -89,34 +95,37 @@ namespace DSOO_Grupo4_TP1
             // button6
             // 
             button6.BackColor = Color.RosyBrown;
-            button6.Location = new Point(274, 179);
+            button6.Location = new Point(665, 489);
+            button6.Margin = new Padding(7, 8, 7, 8);
             button6.Name = "button6";
-            button6.Size = new Size(152, 23);
+            button6.Size = new Size(369, 63);
             button6.TabIndex = 5;
             button6.Text = "Salir";
             button6.UseVisualStyleBackColor = false;
             // 
             // button7
             // 
-            button7.Location = new Point(274, 136);
+            button7.Location = new Point(665, 372);
+            button7.Margin = new Padding(7, 8, 7, 8);
             button7.Name = "button7";
-            button7.Size = new Size(152, 23);
+            button7.Size = new Size(369, 63);
             button7.TabIndex = 6;
             button7.Text = "Ver Morosos";
             button7.UseVisualStyleBackColor = true;
             // 
             // menu_form
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(513, 450);
+            ClientSize = new Size(1246, 1230);
             Controls.Add(button7);
             Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(ConvertirEnSocio);
+            Controls.Add(AltaSocio);
+            Controls.Add(AltaCliente);
+            Margin = new Padding(7, 8, 7, 8);
             Name = "menu_form";
             Text = "Form1";
             ResumeLayout(false);
@@ -130,9 +139,9 @@ namespace DSOO_Grupo4_TP1
 
         #endregion
 
-        private Button button1;
-        private Button button2;
-        private Button button3;
+        private Button AltaCliente;
+        private Button AltaSocio;
+        private Button ConvertirEnSocio;
         private Button button4;
         private Button button5;
         private Button button6;
