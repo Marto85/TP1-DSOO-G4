@@ -52,7 +52,7 @@ namespace DSOO_Grupo4_TP1
                         apellido = Console.ReadLine();
                         Console.Write("Ingrese DNI: ");
                         dni = int.Parse(Console.ReadLine());
-                        Socio nuevoSocio = club.AltaSocio(nombre, apellido, dni, true, true);
+                        Socio nuevoSocio = club.AltaSocio(nombre, apellido, dni, false, true);
                         Console.WriteLine($"Socio {nuevoSocio.Nombre} dado de alta.");
                         Console.WriteLine("Actualmente la lista de Socios es la siguiente: ");
                         List<Cliente> socios = club.ObtenerClientesFiltrados(soloSocios: true);
@@ -137,7 +137,7 @@ namespace DSOO_Grupo4_TP1
                             }
                             else
                             {
-                                // Pagar el socio
+                                // Paga el socio
                                 club.ProcesarPago(idSocio);
                                 socio.MostrarPagos(idSocio);
                             }

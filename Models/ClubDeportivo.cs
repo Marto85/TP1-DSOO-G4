@@ -63,33 +63,7 @@ namespace DSOO_Grupo4_TP1.Models
                 default:
                     return abonoMensualSocios;
             }
-        }
-
-        public void ProcesarPago(int idSocio)
-        {
-           Socio SocioPagador = (Socio)clientes.FirstOrDefault(c => c.IdCliente == idSocio);
-
-            if (SocioPagador == null)
-            {
-                throw new Exception("El socio no existe");
-            }
-            else if (SocioPagador.Activo == true)
-            {
-                Console.WriteLine("Su cuota se encuentra al dia");
-            }
-            else
-            {
-                Console.WriteLine("Vamos a procesar tu pago");
-                decimal montoTotalAbonado = SocioPagador.CalcularAbonoTotalAPagar();
-                SocioPagador.Activo = true;
-                Pago nuevoPago = new Pago(1, idSocio, montoTotalAbonado, DateTime.Now, 1);
-                SocioPagador.AgregarPago(nuevoPago);
-                Console.WriteLine("Tu pago se ha procesado con exito");
-                Console.WriteLine($"Los Pagos realizados por el socio {SocioPagador.Nombre} {SocioPagador.Apellido} son:");
-                SocioPagador.MostrarPagos(SocioPagador.IdCliente);
-            }
-
-        }
+        }        
 
         public Cliente AltaCliente(string nombre, string apellido, int dni, bool activo, bool esApto)
         {
@@ -235,6 +209,38 @@ namespace DSOO_Grupo4_TP1.Models
         {
             return clientes.Where(c => !c.Activo).ToList();
         }
-    }
 
+        public void ProcesarPago(int idSocio)
+        {
+            Socio SocioPagador = clientes.FirstOrDefault(c => c.IdCliente == idSocio) as Socio;
+            if (SocioPagador == null)
+            {
+                throw new Exception("El socio no existe o no es un socio.");
+            }
+
+            else if (SocioPagador.Activo == true)
+            {
+                Console.WriteLine("Su cuota se encuentra al dia");
+            }
+            else
+            {
+                Console.WriteLine("Vamos a procesar tu pago");
+                int frecuenciaPago = SocioPagador.ObtenerFrecuenciaDePago();
+                
+                // Convertimos el int previo en el valor correspondiente del enum FrecuenciaPago (de la clase Pago)
+                Pago.FrecuenciaPago frecuencia = (Pago.FrecuenciaPago)frecuenciaPago;
+                Console.WriteLine($"La frecuencia elegida es: {frecuencia}");
+                
+                decimal montoTotalAbonado = SocioPagador.CalcularAbonoConDescuento(frecuenciaPago);
+                SocioPagador.Activo = true;
+                Pago nuevoPago = new Pago(idSocio, montoTotalAbonado, DateTime.Now, frecuencia);
+                SocioPagador.AgregarPago(nuevoPago);
+                Console.WriteLine();
+                Console.WriteLine("Tu pago se ha procesado con exito");
+                SocioPagador.MostrarPagos(SocioPagador.IdCliente);
+                DateTime proximoVencimiento = nuevoPago.CalcularProximoVencimiento();
+                Console.WriteLine($"Su abono estara vigente hasta el dia: {proximoVencimiento}");
+            }
+        }
+    }
 }
