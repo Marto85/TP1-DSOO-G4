@@ -36,9 +36,6 @@ namespace DSOO_Grupo4_TP1
         /// </summary>
         private void InitializeComponent()
         {
-            conexion = Conexion.getInstancia();
-
-
             pictureBox1 = new PictureBox();
             username = new TextBox();
             password = new TextBox();
@@ -74,7 +71,7 @@ namespace DSOO_Grupo4_TP1
             password.Location = new Point(63, 278);
             password.Name = "password";
             password.Size = new Size(210, 23);
-            password.TabIndex = 2;
+            password.TabIndex = 3;
             password.Text = "Contraseña";
             password.Enter += password_Enter;
             password.Leave += password_Leave;
@@ -87,7 +84,7 @@ namespace DSOO_Grupo4_TP1
             Login.TabIndex = 1;
             Login.Text = "Ingresar";
             Login.UseVisualStyleBackColor = true;
-            Login.Click += this.Login_Click;
+            Login.Click += Login_Click;
             // 
             // Login_form
             // 
