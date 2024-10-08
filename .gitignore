@@ -32,8 +32,6 @@ Bin/
 obj/
 Obj/
 
-Datos/
-
 # Visual Studio 2015 cache/options directory
 .vs/
 
@@ -257,4 +255,3 @@ Logs
 /obj/DSOO-Grupo4-TP1.csproj.nuget.g.props
 /obj/project.assets.json
 /obj/project.nuget.cache
-/Datos/conexion.cs
