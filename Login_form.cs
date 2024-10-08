@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace DSOO_Grupo4_TP1
 {
@@ -17,12 +18,14 @@ namespace DSOO_Grupo4_TP1
             InitializeComponent();
         }
 
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
+
+
+
         private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -32,7 +35,7 @@ namespace DSOO_Grupo4_TP1
             if (username.Text == "Nombre de usuario")
             {
                 username.Text = "";
-                username.ForeColor = Color.Black;
+                username.ForeColor = Color.DarkGray;
             }
         }
 
@@ -51,7 +54,7 @@ namespace DSOO_Grupo4_TP1
             {
                 password.Text = "";
                 password.UseSystemPasswordChar = true;
-                password.ForeColor = Color.Black;
+                password.ForeColor = Color.DarkGray;
             }
         }
 
@@ -63,6 +66,33 @@ namespace DSOO_Grupo4_TP1
                 password.Text = "Contraseña";
                 password.ForeColor = Color.Gray;
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_cerrar_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btn_minimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void Login_form_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void flowLayoutPanel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }
