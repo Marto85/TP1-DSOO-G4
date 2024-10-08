@@ -17,7 +17,7 @@ namespace DSOO_Grupo4_TP1
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Login_form());
-            Conexion.getInstancia();
+            //Conexion.getInstancia();
         }
 
         //static void Main(string[] args)

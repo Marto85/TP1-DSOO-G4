@@ -15,6 +15,7 @@ namespace DSOO_Grupo4_TP1
         private System.ComponentModel.IContainer components = null;
         private Conexion conexion;
 
+
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -118,7 +119,9 @@ namespace DSOO_Grupo4_TP1
 
         private Boolean verificarDatos(string username, string password)
         {
+            conexion = Conexion.getInstancia();
             string connectionString = conexion.CrearConexion().ConnectionString; // Obtiene la cadena de conexión
+
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 try
