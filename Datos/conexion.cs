@@ -55,6 +55,7 @@ namespace DSOO_Grupo4_TP1.Datos
             {
                 con = new Conexion(); // se crea una nueva
             }
+            Console.WriteLine("conexion exitosa");
             return con;
         }
     }

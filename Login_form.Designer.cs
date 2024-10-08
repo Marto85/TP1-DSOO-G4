@@ -1,4 +1,11 @@
-﻿namespace DSOO_Grupo4_TP1
+﻿
+using DSOO_Grupo4_TP1.Datos;
+using DSOO_Grupo4_TP1.Models;
+using MySql.Data.MySqlClient;
+using System.Diagnostics.Eventing.Reader;
+using System.Reflection;
+
+namespace DSOO_Grupo4_TP1
 {
     partial class Login_form
     {
@@ -6,6 +13,7 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private Conexion conexion;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -28,6 +36,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            conexion = Conexion.getInstancia();
+
+
             pictureBox1 = new PictureBox();
             username = new TextBox();
             password = new TextBox();
@@ -76,8 +87,9 @@
             Login.TabIndex = 1;
             Login.Text = "Ingresar";
             Login.UseVisualStyleBackColor = true;
+            Login.Click += this.Login_Click;
             // 
-            // Form1
+            // Login_form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -86,12 +98,61 @@
             Controls.Add(password);
             Controls.Add(username);
             Controls.Add(pictureBox1);
-            Name = "Form1";
+            Name = "Login_form";
             Text = "Form1";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void Login_Click(object sender, EventArgs e)
+        {
+
+            if (this.verificarDatos(username.Text, password.Text))
+            {
+                Form formulario = new menu_form();
+                formulario.ShowDialog();
+            }
+            else {
+                MessageBox.Show("El nombre de usuario o la contraseña es incorrecto.", "Error de Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private Boolean verificarDatos(string username, string password)
+        {
+            string connectionString = conexion.CrearConexion().ConnectionString; // Obtiene la cadena de conexión
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open(); // Abre la conexión
+                    string query = "SELECT COUNT(*) FROM usuario WHERE username = @username AND password = @password";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        // Agregar parámetros para evitar inyecciones SQL
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@password", password);
+
+                        // Ejecuta la consulta y obtiene el resultado
+                        int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        // Devuelve verdadero si hay coincidencias, falso en caso contrario
+                        return count > 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de errores
+                    Console.WriteLine("Error en la conexión: " + ex.Message);
+                    return false; // O maneja el error como prefieras
+                }
+                finally
+                {
+                    conn.Close(); // Cierra la conexión
+                }
+            }
         }
 
         #endregion

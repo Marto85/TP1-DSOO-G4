@@ -2,6 +2,8 @@
 //using System.Reflection.PortableExecutable;
 //using static System.Net.Mime.MediaTypeNames;
 
+using DSOO_Grupo4_TP1.Datos;
+
 namespace DSOO_Grupo4_TP1
 {
     internal class Program
@@ -15,6 +17,7 @@ namespace DSOO_Grupo4_TP1
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Login_form());
+            Conexion.getInstancia();
         }
 
         //static void Main(string[] args)
