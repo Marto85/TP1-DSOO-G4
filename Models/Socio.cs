@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DSOO_Grupo4_TP1.Models
 {
-    public class Socio : Cliente
+    /*public class Socio : Cliente
     {
         private ClubDeportivo club;
         private List<Pago> pagos;
@@ -93,5 +93,36 @@ namespace DSOO_Grupo4_TP1.Models
                     return abonoConDescuento; // Mensual
             }
         }
+    }*/
+
+    public class Socio : Cliente
+    {
+        public List<Pago> Pagos { get; private set; }
+
+        public Socio(string nombre, string apellido, bool activo, bool esApto)
+            : base(nombre, apellido, activo, esApto)
+        {
+            Pagos = new List<Pago>();
+        }
+
+        public Socio(int idCliente, DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, DateTime fechaNacimiento, bool activo, bool esApto)
+            : base(idCliente, fechaIngreso, nombre, apellido, dni, direccion, telefono, email, fechaNacimiento, activo, esApto)
+        {
+            Pagos = new List<Pago>();
+        }
+
+        // Método para agregar un pago a la base de datos
+        public void AgregarPago(Pago pago)
+        {
+            Pagos.Add(pago);
+            // Guardar el pago en la base de datos
+        }
+
+        public List<Pago> ObtenerPagos()
+        {
+            // Recuperar pagos desde la base de datos
+            return Pagos;
+        }
     }
+
 }

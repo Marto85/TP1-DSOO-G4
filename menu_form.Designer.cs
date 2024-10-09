@@ -1,10 +1,18 @@
 ﻿
+using DSOO_Grupo4_TP1.Datos;
 using System.Reflection;
 
 namespace DSOO_Grupo4_TP1
 {
-    partial class menu_form
+    partial class menu_form : Form
     {
+        private Conexion conexion;
+
+        public menu_form(Conexion conexionActiva)
+        {
+            InitializeComponent();
+            this.conexion = conexionActiva; // Guarda la conexión activa
+        }
         /// <summary>
         /// Required designer variable.
         /// </summary>

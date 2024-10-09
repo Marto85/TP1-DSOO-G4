@@ -59,8 +59,5 @@ namespace DSOO_Grupo4_TP1.Models
             inscriptos.Add(cliente);
         }
 
-
     }
-
-
 }
