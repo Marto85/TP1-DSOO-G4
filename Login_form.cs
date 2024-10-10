@@ -32,39 +32,39 @@ namespace DSOO_Grupo4_TP1
 
         private void username_Enter(object sender, EventArgs e)
         {
-            if (username.Text == "Nombre de usuario")
+            if (username_login.Text == "Nombre de usuario")
             {
-                username.Text = "";
-                username.ForeColor = Color.DarkGray;
+                username_login.Text = "";
+                username_login.ForeColor = Color.DarkGray;
             }
         }
 
         private void username_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(username.Text))
+            if (string.IsNullOrWhiteSpace(username_login.Text))
             {
-                username.Text = "Nombre de usuario";
-                username.ForeColor = Color.Gray;
+                username_login.Text = "Nombre de usuario";
+                username_login.ForeColor = Color.Gray;
             }
         }
 
         private void password_Enter(object sender, EventArgs e)
         {
-            if (password.Text == "Contraseña")
+            if (password_login.Text == "Contraseña")
             {
-                password.Text = "";
-                password.UseSystemPasswordChar = true;
-                password.ForeColor = Color.DarkGray;
+                password_login.Text = "";
+                password_login.UseSystemPasswordChar = true;
+                password_login.ForeColor = Color.DarkGray;
             }
         }
 
         private void password_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(password.Text))
+            if (string.IsNullOrWhiteSpace(password_login.Text))
             {
-                password.UseSystemPasswordChar = false;
-                password.Text = "Contraseña";
-                password.ForeColor = Color.Gray;
+                password_login.UseSystemPasswordChar = false;
+                password_login.Text = "Contraseña";
+                password_login.ForeColor = Color.Gray;
             }
         }
 

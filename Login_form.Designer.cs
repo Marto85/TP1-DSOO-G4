@@ -39,8 +39,8 @@ namespace DSOO_Grupo4_TP1
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login_form));
             pictureBox1 = new PictureBox();
-            username = new TextBox();
-            password = new TextBox();
+            username_login = new TextBox();
+            password_login = new TextBox();
             Login = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
             mySqlCommand1 = new MySqlCommand();
@@ -64,35 +64,35 @@ namespace DSOO_Grupo4_TP1
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // username
+            // username_login
             // 
-            username.BackColor = Color.FromArgb(15, 15, 15);
-            username.Cursor = Cursors.Hand;
-            username.Font = new Font("Century Gothic", 11.1F, FontStyle.Italic, GraphicsUnit.Point);
-            username.ForeColor = Color.Gray;
-            username.Location = new Point(645, 287);
-            username.Margin = new Padding(7, 8, 7, 8);
-            username.Name = "username";
-            username.Size = new Size(928, 53);
-            username.TabIndex = 2;
-            username.Text = "Nombre de usuario";
-            username.Enter += username_Enter;
-            username.Leave += username_Leave;
+            username_login.BackColor = Color.FromArgb(15, 15, 15);
+            username_login.Cursor = Cursors.Hand;
+            username_login.Font = new Font("Century Gothic", 11.1F, FontStyle.Italic, GraphicsUnit.Point);
+            username_login.ForeColor = Color.Gray;
+            username_login.Location = new Point(645, 287);
+            username_login.Margin = new Padding(7, 8, 7, 8);
+            username_login.Name = "username_login";
+            username_login.Size = new Size(928, 53);
+            username_login.TabIndex = 2;
+            username_login.Text = "Nombre de usuario";
+            username_login.Enter += username_Enter;
+            username_login.Leave += username_Leave;
             // 
-            // password
+            // password_login
             // 
-            password.BackColor = Color.FromArgb(15, 15, 15);
-            password.Cursor = Cursors.Hand;
-            password.Font = new Font("Century Gothic", 11.1F, FontStyle.Italic, GraphicsUnit.Point);
-            password.ForeColor = Color.Gray;
-            password.Location = new Point(645, 444);
-            password.Margin = new Padding(7, 8, 7, 8);
-            password.Name = "password";
-            password.Size = new Size(928, 53);
-            password.TabIndex = 3;
-            password.Text = "Contraseña";
-            password.Enter += password_Enter;
-            password.Leave += password_Leave;
+            password_login.BackColor = Color.FromArgb(15, 15, 15);
+            password_login.Cursor = Cursors.Hand;
+            password_login.Font = new Font("Century Gothic", 11.1F, FontStyle.Italic, GraphicsUnit.Point);
+            password_login.ForeColor = Color.Gray;
+            password_login.Location = new Point(645, 444);
+            password_login.Margin = new Padding(7, 8, 7, 8);
+            password_login.Name = "password_login";
+            password_login.Size = new Size(928, 53);
+            password_login.TabIndex = 3;
+            password_login.Text = "Contraseña";
+            password_login.Enter += password_Enter;
+            password_login.Leave += password_Leave;
             // 
             // Login
             // 
@@ -178,8 +178,8 @@ namespace DSOO_Grupo4_TP1
             Controls.Add(label1);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(Login);
-            Controls.Add(password);
-            Controls.Add(username);
+            Controls.Add(password_login);
+            Controls.Add(username_login);
             ForeColor = SystemColors.ActiveBorder;
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(7, 8, 7, 8);
@@ -200,7 +200,7 @@ namespace DSOO_Grupo4_TP1
         private void Login_Click(object sender, EventArgs e)
         {
 
-            if (this.verificarDatos(username.Text, password.Text))
+            if (this.verificarDatos(username_login.Text, password_login.Text))
             {
                 Form formulario = new menu_form();
                 formulario.ShowDialog();
@@ -251,8 +251,8 @@ namespace DSOO_Grupo4_TP1
         #endregion
 
         private PictureBox pictureBox1;
-        private TextBox username;
-        private TextBox password;
+        private TextBox username_login;
+        private TextBox password_login;
         private Button Login;
         private FlowLayoutPanel flowLayoutPanel1;
         private MySqlCommand mySqlCommand1;

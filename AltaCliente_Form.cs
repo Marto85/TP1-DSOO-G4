@@ -16,5 +16,20 @@ namespace DSOO_Grupo4_TP1
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Mail_Registro_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Tipo_Cliente_Form_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
