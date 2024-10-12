@@ -38,7 +38,8 @@
             Telefono_Registro = new TextBox();
             Domicilio_Registro = new TextBox();
             Mail_Registro = new TextBox();
-            Tipo_Cliente_Form = new ComboBox();
+            Tipo_Cliente_Registro = new ComboBox();
+            Enviar_Registro = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -154,19 +155,33 @@
             Mail_Registro.Text = "Correo Electronico";
             Mail_Registro.TextChanged += Mail_Registro_TextChanged;
             // 
-            // Tipo_Cliente_Form
+            // Tipo_Cliente_Registro
             // 
-            Tipo_Cliente_Form.BackColor = Color.FromArgb(15, 15, 15);
-            Tipo_Cliente_Form.Cursor = Cursors.Hand;
-            Tipo_Cliente_Form.Font = new Font("Century Gothic", 11.1F, FontStyle.Italic, GraphicsUnit.Point);
-            Tipo_Cliente_Form.ForeColor = Color.Gray;
-            Tipo_Cliente_Form.FormattingEnabled = true;
-            Tipo_Cliente_Form.Items.AddRange(new object[] { "Seleccione una opcion:", "Es Socio", "Cliente por actividades" });
-            Tipo_Cliente_Form.Location = new Point(544, 613);
-            Tipo_Cliente_Form.Name = "Tipo_Cliente_Form";
-            Tipo_Cliente_Form.Size = new Size(661, 52);
-            Tipo_Cliente_Form.TabIndex = 9;
-            Tipo_Cliente_Form.SelectedIndexChanged += Tipo_Cliente_Form_SelectedIndexChanged;
+            Tipo_Cliente_Registro.BackColor = Color.FromArgb(15, 15, 15);
+            Tipo_Cliente_Registro.Cursor = Cursors.Hand;
+            Tipo_Cliente_Registro.Font = new Font("Century Gothic", 11.1F, FontStyle.Italic, GraphicsUnit.Point);
+            Tipo_Cliente_Registro.ForeColor = Color.Gray;
+            Tipo_Cliente_Registro.FormattingEnabled = true;
+            Tipo_Cliente_Registro.Items.AddRange(new object[] { "Seleccione una opcion:", "Es Socio", "Cliente por actividades" });
+            Tipo_Cliente_Registro.Location = new Point(544, 613);
+            Tipo_Cliente_Registro.Name = "Tipo_Cliente_Registro";
+            Tipo_Cliente_Registro.Size = new Size(661, 52);
+            Tipo_Cliente_Registro.TabIndex = 9;
+            Tipo_Cliente_Registro.SelectedIndexChanged += Tipo_Cliente_Form_SelectedIndexChanged;
+            // 
+            // Enviar_Registro
+            // 
+            Enviar_Registro.BackColor = Color.FromArgb(0, 122, 204);
+            Enviar_Registro.Cursor = Cursors.Hand;
+            Enviar_Registro.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            Enviar_Registro.ForeColor = Color.FromArgb(15, 15, 15);
+            Enviar_Registro.Location = new Point(822, 707);
+            Enviar_Registro.Name = "Enviar_Registro";
+            Enviar_Registro.Size = new Size(336, 58);
+            Enviar_Registro.TabIndex = 10;
+            Enviar_Registro.Text = "Registrar";
+            Enviar_Registro.UseVisualStyleBackColor = false;
+            Enviar_Registro.MouseClick += Enviar_Registro_MouseClick;
             // 
             // AltaCliente_Form
             // 
@@ -174,7 +189,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
             ClientSize = new Size(1573, 803);
-            Controls.Add(Tipo_Cliente_Form);
+            Controls.Add(Enviar_Registro);
+            Controls.Add(Tipo_Cliente_Registro);
             Controls.Add(Mail_Registro);
             Controls.Add(Domicilio_Registro);
             Controls.Add(Telefono_Registro);
@@ -205,6 +221,7 @@
         private TextBox Telefono_Registro;
         private TextBox Domicilio_Registro;
         private TextBox Mail_Registro;
-        private ComboBox Tipo_Cliente_Form;
+        private ComboBox Tipo_Cliente_Registro;
+        private Button Enviar_Registro;
     }
 }

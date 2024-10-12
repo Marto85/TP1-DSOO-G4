@@ -19,7 +19,14 @@ namespace DSOO_Grupo4_TP1
 
         private void AltaSocio_Click(object sender, EventArgs e)
         {
+            Form formulario = new AltaCliente_Form();
+            formulario.ShowDialog();
+        }
 
+        private void AltaCliente_Click(object sender, EventArgs e)
+        {
+            Form formulario = new AltaCliente_Form();
+            formulario.ShowDialog();
         }
     }
 }

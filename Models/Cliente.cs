@@ -72,7 +72,6 @@ namespace DSOO_Grupo4_TP1.Models
         public string Direccion { get; set; }
         public string Telefono { get; set; }
         public string Email { get; set; }
-        public DateTime FechaNacimiento { get; set; }
         public bool Activo { get; set; }
         public bool EsApto { get; set; }
 
@@ -85,9 +84,8 @@ namespace DSOO_Grupo4_TP1.Models
             EsApto = esApto;
         }
 
-        public Cliente(int idCliente, DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, DateTime fechaNacimiento, bool activo, bool esApto)
+        public Cliente(DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, bool activo = true, bool esApto = true)
         {
-            IdCliente = idCliente;
             FechaIngreso = fechaIngreso;
             Nombre = nombre;
             Apellido = apellido;
@@ -95,9 +93,6 @@ namespace DSOO_Grupo4_TP1.Models
             Direccion = direccion;
             Telefono = telefono;
             Email = email;
-            FechaNacimiento = fechaNacimiento;
-            Activo = activo;
-            EsApto = esApto;
         }
 
         public void AltaCliente(Conexion conexion)
@@ -107,27 +102,33 @@ namespace DSOO_Grupo4_TP1.Models
                 try
                 {
                     conn.Open();
-                    string query = "INSERT INTO cliente (Nombre, Apellido, DNI) VALUES (@nombre, @apellido, @dni)";
+                    string query = @"INSERT INTO cliente 
+                             (Nombre, Apellido, DNI, Direccion, Telefono, Email, Activo, EsApto, FechaIngreso) 
+                             VALUES (@nombre, @apellido, @dni, @direccion, @telefono, @email, @activo, @esApto, @fechaIngreso)";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@nombre", this.Nombre);
                         cmd.Parameters.AddWithValue("@apellido", this.Apellido);
                         cmd.Parameters.AddWithValue("@dni", this.DNI);
+                        cmd.Parameters.AddWithValue("@direccion", this.Direccion);
+                        cmd.Parameters.AddWithValue("@telefono", this.Telefono);
+                        cmd.Parameters.AddWithValue("@email", this.Email);
+                        cmd.Parameters.AddWithValue("@activo", this.Activo);
+                        cmd.Parameters.AddWithValue("@esApto", this.EsApto);
+                        cmd.Parameters.AddWithValue("@fechaIngreso", this.FechaIngreso);
 
                         cmd.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error al insertar cliente: " + ex.Message);
-                }
-                finally
-                {
-                    conn.Close();
+                    // Manejar cualquier error
+                    MessageBox.Show("Error al registrar cliente: " + ex.Message);
                 }
             }
         }
+
     }
 
 

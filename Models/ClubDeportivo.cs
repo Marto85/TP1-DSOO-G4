@@ -77,7 +77,7 @@ namespace DSOO_Grupo4_TP1.Models
             return nuevo;
         }
 
-        public Socio AltaSocio(string nombre, string apellido, int dni, bool activo, bool esApto)
+        /*public Socio AltaSocio(string nombre, string apellido, int dni, bool activo, bool esApto)
         {
             Cliente cliente = clientes.FirstOrDefault(c => c.DNI == dni);
             if (cliente == null)
@@ -91,9 +91,9 @@ namespace DSOO_Grupo4_TP1.Models
                 ConvertirEnSocio(cliente);
                 return (Socio)cliente;
             }
-        }
+        }*/
 
-        public void ConvertirEnSocio(Cliente cliente)
+        /*public void ConvertirEnSocio(Cliente cliente)
         {
             if (cliente is Socio)
             {
@@ -135,12 +135,12 @@ namespace DSOO_Grupo4_TP1.Models
             }
 
             Console.WriteLine("Cliente convertido a socio exitosamente.");
-        }
+        }*/
 
         /*
          * Permite inscribir un cliente o Socio en una actividad
          */
-        public string InscribirActividad(string nombreActividad, int idCliente)
+        /*public string InscribirActividad(string nombreActividad, int idCliente)
         {
             //Chequea que la actividad exista
             Actividad actividad = actividades.FirstOrDefault(a => a.Nombre == nombreActividad);            
@@ -185,7 +185,7 @@ namespace DSOO_Grupo4_TP1.Models
             }
 
             return "INSCRIPCIÓN EXITOSA";
-        }
+        }*/
 
         public List<Actividad> ObtenerActividades()
         {
@@ -210,7 +210,7 @@ namespace DSOO_Grupo4_TP1.Models
             return clientes.Where(c => !c.Activo).ToList();
         }
 
-        public void ProcesarPago(int idSocio)
+        /*public void ProcesarPago(int idSocio)
         {
             Socio SocioPagador = clientes.FirstOrDefault(c => c.IdCliente == idSocio) as Socio;
             if (SocioPagador == null)
@@ -241,6 +241,6 @@ namespace DSOO_Grupo4_TP1.Models
                 DateTime proximoVencimiento = nuevoPago.CalcularProximoVencimiento();
                 Console.WriteLine($"Su abono estara vigente hasta el dia: {proximoVencimiento}");
             }
-        }
+        }*/
     }
 }

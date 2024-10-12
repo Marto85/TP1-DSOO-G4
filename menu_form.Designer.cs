@@ -57,7 +57,7 @@ namespace DSOO_Grupo4_TP1
             AltaCliente.TabIndex = 0;
             AltaCliente.Text = "Dar de alta un Cliente";
             AltaCliente.UseVisualStyleBackColor = true;
-            AltaCliente.Click += button1_Click;
+            AltaCliente.Click += AltaCliente_Click;
             // 
             // AltaSocio
             // 
@@ -137,12 +137,6 @@ namespace DSOO_Grupo4_TP1
             Name = "menu_form";
             Text = "Form1";
             ResumeLayout(false);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //Form formulario = new frmDos();
-            //formulario.ShowDialog(); 
         }
 
         #endregion

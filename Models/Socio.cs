@@ -105,8 +105,8 @@ namespace DSOO_Grupo4_TP1.Models
             Pagos = new List<Pago>();
         }
 
-        public Socio(int idCliente, DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, DateTime fechaNacimiento, bool activo, bool esApto)
-            : base(idCliente, fechaIngreso, nombre, apellido, dni, direccion, telefono, email, fechaNacimiento, activo, esApto)
+        public Socio(DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, bool activo = true, bool esApto = true)
+            : base(fechaIngreso, nombre, apellido, dni, direccion, telefono, email, activo, esApto)
         {
             Pagos = new List<Pago>();
         }
