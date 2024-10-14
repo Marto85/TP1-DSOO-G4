@@ -35,6 +35,7 @@ namespace DSOO_Grupo4_TP1
         private void AltaSocio_Click(object sender, EventArgs e)
         {
             Form formulario = new AltaCliente_Form();
+            this.WindowState = FormWindowState.Minimized;
             formulario.ShowDialog();
         }       
 
