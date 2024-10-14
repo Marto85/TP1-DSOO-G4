@@ -42,18 +42,23 @@ namespace DSOO_Grupo4_TP1
             int dni = int.Parse(DNI_Registro.Text);
             string domicilio = Domicilio_Registro.Text;
             string telefono = Telefono_Registro.Text;
-            string mail = Mail_Registro.Text;        
+            string mail = Mail_Registro.Text;
             string tipoCliente = Tipo_Cliente_Registro.SelectedItem.ToString();
+            bool activo = true;
+            bool esApto = true;
+      
 
             if (tipoCliente == "Cliente por actividades")
             {
                 Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail);
-                nuevoCliente.AltaCliente(nuevoCliente);
+                nuevoCliente.AltaCliente();
             }
-            else if (tipoCliente == "Es Socio")
+            /*else if (tipoCliente == "Es Socio")
             {
-                Socio nuevoSocio = new Socio(nombre, apellido, activo, esApto, this);
-            }
+                Socio nuevoSocio = new Socio(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, activo, esApto);
+                nuevoSocio.AltaSocio();
+            }*/
         }
+
     }
 }

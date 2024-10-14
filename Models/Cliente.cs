@@ -41,19 +41,23 @@ namespace DSOO_Grupo4_TP1.Models
             Email = email;
         }
 
-        public void AltaCliente(Conexion conexion)
+        public void AltaCliente()
         {
+            // Crear una instancia de la clase que maneja las conexiones
+            Conexion conexion = Conexion.getInstancia();
+
             using (MySqlConnection conn = conexion.CrearConexion())
             {
                 try
                 {
                     conn.Open();
                     string query = @"INSERT INTO cliente 
-                             (Nombre, Apellido, DNI, Direccion, Telefono, Email, Activo, EsApto, FechaIngreso) 
-                             VALUES (@nombre, @apellido, @dni, @direccion, @telefono, @email, @activo, @esApto, @fechaIngreso)";
+                     (FechaIngreso, Nombre, Apellido, DNI, Direccion, Telefono, Email, PagoVencido, Activo, EsApto) 
+                     VALUES (@fechaIngreso, @nombre, @apellido, @dni, @direccion, @telefono, @email, @pagoVencido, @activo, @esApto)";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
+                        // Asignar los valores de las propiedades del cliente actual (this)
                         cmd.Parameters.AddWithValue("@nombre", this.Nombre);
                         cmd.Parameters.AddWithValue("@apellido", this.Apellido);
                         cmd.Parameters.AddWithValue("@dni", this.DNI);
@@ -63,17 +67,26 @@ namespace DSOO_Grupo4_TP1.Models
                         cmd.Parameters.AddWithValue("@activo", this.Activo);
                         cmd.Parameters.AddWithValue("@esApto", this.EsApto);
                         cmd.Parameters.AddWithValue("@fechaIngreso", this.FechaIngreso);
+                        cmd.Parameters.AddWithValue("@pagoVencido", false);
 
-                        cmd.ExecuteNonQuery();
+                    // Ejecutar el comando
+                    cmd.ExecuteNonQuery();
                     }
+                }
+                catch (MySqlException ex)
+                {
+                    // Imprimir detalles del error de MySQL
+                    MessageBox.Show($"Error al registrar cliente: {ex.Message}\nCódigo del error: {ex.Number}");
                 }
                 catch (Exception ex)
                 {
-                    // Manejar cualquier error
+                    // Manejar otros errores
                     MessageBox.Show("Error al registrar cliente: " + ex.Message);
                 }
+
             }
         }
+
 
     }
 

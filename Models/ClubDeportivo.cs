@@ -65,17 +65,7 @@ namespace DSOO_Grupo4_TP1.Models
             }
         }        
 
-        public Cliente AltaCliente(string nombre, string apellido, int dni, bool activo, bool esApto)
-        {
-            if (clientes.Any(c => c.DNI == dni))
-            {
-                throw new Exception("El cliente ya existe");
-            }
-
-            Cliente nuevo = new Cliente(nombre, apellido, activo, esApto);
-            clientes.Add(nuevo);
-            return nuevo;
-        }
+       
 
         /*public Socio AltaSocio(string nombre, string apellido, int dni, bool activo, bool esApto)
         {
