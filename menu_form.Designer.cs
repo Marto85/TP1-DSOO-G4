@@ -125,7 +125,8 @@ namespace DSOO_Grupo4_TP1
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1246, 1230);
+            BackColor = Color.DimGray;
+            ClientSize = new Size(1546, 800);
             Controls.Add(button7);
             Controls.Add(button6);
             Controls.Add(button5);
@@ -133,6 +134,8 @@ namespace DSOO_Grupo4_TP1
             Controls.Add(ConvertirEnSocio);
             Controls.Add(AltaSocio);
             Controls.Add(AltaCliente);
+            Cursor = Cursors.Hand;
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(7, 8, 7, 8);
             Name = "menu_form";
             Text = "Form1";
