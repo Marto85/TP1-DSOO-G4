@@ -54,12 +54,12 @@ namespace DSOO_Grupo4_TP1
                 nuevoCliente.AltaCliente();
                 this.Close();
             }
-            /*else if (tipoCliente == "Es Socio")
+            else if (tipoCliente == "Es Socio")
             {
                 Socio nuevoSocio = new Socio(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, activo, esApto);
                 nuevoSocio.AltaSocio();
                 this.Close();
-            }*/
+            }
         }
 
         private void btn_cerrar_Click(object sender, EventArgs e)

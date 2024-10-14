@@ -32,11 +32,13 @@ namespace DSOO_Grupo4_TP1.Models
             Direccion = direccion;
             Telefono = telefono;
             Email = email;
+            Activo = activo;
+            EsApto = esApto;
+            PagoVencido = pagoVencido;
         }
 
         public void AltaCliente()
         {
-
             Conexion conexion = Conexion.getInstancia();
 
             using (MySqlConnection conn = conexion.CrearConexion())
@@ -80,8 +82,6 @@ namespace DSOO_Grupo4_TP1.Models
             }
         }
 
-
     }
-
 
 }

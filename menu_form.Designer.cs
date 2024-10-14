@@ -41,11 +41,10 @@ namespace DSOO_Grupo4_TP1
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(menu_form));
             AltaCliente = new Button();
-            AltaSocio = new Button();
             ConvertirEnSocio = new Button();
             button4 = new Button();
             button5 = new Button();
-            button6 = new Button();
+            Salir_Menu_Button = new Button();
             button7 = new Button();
             Menu_Form_Panel = new Panel();
             btn_cerrar = new PictureBox();
@@ -57,74 +56,64 @@ namespace DSOO_Grupo4_TP1
             // 
             // AltaCliente
             // 
-            AltaCliente.Location = new Point(199, 257);
+            AltaCliente.Location = new Point(199, 284);
             AltaCliente.Margin = new Padding(7, 8, 7, 8);
             AltaCliente.Name = "AltaCliente";
-            AltaCliente.Size = new Size(369, 63);
+            AltaCliente.Size = new Size(417, 63);
             AltaCliente.TabIndex = 0;
-            AltaCliente.Text = "Dar de alta un Cliente";
+            AltaCliente.Text = "Dar de alta un socio o cliente";
             AltaCliente.UseVisualStyleBackColor = true;
             AltaCliente.Click += AltaCliente_Click;
             // 
-            // AltaSocio
-            // 
-            AltaSocio.Location = new Point(199, 372);
-            AltaSocio.Margin = new Padding(7, 8, 7, 8);
-            AltaSocio.Name = "AltaSocio";
-            AltaSocio.Size = new Size(369, 63);
-            AltaSocio.TabIndex = 1;
-            AltaSocio.Text = "Dar de alta un Socio";
-            AltaSocio.UseVisualStyleBackColor = true;
-            AltaSocio.Click += AltaSocio_Click;
-            // 
             // ConvertirEnSocio
             // 
-            ConvertirEnSocio.Location = new Point(199, 489);
+            ConvertirEnSocio.Location = new Point(199, 398);
             ConvertirEnSocio.Margin = new Padding(7, 8, 7, 8);
             ConvertirEnSocio.Name = "ConvertirEnSocio";
-            ConvertirEnSocio.Size = new Size(369, 63);
+            ConvertirEnSocio.Size = new Size(417, 63);
             ConvertirEnSocio.TabIndex = 2;
             ConvertirEnSocio.Text = "Convertir Cliente en Socio";
             ConvertirEnSocio.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            button4.Location = new Point(199, 599);
+            button4.Location = new Point(851, 284);
             button4.Margin = new Padding(7, 8, 7, 8);
             button4.Name = "button4";
-            button4.Size = new Size(369, 63);
+            button4.Size = new Size(417, 63);
             button4.TabIndex = 3;
             button4.Text = "Inscribir en Actividad";
             button4.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            button5.Location = new Point(665, 257);
+            button5.Location = new Point(851, 398);
             button5.Margin = new Padding(7, 8, 7, 8);
             button5.Name = "button5";
-            button5.Size = new Size(369, 63);
+            button5.Size = new Size(417, 63);
             button5.TabIndex = 4;
             button5.Text = "Cobrar";
             button5.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // Salir_Menu_Button
             // 
-            button6.BackColor = Color.RosyBrown;
-            button6.Location = new Point(665, 489);
-            button6.Margin = new Padding(7, 8, 7, 8);
-            button6.Name = "button6";
-            button6.Size = new Size(369, 63);
-            button6.TabIndex = 5;
-            button6.Text = "Salir";
-            button6.UseVisualStyleBackColor = false;
-            button6.Click += button6_Click;
+            Salir_Menu_Button.BackColor = Color.RosyBrown;
+            Salir_Menu_Button.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            Salir_Menu_Button.Location = new Point(851, 645);
+            Salir_Menu_Button.Margin = new Padding(7, 8, 7, 8);
+            Salir_Menu_Button.Name = "Salir_Menu_Button";
+            Salir_Menu_Button.Size = new Size(416, 63);
+            Salir_Menu_Button.TabIndex = 5;
+            Salir_Menu_Button.Text = "Salir";
+            Salir_Menu_Button.UseVisualStyleBackColor = false;
+            Salir_Menu_Button.Click += button6_Click;
             // 
             // button7
             // 
-            button7.Location = new Point(665, 372);
+            button7.Location = new Point(184, 645);
             button7.Margin = new Padding(7, 8, 7, 8);
             button7.Name = "button7";
-            button7.Size = new Size(369, 63);
+            button7.Size = new Size(417, 63);
             button7.TabIndex = 6;
             button7.Text = "Ver Morosos";
             button7.UseVisualStyleBackColor = true;
@@ -172,18 +161,17 @@ namespace DSOO_Grupo4_TP1
             ClientSize = new Size(1546, 800);
             Controls.Add(Menu_Form_Panel);
             Controls.Add(button7);
-            Controls.Add(button6);
+            Controls.Add(Salir_Menu_Button);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(ConvertirEnSocio);
-            Controls.Add(AltaSocio);
             Controls.Add(AltaCliente);
             Cursor = Cursors.Hand;
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(7, 8, 7, 8);
             Name = "menu_form";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Menu de Opciones";
             MouseDown += menu_form_MouseDown;
             Menu_Form_Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).EndInit();
@@ -194,11 +182,10 @@ namespace DSOO_Grupo4_TP1
         #endregion
 
         private Button AltaCliente;
-        private Button AltaSocio;
         private Button ConvertirEnSocio;
         private Button button4;
         private Button button5;
-        private Button button6;
+        private Button Salir_Menu_Button;
         private Button button7;
         private Panel Menu_Form_Panel;
         private PictureBox btn_cerrar;
