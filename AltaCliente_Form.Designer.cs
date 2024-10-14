@@ -90,6 +90,7 @@
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_minimizar.TabIndex = 8;
             btn_minimizar.TabStop = false;
+            btn_minimizar.Click += btn_minimizar_Click;
             // 
             // btn_cerrar
             // 
@@ -101,6 +102,7 @@
             btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_cerrar.TabIndex = 7;
             btn_cerrar.TabStop = false;
+            btn_cerrar.Click += btn_cerrar_Click;
             // 
             // label1
             // 

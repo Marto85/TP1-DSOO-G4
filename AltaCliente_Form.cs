@@ -46,7 +46,7 @@ namespace DSOO_Grupo4_TP1
             string tipoCliente = Tipo_Cliente_Registro.SelectedItem.ToString();
             bool activo = true;
             bool esApto = true;
-      
+
 
             if (tipoCliente == "Cliente por actividades")
             {
@@ -61,5 +61,14 @@ namespace DSOO_Grupo4_TP1
             }*/
         }
 
+        private void btn_cerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btn_minimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 }
