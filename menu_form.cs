@@ -25,17 +25,18 @@ namespace DSOO_Grupo4_TP1
 
         private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
 
+        private void AltaCliente_Click(object sender, EventArgs e)
+        {
+            Form formulario = new AltaCliente_Form();
+            this.WindowState = FormWindowState.Minimized;
+            formulario.ShowDialog();
+        }
+
         private void AltaSocio_Click(object sender, EventArgs e)
         {
             Form formulario = new AltaCliente_Form();
             formulario.ShowDialog();
-        }
-
-        private void AltaCliente_Click(object sender, EventArgs e)
-        {
-            Form formulario = new AltaCliente_Form();
-            formulario.ShowDialog();
-        }
+        }       
 
         private void btn_minimizar_Click(object sender, EventArgs e)
         {

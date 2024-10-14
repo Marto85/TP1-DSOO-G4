@@ -30,10 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AltaCliente_Form));
             panel1 = new Panel();
-            panel2 = new Panel();
-            btn_cerrar = new PictureBox();
-            btn_minimizar = new PictureBox();
             pictureBox1 = new PictureBox();
+            panel2 = new Panel();
+            btn_minimizar = new PictureBox();
+            btn_cerrar = new PictureBox();
             label1 = new Label();
             Nombre_Registro = new TextBox();
             Apellido_Registro = new TextBox();
@@ -44,10 +44,10 @@
             Tipo_Cliente_Registro = new ComboBox();
             Enviar_Registro = new Button();
             panel1.SuspendLayout();
-            panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)btn_cerrar).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)btn_minimizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)btn_minimizar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btn_cerrar).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -60,6 +60,16 @@
             panel1.Size = new Size(500, 803);
             panel1.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(130, 215);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(250, 228);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
             // panel2
             // 
             panel2.BackColor = SystemColors.Highlight;
@@ -69,17 +79,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1730, 56);
             panel2.TabIndex = 11;
-            // 
-            // btn_cerrar
-            // 
-            btn_cerrar.Cursor = Cursors.Hand;
-            btn_cerrar.Image = (Image)resources.GetObject("btn_cerrar.Image");
-            btn_cerrar.Location = new Point(1661, 0);
-            btn_cerrar.Name = "btn_cerrar";
-            btn_cerrar.Size = new Size(69, 47);
-            btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
-            btn_cerrar.TabIndex = 7;
-            btn_cerrar.TabStop = false;
             // 
             // btn_minimizar
             // 
@@ -92,15 +91,16 @@
             btn_minimizar.TabIndex = 8;
             btn_minimizar.TabStop = false;
             // 
-            // pictureBox1
+            // btn_cerrar
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(130, 215);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(250, 228);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            btn_cerrar.Cursor = Cursors.Hand;
+            btn_cerrar.Image = (Image)resources.GetObject("btn_cerrar.Image");
+            btn_cerrar.Location = new Point(1661, 0);
+            btn_cerrar.Name = "btn_cerrar";
+            btn_cerrar.Size = new Size(69, 47);
+            btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
+            btn_cerrar.TabIndex = 7;
+            btn_cerrar.TabStop = false;
             // 
             // label1
             // 
@@ -241,12 +241,13 @@
             ForeColor = SystemColors.ActiveBorder;
             FormBorderStyle = FormBorderStyle.None;
             Name = "AltaCliente_Form";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AltaCliente_Form";
             panel1.ResumeLayout(false);
-            panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)btn_cerrar).EndInit();
-            ((System.ComponentModel.ISupportInitialize)btn_minimizar).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)btn_minimizar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btn_cerrar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

@@ -41,7 +41,7 @@ namespace DSOO_Grupo4_TP1
             pictureBox1 = new PictureBox();
             username_login = new TextBox();
             password_login = new TextBox();
-            Login = new Button();
+            Login_Button = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
             mySqlCommand1 = new MySqlCommand();
             label1 = new Label();
@@ -102,25 +102,25 @@ namespace DSOO_Grupo4_TP1
             password_login.Enter += password_Enter;
             password_login.Leave += password_Leave;
             // 
-            // Login
+            // Login_Button
             // 
-            Login.BackColor = SystemColors.ActiveBorder;
-            Login.Cursor = Cursors.Hand;
-            Login.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
-            Login.FlatAppearance.BorderSize = 2;
-            Login.FlatAppearance.MouseDownBackColor = Color.FromArgb(28, 28, 28);
-            Login.FlatAppearance.MouseOverBackColor = SystemColors.Highlight;
-            Login.FlatStyle = FlatStyle.Flat;
-            Login.Font = new Font("Century Gothic", 9.900001F, FontStyle.Bold, GraphicsUnit.Point);
-            Login.ForeColor = SystemColors.InactiveCaptionText;
-            Login.Location = new Point(643, 659);
-            Login.Margin = new Padding(7, 8, 7, 8);
-            Login.Name = "Login";
-            Login.Size = new Size(928, 63);
-            Login.TabIndex = 1;
-            Login.Text = "ACCEDER";
-            Login.UseVisualStyleBackColor = false;
-            Login.Click += Login_Click;
+            Login_Button.BackColor = SystemColors.ActiveBorder;
+            Login_Button.Cursor = Cursors.Hand;
+            Login_Button.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            Login_Button.FlatAppearance.BorderSize = 2;
+            Login_Button.FlatAppearance.MouseDownBackColor = Color.FromArgb(28, 28, 28);
+            Login_Button.FlatAppearance.MouseOverBackColor = SystemColors.Highlight;
+            Login_Button.FlatStyle = FlatStyle.Flat;
+            Login_Button.Font = new Font("Century Gothic", 9.900001F, FontStyle.Bold, GraphicsUnit.Point);
+            Login_Button.ForeColor = SystemColors.InactiveCaptionText;
+            Login_Button.Location = new Point(643, 659);
+            Login_Button.Margin = new Padding(7, 8, 7, 8);
+            Login_Button.Name = "Login_Button";
+            Login_Button.Size = new Size(928, 63);
+            Login_Button.TabIndex = 1;
+            Login_Button.Text = "ACCEDER";
+            Login_Button.UseVisualStyleBackColor = false;
+            Login_Button.Click += Login_Click;
             // 
             // flowLayoutPanel1
             // 
@@ -215,7 +215,7 @@ namespace DSOO_Grupo4_TP1
             Controls.Add(panel1);
             Controls.Add(label1);
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(Login);
+            Controls.Add(Login_Button);
             Controls.Add(password_login);
             Controls.Add(username_login);
             ForeColor = SystemColors.ActiveBorder;
@@ -241,8 +241,11 @@ namespace DSOO_Grupo4_TP1
 
             if (this.verificarDatos(username_login.Text, password_login.Text))
             {
+                
                 Form formulario = new menu_form();
+                this.WindowState = FormWindowState.Minimized;
                 formulario.ShowDialog();
+                
             }
             else {
 
@@ -293,7 +296,7 @@ namespace DSOO_Grupo4_TP1
         private PictureBox pictureBox1;
         private TextBox username_login;
         private TextBox password_login;
-        private Button Login;
+        private Button Login_Button;
         private FlowLayoutPanel flowLayoutPanel1;
         private MySqlCommand mySqlCommand1;
         private Label label1;

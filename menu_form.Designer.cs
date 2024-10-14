@@ -182,6 +182,7 @@ namespace DSOO_Grupo4_TP1
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(7, 8, 7, 8);
             Name = "menu_form";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             MouseDown += menu_form_MouseDown;
             Menu_Form_Panel.ResumeLayout(false);
