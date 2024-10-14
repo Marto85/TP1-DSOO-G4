@@ -47,10 +47,10 @@ namespace DSOO_Grupo4_TP1
             button5 = new Button();
             button6 = new Button();
             button7 = new Button();
-            panel1 = new Panel();
+            Menu_Form_Panel = new Panel();
             btn_cerrar = new PictureBox();
             btn_minimizar = new PictureBox();
-            panel1.SuspendLayout();
+            Menu_Form_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).BeginInit();
             SuspendLayout();
@@ -117,6 +117,7 @@ namespace DSOO_Grupo4_TP1
             button6.TabIndex = 5;
             button6.Text = "Salir";
             button6.UseVisualStyleBackColor = false;
+            button6.Click += button6_Click;
             // 
             // button7
             // 
@@ -128,15 +129,16 @@ namespace DSOO_Grupo4_TP1
             button7.Text = "Ver Morosos";
             button7.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // Menu_Form_Panel
             // 
-            panel1.BackColor = SystemColors.Highlight;
-            panel1.Controls.Add(btn_cerrar);
-            panel1.Controls.Add(btn_minimizar);
-            panel1.Location = new Point(0, 4);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1548, 56);
-            panel1.TabIndex = 7;
+            Menu_Form_Panel.BackColor = SystemColors.Highlight;
+            Menu_Form_Panel.Controls.Add(btn_cerrar);
+            Menu_Form_Panel.Controls.Add(btn_minimizar);
+            Menu_Form_Panel.Location = new Point(0, 8);
+            Menu_Form_Panel.Name = "Menu_Form_Panel";
+            Menu_Form_Panel.Size = new Size(1548, 56);
+            Menu_Form_Panel.TabIndex = 7;
+            Menu_Form_Panel.MouseDown += panel1_MouseDown;
             // 
             // btn_cerrar
             // 
@@ -168,7 +170,7 @@ namespace DSOO_Grupo4_TP1
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
             ClientSize = new Size(1546, 800);
-            Controls.Add(panel1);
+            Controls.Add(Menu_Form_Panel);
             Controls.Add(button7);
             Controls.Add(button6);
             Controls.Add(button5);
@@ -181,7 +183,8 @@ namespace DSOO_Grupo4_TP1
             Margin = new Padding(7, 8, 7, 8);
             Name = "menu_form";
             Text = "Form1";
-            panel1.ResumeLayout(false);
+            MouseDown += menu_form_MouseDown;
+            Menu_Form_Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).EndInit();
             ResumeLayout(false);
@@ -196,7 +199,7 @@ namespace DSOO_Grupo4_TP1
         private Button button5;
         private Button button6;
         private Button button7;
-        private Panel panel1;
+        private Panel Menu_Form_Panel;
         private PictureBox btn_cerrar;
         private PictureBox btn_minimizar;
     }
