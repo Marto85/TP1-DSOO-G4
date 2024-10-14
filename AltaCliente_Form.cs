@@ -34,21 +34,21 @@ namespace DSOO_Grupo4_TP1
 
         }
 
-        private void Enviar_Registro_MouseClick(object sender, MouseEventArgs e)
+        private void Enviar_Registro_Click(object sender, EventArgs e)
         {
-            DateTime fechaIngreso =  DateTime.Now;
+            DateTime fechaIngreso = DateTime.Now;
             string nombre = Nombre_Registro.Text;
             string apellido = Apellido_Registro.Text;
-            int dni =  int.Parse(DNI_Registro.Text);
+            int dni = int.Parse(DNI_Registro.Text);
             string domicilio = Domicilio_Registro.Text;
-            string mail = Mail_Registro.Text;
             string telefono = Telefono_Registro.Text;
+            string mail = Mail_Registro.Text;        
             string tipoCliente = Tipo_Cliente_Registro.SelectedItem.ToString();
-            
+
             if (tipoCliente == "Cliente por actividades")
             {
-                Cliente nuevoCliente =  new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail);
-                nuevoCliente.AltaCliente(nuevoCliente)
+                Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail);
+                nuevoCliente.AltaCliente(nuevoCliente);
             }
             else if (tipoCliente == "Es Socio")
             {

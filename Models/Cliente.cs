@@ -23,15 +23,12 @@ namespace DSOO_Grupo4_TP1.Models
         public bool PagoVencido { get; set; } 
 
 
-        public Cliente(string nombre, string apellido, bool activo, bool esApto, bool pagoVencido)
+        /*public Cliente(string nombre, string apellido, bool activo = true, bool esApto = true, bool pagoVencido =  false)
         {
             FechaIngreso = DateTime.Now;
             Nombre = nombre;
             Apellido = apellido;
-            Activo = activo;
-            EsApto = esApto;
-            PagoVencido = pagoVencido;
-        }
+        }*/
 
         public Cliente(DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, bool activo = true, bool esApto = true, bool pagoVencido = false)
         {

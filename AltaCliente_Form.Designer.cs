@@ -181,7 +181,8 @@
             Enviar_Registro.TabIndex = 10;
             Enviar_Registro.Text = "Registrar";
             Enviar_Registro.UseVisualStyleBackColor = false;
-            Enviar_Registro.MouseClick += Enviar_Registro_MouseClick;
+            Enviar_Registro.Click += Enviar_Registro_Click;
+
             // 
             // AltaCliente_Form
             // 
