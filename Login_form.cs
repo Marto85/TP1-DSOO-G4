@@ -35,7 +35,7 @@ namespace DSOO_Grupo4_TP1
             if (username_login.Text == "Nombre de usuario")
             {
                 username_login.Text = "";
-                username_login.ForeColor = Color.DarkGray;
+                username_login.ForeColor = Color.Black;
             }
         }
 
@@ -44,7 +44,7 @@ namespace DSOO_Grupo4_TP1
             if (string.IsNullOrWhiteSpace(username_login.Text))
             {
                 username_login.Text = "Nombre de usuario";
-                username_login.ForeColor = Color.Gray;
+                username_login.ForeColor = Color.DarkGray;
             }
         }
 
@@ -54,7 +54,7 @@ namespace DSOO_Grupo4_TP1
             {
                 password_login.Text = "";
                 password_login.UseSystemPasswordChar = true;
-                password_login.ForeColor = Color.DarkGray;
+                password_login.ForeColor = Color.Black;
             }
         }
 
@@ -64,7 +64,7 @@ namespace DSOO_Grupo4_TP1
             {
                 password_login.UseSystemPasswordChar = false;
                 password_login.Text = "Contraseña";
-                password_login.ForeColor = Color.Gray;
+                password_login.ForeColor = Color.DarkGray;
             }
         }
 
@@ -97,9 +97,12 @@ namespace DSOO_Grupo4_TP1
 
         private void username_login_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
-      
+        private void password_login_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

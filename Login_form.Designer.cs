@@ -98,18 +98,20 @@ namespace DSOO_Grupo4_TP1
             password_login.Size = new Size(928, 46);
             password_login.TabIndex = 3;
             password_login.Text = "Contraseña";
+            password_login.TextChanged += password_login_TextChanged;
             password_login.Enter += password_Enter;
             password_login.Leave += password_Leave;
             // 
             // Login
             // 
-            Login.BackColor = SystemColors.Highlight;
+            Login.BackColor = SystemColors.ActiveBorder;
             Login.Cursor = Cursors.Hand;
-            Login.FlatAppearance.BorderSize = 0;
+            Login.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            Login.FlatAppearance.BorderSize = 2;
             Login.FlatAppearance.MouseDownBackColor = Color.FromArgb(28, 28, 28);
-            Login.FlatAppearance.MouseOverBackColor = Color.FromArgb(64, 64, 64);
+            Login.FlatAppearance.MouseOverBackColor = SystemColors.Highlight;
             Login.FlatStyle = FlatStyle.Flat;
-            Login.Font = new Font("Arial Rounded MT Bold", 11.1F, FontStyle.Italic, GraphicsUnit.Point);
+            Login.Font = new Font("Century Gothic", 9.900001F, FontStyle.Bold, GraphicsUnit.Point);
             Login.ForeColor = SystemColors.InactiveCaptionText;
             Login.Location = new Point(643, 659);
             Login.Margin = new Padding(7, 8, 7, 8);
@@ -176,7 +178,7 @@ namespace DSOO_Grupo4_TP1
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(17, 53, 71);
+            panel1.BackColor = SystemColors.Highlight;
             panel1.Controls.Add(btn_cerrar);
             panel1.Controls.Add(btn_minimizar);
             panel1.Location = new Point(5, 5);
