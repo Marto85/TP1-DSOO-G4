@@ -20,17 +20,20 @@ namespace DSOO_Grupo4_TP1.Models
         public string Email { get; set; }
         public bool Activo { get; set; }
         public bool EsApto { get; set; }
+        public bool PagoVencido { get; set; } 
 
-        public Cliente(string nombre, string apellido, bool activo, bool esApto)
+
+        public Cliente(string nombre, string apellido, bool activo, bool esApto, bool pagoVencido)
         {
             FechaIngreso = DateTime.Now;
             Nombre = nombre;
             Apellido = apellido;
             Activo = activo;
             EsApto = esApto;
+            PagoVencido = pagoVencido;
         }
 
-        public Cliente(DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, bool activo = true, bool esApto = true)
+        public Cliente(DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, bool activo = true, bool esApto = true, bool pagoVencido = false)
         {
             FechaIngreso = fechaIngreso;
             Nombre = nombre;

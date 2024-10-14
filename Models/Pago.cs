@@ -8,7 +8,7 @@ namespace DSOO_Grupo4_TP1.Models
 {
     public class Pago
     {
-        public Guid Id { get; private set; }
+        public int Id { get; private set; }
         public int SocioId { get; private set; }
         public decimal Monto { get; private set; }
         public DateTime FechaPago { get; private set; }
@@ -29,7 +29,6 @@ namespace DSOO_Grupo4_TP1.Models
                 throw new ArgumentException("El monto del pago debe ser mayor a 0");
             }
 
-            Id = Guid.NewGuid();
             SocioId = socioId;
             Monto = monto;
             FechaPago = fechaPago;

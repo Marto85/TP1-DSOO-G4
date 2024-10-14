@@ -15,6 +15,8 @@ namespace DSOO_Grupo4_TP1.Models
         public string Horario { get; private set; }
         public int CuposDisponibles { get; private set; }
         public string Profesor { get; set; }
+        public DateTime FechaVencimiento { get; private set; }
+
         private List<Cliente> inscriptos;
 
         public Actividad(int id, string nombre, string descripcion, decimal precioNoSocio, string horario, int cuposDisponibles, string profesor)
