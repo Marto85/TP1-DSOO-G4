@@ -66,6 +66,7 @@ namespace DSOO_Grupo4_TP1.Models
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Cliente registrado exitosamente.", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    
                 }
                 catch (MySqlException ex)
                 {

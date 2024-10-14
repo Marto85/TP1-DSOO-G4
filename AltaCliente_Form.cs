@@ -52,6 +52,7 @@ namespace DSOO_Grupo4_TP1
             {
                 Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail);
                 nuevoCliente.AltaCliente();
+                this.Close();
             }
             /*else if (tipoCliente == "Es Socio")
             {
