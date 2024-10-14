@@ -58,6 +58,7 @@ namespace DSOO_Grupo4_TP1
             {
                 Socio nuevoSocio = new Socio(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, activo, esApto);
                 nuevoSocio.AltaSocio();
+                this.Close();
             }*/
         }
 
