@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AltaCliente_Form));
             panel1 = new Panel();
+            panel2 = new Panel();
+            btn_cerrar = new PictureBox();
+            btn_minimizar = new PictureBox();
             pictureBox1 = new PictureBox();
             label1 = new Label();
             Nombre_Registro = new TextBox();
@@ -41,18 +44,53 @@
             Tipo_Cliente_Registro = new ComboBox();
             Enviar_Registro = new Button();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)btn_cerrar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btn_minimizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(0, 122, 204);
+            panel1.BackColor = SystemColors.Highlight;
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(500, 803);
             panel1.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = SystemColors.Highlight;
+            panel2.Controls.Add(btn_minimizar);
+            panel2.Controls.Add(btn_cerrar);
+            panel2.Location = new Point(3, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1730, 56);
+            panel2.TabIndex = 11;
+            // 
+            // btn_cerrar
+            // 
+            btn_cerrar.Cursor = Cursors.Hand;
+            btn_cerrar.Image = (Image)resources.GetObject("btn_cerrar.Image");
+            btn_cerrar.Location = new Point(1661, 0);
+            btn_cerrar.Name = "btn_cerrar";
+            btn_cerrar.Size = new Size(69, 47);
+            btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
+            btn_cerrar.TabIndex = 7;
+            btn_cerrar.TabStop = false;
+            // 
+            // btn_minimizar
+            // 
+            btn_minimizar.Cursor = Cursors.Hand;
+            btn_minimizar.Image = (Image)resources.GetObject("btn_minimizar.Image");
+            btn_minimizar.Location = new Point(1586, 0);
+            btn_minimizar.Name = "btn_minimizar";
+            btn_minimizar.Size = new Size(69, 47);
+            btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
+            btn_minimizar.TabIndex = 8;
+            btn_minimizar.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -165,7 +203,7 @@
             Tipo_Cliente_Registro.Items.AddRange(new object[] { "Seleccione una opcion:", "Es Socio", "Cliente por actividades" });
             Tipo_Cliente_Registro.Location = new Point(544, 613);
             Tipo_Cliente_Registro.Name = "Tipo_Cliente_Registro";
-            Tipo_Cliente_Registro.Size = new Size(661, 52);
+            Tipo_Cliente_Registro.Size = new Size(855, 52);
             Tipo_Cliente_Registro.TabIndex = 9;
             Tipo_Cliente_Registro.SelectedIndexChanged += Tipo_Cliente_Form_SelectedIndexChanged;
             // 
@@ -175,21 +213,21 @@
             Enviar_Registro.Cursor = Cursors.Hand;
             Enviar_Registro.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             Enviar_Registro.ForeColor = Color.FromArgb(15, 15, 15);
-            Enviar_Registro.Location = new Point(822, 707);
+            Enviar_Registro.Location = new Point(741, 707);
             Enviar_Registro.Name = "Enviar_Registro";
-            Enviar_Registro.Size = new Size(336, 58);
+            Enviar_Registro.Size = new Size(502, 70);
             Enviar_Registro.TabIndex = 10;
             Enviar_Registro.Text = "Registrar";
             Enviar_Registro.UseVisualStyleBackColor = false;
             Enviar_Registro.Click += Enviar_Registro_Click;
-
             // 
             // AltaCliente_Form
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
-            ClientSize = new Size(1573, 803);
+            ClientSize = new Size(1735, 803);
+            Controls.Add(panel2);
             Controls.Add(Enviar_Registro);
             Controls.Add(Tipo_Cliente_Registro);
             Controls.Add(Mail_Registro);
@@ -203,9 +241,11 @@
             ForeColor = SystemColors.ActiveBorder;
             FormBorderStyle = FormBorderStyle.None;
             Name = "AltaCliente_Form";
-            Opacity = 0.9D;
             Text = "AltaCliente_Form";
             panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)btn_cerrar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btn_minimizar).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -224,5 +264,8 @@
         private TextBox Mail_Registro;
         private ComboBox Tipo_Cliente_Registro;
         private Button Enviar_Registro;
+        private Panel panel2;
+        private PictureBox btn_cerrar;
+        private PictureBox btn_minimizar;
     }
 }

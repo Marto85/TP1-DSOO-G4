@@ -134,9 +134,9 @@ namespace DSOO_Grupo4_TP1
             Menu_Form_Panel.BackColor = SystemColors.Highlight;
             Menu_Form_Panel.Controls.Add(btn_cerrar);
             Menu_Form_Panel.Controls.Add(btn_minimizar);
-            Menu_Form_Panel.Location = new Point(0, 8);
+            Menu_Form_Panel.Location = new Point(0, 2);
             Menu_Form_Panel.Name = "Menu_Form_Panel";
-            Menu_Form_Panel.Size = new Size(1548, 56);
+            Menu_Form_Panel.Size = new Size(1548, 62);
             Menu_Form_Panel.TabIndex = 7;
             Menu_Form_Panel.MouseDown += panel1_MouseDown;
             // 
