@@ -28,5 +28,15 @@ namespace DSOO_Grupo4_TP1
             Form formulario = new AltaCliente_Form();
             formulario.ShowDialog();
         }
+
+        private void btn_minimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btn_cerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

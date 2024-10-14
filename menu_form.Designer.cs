@@ -39,6 +39,7 @@ namespace DSOO_Grupo4_TP1
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(menu_form));
             AltaCliente = new Button();
             AltaSocio = new Button();
             ConvertirEnSocio = new Button();
@@ -46,6 +47,12 @@ namespace DSOO_Grupo4_TP1
             button5 = new Button();
             button6 = new Button();
             button7 = new Button();
+            panel1 = new Panel();
+            btn_cerrar = new PictureBox();
+            btn_minimizar = new PictureBox();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)btn_cerrar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btn_minimizar).BeginInit();
             SuspendLayout();
             // 
             // AltaCliente
@@ -121,12 +128,47 @@ namespace DSOO_Grupo4_TP1
             button7.Text = "Ver Morosos";
             button7.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.Highlight;
+            panel1.Controls.Add(btn_cerrar);
+            panel1.Controls.Add(btn_minimizar);
+            panel1.Location = new Point(0, 4);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1548, 56);
+            panel1.TabIndex = 7;
+            // 
+            // btn_cerrar
+            // 
+            btn_cerrar.Cursor = Cursors.Hand;
+            btn_cerrar.Image = (Image)resources.GetObject("btn_cerrar.Image");
+            btn_cerrar.Location = new Point(1465, 6);
+            btn_cerrar.Name = "btn_cerrar";
+            btn_cerrar.Size = new Size(69, 47);
+            btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
+            btn_cerrar.TabIndex = 9;
+            btn_cerrar.TabStop = false;
+            btn_cerrar.Click += btn_cerrar_Click;
+            // 
+            // btn_minimizar
+            // 
+            btn_minimizar.Cursor = Cursors.Hand;
+            btn_minimizar.Image = (Image)resources.GetObject("btn_minimizar.Image");
+            btn_minimizar.Location = new Point(1400, 6);
+            btn_minimizar.Name = "btn_minimizar";
+            btn_minimizar.Size = new Size(69, 47);
+            btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
+            btn_minimizar.TabIndex = 10;
+            btn_minimizar.TabStop = false;
+            btn_minimizar.Click += btn_minimizar_Click;
+            // 
             // menu_form
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
             ClientSize = new Size(1546, 800);
+            Controls.Add(panel1);
             Controls.Add(button7);
             Controls.Add(button6);
             Controls.Add(button5);
@@ -139,6 +181,9 @@ namespace DSOO_Grupo4_TP1
             Margin = new Padding(7, 8, 7, 8);
             Name = "menu_form";
             Text = "Form1";
+            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)btn_cerrar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btn_minimizar).EndInit();
             ResumeLayout(false);
         }
 
@@ -151,5 +196,8 @@ namespace DSOO_Grupo4_TP1
         private Button button5;
         private Button button6;
         private Button button7;
+        private Panel panel1;
+        private PictureBox btn_cerrar;
+        private PictureBox btn_minimizar;
     }
 }
