@@ -45,7 +45,7 @@ namespace DSOO_Grupo4_TP1
             button4 = new Button();
             button5 = new Button();
             Salir_Menu_Button = new Button();
-            button7 = new Button();
+            Morosos_Menu_Button = new Button();
             Menu_Form_Panel = new Panel();
             btn_cerrar = new PictureBox();
             btn_minimizar = new PictureBox();
@@ -108,15 +108,17 @@ namespace DSOO_Grupo4_TP1
             Salir_Menu_Button.UseVisualStyleBackColor = false;
             Salir_Menu_Button.Click += button6_Click;
             // 
-            // button7
+            // Morosos_Menu_Button
             // 
-            button7.Location = new Point(184, 645);
-            button7.Margin = new Padding(7, 8, 7, 8);
-            button7.Name = "button7";
-            button7.Size = new Size(417, 63);
-            button7.TabIndex = 6;
-            button7.Text = "Ver Morosos";
-            button7.UseVisualStyleBackColor = true;
+            Morosos_Menu_Button.BackColor = Color.RosyBrown;
+            Morosos_Menu_Button.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            Morosos_Menu_Button.Location = new Point(184, 645);
+            Morosos_Menu_Button.Margin = new Padding(7, 8, 7, 8);
+            Morosos_Menu_Button.Name = "Morosos_Menu_Button";
+            Morosos_Menu_Button.Size = new Size(417, 63);
+            Morosos_Menu_Button.TabIndex = 6;
+            Morosos_Menu_Button.Text = "Ver Morosos";
+            Morosos_Menu_Button.UseVisualStyleBackColor = false;
             // 
             // Menu_Form_Panel
             // 
@@ -160,7 +162,7 @@ namespace DSOO_Grupo4_TP1
             BackColor = Color.DimGray;
             ClientSize = new Size(1546, 800);
             Controls.Add(Menu_Form_Panel);
-            Controls.Add(button7);
+            Controls.Add(Morosos_Menu_Button);
             Controls.Add(Salir_Menu_Button);
             Controls.Add(button5);
             Controls.Add(button4);
@@ -186,7 +188,7 @@ namespace DSOO_Grupo4_TP1
         private Button button4;
         private Button button5;
         private Button Salir_Menu_Button;
-        private Button button7;
+        private Button Morosos_Menu_Button;
         private Panel Menu_Form_Panel;
         private PictureBox btn_cerrar;
         private PictureBox btn_minimizar;
