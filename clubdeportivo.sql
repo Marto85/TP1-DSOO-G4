@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS clubdeportivo;
 CREATE DATABASE clubdeportivo;
-
+USE clubdeportivo;
 
 CREATE TABLE Cliente (
     Id INT AUTO_INCREMENT PRIMARY KEY,
@@ -11,32 +11,25 @@ CREATE TABLE Cliente (
     Direccion VARCHAR(255),
     Telefono VARCHAR(20),
     Email VARCHAR(100),
-    PagoVencido BOOLEAN DEFAULT FALSE,
-    Activo BOOLEAN NOT NULL,
+    EsSocio BOOLEAN NOT NULL,
     EsApto BOOLEAN NOT NULL
 );
 
-CREATE TABLE socio (
+CREATE TABLE Tipo_de_pago (
     Id INT AUTO_INCREMENT PRIMARY KEY,
-    Nombre VARCHAR(50) NOT NULL,
-    Apellido VARCHAR(50) NOT NULL,
-    DNI INT NOT NULL UNIQUE,
-    Direccion VARCHAR(100),
-    Telefono VARCHAR(20),
-    Email VARCHAR(100),
-    FechaIngreso DATETIME DEFAULT CURRENT_TIMESTAMP,
-    Activo BOOLEAN DEFAULT TRUE,
-    EsApto BOOLEAN NOT NULL
+    Nombre VARCHAR(100) NOT NULL
 );
+
 
 CREATE TABLE Pago (
-    Id CHAR(36) PRIMARY KEY,  -- Utilizamos un GUID para el identificador único de cada pago
-    Socio_Id INT NOT NULL,
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Cliente_Id INT NOT NULL,
     Monto DECIMAL(10, 2) NOT NULL,
     FechaPago DATE NOT NULL,
     ProximoVencimiento DATE NOT NULL,
-    FrecuenciaPago ENUM('Mensual', 'Trimestral', 'Semestral', 'Anual') NOT NULL,
-    FOREIGN KEY (Socio_Id) REFERENCES Socio(Id) ON DELETE CASCADE
+	Id_tipo_de_pago INT NOT NULL,
+    FOREIGN KEY (Cliente_Id) REFERENCES Cliente(Id) ON DELETE CASCADE,
+	FOREIGN KEY (Id_tipo_de_pago) REFERENCES Tipo_de_pago(Id) ON DELETE CASCADE
 );
 
 
@@ -55,7 +48,7 @@ CREATE TABLE Actividad (
 CREATE TABLE Actividad_Cliente (
     IdCliente INT NOT NULL,
     IdActividad INT NOT NULL,
-    EsSocio BOOLEAN NOT NULL, -- Agregoo esto para diferenciar si la inscripción es de un socio o de un cliente y asi validar la restriccion de 3 actividades para socios
+    EsSocio BOOLEAN NOT NULL, -- Agregoo esto para diferenciar si la inscripciÃ³n es de un socio o de un cliente y asi validar la restriccion de 3 actividades para socios
     PRIMARY KEY (IdCliente, IdActividad),
     FOREIGN KEY (IdCliente) REFERENCES Cliente(Id) ON DELETE CASCADE,
     FOREIGN KEY (IdActividad) REFERENCES Actividad(Id) ON DELETE CASCADE
