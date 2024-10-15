@@ -55,7 +55,7 @@ CREATE TABLE Actividad (
 CREATE TABLE Actividad_Cliente (
     IdCliente INT NOT NULL,
     IdActividad INT NOT NULL,
-    EsSocio BOOLEAN NOT NULL, // Agregoo esto para diferenciar si la inscripción es de un socio o de un cliente y asi validar la restriccion de 3 actividades para socios
+    EsSocio BOOLEAN NOT NULL, -- Agregoo esto para diferenciar si la inscripción es de un socio o de un cliente y asi validar la restriccion de 3 actividades para socios
     PRIMARY KEY (IdCliente, IdActividad),
     FOREIGN KEY (IdCliente) REFERENCES Cliente(Id) ON DELETE CASCADE,
     FOREIGN KEY (IdActividad) REFERENCES Actividad(Id) ON DELETE CASCADE
