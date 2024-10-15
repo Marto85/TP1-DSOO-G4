@@ -43,23 +43,12 @@ namespace DSOO_Grupo4_TP1
             string domicilio = Domicilio_Registro.Text;
             string telefono = Telefono_Registro.Text;
             string mail = Mail_Registro.Text;
-            string tipoCliente = Tipo_Cliente_Registro.SelectedItem.ToString();
-            bool activo = true;
+            bool esSocio = Socio.Checked;
             bool esApto = true;
 
-
-            if (tipoCliente == "Cliente por actividades")
-            {
-                Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail);
-                nuevoCliente.AltaCliente();
-                this.Close();
-            }
-            else if (tipoCliente == "Es Socio")
-            {
-                Socio nuevoSocio = new Socio(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, activo, esApto);
-                nuevoSocio.AltaSocio();
-                this.Close();
-            }
+            Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, esSocio);
+            nuevoCliente.AltaCliente();
+            this.Close();
         }
 
         private void btn_cerrar_Click(object sender, EventArgs e)
@@ -70,6 +59,46 @@ namespace DSOO_Grupo4_TP1
         private void btn_minimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Nombre_Registro_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Nombre_Registro_MouseEnter(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Nombre_Registro_MouseLeave(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void Nombre_Registro_Enter(object sender, EventArgs e)
+        {
+            if (Nombre_Registro.Text == "Nombre")
+            {
+                Nombre_Registro.Text = "";
+                Nombre_Registro.UseSystemPasswordChar = true;
+                Nombre_Registro.ForeColor = Color.Black;
+            }
+        }
+
+        private void Nombre_Registro_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(Nombre_Registro.Text))
+            {
+                Nombre_Registro.UseSystemPasswordChar = false;
+                Nombre_Registro.Text = "Nombre";
+                Nombre_Registro.ForeColor = Color.DarkGray;
+            }
         }
     }
 }
