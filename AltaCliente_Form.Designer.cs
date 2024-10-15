@@ -148,6 +148,8 @@
             Apellido_Registro.Size = new Size(159, 26);
             Apellido_Registro.TabIndex = 4;
             Apellido_Registro.Text = "Apellido";
+            Apellido_Registro.Enter += Apellido_Registro_Enter;
+            Apellido_Registro.Leave += Apellido_Registro_Leave;
             // 
             // DNI_Registro
             // 
@@ -160,6 +162,8 @@
             DNI_Registro.Size = new Size(159, 26);
             DNI_Registro.TabIndex = 5;
             DNI_Registro.Text = "DNI";
+            DNI_Registro.Enter += DNI_Registro_Enter;
+            DNI_Registro.Leave += DNI_Registro_Leave;
             // 
             // Telefono_Registro
             // 
@@ -172,6 +176,8 @@
             Telefono_Registro.Size = new Size(159, 26);
             Telefono_Registro.TabIndex = 6;
             Telefono_Registro.Text = "Telefono";
+            Telefono_Registro.Enter += Telefono_Registro_Enter;
+            Telefono_Registro.Leave += Telefono_Registro_Leave;
             // 
             // Domicilio_Registro
             // 
@@ -184,6 +190,8 @@
             Domicilio_Registro.Size = new Size(354, 26);
             Domicilio_Registro.TabIndex = 7;
             Domicilio_Registro.Text = "Domicilio";
+            Domicilio_Registro.Enter += Domicilio_Registro_Enter;
+            Domicilio_Registro.Leave += Domicilio_Registro_Leave;
             // 
             // Mail_Registro
             // 
@@ -197,6 +205,8 @@
             Mail_Registro.TabIndex = 8;
             Mail_Registro.Text = "Correo Electronico";
             Mail_Registro.TextChanged += Mail_Registro_TextChanged;
+            Mail_Registro.Enter += Mail_Registro_Enter;
+            Mail_Registro.Leave += Mail_Registro_Leave;
             // 
             // Enviar_Registro
             // 

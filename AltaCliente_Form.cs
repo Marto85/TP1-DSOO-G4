@@ -73,12 +73,12 @@ namespace DSOO_Grupo4_TP1
 
         private void Nombre_Registro_MouseEnter(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Nombre_Registro_MouseLeave(object sender, EventArgs e)
         {
-           
+
         }
 
         private void Nombre_Registro_Enter(object sender, EventArgs e)
@@ -86,8 +86,7 @@ namespace DSOO_Grupo4_TP1
             if (Nombre_Registro.Text == "Nombre")
             {
                 Nombre_Registro.Text = "";
-                Nombre_Registro.UseSystemPasswordChar = true;
-                Nombre_Registro.ForeColor = Color.Black;
+                Nombre_Registro.ForeColor = Color.White;
             }
         }
 
@@ -95,9 +94,98 @@ namespace DSOO_Grupo4_TP1
         {
             if (string.IsNullOrWhiteSpace(Nombre_Registro.Text))
             {
-                Nombre_Registro.UseSystemPasswordChar = false;
                 Nombre_Registro.Text = "Nombre";
                 Nombre_Registro.ForeColor = Color.DarkGray;
+            }
+        }
+
+        private void Apellido_Registro_Enter(object sender, EventArgs e)
+        {
+            if (Apellido_Registro.Text == "Apellido")
+            {
+                Apellido_Registro.Text = "";
+                Apellido_Registro.ForeColor = Color.White;
+            }
+        }
+
+        private void Apellido_Registro_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(Apellido_Registro.Text))
+            {
+                Apellido_Registro.Text = "Apellido";
+                Apellido_Registro.ForeColor = Color.DarkGray;
+            }
+        }
+
+        private void DNI_Registro_Enter(object sender, EventArgs e)
+        {
+            if (DNI_Registro.Text == "DNI")
+            {
+                DNI_Registro.Text = "";
+                DNI_Registro.ForeColor = Color.White;
+            }
+        }
+
+        private void DNI_Registro_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(DNI_Registro.Text))
+            {
+                DNI_Registro.Text = "DNI";
+                DNI_Registro.ForeColor = Color.DarkGray;
+            }
+        }
+
+        private void Telefono_Registro_Enter(object sender, EventArgs e)
+        {
+            if (Telefono_Registro.Text == "Telefono")
+            {
+                Telefono_Registro.Text = "";
+                Telefono_Registro.ForeColor = Color.White;
+            }
+        }
+
+        private void Telefono_Registro_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(Telefono_Registro.Text))
+            {
+                Telefono_Registro.Text = "Telefono";
+                Telefono_Registro.ForeColor = Color.DarkGray;
+            }
+        }
+
+        private void Domicilio_Registro_Enter(object sender, EventArgs e)
+        {
+            if (Domicilio_Registro.Text == "Domicilio")
+            {
+                Domicilio_Registro.Text = "";
+                Domicilio_Registro.ForeColor = Color.White;
+            }
+        }
+
+        private void Domicilio_Registro_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(Domicilio_Registro.Text))
+            {
+                Domicilio_Registro.Text = "Domicilio";
+                Domicilio_Registro.ForeColor = Color.DarkGray;
+            }
+        }
+
+        private void Mail_Registro_Enter(object sender, EventArgs e)
+        {
+            if (Mail_Registro.Text == "Correo Electronico")
+            {
+                Mail_Registro.Text = "";
+                Mail_Registro.ForeColor = Color.White;
+            }
+        }
+
+        private void Mail_Registro_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(Mail_Registro.Text))
+            {
+                Mail_Registro.Text = "Correo Electronico";
+                Mail_Registro.ForeColor = Color.DarkGray;
             }
         }
     }
