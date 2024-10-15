@@ -11,24 +11,22 @@ namespace DSOO_Grupo4_TP1.Models
         public int Id { get; private set; }
         public string Nombre { get; private set; }
         public string Descripcion { get; private set; }
-        public decimal PrecioNoSocio { get; private set; } 
+        public decimal Precio { get; private set; } 
         public string Horario { get; private set; }
         public int CuposDisponibles { get; private set; }
         public string Profesor { get; set; }
         public DateTime FechaVencimiento { get; private set; }
 
-        private List<Cliente> inscriptos;
 
-        public Actividad(int id, string nombre, string descripcion, decimal precioNoSocio, string horario, int cuposDisponibles, string profesor)
+        public Actividad(int id, string nombre, string descripcion, decimal precio, string horario, int cuposDisponibles, string profesor)
         {
             Id = id;
             Nombre = nombre;
             Descripcion = descripcion;
-            PrecioNoSocio = precioNoSocio;
+            Precio = precio;
             Horario = horario;
             CuposDisponibles = cuposDisponibles;
             Profesor = profesor;
-            inscriptos = new List<Cliente>();
         }
 
         public bool ChequearCupo()
@@ -58,7 +56,6 @@ namespace DSOO_Grupo4_TP1.Models
 
         public void AgregarInscripto(Cliente cliente)
         {
-            inscriptos.Add(cliente);
         }
 
     }
