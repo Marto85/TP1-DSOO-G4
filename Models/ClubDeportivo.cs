@@ -164,24 +164,24 @@ namespace DSOO_Grupo4_TP1.Models
         {
             return actividades;
         }
-        public List<Cliente> ObtenerClientesFiltrados(bool soloSocios = false, bool soloNoSocios = false)
-        {
-            if(soloSocios && !soloNoSocios) return clientes.Where(c => c is Socio).ToList();
+        //public List<Cliente> ObtenerClientesFiltrados(bool soloSocios = false, bool soloNoSocios = false)
+        //{
+        //    if(soloSocios && !soloNoSocios) return clientes.Where(c => c is Socio).ToList();
 
-            else if (soloNoSocios && !soloSocios) return clientes.Where(c => !(c is Socio)).ToList();
+        //    else if (soloNoSocios && !soloSocios) return clientes.Where(c => !(c is Socio)).ToList();
 
-            else return clientes.ToList();
-        }
+        //    else return clientes.ToList();
+        //}
 
-        public Cliente ObtenerClientePorId(int id)
-        {
-            return clientes.Find(c => c.IdCliente == id);
-        }
+        //public Cliente ObtenerClientePorId(int id)
+        //{
+        //    return clientes.Find(c => c.IdCliente == id);
+        //}
 
-        public List<Cliente> ObtenerMorosos()
-        {
-            return clientes.Where(c => !c.Activo).ToList();
-        }
+        //public List<Cliente> ObtenerMorosos()
+        //{
+        //    return clientes.Where(c => !c.Activo).ToList();
+        //}
 
         /*public void ProcesarPago(int idSocio)
         {

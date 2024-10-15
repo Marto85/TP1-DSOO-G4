@@ -18,12 +18,11 @@ namespace DSOO_Grupo4_TP1.Models
         public string Direccion { get; set; }
         public string Telefono { get; set; }
         public string Email { get; set; }
-        public bool Activo { get; set; }
+        public bool EsSocio { get; set; }
         public bool EsApto { get; set; }
-        public bool PagoVencido { get; set; } 
 
 
-        public Cliente(DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, bool activo = true, bool esApto = true, bool pagoVencido = false)
+        public Cliente(DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, bool esSocio = false, bool esApto = true)
         {
             FechaIngreso = fechaIngreso;
             Nombre = nombre;
@@ -32,9 +31,8 @@ namespace DSOO_Grupo4_TP1.Models
             Direccion = direccion;
             Telefono = telefono;
             Email = email;
-            Activo = activo;
+            EsSocio = esSocio;
             EsApto = esApto;
-            PagoVencido = pagoVencido;
         }
 
         public void AltaCliente()
@@ -47,8 +45,8 @@ namespace DSOO_Grupo4_TP1.Models
                 {
                     conn.Open();
                     string query = @"INSERT INTO cliente 
-                     (FechaIngreso, Nombre, Apellido, DNI, Direccion, Telefono, Email, PagoVencido, Activo, EsApto) 
-                     VALUES (@fechaIngreso, @nombre, @apellido, @dni, @direccion, @telefono, @email, @pagoVencido, @activo, @esApto)";
+                     (FechaIngreso, Nombre, Apellido, DNI, Direccion, Telefono, Email, EsSocio, EsApto) 
+                     VALUES (@fechaIngreso, @nombre, @apellido, @dni, @direccion, @telefono, @email, @esSocio, @esApto)";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
@@ -59,10 +57,9 @@ namespace DSOO_Grupo4_TP1.Models
                         cmd.Parameters.AddWithValue("@direccion", this.Direccion);
                         cmd.Parameters.AddWithValue("@telefono", this.Telefono);
                         cmd.Parameters.AddWithValue("@email", this.Email);
-                        cmd.Parameters.AddWithValue("@activo", this.Activo);
+                        cmd.Parameters.AddWithValue("@esSocio", this.EsSocio);
                         cmd.Parameters.AddWithValue("@esApto", this.EsApto);
                         cmd.Parameters.AddWithValue("@fechaIngreso", this.FechaIngreso);
-                        cmd.Parameters.AddWithValue("@pagoVencido", false);
 
                     
                         cmd.ExecuteNonQuery();
