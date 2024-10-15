@@ -51,21 +51,21 @@ namespace DSOO_Grupo4_TP1.Models
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
 
-                        cmd.Parameters.AddWithValue("@nombre", this.Nombre);
-                        cmd.Parameters.AddWithValue("@apellido", this.Apellido);
-                        cmd.Parameters.AddWithValue("@dni", this.DNI);
-                        cmd.Parameters.AddWithValue("@direccion", this.Direccion);
-                        cmd.Parameters.AddWithValue("@telefono", this.Telefono);
-                        cmd.Parameters.AddWithValue("@email", this.Email);
-                        cmd.Parameters.AddWithValue("@esSocio", this.EsSocio);
-                        cmd.Parameters.AddWithValue("@esApto", this.EsApto);
-                        cmd.Parameters.AddWithValue("@fechaIngreso", this.FechaIngreso);
+                        cmd.Parameters.AddWithValue("@nombre", Nombre);
+                        cmd.Parameters.AddWithValue("@apellido", Apellido);
+                        cmd.Parameters.AddWithValue("@dni", DNI);
+                        cmd.Parameters.AddWithValue("@direccion", Direccion);
+                        cmd.Parameters.AddWithValue("@telefono", Telefono);
+                        cmd.Parameters.AddWithValue("@email", Email);
+                        cmd.Parameters.AddWithValue("@esSocio", EsSocio);
+                        cmd.Parameters.AddWithValue("@esApto", EsApto);
+                        cmd.Parameters.AddWithValue("@fechaIngreso", FechaIngreso);
 
-                    
+
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Cliente registrado exitosamente.", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    
+
                 }
                 catch (MySqlException ex)
                 {
