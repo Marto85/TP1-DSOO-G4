@@ -37,7 +37,7 @@ namespace DSOO_Grupo4_TP1
             Form formulario = new AltaCliente_Form();
             this.WindowState = FormWindowState.Minimized;
             formulario.ShowDialog();
-        }       
+        }
 
         private void btn_minimizar_Click(object sender, EventArgs e)
         {
@@ -64,6 +64,14 @@ namespace DSOO_Grupo4_TP1
         private void button6_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void ConvertirEnSocio_Click(object sender, EventArgs e)
+        {
+            Form formulario = new Convert_form();
+            this.WindowState = FormWindowState.Minimized;
+            formulario.ShowDialog();
+
         }
     }
 }

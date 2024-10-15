@@ -71,15 +71,6 @@ namespace DSOO_Grupo4_TP1
 
         }
 
-        private void Nombre_Registro_MouseEnter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Nombre_Registro_MouseLeave(object sender, EventArgs e)
-        {
-
-        }
 
         private void Nombre_Registro_Enter(object sender, EventArgs e)
         {
