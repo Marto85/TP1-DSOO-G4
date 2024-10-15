@@ -65,23 +65,6 @@ namespace DSOO_Grupo4_TP1.Models
             }
         }        
 
-       
-
-        /*public Socio AltaSocio(string nombre, string apellido, int dni, bool activo, bool esApto)
-        {
-            Cliente cliente = clientes.FirstOrDefault(c => c.DNI == dni);
-            if (cliente == null)
-            {
-                // Si no existe como cliente, creamos un socio desde cero
-                Socio nuevoSocio = new Socio(nombre, apellido, activo, esApto, this);
-                clientes.Add(nuevoSocio);
-                return nuevoSocio;
-            }
-            else {
-                ConvertirEnSocio(cliente);
-                return (Socio)cliente;
-            }
-        }*/
 
         /*public void ConvertirEnSocio(Cliente cliente)
         {
