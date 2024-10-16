@@ -72,3 +72,13 @@ CREATE TABLE usuario (
 );
 
 INSERT INTO usuario(username, `password`) VALUES ("admin", "admin123");
+
+INSERT INTO Actividad (Nombre, Descripcion, PrecioNoSocio, Horario, CuposDisponibles, Profesor)
+VALUES
+('Yoga', 'Clase de yoga para todos los niveles', 500, 'Lunes 18:00', 10, 'Ana López'),
+('Pilates', 'Pilates intermedio', 600, 'Martes 17:00', 8, 'Carlos Pérez'),
+('Zumba', 'Clase de zumba energizante', 400, 'Miércoles 19:00', 12, 'María Gómez'),
+('Crossfit', 'Entrenamiento de alta intensidad', 700, 'Jueves 18:00', 5, 'Juan Martínez'),
+('Natacion', 'Clase de natación', 800, 'Viernes 17:00', 6, 'Lucía Fernández'),
+('Futbol', 'Partido de fútbol amistoso', 300, 'Sábado 16:00', 20, 'Pedro González');
+
