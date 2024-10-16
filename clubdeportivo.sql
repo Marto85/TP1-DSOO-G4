@@ -39,7 +39,6 @@ CREATE TABLE Actividad (
     Descripcion TEXT,
     PrecioNoSocio DECIMAL(10, 2) NOT NULL,
     Horario VARCHAR(50),
-    FechaVencimiento DATETIME NOT NULL,
     CuposDisponibles INT NOT NULL,
     Profesor VARCHAR(100)
 );

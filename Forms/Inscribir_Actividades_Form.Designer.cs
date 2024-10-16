@@ -36,6 +36,7 @@
             ID_Registro = new TextBox();
             button1 = new Button();
             label1 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).BeginInit();
             panel2.SuspendLayout();
@@ -126,12 +127,23 @@
             label1.TabIndex = 18;
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label2.Location = new Point(364, 443);
+            label2.Name = "label2";
+            label2.Size = new Size(999, 50);
+            label2.TabIndex = 19;
+            label2.Text = "Seleccionar en que actividad/es desea inscribirse";
+            // 
             // Inscribir_Actividades_Form
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
-            ClientSize = new Size(1727, 700);
+            ClientSize = new Size(1733, 814);
+            Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(ID_Registro);
@@ -158,5 +170,6 @@
         private TextBox ID_Registro;
         private Button button1;
         private Label label1;
+        private Label label2;
     }
 }
