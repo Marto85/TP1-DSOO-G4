@@ -58,8 +58,7 @@ namespace DSOO_Grupo4_TP1
             int id_usuario = int.Parse(ID_Registro.Text);
 
             if (id_usuario > 0)
-
-
+            {
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
                     try
@@ -114,6 +113,7 @@ namespace DSOO_Grupo4_TP1
                         conn.Close(); // Cierra la conexión
                     }
                 }
+            }
         }
 
         private void Convert_button_Click(object sender, EventArgs e)

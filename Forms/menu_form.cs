@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using DSOO_Grupo4_TP1.Forms;
 
 namespace DSOO_Grupo4_TP1
 {
@@ -72,6 +73,13 @@ namespace DSOO_Grupo4_TP1
             this.WindowState = FormWindowState.Minimized;
             formulario.ShowDialog();
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form formulario = new Inscribir_Actividades_Form();
+            this.WindowState = FormWindowState.Minimized;
+            formulario.ShowDialog();
         }
     }
 }

@@ -66,49 +66,6 @@ namespace DSOO_Grupo4_TP1.Models
         }        
 
 
-        /*public void ConvertirEnSocio(Cliente cliente)
-        {
-            if (cliente is Socio)
-            {
-                Console.WriteLine("El cliente ya es un socio.");
-                return;
-            }
-
-            // Convertir el cliente en socio
-            Socio nuevoSocio = new Socio (cliente.Nombre, cliente.Apellido, true, true, this, cliente.IdCliente);
-            clientes.Remove(cliente);  // Eliminar el cliente original
-            clientes.Add(nuevoSocio);  // Añadir el nuevo socio
-
-            // Verificar si el cliente tiene más de 3 actividades inscritas
-            if (nuevoSocio.Actividades.Count > 3)
-            {
-                Console.WriteLine($"El cliente tiene {nuevoSocio.Actividades.Count} actividades inscritas. Solo puede tener 3.");
-
-                while (nuevoSocio.Actividades.Count > 3)
-                {
-                    Console.WriteLine("Actividades actuales inscritas:");
-                    for (int i = 0; i < nuevoSocio.Actividades.Count; i++)
-                    {
-                        Console.WriteLine($"{i + 1}. {nuevoSocio.Actividades[i].Nombre}");
-                    }
-
-                    Console.WriteLine("Indica el número de la actividad que deseas dar de baja:");
-                    int seleccion;
-                    if (int.TryParse(Console.ReadLine(), out seleccion) && seleccion > 0 && seleccion <= nuevoSocio.Actividades.Count)
-                    {
-                        // Remover la actividad seleccionada
-                        nuevoSocio.Actividades.RemoveAt(seleccion - 1);
-                        Console.WriteLine("Actividad eliminada.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Selección no válida. Intenta nuevamente.");
-                    }
-                }
-            }
-
-            Console.WriteLine("Cliente convertido a socio exitosamente.");
-        }*/
 
         /*
          * Permite inscribir un cliente o Socio en una actividad
