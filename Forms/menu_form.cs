@@ -77,7 +77,7 @@ namespace DSOO_Grupo4_TP1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Form formulario = new Inscribir_Actividades_Form();
+            Form formulario = new Inscribir_Actividad_Form();
             this.WindowState = FormWindowState.Minimized;
             formulario.ShowDialog();
         }

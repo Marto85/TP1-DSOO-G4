@@ -16,22 +16,6 @@ namespace DSOO_Grupo4_TP1.Models
         public DateTime FechaPago { get; private set; }
         public DateTime ProximoVencimiento { get; private set; }
 
-   
-
-        /*public Pago(int socioId, decimal monto, DateTime fechaPago, FrecuenciaPago frecuencia)
-        {
-            if (monto <= 0)
-            {
-                throw new ArgumentException("El monto del pago debe ser mayor a 0");
-            }
-
-            SocioId = socioId;
-            Monto = monto;
-            FechaPago = fechaPago;
-            ProximoVencimiento = fechaPago.AddMonths((int)frecuencia); // Calcular próximo vencimiento basado en frecuencia
-        }*/
-
-
         public DateTime CalcularProximoVencimiento()
         {
            return ProximoVencimiento;

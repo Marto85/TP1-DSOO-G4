@@ -63,13 +63,13 @@ namespace DSOO_Grupo4_TP1
                 {
                     try
                     {
-                        conn.Open(); // Abre la conexión
+                        conn.Open();
                         string query = "SELECT Nombre, Apellido, EsSocio FROM cliente WHERE Id = @id_usuario";
 
                         using (MySqlCommand cmd = new MySqlCommand(query, conn))
                         {
                             // Definir el parámetro
-                            cmd.Parameters.AddWithValue("@id_usuario", id_usuario); // Asegúrate de que id_usuario tenga un valor válido
+                            cmd.Parameters.AddWithValue("@id_usuario", id_usuario);
 
                             // Ejecuta la consulta y obtiene el resultado
                             using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -105,12 +105,11 @@ namespace DSOO_Grupo4_TP1
                     }
                     catch (Exception ex)
                     {
-                        // Manejo de errores
                         Console.WriteLine("Error en la conexión: " + ex.Message);
                     }
                     finally
                     {
-                        conn.Close(); // Cierra la conexión
+                        conn.Close();
                     }
                 }
             }
@@ -132,20 +131,20 @@ namespace DSOO_Grupo4_TP1
                     {
                         conn.Open(); // Abre la conexión
 
-                        // Primero, obtenemos el valor actual de EsSocio
+                        // query para obtener el valor actual de EsSocio
                         string querySelect = "SELECT EsSocio FROM cliente WHERE Id = @id_usuario";
 
                         using (MySqlCommand cmdSelect = new MySqlCommand(querySelect, conn))
                         {
                             cmdSelect.Parameters.AddWithValue("@id_usuario", id_usuario);
 
-                            // Ejecuta la consulta para obtener el valor actual de EsSocio
+                            // Ejecuta la query para obtener el valor actual de EsSocio
                             int EsSocioActual = Convert.ToInt32(cmdSelect.ExecuteScalar());
 
                             // Calcula el valor inverso
                             int nuevoEsSocio = (EsSocioActual == 1) ? 0 : 1;
 
-                            // Luego, actualizamos el valor de EsSocio en la base de datos
+                            // Actualizamos el valor de EsSocio en la base de datos
                             string queryUpdate = "UPDATE cliente SET EsSocio = @nuevoEsSocio WHERE Id = @id_usuario";
 
                             using (MySqlCommand cmdUpdate = new MySqlCommand(queryUpdate, conn))
@@ -156,7 +155,6 @@ namespace DSOO_Grupo4_TP1
                                 // Ejecuta la actualización
                                 cmdUpdate.ExecuteNonQuery();
 
-                                // Actualiza la UI según el nuevo valor de EsSocio
                                 if (nuevoEsSocio == 1)
                                 {
                                     label1.Text = "El usuario ahora es Socio";
@@ -172,12 +170,11 @@ namespace DSOO_Grupo4_TP1
                     }
                     catch (Exception ex)
                     {
-                        // Manejo de errores
                         Console.WriteLine("Error en la conexión: " + ex.Message);
                     }
                     finally
                     {
-                        conn.Close(); // Cierra la conexión
+                        conn.Close();
                     }
                 }
 

@@ -1,3 +1,5 @@
+/*
+
 DROP DATABASE IF EXISTS clubdeportivo;
 CREATE DATABASE clubdeportivo;
 USE clubdeportivo;
@@ -82,3 +84,4 @@ VALUES
 ('Natacion', 'Clase de natación', 800, 'Viernes 17:00', 6, 'Lucía Fernández'),
 ('Futbol', 'Partido de fútbol amistoso', 300, 'Sábado 16:00', 20, 'Pedro González');
 
+*/

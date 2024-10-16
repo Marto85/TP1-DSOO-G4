@@ -70,7 +70,6 @@ namespace DSOO_Grupo4_TP1.Models
                 {
                     conn.Open();
 
-                    // Si es un socio
                     if (cliente.EsSocio)
                     {
                         // Verificar si el socio tiene el pago al día
