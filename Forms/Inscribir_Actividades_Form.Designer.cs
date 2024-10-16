@@ -37,6 +37,12 @@
             button1 = new Button();
             label1 = new Label();
             label2 = new Label();
+            checkBox1 = new CheckBox();
+            checkBox2 = new CheckBox();
+            checkBox3 = new CheckBox();
+            checkBox4 = new CheckBox();
+            checkBox5 = new CheckBox();
+            checkBox6 = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).BeginInit();
             panel2.SuspendLayout();
@@ -120,7 +126,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(868, 335);
+            label1.Location = new Point(715, 351);
             label1.Margin = new Padding(7, 0, 7, 0);
             label1.Name = "label1";
             label1.Size = new Size(0, 41);
@@ -137,12 +143,90 @@
             label2.TabIndex = 19;
             label2.Text = "Seleccionar en que actividad/es desea inscribirse";
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Cursor = Cursors.Hand;
+            checkBox1.Font = new Font("Century Gothic", 9.900001F, FontStyle.Bold, GraphicsUnit.Point);
+            checkBox1.Location = new Point(404, 574);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(142, 44);
+            checkBox1.TabIndex = 20;
+            checkBox1.Text = "Yoga";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Cursor = Cursors.Hand;
+            checkBox2.Font = new Font("Century Gothic", 9.900001F, FontStyle.Bold, GraphicsUnit.Point);
+            checkBox2.Location = new Point(404, 650);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(159, 44);
+            checkBox2.TabIndex = 21;
+            checkBox2.Text = "Pilates";
+            checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            checkBox3.AutoSize = true;
+            checkBox3.Cursor = Cursors.Hand;
+            checkBox3.Font = new Font("Century Gothic", 9.900001F, FontStyle.Bold, GraphicsUnit.Point);
+            checkBox3.Location = new Point(710, 574);
+            checkBox3.Name = "checkBox3";
+            checkBox3.Size = new Size(168, 44);
+            checkBox3.TabIndex = 22;
+            checkBox3.Text = "Zumba";
+            checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            checkBox4.AutoSize = true;
+            checkBox4.Cursor = Cursors.Hand;
+            checkBox4.Font = new Font("Century Gothic", 9.900001F, FontStyle.Bold, GraphicsUnit.Point);
+            checkBox4.Location = new Point(710, 650);
+            checkBox4.Name = "checkBox4";
+            checkBox4.Size = new Size(173, 44);
+            checkBox4.TabIndex = 23;
+            checkBox4.Text = "Crossfit";
+            checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            checkBox5.AutoSize = true;
+            checkBox5.Cursor = Cursors.Hand;
+            checkBox5.Font = new Font("Century Gothic", 9.900001F, FontStyle.Bold, GraphicsUnit.Point);
+            checkBox5.Location = new Point(1017, 574);
+            checkBox5.Name = "checkBox5";
+            checkBox5.Size = new Size(206, 44);
+            checkBox5.TabIndex = 24;
+            checkBox5.Text = "Natacion";
+            checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            checkBox6.AutoSize = true;
+            checkBox6.Cursor = Cursors.Hand;
+            checkBox6.Font = new Font("Century Gothic", 9.900001F, FontStyle.Bold, GraphicsUnit.Point);
+            checkBox6.Location = new Point(1017, 650);
+            checkBox6.Name = "checkBox6";
+            checkBox6.Size = new Size(153, 44);
+            checkBox6.TabIndex = 25;
+            checkBox6.Text = "Futbol";
+            checkBox6.UseVisualStyleBackColor = true;
+            // 
             // Inscribir_Actividades_Form
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
             ClientSize = new Size(1733, 814);
+            Controls.Add(checkBox6);
+            Controls.Add(checkBox5);
+            Controls.Add(checkBox4);
+            Controls.Add(checkBox3);
+            Controls.Add(checkBox2);
+            Controls.Add(checkBox1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(button1);
@@ -171,5 +255,11 @@
         private Button button1;
         private Label label1;
         private Label label2;
+        private CheckBox checkBox1;
+        private CheckBox checkBox2;
+        private CheckBox checkBox3;
+        private CheckBox checkBox4;
+        private CheckBox checkBox5;
+        private CheckBox checkBox6;
     }
 }
