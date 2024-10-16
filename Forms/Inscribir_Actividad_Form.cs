@@ -122,12 +122,14 @@ namespace DSOO_Grupo4_TP1.Forms
                     // Verificar cuántas actividades ya tiene registradas el socio
                     int actividadesRegistradas = ObtenerCantidadActividadesRegistradas(conn, id_usuario);
 
-
-                    // Validar si es socio y tiene 3 o mas actividades seleccionadas
-                    if (esSocio && (actividadesRegistradas + actividadesSeleccionadas.Count > 3))
+                    // Para el caso de ser socio, se verifica cantidad de actividades en las que se quiere inscribir y en las que ya este inscripto para no superar el limite de 3
+                    if (esSocio)
                     {
-                        MessageBox.Show("Un socio solo puede inscribirse en un máximo de 3 actividades.");
-                        return;
+                        if (actividadesRegistradas + actividadesSeleccionadas.Count > 3)
+                        {
+                            MessageBox.Show("Un socio solo puede inscribirse en un máximo de 3 actividades.");
+                            return;
+                        }
                     }
 
                     // Registrar las actividades
