@@ -119,8 +119,12 @@ namespace DSOO_Grupo4_TP1.Forms
                     // Obtener las actividades tildadas en los checkbox del form
                     List<int> actividadesSeleccionadas = ObtenerActividadesSeleccionadas();
 
-                    // Validar si es socio y tiene más de 3 actividades seleccionadas
-                    if (esSocio && actividadesSeleccionadas.Count > 3)
+                    // Verificar cuántas actividades ya tiene registradas el socio
+                    int actividadesRegistradas = ObtenerCantidadActividadesRegistradas(conn, id_usuario);
+
+
+                    // Validar si es socio y tiene 3 o mas actividades seleccionadas
+                    if (esSocio && (actividadesRegistradas + actividadesSeleccionadas.Count > 3))
                     {
                         MessageBox.Show("Un socio solo puede inscribirse en un máximo de 3 actividades.");
                         return;
@@ -154,6 +158,17 @@ namespace DSOO_Grupo4_TP1.Forms
 
             return actividadesSeleccionadas;
         }
+
+        private int ObtenerCantidadActividadesRegistradas(MySqlConnection conn, int idCliente)
+        {
+            string query = "SELECT COUNT(*) FROM Actividad_Cliente WHERE IdCliente = @idCliente";
+            using (MySqlCommand cmd = new MySqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@idCliente", idCliente);
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+
 
         private void RegistrarActividadesCliente(MySqlConnection conn, int idCliente, bool esSocio)
         {
