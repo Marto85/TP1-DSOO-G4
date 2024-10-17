@@ -91,6 +91,9 @@ namespace DSOO_Grupo4_TP1.Forms
                                 {
                                     label1.Text = "No se ha encontrado el cliente con el ID indicado";
                                 }
+
+                                label1.Left = (this.ClientSize.Width - label1.Width) / 2;
+
                             }
                         }
                     }
@@ -161,7 +164,7 @@ namespace DSOO_Grupo4_TP1.Forms
             if (checkBoxYoga.Checked) actividadesSeleccionadas.Add(1);
             if (checkBoxPilates.Checked) actividadesSeleccionadas.Add(2);
             if (checkBoxZumba.Checked) actividadesSeleccionadas.Add(3);
-            if (checkBoxCrossfit.Checked) actividadesSeleccionadas.Add(4); 
+            if (checkBoxCrossfit.Checked) actividadesSeleccionadas.Add(4);
             if (checkBoxNatacion.Checked) actividadesSeleccionadas.Add(5);
             if (checkBoxFutbol.Checked) actividadesSeleccionadas.Add(6);
 
@@ -224,6 +227,22 @@ namespace DSOO_Grupo4_TP1.Forms
             MessageBox.Show("Cliente inscripto correctamente en las actividades seleccionadas.");
         }
 
+        private void ID_Registro_Enter(object sender, EventArgs e)
+        {
+            if (ID_Registro.Text == "ID de cliente")
+            {
+                ID_Registro.Text = "";
+                ID_Registro.ForeColor = Color.White;
+            }
+        }
 
+        private void ID_Registro_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(ID_Registro.Text))
+            {
+                ID_Registro.Text = "ID de cliente";
+                ID_Registro.ForeColor = Color.DarkGray;
+            }
+        }
     }
 }
