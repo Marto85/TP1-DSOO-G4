@@ -19,11 +19,13 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private int id_usuario = -1;
         private bool esSocio = false;
-
         private Conexion conexion;
-        public Inscribir_Actividad_Form()
+        private Form _formularioPrincipal;
+
+        public Inscribir_Actividad_Form(Form formularioPrincipal)
         {
             InitializeComponent();
+            _formularioPrincipal = formularioPrincipal;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -33,7 +35,12 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void btn_cerrar_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (_formularioPrincipal != null)
+            {
+                _formularioPrincipal.WindowState = FormWindowState.Normal;
+            }
+
+            this.Close();
         }
 
         private void btn_minimizar_Click(object sender, EventArgs e)

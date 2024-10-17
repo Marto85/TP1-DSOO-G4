@@ -41,9 +41,27 @@ namespace DSOO_Grupo4_TP1.Models
 
             using (MySqlConnection conn = conexion.CrearConexion())
             {
+              
                 try
                 {
                     conn.Open();
+
+                    // Verificar si el DNI ya existe
+                    string checkQuery = "SELECT COUNT(*) FROM cliente WHERE DNI = @dni";
+                    using (MySqlCommand checkCmd = new MySqlCommand(checkQuery, conn))
+                    {
+                        checkCmd.Parameters.AddWithValue("@dni", DNI);
+                        int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                        if (count > 0)
+                        {
+                            // El DNI ya existe en la base de datos
+                            MessageBox.Show("Error: El cliente con este DNI ya existe.", "Error de duplicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;  // Detener el proceso de inserción
+                        }
+                    }
+
+
                     string query = @"INSERT INTO cliente 
                      (FechaIngreso, Nombre, Apellido, DNI, Direccion, Telefono, Email, EsSocio, EsApto) 
                      VALUES (@fechaIngreso, @nombre, @apellido, @dni, @direccion, @telefono, @email, @esSocio, @esApto)";

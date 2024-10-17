@@ -16,10 +16,12 @@ namespace DSOO_Grupo4_TP1
     public partial class Convert_form : Form
     {
         private Conexion conexion;
+        private Form _formularioPrincipal;
 
-        public Convert_form()
+        public Convert_form(Form formularioPrincipal)
         {
             InitializeComponent();
+            _formularioPrincipal = formularioPrincipal;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -179,6 +181,21 @@ namespace DSOO_Grupo4_TP1
                 }
 
             }
+        }
+
+        private void btn_cerrar_Click(object sender, EventArgs e)
+        {
+            if (_formularioPrincipal != null)
+            {
+                _formularioPrincipal.WindowState = FormWindowState.Normal;
+            }
+
+            this.Close();
+        }
+
+        private void btn_minimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

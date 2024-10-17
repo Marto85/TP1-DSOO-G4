@@ -1,4 +1,5 @@
-﻿using DSOO_Grupo4_TP1.Models;
+﻿using DSOO_Grupo4_TP1.Forms;
+using DSOO_Grupo4_TP1.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +14,12 @@ namespace DSOO_Grupo4_TP1
 {
     public partial class AltaCliente_Form : Form
     {
-        public AltaCliente_Form()
+        private Form _formularioPrincipal;
+
+        public AltaCliente_Form(Form formularioPrincipal)
         {
             InitializeComponent();
+            _formularioPrincipal = formularioPrincipal;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -48,11 +52,23 @@ namespace DSOO_Grupo4_TP1
 
             Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, esSocio);
             nuevoCliente.AltaCliente();
+
+            if (_formularioPrincipal != null)
+            {
+                _formularioPrincipal.WindowState = FormWindowState.Normal;
+            }
+
             this.Close();
+
         }
 
         private void btn_cerrar_Click(object sender, EventArgs e)
         {
+            if (_formularioPrincipal != null)
+            {
+                _formularioPrincipal.WindowState = FormWindowState.Normal;
+            }
+
             this.Close();
         }
 

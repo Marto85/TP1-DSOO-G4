@@ -28,14 +28,14 @@ namespace DSOO_Grupo4_TP1
 
         private void AltaCliente_Click(object sender, EventArgs e)
         {
-            Form formulario = new AltaCliente_Form();
+            Form formulario = new AltaCliente_Form(this);
             this.WindowState = FormWindowState.Minimized;
             formulario.ShowDialog();
         }
 
         private void AltaSocio_Click(object sender, EventArgs e)
         {
-            Form formulario = new AltaCliente_Form();
+            Form formulario = new AltaCliente_Form(this);
             this.WindowState = FormWindowState.Minimized;
             formulario.ShowDialog();
         }
@@ -69,7 +69,7 @@ namespace DSOO_Grupo4_TP1
 
         private void ConvertirEnSocio_Click(object sender, EventArgs e)
         {
-            Form formulario = new Convert_form();
+            Form formulario = new Convert_form(this);
             this.WindowState = FormWindowState.Minimized;
             formulario.ShowDialog();
 
@@ -77,9 +77,14 @@ namespace DSOO_Grupo4_TP1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Form formulario = new Inscribir_Actividad_Form();
+            Form formulario = new Inscribir_Actividad_Form(this);
             this.WindowState = FormWindowState.Minimized;
             formulario.ShowDialog();
+        }
+
+        private void Morosos_Menu_Button_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
