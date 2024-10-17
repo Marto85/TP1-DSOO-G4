@@ -195,5 +195,14 @@ namespace DSOO_Grupo4_TP1
                 Mail_Registro.ForeColor = Color.DarkGray;
             }
         }
+
+        private void AltaCliente_Form_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                Enviar_Registro_Click(sender, e);  // Ejecutar el mismo método que al hacer click en el botón
+                e.Handled = true;        // Evita que el evento continúe propagándose
+            }
+        }
     }
 }

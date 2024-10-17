@@ -226,6 +226,7 @@ namespace DSOO_Grupo4_TP1
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
             Load += Form1_Load;
+            KeyPress += Login_Form_KeyPress;
             MouseDown += Login_form_MouseDown;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             flowLayoutPanel1.ResumeLayout(false);
@@ -241,9 +242,8 @@ namespace DSOO_Grupo4_TP1
 
             if (this.verificarDatos(username_login.Text, password_login.Text))
             {
-                
+                this.Hide();
                 Form formulario = new menu_form();
-                this.WindowState = FormWindowState.Minimized;
                 formulario.ShowDialog();
                 
             }

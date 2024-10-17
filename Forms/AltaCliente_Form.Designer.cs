@@ -264,6 +264,7 @@
             Name = "AltaCliente_Form";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AltaCliente_Form";
+            KeyPress += AltaCliente_Form_KeyPress;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);

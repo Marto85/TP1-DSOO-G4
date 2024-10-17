@@ -16,6 +16,8 @@ namespace DSOO_Grupo4_TP1
         public Login_form()
         {
             InitializeComponent();
+            this.KeyPreview = true; // Habilitar que el formulario capture las teclas
+
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -97,12 +99,24 @@ namespace DSOO_Grupo4_TP1
 
         private void username_login_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void password_login_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
+
+
+
+        private void Login_Form_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                Login_Click(sender, e);  // Ejecutar el mismo método que al hacer click en el botón
+                e.Handled = true;        // Evita que el evento continúe propagándose
+            }
+        }
+
     }
 }
