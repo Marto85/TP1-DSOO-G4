@@ -81,8 +81,15 @@ namespace DSOO_Grupo4_TP1.Models
 
 
                         cmd.ExecuteNonQuery();
-                        MessageBox.Show("Cliente registrado exitosamente.", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        MessageBox.Show($"Se procede a entregar al socio numero {IdCliente + 1} con nombre {Nombre} {Apellido} el carnet que lo acredita como socio de Club Sports");
+                        if (EsSocio)
+                        {
+                            MessageBox.Show("Socio registrado exitosamente.", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show($"Se procede a entregar al Socio con nombre {Nombre} {Apellido} el carnet que lo acredita como socio de Club Sports");
+                        }
+                        else {
+                            MessageBox.Show("Cliente registrado exitosamente.", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show($"Se procede a entregar al Cliente con nombre {Nombre} {Apellido} el carnet que lo acredita a ingresar a las actividades.");
+                        }
                     }
 
                 }
