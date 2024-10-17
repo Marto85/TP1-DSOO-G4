@@ -35,12 +35,12 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void btn_cerrar_Click(object sender, EventArgs e)
         {
-            if (_formularioPrincipal != null)
-            {
-                _formularioPrincipal.WindowState = FormWindowState.Normal;
-            }
+            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas cerrar la aplicación?", "Confirmación de cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            this.Close();
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
         private void btn_minimizar_Click(object sender, EventArgs e)
@@ -223,7 +223,7 @@ namespace DSOO_Grupo4_TP1.Forms
                     conn.Close();
                 }
             }
-     
+
         }
 
         private int ObtenerCantidadActividadesRegistradas(MySqlConnection conn, int idCliente)
@@ -298,6 +298,17 @@ namespace DSOO_Grupo4_TP1.Forms
                 ID_Registro.Text = "ID de cliente";
                 ID_Registro.ForeColor = Color.DarkGray;
             }
+        }
+
+        private void Btn_Atras_Click(object sender, EventArgs e)
+        {
+            Form menuForm = Application.OpenForms["Menu_Form"];
+            if (menuForm != null)
+            {
+                menuForm.Show();
+            }
+
+            this.Close();
         }
     }
 }

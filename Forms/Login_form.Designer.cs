@@ -158,7 +158,7 @@ namespace DSOO_Grupo4_TP1
             btn_cerrar.Image = (Image)resources.GetObject("btn_cerrar.Image");
             btn_cerrar.Location = new Point(1622, 0);
             btn_cerrar.Name = "btn_cerrar";
-            btn_cerrar.Size = new Size(69, 47);
+            btn_cerrar.Size = new Size(77, 55);
             btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_cerrar.TabIndex = 7;
             btn_cerrar.TabStop = false;
@@ -168,9 +168,9 @@ namespace DSOO_Grupo4_TP1
             // 
             btn_minimizar.Cursor = Cursors.Hand;
             btn_minimizar.Image = (Image)resources.GetObject("btn_minimizar.Image");
-            btn_minimizar.Location = new Point(1557, 0);
+            btn_minimizar.Location = new Point(1547, 0);
             btn_minimizar.Name = "btn_minimizar";
-            btn_minimizar.Size = new Size(69, 47);
+            btn_minimizar.Size = new Size(77, 55);
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_minimizar.TabIndex = 8;
             btn_minimizar.TabStop = false;

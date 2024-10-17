@@ -40,7 +40,12 @@ namespace DSOO_Grupo4_TP1
 
         private void btn_cerrar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas cerrar la aplicación?", "Confirmación de cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
         private void menu_form_MouseDown(object sender, MouseEventArgs e)
@@ -80,5 +85,16 @@ namespace DSOO_Grupo4_TP1
 
         }
 
+        private void Btn_Atras_Click(object sender, EventArgs e)
+        {
+            // Mostrar el formulario de login nuevamente
+            Form loginForm = Application.OpenForms["Login_Form"];
+            if (loginForm != null)
+            {
+                loginForm.Show();
+            }
+
+            this.Close();
+        }
     }
 }

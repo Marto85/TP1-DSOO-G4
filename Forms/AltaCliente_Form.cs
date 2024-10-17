@@ -64,12 +64,12 @@ namespace DSOO_Grupo4_TP1
 
         private void btn_cerrar_Click(object sender, EventArgs e)
         {
-            if (_formularioPrincipal != null)
-            {
-                _formularioPrincipal.WindowState = FormWindowState.Normal;
-            }
+            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas cerrar la aplicación?", "Confirmación de cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            this.Close();
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
         private void btn_minimizar_Click(object sender, EventArgs e)
@@ -203,6 +203,17 @@ namespace DSOO_Grupo4_TP1
                 Enviar_Registro_Click(sender, e);  // Ejecutar el mismo método que al hacer click en el botón
                 e.Handled = true;        // Evita que el evento continúe propagándose
             }
+        }
+
+        private void Btn_Atras_Click(object sender, EventArgs e)
+        {// Mostrar el formulario de Menu nuevamente
+            Form menuForm = Application.OpenForms["Menu_Form"];
+            if (menuForm != null)
+            {
+                menuForm.Show();
+            }
+
+            this.Close();
         }
     }
 }

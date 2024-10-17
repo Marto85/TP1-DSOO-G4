@@ -47,9 +47,11 @@ namespace DSOO_Grupo4_TP1
             Salir_Menu_Button = new Button();
             Morosos_Menu_Button = new Button();
             Menu_Form_Panel = new Panel();
+            Btn_Atras = new PictureBox();
             btn_cerrar = new PictureBox();
             btn_minimizar = new PictureBox();
             Menu_Form_Panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)Btn_Atras).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).BeginInit();
             SuspendLayout();
@@ -126,6 +128,7 @@ namespace DSOO_Grupo4_TP1
             // Menu_Form_Panel
             // 
             Menu_Form_Panel.BackColor = SystemColors.Highlight;
+            Menu_Form_Panel.Controls.Add(Btn_Atras);
             Menu_Form_Panel.Controls.Add(btn_cerrar);
             Menu_Form_Panel.Controls.Add(btn_minimizar);
             Menu_Form_Panel.Location = new Point(0, 3);
@@ -135,6 +138,17 @@ namespace DSOO_Grupo4_TP1
             Menu_Form_Panel.TabIndex = 7;
             Menu_Form_Panel.MouseDown += panel1_MouseDown;
             // 
+            // Btn_Atras
+            // 
+            Btn_Atras.Image = (Image)resources.GetObject("Btn_Atras.Image");
+            Btn_Atras.Location = new Point(12, 3);
+            Btn_Atras.Name = "Btn_Atras";
+            Btn_Atras.Size = new Size(77, 55);
+            Btn_Atras.SizeMode = PictureBoxSizeMode.Zoom;
+            Btn_Atras.TabIndex = 11;
+            Btn_Atras.TabStop = false;
+            Btn_Atras.Click += Btn_Atras_Click;
+            // 
             // btn_cerrar
             // 
             btn_cerrar.Cursor = Cursors.Hand;
@@ -142,7 +156,7 @@ namespace DSOO_Grupo4_TP1
             btn_cerrar.Location = new Point(1464, 5);
             btn_cerrar.Margin = new Padding(2, 3, 2, 3);
             btn_cerrar.Name = "btn_cerrar";
-            btn_cerrar.Size = new Size(68, 46);
+            btn_cerrar.Size = new Size(77, 55);
             btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_cerrar.TabIndex = 9;
             btn_cerrar.TabStop = false;
@@ -152,10 +166,10 @@ namespace DSOO_Grupo4_TP1
             // 
             btn_minimizar.Cursor = Cursors.Hand;
             btn_minimizar.Image = (Image)resources.GetObject("btn_minimizar.Image");
-            btn_minimizar.Location = new Point(1399, 5);
+            btn_minimizar.Location = new Point(1390, 5);
             btn_minimizar.Margin = new Padding(2, 3, 2, 3);
             btn_minimizar.Name = "btn_minimizar";
-            btn_minimizar.Size = new Size(68, 46);
+            btn_minimizar.Size = new Size(77, 55);
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_minimizar.TabIndex = 10;
             btn_minimizar.TabStop = false;
@@ -182,6 +196,7 @@ namespace DSOO_Grupo4_TP1
             Text = "Menu de Opciones";
             MouseDown += menu_form_MouseDown;
             Menu_Form_Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)Btn_Atras).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).EndInit();
             ResumeLayout(false);
@@ -198,5 +213,6 @@ namespace DSOO_Grupo4_TP1
         private Panel Menu_Form_Panel;
         private PictureBox btn_cerrar;
         private PictureBox btn_minimizar;
+        private PictureBox Btn_Atras;
     }
 }

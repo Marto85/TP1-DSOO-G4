@@ -32,6 +32,7 @@
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
+            Btn_Atras = new PictureBox();
             btn_minimizar = new PictureBox();
             btn_cerrar = new PictureBox();
             label1 = new Label();
@@ -46,6 +47,7 @@
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)Btn_Atras).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).BeginInit();
             SuspendLayout();
@@ -75,6 +77,7 @@
             // panel2
             // 
             panel2.BackColor = SystemColors.Highlight;
+            panel2.Controls.Add(Btn_Atras);
             panel2.Controls.Add(btn_minimizar);
             panel2.Controls.Add(btn_cerrar);
             panel2.Location = new Point(2, 0);
@@ -83,6 +86,18 @@
             panel2.Size = new Size(1729, 55);
             panel2.TabIndex = 11;
             // 
+            // Btn_Atras
+            // 
+            Btn_Atras.Cursor = Cursors.Hand;
+            Btn_Atras.Image = (Image)resources.GetObject("Btn_Atras.Image");
+            Btn_Atras.Location = new Point(3, -3);
+            Btn_Atras.Name = "Btn_Atras";
+            Btn_Atras.Size = new Size(77, 55);
+            Btn_Atras.SizeMode = PictureBoxSizeMode.Zoom;
+            Btn_Atras.TabIndex = 13;
+            Btn_Atras.TabStop = false;
+            Btn_Atras.Click += Btn_Atras_Click;
+            // 
             // btn_minimizar
             // 
             btn_minimizar.Cursor = Cursors.Hand;
@@ -90,7 +105,7 @@
             btn_minimizar.Location = new Point(1586, 0);
             btn_minimizar.Margin = new Padding(2, 3, 2, 3);
             btn_minimizar.Name = "btn_minimizar";
-            btn_minimizar.Size = new Size(68, 46);
+            btn_minimizar.Size = new Size(77, 55);
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_minimizar.TabIndex = 8;
             btn_minimizar.TabStop = false;
@@ -103,7 +118,7 @@
             btn_cerrar.Location = new Point(1661, 0);
             btn_cerrar.Margin = new Padding(2, 3, 2, 3);
             btn_cerrar.Name = "btn_cerrar";
-            btn_cerrar.Size = new Size(68, 46);
+            btn_cerrar.Size = new Size(77, 55);
             btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_cerrar.TabIndex = 7;
             btn_cerrar.TabStop = false;
@@ -232,6 +247,7 @@
             // Socio
             // 
             Socio.AutoSize = true;
+            Socio.Cursor = Cursors.Hand;
             Socio.Location = new Point(544, 623);
             Socio.Margin = new Padding(7, 8, 7, 8);
             Socio.Name = "Socio";
@@ -268,6 +284,7 @@
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)Btn_Atras).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).EndInit();
             ResumeLayout(false);
@@ -290,5 +307,6 @@
         private PictureBox btn_cerrar;
         private PictureBox btn_minimizar;
         private CheckBox Socio;
+        private PictureBox Btn_Atras;
     }
 }
