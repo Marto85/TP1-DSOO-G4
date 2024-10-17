@@ -104,6 +104,8 @@ namespace DSOO_Grupo4_TP1.Forms
                     finally
                     {
                         conn.Close();
+                        ObtenerActividadesRegistradas(id_usuario);
+
                     }
                 }
             }
@@ -169,6 +171,59 @@ namespace DSOO_Grupo4_TP1.Forms
             if (checkBoxFutbol.Checked) actividadesSeleccionadas.Add(6);
 
             return actividadesSeleccionadas;
+        }
+
+
+        private void ObtenerActividadesRegistradas(int IdCliente)
+        {
+            conexion = Conexion.getInstancia();
+            string connectionString = conexion.CrearConexion().ConnectionString; // Obtiene la cadena de conexión           
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Actividad_Cliente WHERE IdCliente = @IdCliente";
+                    // Destildar todos los checkboxes antes de leer los datos
+                    checkBoxYoga.Checked = false;
+                    checkBoxPilates.Checked = false;
+                    checkBoxZumba.Checked = false;
+                    checkBoxCrossfit.Checked = false;
+                    checkBoxNatacion.Checked = false;
+                    checkBoxFutbol.Checked = false;
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@IdCliente", IdCliente);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int actividadId = reader.GetInt32("IdActividad");
+                                switch (actividadId)
+                                {
+                                    case 1: checkBoxYoga.Checked = true; break;
+                                    case 2: checkBoxPilates.Checked = true; break;
+                                    case 3: checkBoxZumba.Checked = true; break;
+                                    case 4: checkBoxCrossfit.Checked = true; break;
+                                    case 5: checkBoxNatacion.Checked = true; break;
+                                    case 6: checkBoxFutbol.Checked = true; break;
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al conectarse a la base de datos: {ex.Message}");
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+     
         }
 
         private int ObtenerCantidadActividadesRegistradas(MySqlConnection conn, int idCliente)
