@@ -66,12 +66,13 @@ namespace DSOO_Grupo4_TP1.Models
 
 
                     string query = @"INSERT INTO cliente 
-                     (FechaIngreso, Nombre, Apellido, DNI, Direccion, Telefono, Email, EsSocio, EsApto) 
-                     VALUES (@fechaIngreso, @nombre, @apellido, @dni, @direccion, @telefono, @email, @esSocio, @esApto)";
+                     (FechaIngreso, Nombre, Apellido, DNI, Direccion, Telefono, Email, EsSocio, EsApto, Imagen_Perfil) 
+                     VALUES (@fechaIngreso, @nombre, @apellido, @dni, @direccion, @telefono, @email, @esSocio, @esApto, @imagen_Perfil)";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
 
+                        cmd.Parameters.AddWithValue("@fechaIngreso", FechaIngreso);
                         cmd.Parameters.AddWithValue("@nombre", Nombre);
                         cmd.Parameters.AddWithValue("@apellido", Apellido);
                         cmd.Parameters.AddWithValue("@dni", DNI);
@@ -80,8 +81,7 @@ namespace DSOO_Grupo4_TP1.Models
                         cmd.Parameters.AddWithValue("@email", Email);
                         cmd.Parameters.AddWithValue("@esSocio", EsSocio);
                         cmd.Parameters.AddWithValue("@esApto", EsApto);
-                        cmd.Parameters.AddWithValue("@fechaIngreso", FechaIngreso);
-
+                        cmd.Parameters.AddWithValue("@imagen_Perfil", ImagenPerfil);
 
                         cmd.ExecuteNonQuery();
                         if (EsSocio)
@@ -98,11 +98,7 @@ namespace DSOO_Grupo4_TP1.Models
                 }
                 catch (MySqlException ex)
                 {
-                    MessageBox.Show($"Error al registrar cliente: {ex.Message}\nCódigo del error: {ex.Number}");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al registrar cliente: " + ex.Message);
+                    MessageBox.Show($"{ImagenPerfil}Error al registrar cliente: {ex.Message}\nCódigo del error: {ex.Number}");
                 }
 
             }

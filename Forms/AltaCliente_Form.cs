@@ -15,6 +15,7 @@ namespace DSOO_Grupo4_TP1
     public partial class AltaCliente_Form : Form
     {
         private Form _formularioPrincipal;
+        private string imgPath;
 
         public AltaCliente_Form(Form formularioPrincipal)
         {
@@ -49,8 +50,9 @@ namespace DSOO_Grupo4_TP1
             string mail = Mail_Registro.Text;
             bool esSocio = Socio.Checked;
             bool esApto = true;
+            string imagenPerfil = imgPath;
 
-            Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, esSocio);
+            Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, imagenPerfil, esSocio);
             nuevoCliente.AltaCliente();
 
             if (_formularioPrincipal != null)
@@ -214,6 +216,32 @@ namespace DSOO_Grupo4_TP1
             }
 
             this.Close();
+        }
+
+        private void ImagenPerfil_Click(object sender, EventArgs e)
+        {
+            Form formulario = new Foto_form(this);
+            formulario.ShowDialog();
+        }
+
+        public void AsignarImagenPerfil(string imagePath)
+        {
+            if (File.Exists(imagePath))
+            {
+                imgPath = imagePath;
+                // Cargar la imagen en el PictureBox si el archivo existe
+                ImagenPerfil.Image = Image.FromFile(imagePath);
+            }
+            else
+            {
+                MessageBox.Show("La imagen no se encontró.");
+            }
+        }
+
+        private void Capturar_foto_Click(object sender, EventArgs e)
+        {
+            Form formulario = new Foto_form(this);
+            formulario.ShowDialog();
         }
     }
 }
