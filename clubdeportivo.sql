@@ -14,7 +14,8 @@ CREATE TABLE Cliente (
     Telefono VARCHAR(20),
     Email VARCHAR(100),
     EsSocio BOOLEAN NOT NULL,
-    EsApto BOOLEAN NOT NULL
+    EsApto BOOLEAN NOT NULL,
+    Imagen_Perfil VARCHAR(255)
 );
 
 CREATE TABLE Tipo_de_pago (
