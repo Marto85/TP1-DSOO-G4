@@ -60,10 +60,10 @@ namespace DSOO_Grupo4_TP1
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.sports_club_logo;
-            pictureBox1.Location = new Point(60, 220);
-            pictureBox1.Margin = new Padding(60, 220, 0, 0);
+            pictureBox1.Location = new Point(25, 80);
+            pictureBox1.Margin = new Padding(25, 80, 0, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(378, 445);
+            pictureBox1.Size = new Size(156, 163);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -75,10 +75,9 @@ namespace DSOO_Grupo4_TP1
             username_login.Cursor = Cursors.Hand;
             username_login.Font = new Font("Century Gothic", 11.1F, FontStyle.Italic, GraphicsUnit.Point);
             username_login.ForeColor = Color.FromArgb(15, 15, 15);
-            username_login.Location = new Point(642, 336);
-            username_login.Margin = new Padding(7, 8, 7, 8);
+            username_login.Location = new Point(264, 123);
             username_login.Name = "username_login";
-            username_login.Size = new Size(928, 46);
+            username_login.Size = new Size(382, 19);
             username_login.TabIndex = 2;
             username_login.Text = "Nombre de usuario";
             username_login.TextChanged += username_login_TextChanged;
@@ -92,10 +91,9 @@ namespace DSOO_Grupo4_TP1
             password_login.Cursor = Cursors.Hand;
             password_login.Font = new Font("Century Gothic", 11.1F, FontStyle.Italic, GraphicsUnit.Point);
             password_login.ForeColor = Color.FromArgb(15, 15, 15);
-            password_login.Location = new Point(642, 457);
-            password_login.Margin = new Padding(7, 8, 7, 8);
+            password_login.Location = new Point(264, 167);
             password_login.Name = "password_login";
-            password_login.Size = new Size(928, 46);
+            password_login.Size = new Size(382, 19);
             password_login.TabIndex = 3;
             password_login.Text = "Contraseña";
             password_login.TextChanged += password_login_TextChanged;
@@ -104,7 +102,7 @@ namespace DSOO_Grupo4_TP1
             // 
             // Login_Button
             // 
-            Login_Button.BackColor = SystemColors.ActiveBorder;
+            Login_Button.BackColor = SystemColors.Highlight;
             Login_Button.Cursor = Cursors.Hand;
             Login_Button.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             Login_Button.FlatAppearance.BorderSize = 2;
@@ -113,10 +111,9 @@ namespace DSOO_Grupo4_TP1
             Login_Button.FlatStyle = FlatStyle.Flat;
             Login_Button.Font = new Font("Century Gothic", 9.900001F, FontStyle.Bold, GraphicsUnit.Point);
             Login_Button.ForeColor = SystemColors.InactiveCaptionText;
-            Login_Button.Location = new Point(643, 659);
-            Login_Button.Margin = new Padding(7, 8, 7, 8);
+            Login_Button.Location = new Point(265, 241);
             Login_Button.Name = "Login_Button";
-            Login_Button.Size = new Size(928, 63);
+            Login_Button.Size = new Size(382, 30);
             Login_Button.TabIndex = 1;
             Login_Button.Text = "ACCEDER";
             Login_Button.UseVisualStyleBackColor = false;
@@ -127,9 +124,10 @@ namespace DSOO_Grupo4_TP1
             flowLayoutPanel1.BackColor = SystemColors.Highlight;
             flowLayoutPanel1.Controls.Add(pictureBox1);
             flowLayoutPanel1.Dock = DockStyle.Left;
-            flowLayoutPanel1.Location = new Point(5, 5);
+            flowLayoutPanel1.Location = new Point(2, 2);
+            flowLayoutPanel1.Margin = new Padding(1, 1, 1, 1);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(500, 848);
+            flowLayoutPanel1.Size = new Size(206, 310);
             flowLayoutPanel1.TabIndex = 5;
             flowLayoutPanel1.MouseDown += flowLayoutPanel1_MouseDown;
             // 
@@ -145,9 +143,10 @@ namespace DSOO_Grupo4_TP1
             label1.AutoSize = true;
             label1.Font = new Font("Arial Rounded MT Bold", 18F, FontStyle.Italic, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(737, 166);
+            label1.Location = new Point(303, 61);
+            label1.Margin = new Padding(1, 0, 1, 0);
             label1.Name = "label1";
-            label1.Size = new Size(765, 70);
+            label1.Size = new Size(304, 28);
             label1.TabIndex = 6;
             label1.Text = "Bienvenido a Club Sports";
             label1.Click += label1_Click;
@@ -156,9 +155,10 @@ namespace DSOO_Grupo4_TP1
             // 
             btn_cerrar.Cursor = Cursors.Hand;
             btn_cerrar.Image = (Image)resources.GetObject("btn_cerrar.Image");
-            btn_cerrar.Location = new Point(1622, 0);
+            btn_cerrar.Location = new Point(668, 0);
+            btn_cerrar.Margin = new Padding(1, 1, 1, 1);
             btn_cerrar.Name = "btn_cerrar";
-            btn_cerrar.Size = new Size(77, 55);
+            btn_cerrar.Size = new Size(32, 20);
             btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_cerrar.TabIndex = 7;
             btn_cerrar.TabStop = false;
@@ -168,9 +168,10 @@ namespace DSOO_Grupo4_TP1
             // 
             btn_minimizar.Cursor = Cursors.Hand;
             btn_minimizar.Image = (Image)resources.GetObject("btn_minimizar.Image");
-            btn_minimizar.Location = new Point(1547, 0);
+            btn_minimizar.Location = new Point(637, 0);
+            btn_minimizar.Margin = new Padding(1, 1, 1, 1);
             btn_minimizar.Name = "btn_minimizar";
-            btn_minimizar.Size = new Size(77, 55);
+            btn_minimizar.Size = new Size(32, 20);
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_minimizar.TabIndex = 8;
             btn_minimizar.TabStop = false;
@@ -181,35 +182,38 @@ namespace DSOO_Grupo4_TP1
             panel1.BackColor = SystemColors.Highlight;
             panel1.Controls.Add(btn_cerrar);
             panel1.Controls.Add(btn_minimizar);
-            panel1.Location = new Point(5, 5);
+            panel1.Location = new Point(2, 2);
+            panel1.Margin = new Padding(1, 1, 1, 1);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1694, 54);
+            panel1.Size = new Size(698, 20);
             panel1.TabIndex = 9;
             // 
             // panel2
             // 
             panel2.Anchor = AnchorStyles.None;
             panel2.BackColor = Color.FromArgb(15, 15, 15);
-            panel2.Location = new Point(642, 380);
+            panel2.Location = new Point(264, 139);
+            panel2.Margin = new Padding(1, 1, 1, 1);
             panel2.Name = "panel2";
-            panel2.Size = new Size(929, 10);
+            panel2.Size = new Size(383, 4);
             panel2.TabIndex = 10;
             // 
             // panel3
             // 
             panel3.Anchor = AnchorStyles.None;
             panel3.BackColor = Color.FromArgb(15, 15, 15);
-            panel3.Location = new Point(641, 504);
+            panel3.Location = new Point(264, 184);
+            panel3.Margin = new Padding(1, 1, 1, 1);
             panel3.Name = "panel3";
-            panel3.Size = new Size(929, 10);
+            panel3.Size = new Size(383, 4);
             panel3.TabIndex = 11;
             // 
             // Login_form
             // 
-            AutoScaleDimensions = new SizeF(17F, 41F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
-            ClientSize = new Size(1707, 858);
+            ClientSize = new Size(703, 314);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -220,9 +224,8 @@ namespace DSOO_Grupo4_TP1
             Controls.Add(username_login);
             ForeColor = SystemColors.ActiveBorder;
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(7, 8, 7, 8);
             Name = "Login_form";
-            Padding = new Padding(5);
+            Padding = new Padding(2, 2, 2, 2);
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
             Load += Form1_Load;

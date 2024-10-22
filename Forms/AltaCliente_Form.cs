@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,12 +54,7 @@ namespace DSOO_Grupo4_TP1
 
             Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, imagenPerfil, esSocio);
             nuevoCliente.AltaCliente();
-
-            if (_formularioPrincipal != null)
-            {
-                _formularioPrincipal.WindowState = FormWindowState.Normal;
-            }
-
+            
             nuevoCliente.ImprimirCliente(nuevoCliente);
 
             this.Close();
