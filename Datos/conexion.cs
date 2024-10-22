@@ -44,6 +44,7 @@ namespace DSOO_Grupo4_TP1.Datos
             catch (Exception ex)
             {
                 cadena = null;
+                MessageBox.Show(ex.Message);
                 throw;
             }
             return cadena;
