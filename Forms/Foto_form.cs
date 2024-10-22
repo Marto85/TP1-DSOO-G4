@@ -94,5 +94,33 @@ namespace DSOO_Grupo4_TP1.Forms
                 videoSource = null;
             }
         }
+
+        private void Btn_Atras_Click(object sender, EventArgs e)
+        {
+            {// Mostrar el formulario de Menu nuevamente
+                Form menuForm = Application.OpenForms["Menu_Form"];
+                if (menuForm != null)
+                {
+                    menuForm.Show();
+                }
+
+                this.Close();
+            }
+        }
+
+        private void btn_minimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btn_cerrar_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas cerrar la aplicación?", "Confirmación de cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
     }
 }
