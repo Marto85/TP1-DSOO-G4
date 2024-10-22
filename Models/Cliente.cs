@@ -111,7 +111,7 @@ namespace DSOO_Grupo4_TP1.Models
             PrintDocument impresora = new PrintDocument();
 
             // Suscribir el evento PrintPage (donde se define qué imprimir)
-            impresora.PrintPage += (sender, e) => GeneraCarnet(sender, e, cliente);
+            impresora.PrintPage += (sender, e) => GenerarCarnet(sender, e, cliente);
 
             // Crear un cuadro de diálogo de impresión
             PrintDialog printDialog = new PrintDialog
@@ -129,7 +129,7 @@ namespace DSOO_Grupo4_TP1.Models
             }
         }
 
-        private void GeneraCarnet(object sender, PrintPageEventArgs e, Cliente cliente)
+        private void GenerarCarnet(object sender, PrintPageEventArgs e, Cliente cliente)
         {
             // Definir las fuentes y estructura de lo que se va a imprimir
             Font fuenteTitulo = new Font("Arial", 16, FontStyle.Bold);
