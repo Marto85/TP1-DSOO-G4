@@ -105,18 +105,18 @@ namespace DSOO_Grupo4_TP1.Models
             }
         }
 
-        public void ImprimirCliente(Cliente cliente)
+        public void ImprimirCarnet(Cliente cliente)
         {
             // Crear un nuevo objeto PrintDocument
-            PrintDocument printDocument = new PrintDocument();
+            PrintDocument impresora = new PrintDocument();
 
             // Suscribir el evento PrintPage (donde se define qué imprimir)
-            printDocument.PrintPage += (sender, e) => PrintPageHandler(sender, e, cliente);
+            impresora.PrintPage += (sender, e) => GeneraCarnet(sender, e, cliente);
 
             // Crear un cuadro de diálogo de impresión
             PrintDialog printDialog = new PrintDialog
             {
-                Document = printDocument
+                Document = impresora
             };
 
             // Abrir el cuadro de diálogo de impresión
@@ -125,47 +125,47 @@ namespace DSOO_Grupo4_TP1.Models
             // Si el usuario hace clic en "Imprimir", realizar la impresión
             if (result == DialogResult.OK)
             {
-                printDocument.Print();
+                impresora.Print();
             }
         }
 
-        private void PrintPageHandler(object sender, PrintPageEventArgs e, Cliente cliente)
+        private void GeneraCarnet(object sender, PrintPageEventArgs e, Cliente cliente)
         {
             // Definir las fuentes y estructura de lo que se va a imprimir
-            Font titleFont = new Font("Arial", 16, FontStyle.Bold);
-            Font regularFont = new Font("Arial", 12, FontStyle.Regular);
+            Font fuenteTitulo = new Font("Arial", 16, FontStyle.Bold);
+            Font fuenteNormal = new Font("Arial", 12, FontStyle.Regular);
 
             float x = e.MarginBounds.Left;
             float y = e.MarginBounds.Top;
-            float lineHeight = regularFont.GetHeight(e.Graphics) + 5;
+            float lineHeight = fuenteNormal.GetHeight(e.Graphics) + 5;
 
             // Título del documento
-            e.Graphics.DrawString("Datos del Cliente", titleFont, Brushes.Black, x, y);
+            e.Graphics.DrawString("Datos del Cliente", fuenteTitulo, Brushes.Black, x, y);
             y += lineHeight * 2;
 
             // Imprimir los detalles del cliente
-            e.Graphics.DrawString($"Nombre: {cliente.Nombre} {cliente.Apellido}", regularFont, Brushes.Black, x, y);
+            e.Graphics.DrawString($"Nombre: {cliente.Nombre} {cliente.Apellido}", fuenteNormal, Brushes.Black, x, y);
             y += lineHeight;
 
-            e.Graphics.DrawString($"DNI: {cliente.DNI}", regularFont, Brushes.Black, x, y);
+            e.Graphics.DrawString($"DNI: {cliente.DNI}", fuenteNormal, Brushes.Black, x, y);
             y += lineHeight;
 
-            e.Graphics.DrawString($"Fecha de Ingreso: {cliente.FechaIngreso.ToShortDateString()}", regularFont, Brushes.Black, x, y);
+            e.Graphics.DrawString($"Fecha de Ingreso: {cliente.FechaIngreso.ToShortDateString()}", fuenteNormal, Brushes.Black, x, y);
             y += lineHeight;
 
-            e.Graphics.DrawString($"Dirección: {cliente.Direccion}", regularFont, Brushes.Black, x, y);
+            e.Graphics.DrawString($"Dirección: {cliente.Direccion}", fuenteNormal, Brushes.Black, x, y);
             y += lineHeight;
 
-            e.Graphics.DrawString($"Teléfono: {cliente.Telefono}", regularFont, Brushes.Black, x, y);
+            e.Graphics.DrawString($"Teléfono: {cliente.Telefono}", fuenteNormal, Brushes.Black, x, y);
             y += lineHeight;
 
-            e.Graphics.DrawString($"Email: {cliente.Email}", regularFont, Brushes.Black, x, y);
+            e.Graphics.DrawString($"Email: {cliente.Email}", fuenteNormal, Brushes.Black, x, y);
             y += lineHeight;
 
-            e.Graphics.DrawString($"Es Socio: {(cliente.EsSocio ? "Sí" : "No")}", regularFont, Brushes.Black, x, y);
+            e.Graphics.DrawString($"Es Socio: {(cliente.EsSocio ? "Sí" : "No")}", fuenteNormal, Brushes.Black, x, y);
             y += lineHeight;
 
-            e.Graphics.DrawString($"Es Apto: {(cliente.EsApto ? "Sí" : "No")}", regularFont, Brushes.Black, x, y);
+            e.Graphics.DrawString($"Es Apto: {(cliente.EsApto ? "Sí" : "No")}", fuenteNormal, Brushes.Black, x, y);
             y += lineHeight;
 
             // Si la imagen está presente, también podrías incluirla en la impresión

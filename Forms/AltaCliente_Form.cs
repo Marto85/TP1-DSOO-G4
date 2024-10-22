@@ -55,7 +55,7 @@ namespace DSOO_Grupo4_TP1
             Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, imagenPerfil, esSocio);
             nuevoCliente.AltaCliente();
             
-            nuevoCliente.ImprimirCliente(nuevoCliente);
+            nuevoCliente.ImprimirCarnet(nuevoCliente);
 
             this.Close();
 
