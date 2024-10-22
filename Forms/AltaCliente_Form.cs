@@ -15,7 +15,7 @@ namespace DSOO_Grupo4_TP1
     public partial class AltaCliente_Form : Form
     {
         private Form _formularioPrincipal;
-        private string imgPath;
+        private string? imgPath;
 
         public AltaCliente_Form(Form formularioPrincipal)
         {
@@ -49,8 +49,7 @@ namespace DSOO_Grupo4_TP1
             string telefono = Telefono_Registro.Text;
             string mail = Mail_Registro.Text;
             bool esSocio = Socio.Checked;
-            bool esApto = true;
-            string imagenPerfil = imgPath;
+            string? imagenPerfil = imgPath;
 
             Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, imagenPerfil, esSocio);
             nuevoCliente.AltaCliente();
@@ -59,6 +58,8 @@ namespace DSOO_Grupo4_TP1
             {
                 _formularioPrincipal.WindowState = FormWindowState.Normal;
             }
+
+            nuevoCliente.ImprimirCliente(nuevoCliente);
 
             this.Close();
 

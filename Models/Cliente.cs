@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,6 +102,77 @@ namespace DSOO_Grupo4_TP1.Models
                     MessageBox.Show($"{ImagenPerfil}Error al registrar cliente: {ex.Message}\nCódigo del error: {ex.Number}");
                 }
 
+            }
+        }
+
+        public void ImprimirCliente(Cliente cliente)
+        {
+            // Crear un nuevo objeto PrintDocument
+            PrintDocument printDocument = new PrintDocument();
+
+            // Suscribir el evento PrintPage (donde se define qué imprimir)
+            printDocument.PrintPage += (sender, e) => PrintPageHandler(sender, e, cliente);
+
+            // Crear un cuadro de diálogo de impresión
+            PrintDialog printDialog = new PrintDialog
+            {
+                Document = printDocument
+            };
+
+            // Abrir el cuadro de diálogo de impresión
+            DialogResult result = printDialog.ShowDialog();
+
+            // Si el usuario hace clic en "Imprimir", realizar la impresión
+            if (result == DialogResult.OK)
+            {
+                printDocument.Print();
+            }
+        }
+
+        private void PrintPageHandler(object sender, PrintPageEventArgs e, Cliente cliente)
+        {
+            // Definir las fuentes y estructura de lo que se va a imprimir
+            Font titleFont = new Font("Arial", 16, FontStyle.Bold);
+            Font regularFont = new Font("Arial", 12, FontStyle.Regular);
+
+            float x = e.MarginBounds.Left;
+            float y = e.MarginBounds.Top;
+            float lineHeight = regularFont.GetHeight(e.Graphics) + 5;
+
+            // Título del documento
+            e.Graphics.DrawString("Datos del Cliente", titleFont, Brushes.Black, x, y);
+            y += lineHeight * 2;
+
+            // Imprimir los detalles del cliente
+            e.Graphics.DrawString($"Nombre: {cliente.Nombre} {cliente.Apellido}", regularFont, Brushes.Black, x, y);
+            y += lineHeight;
+
+            e.Graphics.DrawString($"DNI: {cliente.DNI}", regularFont, Brushes.Black, x, y);
+            y += lineHeight;
+
+            e.Graphics.DrawString($"Fecha de Ingreso: {cliente.FechaIngreso.ToShortDateString()}", regularFont, Brushes.Black, x, y);
+            y += lineHeight;
+
+            e.Graphics.DrawString($"Dirección: {cliente.Direccion}", regularFont, Brushes.Black, x, y);
+            y += lineHeight;
+
+            e.Graphics.DrawString($"Teléfono: {cliente.Telefono}", regularFont, Brushes.Black, x, y);
+            y += lineHeight;
+
+            e.Graphics.DrawString($"Email: {cliente.Email}", regularFont, Brushes.Black, x, y);
+            y += lineHeight;
+
+            e.Graphics.DrawString($"Es Socio: {(cliente.EsSocio ? "Sí" : "No")}", regularFont, Brushes.Black, x, y);
+            y += lineHeight;
+
+            e.Graphics.DrawString($"Es Apto: {(cliente.EsApto ? "Sí" : "No")}", regularFont, Brushes.Black, x, y);
+            y += lineHeight;
+
+            // Si la imagen está presente, también podrías incluirla en la impresión
+            if (!string.IsNullOrEmpty(cliente.ImagenPerfil) && System.IO.File.Exists(cliente.ImagenPerfil))
+            {
+                Image imagen = Image.FromFile(cliente.ImagenPerfil);
+                e.Graphics.DrawImage(imagen, x, y, 100, 100); // Dibuja la imagen en un tamaño de 100x100
             }
         }
 
