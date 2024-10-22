@@ -21,8 +21,10 @@ namespace DSOO_Grupo4_TP1.Models
         public bool EsSocio { get; set; }
         public bool EsApto { get; set; }
 
+        public string ImagenPerfil { get; set; }
 
-        public Cliente(DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, bool esSocio = false, bool esApto = true)
+
+        public Cliente(DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, string imagenPerfil, bool esSocio = false, bool esApto = true)
         {
             FechaIngreso = fechaIngreso;
             Nombre = nombre;
@@ -33,6 +35,7 @@ namespace DSOO_Grupo4_TP1.Models
             Email = email;
             EsSocio = esSocio;
             EsApto = esApto;
+            ImagenPerfil = imagenPerfil;
         }
 
         public void AltaCliente()
