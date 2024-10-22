@@ -63,6 +63,16 @@ namespace DSOO_Grupo4_TP1.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _190256_2755842296 {
+            get {
+                object obj = ResourceManager.GetObject("190256-2755842296", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap sports_club_logo {
             get {
                 object obj = ResourceManager.GetObject("sports_club_logo", resourceCulture);
