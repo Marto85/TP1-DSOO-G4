@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace DSOO_Grupo4_TP1
     {
         private Form _formularioPrincipal;
         private string imgPath;
+        private Cliente clienteAImprimir;
 
         public AltaCliente_Form(Form formularioPrincipal)
         {
@@ -54,6 +56,20 @@ namespace DSOO_Grupo4_TP1
 
             Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, imagenPerfil, esSocio);
             nuevoCliente.AltaCliente();
+            
+
+            //ENVIA IMPRESION - FALTA REVISAR SI PETICIÓN SQL FUE SATISFACTORIA
+            clienteAImprimir = nuevoCliente;
+            PrintDocument printDoc = new PrintDocument();
+            printDoc.PrintPage += new PrintPageEventHandler(PrintPageHandler); // Vincula el evento de impresión
+
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.Document = printDoc;
+
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                printDoc.Print(); // Enviar directamente a la impresora
+            }
 
             if (_formularioPrincipal != null)
             {
@@ -63,6 +79,22 @@ namespace DSOO_Grupo4_TP1
             this.Close();
 
         }
+
+        private void PrintPageHandler(object sender, PrintPageEventArgs e)
+        {
+            if (clienteAImprimir != null)
+            // Dibujar los detalles del cliente en la página
+            e.Graphics.DrawString($"Nombre: {clienteAImprimir.Nombre}", new Font("Arial", 12), Brushes.Black, 100, 100);
+            e.Graphics.DrawString($"Apellido: {clienteAImprimir.Apellido}", new Font("Arial", 12), Brushes.Black, 100, 130);
+            e.Graphics.DrawString($"DNI: {clienteAImprimir.DNI}", new Font("Arial", 12), Brushes.Black, 100, 160);
+            e.Graphics.DrawString($"Domicilio: {clienteAImprimir.Direccion}", new Font("Arial", 12), Brushes.Black, 100, 190);
+            e.Graphics.DrawString($"Teléfono: {clienteAImprimir.Telefono}", new Font("Arial", 12), Brushes.Black, 100, 220);
+            e.Graphics.DrawString($"Mail: {clienteAImprimir.Email}", new Font("Arial", 12), Brushes.Black, 100, 250);
+            e.Graphics.DrawString($"Es Socio: {(clienteAImprimir.EsSocio ? "Sí" : "No")}", new Font("Arial", 12), Brushes.Black, 100, 280);
+
+            // Aquí puedes añadir más información o gráficos si es necesario
+        }
+
 
         private void btn_cerrar_Click(object sender, EventArgs e)
         {

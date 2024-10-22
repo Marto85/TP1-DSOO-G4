@@ -116,7 +116,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
-            ClientSize = new Size(715, 450);
+            ClientSize = new Size(715, 307);
             Controls.Add(panel2);
             Controls.Add(BtnCapturarFoto);
             Controls.Add(Video_box);
