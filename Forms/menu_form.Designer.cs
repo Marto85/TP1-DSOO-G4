@@ -130,7 +130,7 @@ namespace DSOO_Grupo4_TP1
             Menu_Form_Panel.Location = new Point(0, 1);
             Menu_Form_Panel.Margin = new Padding(1, 1, 1, 1);
             Menu_Form_Panel.Name = "Menu_Form_Panel";
-            Menu_Form_Panel.Size = new Size(637, 23);
+            Menu_Form_Panel.Size = new Size(621, 23);
             Menu_Form_Panel.TabIndex = 7;
             Menu_Form_Panel.MouseDown += panel1_MouseDown;
             // 
@@ -150,7 +150,7 @@ namespace DSOO_Grupo4_TP1
             // 
             btn_cerrar.Cursor = Cursors.Hand;
             btn_cerrar.Image = (Image)resources.GetObject("btn_cerrar.Image");
-            btn_cerrar.Location = new Point(603, 2);
+            btn_cerrar.Location = new Point(589, 2);
             btn_cerrar.Margin = new Padding(1, 1, 1, 1);
             btn_cerrar.Name = "btn_cerrar";
             btn_cerrar.Size = new Size(32, 20);
@@ -163,7 +163,7 @@ namespace DSOO_Grupo4_TP1
             // 
             btn_minimizar.Cursor = Cursors.Hand;
             btn_minimizar.Image = (Image)resources.GetObject("btn_minimizar.Image");
-            btn_minimizar.Location = new Point(572, 2);
+            btn_minimizar.Location = new Point(555, 2);
             btn_minimizar.Margin = new Padding(1, 1, 1, 1);
             btn_minimizar.Name = "btn_minimizar";
             btn_minimizar.Size = new Size(32, 20);
@@ -177,7 +177,7 @@ namespace DSOO_Grupo4_TP1
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
-            ClientSize = new Size(637, 293);
+            ClientSize = new Size(621, 293);
             Controls.Add(Menu_Form_Panel);
             Controls.Add(Morosos_Menu_Button);
             Controls.Add(Salir_Menu_Button);
