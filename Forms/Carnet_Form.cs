@@ -62,8 +62,8 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void Btn_Imprimir_Carnet_Click(object sender, EventArgs e)
         {
-            DialogResult resultado = MessageBox.Show("¿Quieres imprimir el carnet o guardarlo como JPG?", "Selecciona una opción",
-                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, 0);
+            DialogResult resultado = MessageBox.Show("¿Deseas imprimir el carnet?", "'Yes' para imprimirlo - 'No' para guardarlo como jpg",
+            MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
             if (resultado == DialogResult.Yes)
             {
@@ -71,7 +71,11 @@ namespace DSOO_Grupo4_TP1.Forms
             }
             else if (resultado == DialogResult.No)
             {
-                GuardarComoJPG();
+                GuardarComoJPG(); 
+            }
+            else if (resultado == DialogResult.Cancel)
+            {
+              
             }
         }
 
