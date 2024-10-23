@@ -34,6 +34,8 @@
             Btn_minimizar = new PictureBox();
             Btn_cerrar = new PictureBox();
             label1 = new Label();
+            Buscar_Cliente = new Button();
+            DNI_Pagos = new TextBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Btn_Atras).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Btn_minimizar).BeginInit();
@@ -101,12 +103,40 @@
             label1.TabIndex = 13;
             label1.Text = "Registro de Pagos";
             // 
+            // Buscar_Cliente
+            // 
+            Buscar_Cliente.BackColor = SystemColors.Highlight;
+            Buscar_Cliente.FlatStyle = FlatStyle.Flat;
+            Buscar_Cliente.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            Buscar_Cliente.Location = new Point(1313, 244);
+            Buscar_Cliente.Margin = new Padding(7, 8, 7, 8);
+            Buscar_Cliente.Name = "Buscar_Cliente";
+            Buscar_Cliente.Size = new Size(385, 72);
+            Buscar_Cliente.TabIndex = 17;
+            Buscar_Cliente.Text = "Buscar";
+            Buscar_Cliente.UseVisualStyleBackColor = false;
+            // 
+            // DNI_Pagos
+            // 
+            DNI_Pagos.BackColor = Color.FromArgb(15, 15, 15);
+            DNI_Pagos.Cursor = Cursors.Hand;
+            DNI_Pagos.Font = new Font("Century Gothic", 11.1F, FontStyle.Italic, GraphicsUnit.Point);
+            DNI_Pagos.ForeColor = Color.Gray;
+            DNI_Pagos.Location = new Point(692, 255);
+            DNI_Pagos.Margin = new Padding(7, 8, 7, 8);
+            DNI_Pagos.Name = "DNI_Pagos";
+            DNI_Pagos.Size = new Size(380, 53);
+            DNI_Pagos.TabIndex = 16;
+            DNI_Pagos.Text = "DNI de cliente";
+            // 
             // Pago_Form
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
             ClientSize = new Size(1806, 901);
+            Controls.Add(Buscar_Cliente);
+            Controls.Add(DNI_Pagos);
             Controls.Add(label1);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
@@ -128,5 +158,7 @@
         private PictureBox Btn_minimizar;
         private PictureBox Btn_cerrar;
         private Label label1;
+        private Button Buscar_Cliente;
+        private TextBox DNI_Pagos;
     }
 }
