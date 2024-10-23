@@ -22,6 +22,8 @@ namespace DSOO_Grupo4_TP1.Models
         public bool EsSocio { get; set; }
         public bool EsApto { get; set; }
 
+        private decimal AbonoMensualSocios { get; set; }
+
         public string ImagenPerfil { get; set; }
 
 
@@ -37,6 +39,17 @@ namespace DSOO_Grupo4_TP1.Models
             EsSocio = esSocio;
             EsApto = esApto;
             ImagenPerfil = imagenPerfil;
+            AbonoMensualSocios = 10000;
+        }
+
+        public decimal GetAbonoMensualSocios ()
+        {
+            return (decimal)AbonoMensualSocios;
+        }
+
+        public void SetAbonoMensualSocios (decimal abonoMensualSocios)
+        {
+            AbonoMensualSocios = abonoMensualSocios;
         }
 
         public void AltaCliente()
@@ -66,9 +79,23 @@ namespace DSOO_Grupo4_TP1.Models
                     }
 
 
+                    // Definir el query según si es socio o no
                     string query = @"INSERT INTO cliente 
-                     (FechaIngreso, Nombre, Apellido, DNI, Direccion, Telefono, Email, EsSocio, EsApto, Imagen_Perfil) 
-                     VALUES (@fechaIngreso, @nombre, @apellido, @dni, @direccion, @telefono, @email, @esSocio, @esApto, @imagen_Perfil)";
+                (FechaIngreso, Nombre, Apellido, DNI, Direccion, Telefono, Email, EsSocio, EsApto, Imagen_Perfil";
+
+                    if (EsSocio)
+                    {
+                        query += ", AbonoMensualSocios";  // en caso de ser socio, agrega el campo
+                    }
+
+                    query += ") VALUES (@fechaIngreso, @nombre, @apellido, @dni, @direccion, @telefono, @email, @esSocio, @esApto, @imagen_Perfil";
+
+                    if (EsSocio)
+                    {
+                        query += ", @abonoMensualSocios"; // añade parametro
+                    }
+
+                    query += ")";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
@@ -84,6 +111,12 @@ namespace DSOO_Grupo4_TP1.Models
                         cmd.Parameters.AddWithValue("@esApto", EsApto);
                         cmd.Parameters.AddWithValue("@imagen_Perfil", ImagenPerfil);
 
+                        if (EsSocio)
+                        {
+                            cmd.Parameters.AddWithValue("@abonoMensualSocios", GetAbonoMensualSocios());
+                        }
+
+                        2
                         cmd.ExecuteNonQuery();
 
                         // Obtener el ID del cliente recién insertado

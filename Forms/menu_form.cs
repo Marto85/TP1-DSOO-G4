@@ -99,5 +99,10 @@ namespace DSOO_Grupo4_TP1
             Form formulario = new Pago_Form();
             formulario.ShowDialog();
         }
+
+        private void Btn_Modifica_Abono_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

@@ -50,6 +50,7 @@ namespace DSOO_Grupo4_TP1
             Btn_Atras = new PictureBox();
             btn_cerrar = new PictureBox();
             btn_minimizar = new PictureBox();
+            Btn_Modifica_Abono = new Button();
             Menu_Form_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Btn_Atras).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).BeginInit();
@@ -58,46 +59,54 @@ namespace DSOO_Grupo4_TP1
             // 
             // AltaCliente
             // 
-            AltaCliente.Location = new Point(199, 284);
+            AltaCliente.BackColor = SystemColors.Highlight;
+            AltaCliente.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            AltaCliente.Location = new Point(201, 115);
             AltaCliente.Margin = new Padding(7, 8, 7, 8);
             AltaCliente.Name = "AltaCliente";
-            AltaCliente.Size = new Size(418, 63);
+            AltaCliente.Size = new Size(434, 110);
             AltaCliente.TabIndex = 0;
             AltaCliente.Text = "Dar de alta un socio o cliente";
-            AltaCliente.UseVisualStyleBackColor = true;
+            AltaCliente.UseVisualStyleBackColor = false;
             AltaCliente.Click += AltaCliente_Click;
             // 
             // ConvertirEnSocio
             // 
-            ConvertirEnSocio.Location = new Point(199, 399);
+            ConvertirEnSocio.BackColor = SystemColors.Highlight;
+            ConvertirEnSocio.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            ConvertirEnSocio.Location = new Point(201, 274);
             ConvertirEnSocio.Margin = new Padding(7, 8, 7, 8);
             ConvertirEnSocio.Name = "ConvertirEnSocio";
-            ConvertirEnSocio.Size = new Size(418, 63);
+            ConvertirEnSocio.Size = new Size(434, 110);
             ConvertirEnSocio.TabIndex = 2;
-            ConvertirEnSocio.Text = "Convertir Cliente en Socio";
-            ConvertirEnSocio.UseVisualStyleBackColor = true;
+            ConvertirEnSocio.Text = "Convertir Cliente/Socio";
+            ConvertirEnSocio.UseVisualStyleBackColor = false;
             ConvertirEnSocio.Click += ConvertirEnSocio_Click;
             // 
             // Inscribir_Actividad
             // 
-            Inscribir_Actividad.Location = new Point(850, 284);
+            Inscribir_Actividad.BackColor = SystemColors.Highlight;
+            Inscribir_Actividad.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            Inscribir_Actividad.Location = new Point(820, 276);
             Inscribir_Actividad.Margin = new Padding(7, 8, 7, 8);
             Inscribir_Actividad.Name = "Inscribir_Actividad";
-            Inscribir_Actividad.Size = new Size(418, 63);
+            Inscribir_Actividad.Size = new Size(434, 108);
             Inscribir_Actividad.TabIndex = 3;
             Inscribir_Actividad.Text = "Inscribir en Actividad";
-            Inscribir_Actividad.UseVisualStyleBackColor = true;
+            Inscribir_Actividad.UseVisualStyleBackColor = false;
             Inscribir_Actividad.Click += Inscribir_Actividad_Click;
             // 
             // Cobrar
             // 
-            Cobrar.Location = new Point(850, 399);
+            Cobrar.BackColor = SystemColors.Highlight;
+            Cobrar.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            Cobrar.Location = new Point(504, 464);
             Cobrar.Margin = new Padding(7, 8, 7, 8);
             Cobrar.Name = "Cobrar";
-            Cobrar.Size = new Size(418, 63);
+            Cobrar.Size = new Size(434, 108);
             Cobrar.TabIndex = 4;
             Cobrar.Text = "Cobrar";
-            Cobrar.UseVisualStyleBackColor = true;
+            Cobrar.UseVisualStyleBackColor = false;
             Cobrar.Click += Cobrar_Click;
             // 
             // Salir_Menu_Button
@@ -179,12 +188,25 @@ namespace DSOO_Grupo4_TP1
             btn_minimizar.TabStop = false;
             btn_minimizar.Click += Btn_minimizar_Click;
             // 
+            // Btn_Modifica_Abono
+            // 
+            Btn_Modifica_Abono.BackColor = SystemColors.Highlight;
+            Btn_Modifica_Abono.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            Btn_Modifica_Abono.Location = new Point(820, 115);
+            Btn_Modifica_Abono.Name = "Btn_Modifica_Abono";
+            Btn_Modifica_Abono.Size = new Size(434, 110);
+            Btn_Modifica_Abono.TabIndex = 8;
+            Btn_Modifica_Abono.Text = "Modificar Abono Socios";
+            Btn_Modifica_Abono.UseVisualStyleBackColor = false;
+            Btn_Modifica_Abono.Click += Btn_Modifica_Abono_Click;
+            // 
             // menu_form
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
             ClientSize = new Size(1508, 801);
+            Controls.Add(Btn_Modifica_Abono);
             Controls.Add(Menu_Form_Panel);
             Controls.Add(Morosos_Menu_Button);
             Controls.Add(Salir_Menu_Button);
@@ -218,5 +240,6 @@ namespace DSOO_Grupo4_TP1
         private PictureBox btn_cerrar;
         private PictureBox btn_minimizar;
         private PictureBox Btn_Atras;
+        private Button Btn_Modifica_Abono;
     }
 }

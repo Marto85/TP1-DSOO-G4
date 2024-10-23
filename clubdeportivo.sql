@@ -16,6 +16,7 @@ CREATE TABLE Cliente (
     EsSocio BOOLEAN NOT NULL,
     EsApto BOOLEAN NOT NULL,
     Imagen_Perfil VARCHAR(255)
+    AbonoMensualSocios DECIMAL(10, 2)
 );
 
 CREATE TABLE Tipo_de_pago (

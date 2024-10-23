@@ -15,6 +15,7 @@ namespace DSOO_Grupo4_TP1.Forms
 {
     public partial class Pago_Form : Form
     {
+        private Cliente clienteActual;
         private Conexion conexion;
         public Pago_Form()
         {
@@ -67,21 +68,21 @@ namespace DSOO_Grupo4_TP1.Forms
                             {
                                 if (reader.Read()) // Lee la primera fila del resultado
                                 {
-                                    string Nombre = reader.GetString("Nombre");
-                                    string Apellido = reader.GetString("Apellido");
-                                    byte EsSocio = reader.GetByte("EsSocio");
+                                    string nombre = reader.GetString("Nombre");
+                                    string apellido = reader.GetString("Apellido");
+                                    int dni = reader.GetInt32("DNI");
+                                    string direccion = reader.GetString("Direccion");
+                                    string telefono = reader.GetString("Telefono");
+                                    string email = reader.GetString("Email");
+                                    bool esSocio = reader.GetBoolean("EsSocio");
+                                    bool esApto = reader.GetBoolean("EsApto");
+                                    string imagenPerfil = reader.GetString("ImagenPerfil");
 
-                                    Txt_Nombre.Text = Nombre;
-                                    Txt_Apellido.Text = Apellido;
+                                    clienteActual = new Cliente(DateTime.Now, nombre, apellido, dni, direccion, telefono, email, imagenPerfil, esSocio, esApto);
 
-                                    if (EsSocio == 1)
-                                    {
-                                       Txt_EsSocio.Text = "SI";
-                                    }
-                                    else
-                                    {
-                                        Txt_EsSocio.Text = "NO";
-                                    }
+                                    Txt_Nombre.Text = nombre;
+                                    Txt_Apellido.Text = apellido;
+                                    Txt_EsSocio.Text = esSocio ? "SI" : "NO";
                                 }
                                 else
                                 {
