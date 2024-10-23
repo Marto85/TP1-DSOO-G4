@@ -157,7 +157,7 @@ namespace DSOO_Grupo4_TP1
             btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_cerrar.TabIndex = 9;
             btn_cerrar.TabStop = false;
-            btn_cerrar.Click += btn_cerrar_Click;
+            btn_cerrar.Click += Btn_cerrar_Click;
             // 
             // btn_minimizar
             // 
@@ -170,7 +170,7 @@ namespace DSOO_Grupo4_TP1
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_minimizar.TabIndex = 10;
             btn_minimizar.TabStop = false;
-            btn_minimizar.Click += btn_minimizar_Click;
+            btn_minimizar.Click += Btn_minimizar_Click;
             // 
             // menu_form
             // 

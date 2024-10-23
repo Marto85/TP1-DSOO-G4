@@ -85,6 +85,12 @@ namespace DSOO_Grupo4_TP1.Models
                         cmd.Parameters.AddWithValue("@imagen_Perfil", ImagenPerfil);
 
                         cmd.ExecuteNonQuery();
+
+                        // Obtener el ID del cliente recién insertado
+                        MySqlCommand getIdCmd = new MySqlCommand("SELECT LAST_INSERT_ID();", conn);
+                        int idGenerado = Convert.ToInt32(getIdCmd.ExecuteScalar());
+                        this.IdCliente = idGenerado; // Asignar el ID al objeto Cliente
+
                         if (EsSocio)
                         {
                             MessageBox.Show("Socio registrado exitosamente.", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -105,7 +111,7 @@ namespace DSOO_Grupo4_TP1.Models
             }
         }
 
-        public void ImprimirCarnet(Cliente cliente)
+        /*public void ImprimirCarnet(Cliente cliente)
         {
             // Crear un nuevo objeto PrintDocument
             PrintDocument impresora = new PrintDocument();
@@ -127,9 +133,9 @@ namespace DSOO_Grupo4_TP1.Models
             {
                 impresora.Print();
             }
-        }
+        }*/
 
-        private void GenerarCarnet(object sender, PrintPageEventArgs e, Cliente cliente)
+        /*private void GenerarCarnet(object sender, PrintPageEventArgs e, Cliente cliente)
         {
             // Definir las fuentes y estructura de lo que se va a imprimir
             Font fuenteTitulo = new Font("Arial", 16, FontStyle.Bold);
@@ -174,7 +180,7 @@ namespace DSOO_Grupo4_TP1.Models
                 Image imagen = Image.FromFile(cliente.ImagenPerfil);
                 e.Graphics.DrawImage(imagen, x, y, 100, 100); // Dibuja la imagen en un tamaño de 100x100
             }
-        }
+        }*/
 
     }
 

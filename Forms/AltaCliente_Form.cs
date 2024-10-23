@@ -1,5 +1,7 @@
-﻿using DSOO_Grupo4_TP1.Forms;
+﻿using DSOO_Grupo4_TP1.Datos;
+using DSOO_Grupo4_TP1.Forms;
 using DSOO_Grupo4_TP1.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -54,8 +56,9 @@ namespace DSOO_Grupo4_TP1
 
             Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, imagenPerfil, esSocio);
             nuevoCliente.AltaCliente();
-            
-            nuevoCliente.ImprimirCarnet(nuevoCliente);
+            GenerarCarnet(nuevoCliente.IdCliente);
+
+            //nuevoCliente.ImprimirCarnet(nuevoCliente);
 
             this.Close();
 
@@ -240,5 +243,55 @@ namespace DSOO_Grupo4_TP1
             Form formulario = new Foto_form(this);
             formulario.ShowDialog();
         }
+
+        private void GenerarCarnet(int clienteId)
+        {
+            Conexion conexion = Conexion.getInstancia();
+
+            using (MySqlConnection conn = conexion.CrearConexion())
+            {
+                try
+                {
+                    conn.Open();
+
+                    // Consulta corregida para recuperar los datos del cliente
+                    MySqlCommand cmd = new MySqlCommand(
+                        "SELECT Nombre, Apellido, DNI, Imagen_Perfil, EsSocio FROM Cliente WHERE Id = @Id", conn
+                    );
+                    cmd.Parameters.AddWithValue("@Id", clienteId);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Recuperar los datos del cliente
+                            string nombre = reader.GetString("Nombre");
+                            string apellido = reader.GetString("Apellido");
+                            int dni = reader.GetInt32("DNI");
+                            string imagenPerfil = reader["Imagen_Perfil"] != DBNull.Value ? reader.GetString("Imagen_Perfil") : null;
+                            bool esSocio = reader.GetBoolean("EsSocio");
+
+                            // Crear una instancia del formulario de carnet
+                            Carnet_Form formularioCarnet = new Carnet_Form();
+
+                            // Asignar los valores recuperados a los controles del formulario
+                            formularioCarnet.SetDatosCliente(nombre, apellido, dni, imagenPerfil, esSocio);
+
+                            // Mostrar el formulario de carnet
+                            formularioCarnet.ShowDialog();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se encontraron datos para el cliente.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al recuperar los datos: {ex.Message}");
+                }
+            }
+        }
+
     }
 }
