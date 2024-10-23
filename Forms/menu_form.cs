@@ -61,6 +61,18 @@ namespace DSOO_Grupo4_TP1
             Application.Exit();
         }
 
+        private void Btn_Atras_Click(object sender, EventArgs e)
+        {
+            // Mostrar el formulario de login nuevamente
+            Form loginForm = Application.OpenForms["Login_Form"];
+            if (loginForm != null)
+            {
+                loginForm.Show();
+            }
+
+            this.Close();
+        }
+
         private void ConvertirEnSocio_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -81,16 +93,11 @@ namespace DSOO_Grupo4_TP1
 
         }
 
-        private void Btn_Atras_Click(object sender, EventArgs e)
+        private void Cobrar_Click(object sender, EventArgs e)
         {
-            // Mostrar el formulario de login nuevamente
-            Form loginForm = Application.OpenForms["Login_Form"];
-            if (loginForm != null)
-            {
-                loginForm.Show();
-            }
-
-            this.Close();
+            this.Hide();
+            Form formulario = new Pago_Form();
+            formulario.ShowDialog();
         }
     }
 }
