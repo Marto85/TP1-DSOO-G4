@@ -37,7 +37,6 @@
             Buscar_Cliente = new Button();
             DNI_Pagos = new TextBox();
             panel1 = new Panel();
-            Actividades = new Label();
             EsSocio = new Label();
             Apellido = new Label();
             Nombre = new Label();
@@ -46,10 +45,13 @@
             label3 = new Label();
             textBox1 = new TextBox();
             label4 = new Label();
-            checkedListBox1 = new CheckedListBox();
-            button1 = new Button();
+            lista_actividades = new CheckedListBox();
+            Btn_Pagar = new Button();
             label5 = new Label();
-            textBox2 = new TextBox();
+            total_pago = new TextBox();
+            Txt_Nombre = new TextBox();
+            Txt_Apellido = new TextBox();
+            Txt_EsSocio = new TextBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Btn_Atras).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Btn_minimizar).BeginInit();
@@ -122,15 +124,15 @@
             // 
             Buscar_Cliente.BackColor = SystemColors.Highlight;
             Buscar_Cliente.Cursor = Cursors.Hand;
-            Buscar_Cliente.FlatStyle = FlatStyle.Flat;
             Buscar_Cliente.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Buscar_Cliente.Location = new Point(189, 165);
+            Buscar_Cliente.Location = new Point(189, 195);
             Buscar_Cliente.Margin = new Padding(7, 8, 7, 8);
             Buscar_Cliente.Name = "Buscar_Cliente";
             Buscar_Cliente.Size = new Size(388, 67);
             Buscar_Cliente.TabIndex = 17;
             Buscar_Cliente.Text = "Buscar";
             Buscar_Cliente.UseVisualStyleBackColor = false;
+            Buscar_Cliente.Click += Buscar_Cliente_Click;
             // 
             // DNI_Pagos
             // 
@@ -149,24 +151,16 @@
             // 
             panel1.BackColor = SystemColors.Highlight;
             panel1.BorderStyle = BorderStyle.Fixed3D;
-            panel1.Controls.Add(Actividades);
+            panel1.Controls.Add(Txt_EsSocio);
+            panel1.Controls.Add(Txt_Apellido);
+            panel1.Controls.Add(Txt_Nombre);
             panel1.Controls.Add(EsSocio);
             panel1.Controls.Add(Apellido);
             panel1.Controls.Add(Nombre);
-            panel1.Location = new Point(51, 243);
+            panel1.Location = new Point(67, 325);
             panel1.Name = "panel1";
-            panel1.Size = new Size(655, 622);
+            panel1.Size = new Size(655, 409);
             panel1.TabIndex = 18;
-            // 
-            // Actividades
-            // 
-            Actividades.AutoSize = true;
-            Actividades.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Actividades.Location = new Point(52, 374);
-            Actividades.Name = "Actividades";
-            Actividades.Size = new Size(242, 44);
-            Actividades.TabIndex = 3;
-            Actividades.Text = "Actividades:";
             // 
             // EsSocio
             // 
@@ -247,27 +241,27 @@
             label4.TabIndex = 23;
             label4.Text = "Pagar Actividades";
             // 
-            // checkedListBox1
+            // lista_actividades
             // 
-            checkedListBox1.Cursor = Cursors.Hand;
-            checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Items.AddRange(new object[] { "Yoga", "Pilates", "Zumba", "Crossfit", "Natacion", "Escuela de Futbol" });
-            checkedListBox1.Location = new Point(1449, 430);
-            checkedListBox1.Name = "checkedListBox1";
-            checkedListBox1.Size = new Size(300, 268);
-            checkedListBox1.TabIndex = 24;
+            lista_actividades.Cursor = Cursors.Hand;
+            lista_actividades.FormattingEnabled = true;
+            lista_actividades.Items.AddRange(new object[] { "Yoga", "Pilates", "Zumba", "Crossfit", "Natacion", "Escuela de Futbol" });
+            lista_actividades.Location = new Point(1449, 430);
+            lista_actividades.Name = "lista_actividades";
+            lista_actividades.Size = new Size(300, 268);
+            lista_actividades.TabIndex = 24;
             // 
-            // button1
+            // Btn_Pagar
             // 
-            button1.BackColor = SystemColors.Highlight;
-            button1.Cursor = Cursors.Hand;
-            button1.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.Location = new Point(871, 782);
-            button1.Name = "button1";
-            button1.Size = new Size(878, 83);
-            button1.TabIndex = 25;
-            button1.Text = "Pagar";
-            button1.UseVisualStyleBackColor = false;
+            Btn_Pagar.BackColor = SystemColors.Highlight;
+            Btn_Pagar.Cursor = Cursors.Hand;
+            Btn_Pagar.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            Btn_Pagar.Location = new Point(871, 782);
+            Btn_Pagar.Name = "Btn_Pagar";
+            Btn_Pagar.Size = new Size(878, 83);
+            Btn_Pagar.TabIndex = 25;
+            Btn_Pagar.Text = "Pagar";
+            Btn_Pagar.UseVisualStyleBackColor = false;
             // 
             // label5
             // 
@@ -279,14 +273,42 @@
             label5.TabIndex = 26;
             label5.Text = "Total a Pagar:";
             // 
-            // textBox2
+            // total_pago
             // 
-            textBox2.BackColor = SystemColors.Highlight;
-            textBox2.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            textBox2.Location = new Point(883, 599);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(271, 57);
-            textBox2.TabIndex = 27;
+            total_pago.BackColor = SystemColors.Highlight;
+            total_pago.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            total_pago.Location = new Point(883, 599);
+            total_pago.Name = "total_pago";
+            total_pago.Size = new Size(296, 57);
+            total_pago.TabIndex = 27;
+            // 
+            // Txt_Nombre
+            // 
+            Txt_Nombre.BackColor = SystemColors.Highlight;
+            Txt_Nombre.BorderStyle = BorderStyle.None;
+            Txt_Nombre.Font = new Font("Century Gothic", 9.900001F, FontStyle.Regular, GraphicsUnit.Point);
+            Txt_Nombre.Location = new Point(306, 80);
+            Txt_Nombre.Name = "Txt_Nombre";
+            Txt_Nombre.Size = new Size(250, 41);
+            Txt_Nombre.TabIndex = 3;
+            // 
+            // Txt_Apellido
+            // 
+            Txt_Apellido.BackColor = SystemColors.Highlight;
+            Txt_Apellido.BorderStyle = BorderStyle.None;
+            Txt_Apellido.Location = new Point(306, 182);
+            Txt_Apellido.Name = "Txt_Apellido";
+            Txt_Apellido.Size = new Size(250, 40);
+            Txt_Apellido.TabIndex = 4;
+            // 
+            // Txt_EsSocio
+            // 
+            Txt_EsSocio.BackColor = SystemColors.Highlight;
+            Txt_EsSocio.BorderStyle = BorderStyle.None;
+            Txt_EsSocio.Location = new Point(306, 281);
+            Txt_EsSocio.Name = "Txt_EsSocio";
+            Txt_EsSocio.Size = new Size(250, 40);
+            Txt_EsSocio.TabIndex = 5;
             // 
             // Pago_Form
             // 
@@ -294,10 +316,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
             ClientSize = new Size(1806, 901);
-            Controls.Add(textBox2);
+            Controls.Add(total_pago);
             Controls.Add(label5);
-            Controls.Add(button1);
-            Controls.Add(checkedListBox1);
+            Controls.Add(Btn_Pagar);
+            Controls.Add(lista_actividades);
             Controls.Add(label4);
             Controls.Add(textBox1);
             Controls.Add(label3);
@@ -333,7 +355,6 @@
         private TextBox DNI_Pagos;
         private Panel panel1;
         private Label Nombre;
-        private Label Actividades;
         private Label EsSocio;
         private Label Apellido;
         private Label label2;
@@ -341,9 +362,12 @@
         private Label label3;
         private TextBox textBox1;
         private Label label4;
-        private CheckedListBox checkedListBox1;
-        private Button button1;
+        private CheckedListBox lista_actividades;
+        private Button Btn_Pagar;
         private Label label5;
-        private TextBox textBox2;
+        private TextBox total_pago;
+        private TextBox Txt_Nombre;
+        private TextBox Txt_EsSocio;
+        private TextBox Txt_Apellido;
     }
 }

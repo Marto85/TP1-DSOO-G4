@@ -116,7 +116,7 @@
             convertLabel.AutoSize = true;
             convertLabel.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Italic, GraphicsUnit.Point);
             convertLabel.ForeColor = SystemColors.ActiveCaptionText;
-            convertLabel.Location = new Point(673, 153);
+            convertLabel.Location = new Point(540, 132);
             convertLabel.Margin = new Padding(2, 0, 2, 0);
             convertLabel.Name = "convertLabel";
             convertLabel.Size = new Size(353, 46);
@@ -128,7 +128,8 @@
             // 
             Buscar_Cliente.BackColor = SystemColors.Highlight;
             Buscar_Cliente.FlatStyle = FlatStyle.Flat;
-            Buscar_Cliente.Location = new Point(1151, 236);
+            Buscar_Cliente.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            Buscar_Cliente.Location = new Point(1133, 234);
             Buscar_Cliente.Margin = new Padding(7, 8, 7, 8);
             Buscar_Cliente.Name = "Buscar_Cliente";
             Buscar_Cliente.Size = new Size(366, 92);
@@ -151,6 +152,7 @@
             // 
             convert_button.BackColor = SystemColors.Highlight;
             convert_button.FlatStyle = FlatStyle.Flat;
+            convert_button.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
             convert_button.Location = new Point(583, 377);
             convert_button.Margin = new Padding(7, 8, 7, 8);
             convert_button.Name = "convert_button";
