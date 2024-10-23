@@ -64,12 +64,12 @@ namespace DSOO_Grupo4_TP1
 
         }
 
-        private void btn_cerrar_Click(object sender, EventArgs e)
+        private void Btn_cerrar_Click(object sender, EventArgs e)
         {
             Utils.ConfirmarCierre();
         }
 
-        private void btn_minimizar_Click(object sender, EventArgs e)
+        private void Btn_minimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }

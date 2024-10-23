@@ -111,6 +111,157 @@ namespace DSOO_Grupo4_TP1.Models
             }
         }
 
+        public void RegistrarPagoSocio(int clienteId, int mesesAbonados)
+        {
+            Conexion conexion = Conexion.getInstancia();
+            using (MySqlConnection conn = conexion.CrearConexion())
+            {
+                try
+                {
+                    conn.Open();
+
+                    decimal monto = 10000; // Precio mensual base
+                    DateTime fechaPago = DateTime.Now;
+                    DateTime proximoVencimiento = fechaPago;
+
+                    // Cálculo del monto total según la cantidad de meses abonados
+                    switch (mesesAbonados)
+                    {
+                        case 1:
+                            monto = 10000; // Sin descuento
+                            proximoVencimiento = fechaPago.AddMonths(1);
+                            break;
+                        case 3:
+                            monto = 9500 * 3; // Descuento por 3 meses
+                            proximoVencimiento = fechaPago.AddMonths(3);
+                            break;
+                        case 6:
+                            monto = 8700 * 6; // Descuento por 6 meses
+                            proximoVencimiento = fechaPago.AddMonths(6);
+                            break;
+                        case 12:
+                            monto = 7500 * 12; // Descuento por 12 meses
+                            proximoVencimiento = fechaPago.AddMonths(12);
+                            break;
+                        default:
+                            MessageBox.Show("Cantidad de meses no válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                    }
+
+                    // Insertar el pago en la tabla 'Pago'
+                    string query = @"INSERT INTO pago (Cliente_Id, Monto, FechaPago, ProximoVencimiento, Id_tipo_de_pago) 
+                             VALUES (@clienteId, @monto, @fechaPago, @proximoVencimiento, @idTipoPago)";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@clienteId", clienteId);
+                        cmd.Parameters.AddWithValue("@monto", monto);
+                        cmd.Parameters.AddWithValue("@fechaPago", fechaPago);
+                        cmd.Parameters.AddWithValue("@proximoVencimiento", proximoVencimiento);
+                        cmd.Parameters.AddWithValue("@idTipoPago", 1); // Asumimos que 1 es "Abono general"
+
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show($"Pago registrado exitosamente. Total: {monto:C2}. Vencimiento: {proximoVencimiento.ToShortDateString()}",
+                            "Pago exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show($"Error al registrar pago: {ex.Message}\nCódigo del error: {ex.Number}");
+                }
+            }
+        }
+
+
+        public void RegistrarPagoNoSocio(int clienteId, int actividadId, string duracion)
+        {
+            Conexion conexion = Conexion.getInstancia();
+            using (MySqlConnection conn = conexion.CrearConexion())
+            {
+                try
+                {
+                    conn.Open();
+
+                    // Obtener el precio mensual de la actividad
+                    string getPrecioQuery = "SELECT PrecioNoSocio FROM actividad WHERE Id = @actividadId";
+                    decimal precioMensual = 0;
+
+                    using (MySqlCommand getPrecioCmd = new MySqlCommand(getPrecioQuery, conn))
+                    {
+                        getPrecioCmd.Parameters.AddWithValue("@actividadId", actividadId);
+                        precioMensual = Convert.ToDecimal(getPrecioCmd.ExecuteScalar());
+                    }
+
+                    decimal monto = 0;
+                    DateTime fechaPago = DateTime.Now;
+                    DateTime proximoVencimiento = fechaPago;
+
+                    // Cálculo del monto según la duración del pago
+                    switch (duracion.ToLower())
+                    {
+                        case "semanal":
+                            monto = (precioMensual / 4) * 1.05m; // Recargo del 5%
+                            proximoVencimiento = fechaPago.AddDays(7);
+                            break;
+                        case "quincenal":
+                            monto = (precioMensual / 2) * 1.10m; // Recargo del 10%
+                            proximoVencimiento = fechaPago.AddDays(14);
+                            break;
+                        case "mensual":
+                            monto = precioMensual;
+                            proximoVencimiento = fechaPago.AddMonths(1);
+                            break;
+                        case "6 meses":
+                            monto = (precioMensual * 6) * 0.90m; // Descuento del 10%
+                            proximoVencimiento = fechaPago.AddMonths(6);
+                            break;
+                        case "12 meses":
+                            monto = (precioMensual * 12) * 0.80m; // Descuento del 20%
+                            proximoVencimiento = fechaPago.AddMonths(12);
+                            break;
+                        default:
+                            MessageBox.Show("Duración no válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                    }
+
+                    // Insertar el pago en la tabla 'Pago_Actividad'
+                    string query = @"INSERT INTO pago_actividad (Cliente_Id, Actividad_Id, Monto, FechaPago, ProximoVencimiento) 
+                             VALUES (@clienteId, @actividadId, @monto, @fechaPago, @proximoVencimiento)";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@clienteId", clienteId);
+                        cmd.Parameters.AddWithValue("@actividadId", actividadId);
+                        cmd.Parameters.AddWithValue("@monto", monto);
+                        cmd.Parameters.AddWithValue("@fechaPago", fechaPago);
+                        cmd.Parameters.AddWithValue("@proximoVencimiento", proximoVencimiento);
+
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show($"Pago registrado exitosamente. Total: {monto:C2}. Vencimiento: {proximoVencimiento.ToShortDateString()}",
+                            "Pago exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show($"Error al registrar pago: {ex.Message}\nCódigo del error: {ex.Number}");
+                }
+            }
+        }
+
+        private int ObtenerTipoDePagoId(int meses)
+        {
+            switch (meses)
+            {
+                case 1: return 3;  // Mensual
+                case 3: return 4;  // Trimestral
+                case 6: return 5;  // Semestral
+                case 12: return 6; // Anual
+                default: throw new ArgumentException("Duración de abono inválida.");
+            }
+        }
+
         /*public void ImprimirCarnet(Cliente cliente)
         {
             // Crear un nuevo objeto PrintDocument
