@@ -54,14 +54,13 @@ namespace DSOO_Grupo4_TP1
             bool esSocio = Socio.Checked;
             string? imagenPerfil = imgPath;
 
-            Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, imagenPerfil, esSocio);
+
+            Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, imagenPerfil, esSocio: esSocio);
+
             nuevoCliente.AltaCliente();
             GenerarCarnet(nuevoCliente.IdCliente);
 
-            //nuevoCliente.ImprimirCarnet(nuevoCliente);
-
             this.Close();
-
         }
 
         private void Btn_cerrar_Click(object sender, EventArgs e)

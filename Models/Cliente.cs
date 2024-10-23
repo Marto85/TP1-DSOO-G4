@@ -22,12 +22,14 @@ namespace DSOO_Grupo4_TP1.Models
         public bool EsSocio { get; set; }
         public bool EsApto { get; set; }
 
-        private decimal AbonoMensualSocios { get; set; }
+        public decimal AbonoMensualSocios { get; set; }
 
         public string ImagenPerfil { get; set; }
 
+        private List<Cliente> listaDeClientes = new List<Cliente>();
 
-        public Cliente(DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, string imagenPerfil, bool esSocio = false, bool esApto = true)
+
+        public Cliente(DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, string imagenPerfil, decimal? abonoMensualSocios = null, bool esSocio = false, bool esApto = true)
         {
             FechaIngreso = fechaIngreso;
             Nombre = nombre;
@@ -39,15 +41,20 @@ namespace DSOO_Grupo4_TP1.Models
             EsSocio = esSocio;
             EsApto = esApto;
             ImagenPerfil = imagenPerfil;
-            AbonoMensualSocios = 10000;
+
+            // Solo asignar abono si es un socio
+            if (esSocio && abonoMensualSocios.HasValue)
+            {
+                AbonoMensualSocios = abonoMensualSocios.Value;
+            }
         }
 
-        public decimal GetAbonoMensualSocios ()
+        public decimal GetAbonoMensualSocios()
         {
-            return (decimal)AbonoMensualSocios;
+            return AbonoMensualSocios;
         }
 
-        public void SetAbonoMensualSocios (decimal abonoMensualSocios)
+        public void SetAbonoMensualSocios(decimal abonoMensualSocios)
         {
             AbonoMensualSocios = abonoMensualSocios;
         }
@@ -72,12 +79,10 @@ namespace DSOO_Grupo4_TP1.Models
 
                         if (count > 0)
                         {
-                            // El DNI ya existe en la base de datos
                             MessageBox.Show("Error: El cliente con este DNI ya existe.", "Error de duplicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;  // Detener el proceso de inserción
+                            return; 
                         }
                     }
-
 
                     // Definir el query según si es socio o no
                     string query = @"INSERT INTO cliente 
@@ -85,14 +90,14 @@ namespace DSOO_Grupo4_TP1.Models
 
                     if (EsSocio)
                     {
-                        query += ", AbonoMensualSocios";  // en caso de ser socio, agrega el campo
+                        query += ", AbonoMensualSocios";
                     }
 
                     query += ") VALUES (@fechaIngreso, @nombre, @apellido, @dni, @direccion, @telefono, @email, @esSocio, @esApto, @imagen_Perfil";
 
                     if (EsSocio)
                     {
-                        query += ", @abonoMensualSocios"; // añade parametro
+                        query += ", @abonoMensualSocios";
                     }
 
                     query += ")";
@@ -116,13 +121,12 @@ namespace DSOO_Grupo4_TP1.Models
                             cmd.Parameters.AddWithValue("@abonoMensualSocios", GetAbonoMensualSocios());
                         }
 
-                        2
                         cmd.ExecuteNonQuery();
 
                         // Obtener el ID del cliente recién insertado
                         MySqlCommand getIdCmd = new MySqlCommand("SELECT LAST_INSERT_ID();", conn);
                         int idGenerado = Convert.ToInt32(getIdCmd.ExecuteScalar());
-                        this.IdCliente = idGenerado; // Asignar el ID al objeto Cliente
+                        this.IdCliente = idGenerado; 
 
                         if (EsSocio)
                         {
@@ -134,7 +138,6 @@ namespace DSOO_Grupo4_TP1.Models
                             MessageBox.Show($"Se procede a entregar al Cliente con nombre {Nombre} {Apellido} el carnet que lo acredita a ingresar a las actividades.");
                         }
                     }
-
                 }
                 catch (MySqlException ex)
                 {

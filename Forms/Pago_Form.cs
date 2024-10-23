@@ -75,10 +75,9 @@ namespace DSOO_Grupo4_TP1.Forms
                                     string telefono = reader.GetString("Telefono");
                                     string email = reader.GetString("Email");
                                     bool esSocio = reader.GetBoolean("EsSocio");
-                                    bool esApto = reader.GetBoolean("EsApto");
                                     string imagenPerfil = reader.GetString("ImagenPerfil");
 
-                                    clienteActual = new Cliente(DateTime.Now, nombre, apellido, dni, direccion, telefono, email, imagenPerfil, esSocio, esApto);
+                                    clienteActual = new Cliente(DateTime.Now, nombre, apellido, dni, direccion, telefono, email, imagenPerfil, esSocio : esSocio);
 
                                     Txt_Nombre.Text = nombre;
                                     Txt_Apellido.Text = apellido;
