@@ -14,8 +14,8 @@ namespace DSOO_Grupo4_TP1.Forms
 {
     public partial class Foto_form : Form
     {
-        private FilterInfoCollection videoDevices; // Colección de dispositivos de video
-        private VideoCaptureDevice videoSource;    // Dispositivo de captura de video (cámara)
+        private FilterInfoCollection videoDevices;
+        private VideoCaptureDevice videoSource;
         string rutaImagenes = Path.Combine(Application.StartupPath, @"..\..\Resources\Captures");
         private Form _formularioAltaCliente;
         public Foto_form(AltaCliente_Form formularioAltaCliente)
@@ -48,7 +48,6 @@ namespace DSOO_Grupo4_TP1.Forms
             Video_box.Image = frame; // Mostrar el fotograma actual en un PictureBox
         }
 
-        // Botón para sacar la foto
         private void BtnCapturarFoto_Click(object sender, EventArgs e)
         {
             if (Video_box.Image != null)
@@ -60,11 +59,9 @@ namespace DSOO_Grupo4_TP1.Forms
                         Directory.CreateDirectory(rutaImagenes);
                     }
 
-                    // Generar un nombre único para la imagen usando la fecha/hora actual
                     string nombreImagen = $"cliente_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.jpg";
                     string imagenPath = Path.Combine(rutaImagenes, nombreImagen);
 
-                    // Guardar la imagen
                     Video_box.Image.Save(imagenPath, System.Drawing.Imaging.ImageFormat.Jpeg);
                     MessageBox.Show($"Foto guardada exitosamente");
               

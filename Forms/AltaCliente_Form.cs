@@ -202,13 +202,13 @@ namespace DSOO_Grupo4_TP1
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                Enviar_Registro_Click(sender, e);  // Ejecutar el mismo método que al hacer click en el botón
-                e.Handled = true;        // Evita que el evento continúe propagándose
+                Enviar_Registro_Click(sender, e);
+                e.Handled = true;
             }
         }
 
         private void Btn_Atras_Click(object sender, EventArgs e)
-        {// Mostrar el formulario de Menu nuevamente
+        {
             Form menuForm = Application.OpenForms["Menu_Form"];
             if (menuForm != null)
             {
@@ -229,7 +229,6 @@ namespace DSOO_Grupo4_TP1
             if (File.Exists(imagePath))
             {
                 imgPath = imagePath;
-                // Cargar la imagen en el PictureBox si el archivo existe
                 ImagenPerfil.Image = Image.FromFile(imagePath);
             }
             else
@@ -254,7 +253,6 @@ namespace DSOO_Grupo4_TP1
                 {
                     conn.Open();
 
-                    // Consulta corregida para recuperar los datos del cliente
                     MySqlCommand cmd = new MySqlCommand(
                         "SELECT Nombre, Apellido, DNI, Imagen_Perfil, EsSocio FROM Cliente WHERE Id = @Id", conn
                     );
@@ -264,20 +262,16 @@ namespace DSOO_Grupo4_TP1
                     {
                         if (reader.Read())
                         {
-                            // Recuperar los datos del cliente
                             string nombre = reader.GetString("Nombre");
                             string apellido = reader.GetString("Apellido");
                             int dni = reader.GetInt32("DNI");
                             string imagenPerfil = reader["Imagen_Perfil"] != DBNull.Value ? reader.GetString("Imagen_Perfil") : null;
                             bool esSocio = reader.GetBoolean("EsSocio");
 
-                            // Crear una instancia del formulario de carnet
                             Carnet_Form formularioCarnet = new Carnet_Form();
 
-                            // Asignar los valores recuperados a los controles del formulario
                             formularioCarnet.SetDatosCliente(nombre, apellido, dni, imagenPerfil, esSocio);
 
-                            // Mostrar el formulario de carnet
                             formularioCarnet.ShowDialog();
                         }
                         else
