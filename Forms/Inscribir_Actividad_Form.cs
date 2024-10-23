@@ -1,4 +1,5 @@
 ﻿using DSOO_Grupo4_TP1.Datos;
+using DSOO_Grupo4_TP1.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -35,12 +36,7 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void btn_cerrar_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas cerrar la aplicación?", "Confirmación de cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            Utils.ConfirmarCierre();
         }
 
         private void btn_minimizar_Click(object sender, EventArgs e)

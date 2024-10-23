@@ -1,4 +1,5 @@
 ﻿using AForge.Video;
+using DSOO_Grupo4_TP1.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,12 +39,7 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void Btn_cerrar_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas cerrar la aplicación?", "Confirmación de cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            Utils.ConfirmarCierre();
         }
 
         public void SetDatosCliente(string nombre, string apellido, int dni, string imagenPerfil, bool esSocio)

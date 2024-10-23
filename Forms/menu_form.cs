@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using DSOO_Grupo4_TP1.Forms;
+using DSOO_Grupo4_TP1.Models;
 
 namespace DSOO_Grupo4_TP1
 {
@@ -40,12 +41,7 @@ namespace DSOO_Grupo4_TP1
 
         private void Btn_cerrar_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas cerrar la aplicación?", "Confirmación de cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            Utils.ConfirmarCierre();
         }
 
         private void menu_form_MouseDown(object sender, MouseEventArgs e)
