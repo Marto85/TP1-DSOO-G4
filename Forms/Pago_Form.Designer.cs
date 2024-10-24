@@ -45,8 +45,8 @@
             Nombre = new Label();
             label2 = new Label();
             comboBox1 = new ComboBox();
-            label3 = new Label();
-            textBox1 = new TextBox();
+            label_AbonoMensual = new Label();
+            txt_AbonoMensual = new TextBox();
             label4 = new Label();
             lista_actividades = new CheckedListBox();
             Btn_Pagar = new Button();
@@ -242,23 +242,25 @@
             comboBox1.Size = new Size(302, 58);
             comboBox1.TabIndex = 20;
             // 
-            // label3
+            // label_AbonoMensual
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(871, 243);
-            label3.Name = "label3";
-            label3.Size = new Size(517, 44);
-            label3.TabIndex = 21;
-            label3.Text = "Abono Mensual para socios";
+            label_AbonoMensual.AutoSize = true;
+            label_AbonoMensual.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            label_AbonoMensual.Location = new Point(871, 243);
+            label_AbonoMensual.Name = "label_AbonoMensual";
+            label_AbonoMensual.Size = new Size(517, 44);
+            label_AbonoMensual.TabIndex = 21;
+            label_AbonoMensual.Text = "Abono Mensual para socios";
+            label_AbonoMensual.Visible = false;
             // 
-            // textBox1
+            // txt_AbonoMensual
             // 
-            textBox1.Font = new Font("Segoe UI", 11.1F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(1447, 243);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(302, 57);
-            textBox1.TabIndex = 22;
+            txt_AbonoMensual.Font = new Font("Segoe UI", 11.1F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_AbonoMensual.Location = new Point(1447, 243);
+            txt_AbonoMensual.Name = "txt_AbonoMensual";
+            txt_AbonoMensual.Size = new Size(302, 57);
+            txt_AbonoMensual.TabIndex = 22;
+            txt_AbonoMensual.Visible = false;
             // 
             // label4
             // 
@@ -296,7 +298,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(871, 552);
+            label5.Location = new Point(871, 546);
             label5.Name = "label5";
             label5.Size = new Size(262, 44);
             label5.TabIndex = 26;
@@ -306,9 +308,9 @@
             // 
             total_pago.BackColor = SystemColors.Highlight;
             total_pago.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            total_pago.Location = new Point(883, 599);
+            total_pago.Location = new Point(871, 608);
             total_pago.Name = "total_pago";
-            total_pago.Size = new Size(296, 57);
+            total_pago.Size = new Size(262, 57);
             total_pago.TabIndex = 27;
             // 
             // Pago_Form
@@ -322,8 +324,8 @@
             Controls.Add(Btn_Pagar);
             Controls.Add(lista_actividades);
             Controls.Add(label4);
-            Controls.Add(textBox1);
-            Controls.Add(label3);
+            Controls.Add(txt_AbonoMensual);
+            Controls.Add(label_AbonoMensual);
             Controls.Add(comboBox1);
             Controls.Add(label2);
             Controls.Add(panel1);
@@ -361,8 +363,8 @@
         private Label Apellido;
         private Label label2;
         private ComboBox comboBox1;
-        private Label label3;
-        private TextBox textBox1;
+        private Label label_AbonoMensual;
+        private TextBox txt_AbonoMensual;
         private Label label4;
         private CheckedListBox lista_actividades;
         private Button Btn_Pagar;

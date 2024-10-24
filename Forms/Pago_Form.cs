@@ -62,7 +62,7 @@ namespace DSOO_Grupo4_TP1.Forms
                     try
                     {
                         conn.Open();
-                        string query = "SELECT Nombre, Apellido, EsSocio FROM cliente WHERE DNI = @dni_usuario";
+                        string query = "SELECT Nombre, Apellido, DNI, Direccion, Telefono, Email, EsSocio, Imagen_Perfil, AbonoMensualSocios FROM cliente WHERE DNI = @dni_usuario";
 
                         using (MySqlCommand cmd = new MySqlCommand(query, conn))
                         {
@@ -74,20 +74,28 @@ namespace DSOO_Grupo4_TP1.Forms
                             {
                                 if (reader.Read()) // Lee la primera fila del resultado
                                 {
-                                    string nombre = reader.GetString("Nombre");
-                                    string apellido = reader.GetString("Apellido");
-                                    int dni = reader.GetInt32("DNI");
-                                    string direccion = reader.GetString("Direccion");
-                                    string telefono = reader.GetString("Telefono");
-                                    string email = reader.GetString("Email");
-                                    bool esSocio = reader.GetBoolean("EsSocio");
-                                    string imagenPerfil = reader.GetString("ImagenPerfil");
+                                    // Verificar si los campos son NULL antes de obtener su valor
+                                    string nombre = reader.IsDBNull(reader.GetOrdinal("Nombre")) ? string.Empty : reader.GetString("Nombre");
+                                    string apellido = reader.IsDBNull(reader.GetOrdinal("Apellido")) ? string.Empty : reader.GetString("Apellido");
+                                    int dni = reader.IsDBNull(reader.GetOrdinal("DNI")) ? 0 : reader.GetInt32("DNI");
+                                    string direccion = reader.IsDBNull(reader.GetOrdinal("Direccion")) ? string.Empty : reader.GetString("Direccion");
+                                    string telefono = reader.IsDBNull(reader.GetOrdinal("Telefono")) ? string.Empty : reader.GetString("Telefono");
+                                    string email = reader.IsDBNull(reader.GetOrdinal("Email")) ? string.Empty : reader.GetString("Email");
+                                    string imagenPerfil = reader.IsDBNull(reader.GetOrdinal("Imagen_Perfil")) ? string.Empty : reader.GetString("Imagen_Perfil");
+                                    bool esSocio = !reader.IsDBNull(reader.GetOrdinal("EsSocio")) && reader.GetBoolean("EsSocio");
+                                    decimal abonoMensualSocios = reader.IsDBNull(reader.GetOrdinal("AbonoMensualSocios")) ? 0 : reader.GetDecimal("AbonoMensualSocios");
+
 
                                     clienteActual = new Cliente(DateTime.Now, nombre, apellido, dni, direccion, telefono, email, imagenPerfil, esSocio: esSocio);
-
+                                    if(esSocio)
+                                    {
+                                        label_AbonoMensual.Visible = true;
+                                        txt_AbonoMensual.Visible = true;
+                                    }
                                     Txt_Nombre.Text = nombre;
                                     Txt_Apellido.Text = apellido;
                                     Txt_EsSocio.Text = esSocio ? "SI" : "NO";
+                                    txt_AbonoMensual.Text = abonoMensualSocios.ToString();
                                 }
                                 else
                                 {
@@ -98,7 +106,7 @@ namespace DSOO_Grupo4_TP1.Forms
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Error en la conexión: " + ex.Message);
+                       MessageBox.Show("Error en la conexión: " + ex.Message);
                     }
                     finally
                     {
