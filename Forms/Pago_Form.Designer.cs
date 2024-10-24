@@ -44,7 +44,7 @@
             Apellido = new Label();
             Nombre = new Label();
             label2 = new Label();
-            comboBox1 = new ComboBox();
+            Frecuencia_Pago = new ComboBox();
             label_AbonoMensual = new Label();
             txt_AbonoMensual = new TextBox();
             label4 = new Label();
@@ -52,6 +52,7 @@
             Btn_Pagar = new Button();
             label5 = new Label();
             total_pago = new TextBox();
+            Btn_Calcular_Total = new Button();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Btn_Atras).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Btn_minimizar).BeginInit();
@@ -231,16 +232,16 @@
             label2.TabIndex = 19;
             label2.Text = "Frecuencia";
             // 
-            // comboBox1
+            // Frecuencia_Pago
             // 
-            comboBox1.Cursor = Cursors.Hand;
-            comboBox1.Font = new Font("Segoe UI", 11.1F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Semanal", "Quincenal", "Mensual", "Trimestral", "Semestral", "Anual" });
-            comboBox1.Location = new Point(1447, 325);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(302, 58);
-            comboBox1.TabIndex = 20;
+            Frecuencia_Pago.Cursor = Cursors.Hand;
+            Frecuencia_Pago.Font = new Font("Segoe UI", 11.1F, FontStyle.Regular, GraphicsUnit.Point);
+            Frecuencia_Pago.FormattingEnabled = true;
+            Frecuencia_Pago.Items.AddRange(new object[] { "Semanal", "Quincenal", "Mensual", "Trimestral", "Semestral", "Anual" });
+            Frecuencia_Pago.Location = new Point(1447, 325);
+            Frecuencia_Pago.Name = "Frecuencia_Pago";
+            Frecuencia_Pago.Size = new Size(302, 58);
+            Frecuencia_Pago.TabIndex = 20;
             // 
             // label_AbonoMensual
             // 
@@ -306,12 +307,25 @@
             // 
             // total_pago
             // 
-            total_pago.BackColor = SystemColors.Highlight;
+            total_pago.BackColor = Color.DimGray;
             total_pago.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            total_pago.Location = new Point(871, 608);
+            total_pago.Location = new Point(1139, 539);
             total_pago.Name = "total_pago";
             total_pago.Size = new Size(262, 57);
             total_pago.TabIndex = 27;
+            // 
+            // Btn_Calcular_Total
+            // 
+            Btn_Calcular_Total.BackColor = SystemColors.Highlight;
+            Btn_Calcular_Total.Cursor = Cursors.Hand;
+            Btn_Calcular_Total.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            Btn_Calcular_Total.Location = new Point(1139, 623);
+            Btn_Calcular_Total.Name = "Btn_Calcular_Total";
+            Btn_Calcular_Total.Size = new Size(261, 58);
+            Btn_Calcular_Total.TabIndex = 28;
+            Btn_Calcular_Total.Text = "Calcular";
+            Btn_Calcular_Total.UseVisualStyleBackColor = false;
+            Btn_Calcular_Total.Click += Btn_Calcular_Total_Click;
             // 
             // Pago_Form
             // 
@@ -319,6 +333,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
             ClientSize = new Size(1806, 901);
+            Controls.Add(Btn_Calcular_Total);
             Controls.Add(total_pago);
             Controls.Add(label5);
             Controls.Add(Btn_Pagar);
@@ -326,7 +341,7 @@
             Controls.Add(label4);
             Controls.Add(txt_AbonoMensual);
             Controls.Add(label_AbonoMensual);
-            Controls.Add(comboBox1);
+            Controls.Add(Frecuencia_Pago);
             Controls.Add(label2);
             Controls.Add(panel1);
             Controls.Add(Buscar_Cliente);
@@ -362,7 +377,7 @@
         private Label EsSocio;
         private Label Apellido;
         private Label label2;
-        private ComboBox comboBox1;
+        private ComboBox Frecuencia_Pago;
         private Label label_AbonoMensual;
         private TextBox txt_AbonoMensual;
         private Label label4;
@@ -373,5 +388,6 @@
         private TextBox Txt_Nombre;
         private TextBox Txt_EsSocio;
         private TextBox Txt_Apellido;
+        private Button Btn_Calcular_Total;
     }
 }

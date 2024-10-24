@@ -28,6 +28,19 @@ namespace DSOO_Grupo4_TP1.Forms
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
 
+
+        private void Pago_Form_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void panel2_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
         private void Btn_Atras_Click(object sender, EventArgs e)
         {
             Form menuForm = Application.OpenForms["Menu_Form"];
@@ -87,15 +100,38 @@ namespace DSOO_Grupo4_TP1.Forms
 
 
                                     clienteActual = new Cliente(DateTime.Now, nombre, apellido, dni, direccion, telefono, email, imagenPerfil, esSocio: esSocio);
-                                    if(esSocio)
+                                    if (esSocio)
                                     {
                                         label_AbonoMensual.Visible = true;
                                         txt_AbonoMensual.Visible = true;
+                                        if (Frecuencia_Pago.Items.Contains("Semanal"))
+                                        {
+                                            Frecuencia_Pago.Items.Remove("Semanal"); // Elimina opción semanal
+                                        }
+
+                                        if (Frecuencia_Pago.Items.Contains("Quincenal"))
+                                        {
+                                            Frecuencia_Pago.Items.Remove("Quincenal"); // Elimina opción quincenal
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // Restaurar las opciones si no es socio
+                                        if (!Frecuencia_Pago.Items.Contains("Semanal"))
+                                        {
+                                            Frecuencia_Pago.Items.Insert(0, "Semanal"); // Reagregar opción semanal si no está
+                                        }
+
+                                        if (!Frecuencia_Pago.Items.Contains("Quincenal"))
+                                        {
+                                            Frecuencia_Pago.Items.Insert(0, "Quincenal"); // Reagregar opción quincenal si no está
+                                        }
                                     }
                                     Txt_Nombre.Text = nombre;
                                     Txt_Apellido.Text = apellido;
                                     Txt_EsSocio.Text = esSocio ? "SI" : "NO";
                                     txt_AbonoMensual.Text = abonoMensualSocios.ToString();
+                                    
                                 }
                                 else
                                 {
@@ -106,7 +142,7 @@ namespace DSOO_Grupo4_TP1.Forms
                     }
                     catch (Exception ex)
                     {
-                       MessageBox.Show("Error en la conexión: " + ex.Message);
+                        MessageBox.Show("Error en la conexión: " + ex.Message);
                     }
                     finally
                     {
@@ -116,16 +152,64 @@ namespace DSOO_Grupo4_TP1.Forms
             }
         }
 
-        private void Pago_Form_MouseDown(object sender, MouseEventArgs e)
+        private void CalcularMontoTotalAPagar()
         {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
+            if (Txt_EsSocio.Text == "SI")
+            {
+                decimal abonoMensual;
+                
+                if (decimal.TryParse(txt_AbonoMensual.Text, out abonoMensual))
+                {
+                    // Verificar si se ha seleccionado una opción en el ComboBox de frecuencia de pago
+                    if (Frecuencia_Pago.SelectedItem != null)
+                    {
+                        string frecuenciaPago = Frecuencia_Pago.SelectedItem.ToString();
+                        decimal totalPagar = 0;
+
+                        switch (frecuenciaPago)
+                        {
+                            case "Mensual":
+                                totalPagar = abonoMensual;
+                                break;
+                            case "Trimestral":
+                                totalPagar = abonoMensual * 3 * 0.95m; // Aplica 5% de descuento
+                                break;
+                            case "Semestral":
+                                totalPagar = abonoMensual * 6 * 0.90m; // Aplica 10% de descuento
+                                break;
+                            case "Anual":
+                                totalPagar = abonoMensual * 12 * 0.75m; // Aplica 25% de descuento
+                                break;
+                            default:
+                                MessageBox.Show("Por favor selecciona una frecuencia de pago válida.");
+
+                                return;
+                        }
+
+                        // Asignar el total calculado al TextBox del total de pago
+                        total_pago.Text = totalPagar.ToString("C"); // Mostrar como moneda
+                    }
+                    else
+                    {
+                        MessageBox.Show("Por favor selecciona una frecuencia de pago.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("El valor del abono mensual no es válido.");
+                }
+            }
+            else
+            {
+               
+                MessageBox.Show("Este cliente no es socio.");
+            }
         }
 
-        private void panel2_MouseDown(object sender, MouseEventArgs e)
+
+        private void Btn_Calcular_Total_Click(object sender, EventArgs e)
         {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
+            CalcularMontoTotalAPagar();
         }
     }
 }
