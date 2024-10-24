@@ -102,8 +102,8 @@ namespace DSOO_Grupo4_TP1.Forms
                                     clienteActual = new Cliente(DateTime.Now, nombre, apellido, dni, direccion, telefono, email, imagenPerfil, esSocio: esSocio);
                                     if (esSocio)
                                     {
-                                        label_AbonoMensual.Visible = true;
-                                        txt_AbonoMensual.Visible = true;
+                                        label_AbonoMensual.Enabled = true;
+                                        txt_AbonoMensual.Enabled = true;
                                         if (Frecuencia_Pago.Items.Contains("Semanal"))
                                         {
                                             Frecuencia_Pago.Items.Remove("Semanal");
@@ -116,6 +116,8 @@ namespace DSOO_Grupo4_TP1.Forms
                                     }
                                     else
                                     {
+                                        label_AbonoMensual.Enabled = false;
+                                        txt_AbonoMensual.Enabled = false;
                                         label_Pagar_Actividades.Visible = true;
                                         lista_actividades.Visible = true;
                                         // Restaurar las opciones si no es socio

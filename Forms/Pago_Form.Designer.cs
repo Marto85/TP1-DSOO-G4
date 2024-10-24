@@ -252,7 +252,6 @@
             label_AbonoMensual.Size = new Size(517, 44);
             label_AbonoMensual.TabIndex = 21;
             label_AbonoMensual.Text = "Abono Mensual para socios";
-            label_AbonoMensual.Visible = false;
             // 
             // txt_AbonoMensual
             // 
@@ -261,7 +260,6 @@
             txt_AbonoMensual.Name = "txt_AbonoMensual";
             txt_AbonoMensual.Size = new Size(302, 57);
             txt_AbonoMensual.TabIndex = 22;
-            txt_AbonoMensual.Visible = false;
             // 
             // label_Pagar_Actividades
             // 
