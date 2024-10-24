@@ -47,7 +47,7 @@
             Frecuencia_Pago = new ComboBox();
             label_AbonoMensual = new Label();
             txt_AbonoMensual = new TextBox();
-            label4 = new Label();
+            label_Pagar_Actividades = new Label();
             lista_actividades = new CheckedListBox();
             Btn_Pagar = new Button();
             label5 = new Label();
@@ -263,15 +263,16 @@
             txt_AbonoMensual.TabIndex = 22;
             txt_AbonoMensual.Visible = false;
             // 
-            // label4
+            // label_Pagar_Actividades
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(871, 430);
-            label4.Name = "label4";
-            label4.Size = new Size(347, 44);
-            label4.TabIndex = 23;
-            label4.Text = "Pagar Actividades";
+            label_Pagar_Actividades.AutoSize = true;
+            label_Pagar_Actividades.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            label_Pagar_Actividades.Location = new Point(871, 430);
+            label_Pagar_Actividades.Name = "label_Pagar_Actividades";
+            label_Pagar_Actividades.Size = new Size(347, 44);
+            label_Pagar_Actividades.TabIndex = 23;
+            label_Pagar_Actividades.Text = "Pagar Actividades";
+            label_Pagar_Actividades.Visible = false;
             // 
             // lista_actividades
             // 
@@ -282,6 +283,7 @@
             lista_actividades.Name = "lista_actividades";
             lista_actividades.Size = new Size(300, 268);
             lista_actividades.TabIndex = 24;
+            lista_actividades.Visible = false;
             // 
             // Btn_Pagar
             // 
@@ -338,7 +340,7 @@
             Controls.Add(label5);
             Controls.Add(Btn_Pagar);
             Controls.Add(lista_actividades);
-            Controls.Add(label4);
+            Controls.Add(label_Pagar_Actividades);
             Controls.Add(txt_AbonoMensual);
             Controls.Add(label_AbonoMensual);
             Controls.Add(Frecuencia_Pago);
@@ -380,7 +382,7 @@
         private ComboBox Frecuencia_Pago;
         private Label label_AbonoMensual;
         private TextBox txt_AbonoMensual;
-        private Label label4;
+        private Label label_Pagar_Actividades;
         private CheckedListBox lista_actividades;
         private Button Btn_Pagar;
         private Label label5;

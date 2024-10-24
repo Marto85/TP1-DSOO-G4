@@ -106,25 +106,27 @@ namespace DSOO_Grupo4_TP1.Forms
                                         txt_AbonoMensual.Visible = true;
                                         if (Frecuencia_Pago.Items.Contains("Semanal"))
                                         {
-                                            Frecuencia_Pago.Items.Remove("Semanal"); // Elimina opción semanal
+                                            Frecuencia_Pago.Items.Remove("Semanal");
                                         }
 
                                         if (Frecuencia_Pago.Items.Contains("Quincenal"))
                                         {
-                                            Frecuencia_Pago.Items.Remove("Quincenal"); // Elimina opción quincenal
+                                            Frecuencia_Pago.Items.Remove("Quincenal");
                                         }
                                     }
                                     else
                                     {
+                                        label_Pagar_Actividades.Visible = true;
+                                        lista_actividades.Visible = true;
                                         // Restaurar las opciones si no es socio
                                         if (!Frecuencia_Pago.Items.Contains("Semanal"))
                                         {
-                                            Frecuencia_Pago.Items.Insert(0, "Semanal"); // Reagregar opción semanal si no está
+                                            Frecuencia_Pago.Items.Insert(0, "Semanal");
                                         }
 
                                         if (!Frecuencia_Pago.Items.Contains("Quincenal"))
                                         {
-                                            Frecuencia_Pago.Items.Insert(0, "Quincenal"); // Reagregar opción quincenal si no está
+                                            Frecuencia_Pago.Items.Insert(0, "Quincenal");
                                         }
                                     }
                                     Txt_Nombre.Text = nombre;
