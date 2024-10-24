@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,6 +25,12 @@ namespace DSOO_Grupo4_TP1.Forms
             CargarDispositivosDeVideo();
             _formularioAltaCliente = formularioAltaCliente;
         }
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+
+        private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
 
         private void CargarDispositivosDeVideo()
         {
@@ -64,7 +71,7 @@ namespace DSOO_Grupo4_TP1.Forms
 
                     Video_box.Image.Save(imagenPath, System.Drawing.Imaging.ImageFormat.Jpeg);
                     MessageBox.Show($"Foto guardada exitosamente");
-              
+
                     if (_formularioAltaCliente != null)
                     {
                         (_formularioAltaCliente as AltaCliente_Form)?.AsignarImagenPerfil(imagenPath);
@@ -97,7 +104,7 @@ namespace DSOO_Grupo4_TP1.Forms
             }
 
             this.Close();
-            
+
         }
 
         private void Btn_minimizar_Click(object sender, EventArgs e)
@@ -120,6 +127,17 @@ namespace DSOO_Grupo4_TP1.Forms
                 Application.Exit();
             }
         }
-    
+
+        private void Foto_form_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void panel2_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
     }
 }

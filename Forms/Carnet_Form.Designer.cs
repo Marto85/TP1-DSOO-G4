@@ -57,6 +57,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(907, 61);
             panel2.TabIndex = 12;
+            panel2.MouseDown += panel2_MouseDown;
             // 
             // Btn_Atras
             // 
@@ -166,6 +167,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "Carnet_Form";
             Text = "Carnet_Form";
+            MouseDown += Carnet_Form_MouseDown;
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)Btn_Atras).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).EndInit();

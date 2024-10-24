@@ -37,6 +37,9 @@
             Buscar_Cliente = new Button();
             DNI_Pagos = new TextBox();
             panel1 = new Panel();
+            Txt_EsSocio = new TextBox();
+            Txt_Apellido = new TextBox();
+            Txt_Nombre = new TextBox();
             EsSocio = new Label();
             Apellido = new Label();
             Nombre = new Label();
@@ -49,9 +52,6 @@
             Btn_Pagar = new Button();
             label5 = new Label();
             total_pago = new TextBox();
-            Txt_Nombre = new TextBox();
-            Txt_Apellido = new TextBox();
-            Txt_EsSocio = new TextBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Btn_Atras).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Btn_minimizar).BeginInit();
@@ -70,6 +70,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1803, 55);
             panel2.TabIndex = 12;
+            panel2.MouseDown += panel2_MouseDown;
             // 
             // Btn_Atras
             // 
@@ -161,6 +162,34 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(655, 409);
             panel1.TabIndex = 18;
+            // 
+            // Txt_EsSocio
+            // 
+            Txt_EsSocio.BackColor = SystemColors.Highlight;
+            Txt_EsSocio.BorderStyle = BorderStyle.None;
+            Txt_EsSocio.Location = new Point(306, 281);
+            Txt_EsSocio.Name = "Txt_EsSocio";
+            Txt_EsSocio.Size = new Size(250, 40);
+            Txt_EsSocio.TabIndex = 5;
+            // 
+            // Txt_Apellido
+            // 
+            Txt_Apellido.BackColor = SystemColors.Highlight;
+            Txt_Apellido.BorderStyle = BorderStyle.None;
+            Txt_Apellido.Location = new Point(306, 182);
+            Txt_Apellido.Name = "Txt_Apellido";
+            Txt_Apellido.Size = new Size(250, 40);
+            Txt_Apellido.TabIndex = 4;
+            // 
+            // Txt_Nombre
+            // 
+            Txt_Nombre.BackColor = SystemColors.Highlight;
+            Txt_Nombre.BorderStyle = BorderStyle.None;
+            Txt_Nombre.Font = new Font("Century Gothic", 9.900001F, FontStyle.Regular, GraphicsUnit.Point);
+            Txt_Nombre.Location = new Point(306, 80);
+            Txt_Nombre.Name = "Txt_Nombre";
+            Txt_Nombre.Size = new Size(250, 41);
+            Txt_Nombre.TabIndex = 3;
             // 
             // EsSocio
             // 
@@ -282,34 +311,6 @@
             total_pago.Size = new Size(296, 57);
             total_pago.TabIndex = 27;
             // 
-            // Txt_Nombre
-            // 
-            Txt_Nombre.BackColor = SystemColors.Highlight;
-            Txt_Nombre.BorderStyle = BorderStyle.None;
-            Txt_Nombre.Font = new Font("Century Gothic", 9.900001F, FontStyle.Regular, GraphicsUnit.Point);
-            Txt_Nombre.Location = new Point(306, 80);
-            Txt_Nombre.Name = "Txt_Nombre";
-            Txt_Nombre.Size = new Size(250, 41);
-            Txt_Nombre.TabIndex = 3;
-            // 
-            // Txt_Apellido
-            // 
-            Txt_Apellido.BackColor = SystemColors.Highlight;
-            Txt_Apellido.BorderStyle = BorderStyle.None;
-            Txt_Apellido.Location = new Point(306, 182);
-            Txt_Apellido.Name = "Txt_Apellido";
-            Txt_Apellido.Size = new Size(250, 40);
-            Txt_Apellido.TabIndex = 4;
-            // 
-            // Txt_EsSocio
-            // 
-            Txt_EsSocio.BackColor = SystemColors.Highlight;
-            Txt_EsSocio.BorderStyle = BorderStyle.None;
-            Txt_EsSocio.Location = new Point(306, 281);
-            Txt_EsSocio.Name = "Txt_EsSocio";
-            Txt_EsSocio.Size = new Size(250, 40);
-            Txt_EsSocio.TabIndex = 5;
-            // 
             // Pago_Form
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
@@ -334,6 +335,7 @@
             Name = "Pago_Form";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Pago_Form";
+            MouseDown += Pago_Form_MouseDown;
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)Btn_Atras).EndInit();
             ((System.ComponentModel.ISupportInitialize)Btn_minimizar).EndInit();

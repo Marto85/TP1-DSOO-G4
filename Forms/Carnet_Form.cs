@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,6 +20,12 @@ namespace DSOO_Grupo4_TP1.Forms
         {
             InitializeComponent();
         }
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+
+        private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
 
         private void Btn_Atras_Click(object sender, EventArgs e)
         {
@@ -71,11 +78,11 @@ namespace DSOO_Grupo4_TP1.Forms
             }
             else if (resultado == DialogResult.No)
             {
-                GuardarComoJPG(); 
+                GuardarComoJPG();
             }
             else if (resultado == DialogResult.Cancel)
             {
-              
+
             }
         }
 
@@ -113,7 +120,7 @@ namespace DSOO_Grupo4_TP1.Forms
             {
                 saveFileDialog.Filter = "Archivo JPEG (*.jpg)|*.jpg";
                 saveFileDialog.Title = "Guardar Carnet como JPG";
-                saveFileDialog.FileName = "Carnet"; 
+                saveFileDialog.FileName = "Carnet";
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -129,7 +136,16 @@ namespace DSOO_Grupo4_TP1.Forms
             }
         }
 
+        private void Carnet_Form_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
 
-
+        private void panel2_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
     }
 }

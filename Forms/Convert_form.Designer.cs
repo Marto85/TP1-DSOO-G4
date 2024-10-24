@@ -81,6 +81,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1729, 55);
             panel2.TabIndex = 12;
+            panel2.MouseDown += panel2_MouseDown;
             // 
             // Btn_Atras
             // 
@@ -181,6 +182,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Load += Form1_Load;
+            MouseDown += Convert_form_MouseDown;
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).EndInit();
             panel2.ResumeLayout(false);
