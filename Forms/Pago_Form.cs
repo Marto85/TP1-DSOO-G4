@@ -65,8 +65,9 @@ namespace DSOO_Grupo4_TP1.Forms
         private void Buscar_Cliente_Click(object sender, EventArgs e)
         {
             conexion = Conexion.getInstancia();
-            string connectionString = conexion.CrearConexion().ConnectionString; // Obtiene la cadena de conexión
+            string connectionString = conexion.CrearConexion().ConnectionString;
             int dni_usuario = int.Parse(DNI_Pagos.Text);
+            total_pago.Text = "0.00";
 
             if (dni_usuario > 0)
             {
@@ -79,13 +80,12 @@ namespace DSOO_Grupo4_TP1.Forms
 
                         using (MySqlCommand cmd = new MySqlCommand(query, conn))
                         {
-                            // Definir el parámetro
                             cmd.Parameters.AddWithValue("@dni_usuario", dni_usuario);
 
                             // Ejecuta la consulta y obtiene el resultado
                             using (MySqlDataReader reader = cmd.ExecuteReader())
                             {
-                                if (reader.Read()) // Lee la primera fila del resultado
+                                if (reader.Read())
                                 {
                                     // Verificar si los campos son NULL antes de obtener su valor
                                     string nombre = reader.IsDBNull(reader.GetOrdinal("Nombre")) ? string.Empty : reader.GetString("Nombre");
@@ -102,8 +102,10 @@ namespace DSOO_Grupo4_TP1.Forms
                                     clienteActual = new Cliente(DateTime.Now, nombre, apellido, dni, direccion, telefono, email, imagenPerfil, esSocio: esSocio);
                                     if (esSocio)
                                     {
-                                        label_AbonoMensual.Enabled = true;
-                                        txt_AbonoMensual.Enabled = true;
+                                        label_AbonoMensual.Visible = true;
+                                        txt_AbonoMensual.Visible = true;
+                                        label_Pagar_Actividades.Visible = false;
+                                        lista_actividades.Visible = false;
                                         if (Frecuencia_Pago.Items.Contains("Semanal"))
                                         {
                                             Frecuencia_Pago.Items.Remove("Semanal");
@@ -116,11 +118,12 @@ namespace DSOO_Grupo4_TP1.Forms
                                     }
                                     else
                                     {
-                                        label_AbonoMensual.Enabled = false;
-                                        txt_AbonoMensual.Enabled = false;
+                                        label_AbonoMensual.Visible = false;
+                                        txt_AbonoMensual.Visible = false;
                                         label_Pagar_Actividades.Visible = true;
                                         lista_actividades.Visible = true;
-                                        // Restaurar las opciones si no es socio
+
+                                        // Restauramos las opciones si no es socio
                                         if (!Frecuencia_Pago.Items.Contains("Semanal"))
                                         {
                                             Frecuencia_Pago.Items.Insert(0, "Semanal");
@@ -156,7 +159,7 @@ namespace DSOO_Grupo4_TP1.Forms
             }
         }
 
-        private void CalcularMontoTotalAPagar()
+        private void CalcularTotalSocios()
         {
             if (Txt_EsSocio.Text == "SI")
             {
@@ -176,13 +179,13 @@ namespace DSOO_Grupo4_TP1.Forms
                                 totalPagar = abonoMensual;
                                 break;
                             case "Trimestral":
-                                totalPagar = abonoMensual * 3 * 0.95m; // Aplica 5% de descuento
+                                totalPagar = abonoMensual * 3 * 0.95m; // 5% de descuento
                                 break;
                             case "Semestral":
-                                totalPagar = abonoMensual * 6 * 0.90m; // Aplica 10% de descuento
+                                totalPagar = abonoMensual * 6 * 0.90m; // 10% de descuento
                                 break;
                             case "Anual":
-                                totalPagar = abonoMensual * 12 * 0.75m; // Aplica 25% de descuento
+                                totalPagar = abonoMensual * 12 * 0.75m; // 25% de descuento
                                 break;
                             default:
                                 MessageBox.Show("Por favor selecciona una frecuencia de pago válida.");
@@ -190,7 +193,6 @@ namespace DSOO_Grupo4_TP1.Forms
                                 return;
                         }
 
-                        // Asignar el total calculado al TextBox del total de pago
                         total_pago.Text = totalPagar.ToString("C"); // Mostrar como moneda
                     }
                     else
@@ -210,10 +212,107 @@ namespace DSOO_Grupo4_TP1.Forms
             }
         }
 
+        private decimal ObtenerPrecioActividad(string nombreActividad)
+        {
+            Conexion conexion = Conexion.getInstancia();
+            decimal precioActividad = 0;
+
+            using (MySqlConnection conn = conexion.CrearConexion())
+            {
+                try
+                {
+                    conn.Open();
+
+                    string query = "SELECT PrecioNoSocio FROM Actividad WHERE Nombre = @NombreActividad";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@NombreActividad", nombreActividad);
+
+                        object resultado = cmd.ExecuteScalar();
+                        if (resultado != null)
+                        {
+                            precioActividad = Convert.ToDecimal(resultado);
+                        }
+                        else
+                        {
+                            MessageBox.Show("La actividad seleccionada no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al obtener el precio de la actividad: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            return precioActividad;
+        }
+
+        private void CalcularTotalNoSocios()
+        {
+            decimal totalPagar = 0;
+
+            if (Frecuencia_Pago.SelectedItem != null)
+            {
+                string frecuenciaPago = Frecuencia_Pago.SelectedItem.ToString();
+
+                foreach (var item in lista_actividades.CheckedItems)
+                {
+                    string nombreActividad = item.ToString();
+                    decimal precioActividad = ObtenerPrecioActividad(nombreActividad);
+                    decimal precioConFrecuencia = 0;
+
+                    switch (frecuenciaPago)
+                    {
+                        case "Semanal":
+                            precioConFrecuencia = (precioActividad / 4) * 1.10m; // Recargo del 10%
+                            break;
+                        case "Quincenal":
+                            precioConFrecuencia = (precioActividad / 2) * 1.05m; // Recargo del 5%
+                            break;
+                        case "Mensual":
+                            precioConFrecuencia = precioActividad; // Precio mensual sin recargo/bonificación
+                            break;
+                        case "Trimestral":
+                            precioConFrecuencia = (precioActividad * 3) * 0.95m; // Descuento del 5%
+                            break;
+                        case "Semestral":
+                            precioConFrecuencia = (precioActividad * 6) * 0.90m; // Descuento del 10%
+                            break;
+                        case "Anual":
+                            precioConFrecuencia = (precioActividad * 12) * 0.75m; // Descuento del 25%
+                            break;
+                        default:
+                            MessageBox.Show("Por favor selecciona una frecuencia de pago válida.");
+                            return;
+                    }
+
+                    totalPagar += precioConFrecuencia;
+                }
+
+                total_pago.Text = totalPagar.ToString("C");
+            }
+            else
+            {
+                MessageBox.Show("Por favor selecciona una frecuencia de pago.");
+            }
+        }
 
         private void Btn_Calcular_Total_Click(object sender, EventArgs e)
         {
-            CalcularMontoTotalAPagar();
+            total_pago.Text = "0.00";
+            if (Txt_EsSocio.Text == "SI")
+            {
+                CalcularTotalSocios();
+            }
+            else if (Txt_EsSocio.Text == "NO")
+            {
+                CalcularTotalNoSocios();
+            }
+            else 
+            {
+                MessageBox.Show("No se ha seleccionado un tipo de cliente adecuadamente.");
+            }
         }
     }
 }
