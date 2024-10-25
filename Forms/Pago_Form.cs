@@ -1,6 +1,7 @@
 ﻿using DSOO_Grupo4_TP1.Datos;
 using DSOO_Grupo4_TP1.Models;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,6 +20,8 @@ namespace DSOO_Grupo4_TP1.Forms
     {
         private Cliente clienteActual;
         private Conexion conexion;
+
+        private Boolean pagoSocio; // variable bandera para para controlar que tipo de pago procesar en el ultimo metodo de clase
         public Pago_Form()
         {
             InitializeComponent();
@@ -134,11 +138,12 @@ namespace DSOO_Grupo4_TP1.Forms
                                             Frecuencia_Pago.Items.Insert(0, "Quincenal");
                                         }
                                     }
+                                    Txt_DNI.Text = dni.ToString();
                                     Txt_Nombre.Text = nombre;
                                     Txt_Apellido.Text = apellido;
                                     Txt_EsSocio.Text = esSocio ? "SI" : "NO";
                                     txt_AbonoMensual.Text = abonoMensualSocios.ToString();
-                                    
+
                                 }
                                 else
                                 {
@@ -164,7 +169,7 @@ namespace DSOO_Grupo4_TP1.Forms
             if (Txt_EsSocio.Text == "SI")
             {
                 decimal abonoMensual;
-                
+
                 if (decimal.TryParse(txt_AbonoMensual.Text, out abonoMensual))
                 {
                     // Verificar si se ha seleccionado una opción en el ComboBox de frecuencia de pago
@@ -207,7 +212,7 @@ namespace DSOO_Grupo4_TP1.Forms
             }
             else
             {
-               
+
                 MessageBox.Show("Este cliente no es socio.");
             }
         }
@@ -304,15 +309,122 @@ namespace DSOO_Grupo4_TP1.Forms
             if (Txt_EsSocio.Text == "SI")
             {
                 CalcularTotalSocios();
+                pagoSocio = true;
             }
             else if (Txt_EsSocio.Text == "NO")
             {
                 CalcularTotalNoSocios();
+                pagoSocio = false;
             }
-            else 
+            else
             {
                 MessageBox.Show("No se ha seleccionado un tipo de cliente adecuadamente.");
             }
         }
+
+        private void Btn_Pagar_Click(object sender, EventArgs e)
+        {
+            Conexion conexion = Conexion.getInstancia();
+            string connectionString = conexion.CrearConexion().ConnectionString;
+
+            // Obtener datos del formulario
+            int clienteDni = Txt_DNI.Text == "" ? 0 : int.Parse(Txt_DNI.Text);
+            decimal monto = decimal.Parse(total_pago.Text);
+            DateTime fechaPago = DateTime.Now;
+            string? tipoDePagoSeleccionado = Frecuencia_Pago.SelectedItem.ToString();
+            DateTime proximoVencimiento = CalcularProximoVencimiento(fechaPago, tipoDePagoSeleccionado);
+            int tipoDePagoId;
+
+            switch(tipoDePagoSeleccionado)
+            {
+                case "Semanal":
+                    tipoDePagoId = 1;
+                    break;
+                case "Quincenal":
+                    tipoDePagoId = 2;
+                    break;
+                case "Mensual":
+                    tipoDePagoId = 3;
+                    break;
+                case "Trimestral":
+                    tipoDePagoId = 4;
+                    break;
+                case "Semestral":
+                    tipoDePagoId = 5;
+                    break;
+                case "Anual":
+                    tipoDePagoId = 6;
+                    break;
+                default:
+                    tipoDePagoId = 0;
+                    break;
+            }
+
+            if (pagoSocio == true)
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        string query = "INSERT INTO Pago (Cliente_Id, Monto, FechaPago, ProximoVencimiento, Id_tipo_de_pago) " +
+                                       "VALUES (@Cliente_Id, @Monto, @FechaPago, @ProximoVencimiento, @Id_tipo_de_pago)";
+                        using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@Cliente_Id", clienteId);
+                            cmd.Parameters.AddWithValue("@Monto", monto);
+                            cmd.Parameters.AddWithValue("@FechaPago", fechaPago);
+                            cmd.Parameters.AddWithValue("@ProximoVencimiento", proximoVencimiento);
+                            cmd.Parameters.AddWithValue("@Id_tipo_de_pago", tipoDePagoId);
+
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Pago procesado correctamente.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al realizar el pago: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else if (pagoSocio == false)
+            {
+                // Lógica para pagos de no socios
+            }
+        }
+
+
+        private DateTime CalcularProximoVencimiento(DateTime fechaPago, string tipoDePago)
+        {
+            DateTime proximoVencimiento = fechaPago;
+            string? frecuenciaPago = Frecuencia_Pago.SelectedItem.ToString();
+            switch (frecuenciaPago)
+            {
+                case "Semanal":
+                    proximoVencimiento = fechaPago.AddDays(7);
+                    break;
+                case "Quincenal":
+                    proximoVencimiento = fechaPago.AddDays(15);
+                    break;
+                case "Mensual":
+                    proximoVencimiento = fechaPago.AddMonths(1);
+                    break;
+                case "Trimestral":
+                    proximoVencimiento = fechaPago.AddMonths(3);
+                    break;
+                case "Semestral":
+                    proximoVencimiento = fechaPago.AddMonths(6);
+                    break;
+                case "Anual":
+                    proximoVencimiento = fechaPago.AddYears(1);
+                    break;
+                default:
+                    proximoVencimiento = fechaPago;
+                    break;
+            }
+
+            return proximoVencimiento;
+        }
+
     }
 }

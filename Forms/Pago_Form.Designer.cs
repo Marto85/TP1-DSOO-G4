@@ -37,6 +37,8 @@
             Buscar_Cliente = new Button();
             DNI_Pagos = new TextBox();
             panel1 = new Panel();
+            Txt_DNI = new TextBox();
+            DNI = new Label();
             Txt_EsSocio = new TextBox();
             Txt_Apellido = new TextBox();
             Txt_Nombre = new TextBox();
@@ -153,6 +155,8 @@
             // 
             panel1.BackColor = SystemColors.Highlight;
             panel1.BorderStyle = BorderStyle.Fixed3D;
+            panel1.Controls.Add(Txt_DNI);
+            panel1.Controls.Add(DNI);
             panel1.Controls.Add(Txt_EsSocio);
             panel1.Controls.Add(Txt_Apellido);
             panel1.Controls.Add(Txt_Nombre);
@@ -164,11 +168,31 @@
             panel1.Size = new Size(655, 409);
             panel1.TabIndex = 18;
             // 
+            // Txt_DNI
+            // 
+            Txt_DNI.BackColor = SystemColors.Highlight;
+            Txt_DNI.BorderStyle = BorderStyle.None;
+            Txt_DNI.Font = new Font("Century Gothic", 9.900001F, FontStyle.Regular, GraphicsUnit.Point);
+            Txt_DNI.Location = new Point(306, 45);
+            Txt_DNI.Name = "Txt_DNI";
+            Txt_DNI.Size = new Size(250, 41);
+            Txt_DNI.TabIndex = 29;
+            // 
+            // DNI
+            // 
+            DNI.AutoSize = true;
+            DNI.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            DNI.Location = new Point(52, 42);
+            DNI.Name = "DNI";
+            DNI.Size = new Size(92, 44);
+            DNI.TabIndex = 29;
+            DNI.Text = "DNI:";
+            // 
             // Txt_EsSocio
             // 
             Txt_EsSocio.BackColor = SystemColors.Highlight;
             Txt_EsSocio.BorderStyle = BorderStyle.None;
-            Txt_EsSocio.Location = new Point(306, 281);
+            Txt_EsSocio.Location = new Point(306, 331);
             Txt_EsSocio.Name = "Txt_EsSocio";
             Txt_EsSocio.Size = new Size(250, 40);
             Txt_EsSocio.TabIndex = 5;
@@ -177,7 +201,7 @@
             // 
             Txt_Apellido.BackColor = SystemColors.Highlight;
             Txt_Apellido.BorderStyle = BorderStyle.None;
-            Txt_Apellido.Location = new Point(306, 182);
+            Txt_Apellido.Location = new Point(306, 229);
             Txt_Apellido.Name = "Txt_Apellido";
             Txt_Apellido.Size = new Size(250, 40);
             Txt_Apellido.TabIndex = 4;
@@ -187,7 +211,7 @@
             Txt_Nombre.BackColor = SystemColors.Highlight;
             Txt_Nombre.BorderStyle = BorderStyle.None;
             Txt_Nombre.Font = new Font("Century Gothic", 9.900001F, FontStyle.Regular, GraphicsUnit.Point);
-            Txt_Nombre.Location = new Point(306, 80);
+            Txt_Nombre.Location = new Point(306, 130);
             Txt_Nombre.Name = "Txt_Nombre";
             Txt_Nombre.Size = new Size(250, 41);
             Txt_Nombre.TabIndex = 3;
@@ -196,7 +220,7 @@
             // 
             EsSocio.AutoSize = true;
             EsSocio.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            EsSocio.Location = new Point(52, 281);
+            EsSocio.Location = new Point(52, 327);
             EsSocio.Name = "EsSocio";
             EsSocio.Size = new Size(174, 44);
             EsSocio.TabIndex = 2;
@@ -206,7 +230,7 @@
             // 
             Apellido.AutoSize = true;
             Apellido.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Apellido.Location = new Point(52, 185);
+            Apellido.Location = new Point(52, 225);
             Apellido.Name = "Apellido";
             Apellido.Size = new Size(179, 44);
             Apellido.TabIndex = 1;
@@ -216,7 +240,7 @@
             // 
             Nombre.AutoSize = true;
             Nombre.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Nombre.Location = new Point(52, 80);
+            Nombre.Location = new Point(51, 127);
             Nombre.Name = "Nombre";
             Nombre.Size = new Size(175, 44);
             Nombre.TabIndex = 0;
@@ -294,6 +318,7 @@
             Btn_Pagar.TabIndex = 25;
             Btn_Pagar.Text = "Pagar";
             Btn_Pagar.UseVisualStyleBackColor = false;
+            Btn_Pagar.Click += Btn_Pagar_Click;
             // 
             // label5
             // 
@@ -389,5 +414,7 @@
         private TextBox Txt_EsSocio;
         private TextBox Txt_Apellido;
         private Button Btn_Calcular_Total;
+        private TextBox Txt_DNI;
+        private Label DNI;
     }
 }
