@@ -166,56 +166,51 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void CalcularTotalSocios()
         {
-            if (Txt_EsSocio.Text == "SI")
+            if (Txt_EsSocio.Text != "SI")
             {
-                decimal abonoMensual;
-
-                if (decimal.TryParse(txt_AbonoMensual.Text, out abonoMensual))
-                {
-                    // Verificar si se ha seleccionado una opción en el ComboBox de frecuencia de pago
-                    if (Frecuencia_Pago.SelectedItem != null)
-                    {
-                        string frecuenciaPago = Frecuencia_Pago.SelectedItem.ToString();
-                        decimal totalPagar = 0;
-
-                        switch (frecuenciaPago)
-                        {
-                            case "Mensual":
-                                totalPagar = abonoMensual;
-                                break;
-                            case "Trimestral":
-                                totalPagar = abonoMensual * 3 * 0.95m; // 5% de descuento
-                                break;
-                            case "Semestral":
-                                totalPagar = abonoMensual * 6 * 0.90m; // 10% de descuento
-                                break;
-                            case "Anual":
-                                totalPagar = abonoMensual * 12 * 0.75m; // 25% de descuento
-                                break;
-                            default:
-                                MessageBox.Show("Por favor selecciona una frecuencia de pago válida.");
-
-                                return;
-                        }
-
-                        total_pago.Text = totalPagar.ToString("C"); // Mostrar como moneda
-                    }
-                    else
-                    {
-                        MessageBox.Show("Por favor selecciona una frecuencia de pago.");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("El valor del abono mensual no es válido.");
-                }
-            }
-            else
-            {
-
                 MessageBox.Show("Este cliente no es socio.");
+                return;
             }
+
+            decimal abonoMensual;
+            if (!decimal.TryParse(txt_AbonoMensual.Text, out abonoMensual))
+            {
+                MessageBox.Show("El valor del abono mensual no es válido.");
+                return;
+            }
+
+            // Verificar si se ha seleccionado una opción en el ComboBox de frecuencia de pago
+            if (Frecuencia_Pago.SelectedItem == null)
+            {
+                MessageBox.Show("Por favor selecciona una frecuencia de pago.");
+                return;
+            }
+
+            string frecuenciaPago = Frecuencia_Pago.SelectedItem.ToString();
+            decimal totalPagar = abonoMensual; // Base mensual
+
+            switch (frecuenciaPago)
+            {
+                case "Mensual":
+                    break;
+                case "Trimestral":
+                    totalPagar = abonoMensual * 3 * 0.95m; // 5% de descuento
+                    break;
+                case "Semestral":
+                    totalPagar = abonoMensual * 6 * 0.90m; // 10% de descuento
+                    break;
+                case "Anual":
+                    totalPagar = abonoMensual * 12 * 0.75m; // 25% de descuento
+                    break;
+                default:
+                    MessageBox.Show("Por favor selecciona una frecuencia de pago válida.");
+                    return;
+            }
+
+            // Mostrar el total calculado como moneda
+            total_pago.Text = totalPagar.ToString("C");
         }
+
 
         private decimal ObtenerPrecioActividad(string nombreActividad)
         {
@@ -329,36 +324,22 @@ namespace DSOO_Grupo4_TP1.Forms
 
             // Obtener datos del formulario
             int clienteDni = Txt_DNI.Text == "" ? 0 : int.Parse(Txt_DNI.Text);
-            decimal monto = decimal.Parse(total_pago.Text);
+            string monto = total_pago.Text;
+            decimal montoDecimal = decimal.Parse(monto.Replace("$", ""));
             DateTime fechaPago = DateTime.Now;
-            string? tipoDePagoSeleccionado = Frecuencia_Pago.SelectedItem.ToString();
+            string tipoDePagoSeleccionado = Frecuencia_Pago.SelectedItem?.ToString();
             DateTime proximoVencimiento = CalcularProximoVencimiento(fechaPago, tipoDePagoSeleccionado);
-            int tipoDePagoId;
 
-            switch(tipoDePagoSeleccionado)
+            int tipoDePagoId = tipoDePagoSeleccionado switch
             {
-                case "Semanal":
-                    tipoDePagoId = 1;
-                    break;
-                case "Quincenal":
-                    tipoDePagoId = 2;
-                    break;
-                case "Mensual":
-                    tipoDePagoId = 3;
-                    break;
-                case "Trimestral":
-                    tipoDePagoId = 4;
-                    break;
-                case "Semestral":
-                    tipoDePagoId = 5;
-                    break;
-                case "Anual":
-                    tipoDePagoId = 6;
-                    break;
-                default:
-                    tipoDePagoId = 0;
-                    break;
-            }
+                "Semanal" => 1,
+                "Quincenal" => 2,
+                "Mensual" => 3,
+                "Trimestral" => 4,
+                "Semestral" => 5,
+                "Anual" => 6,
+                _ => 0
+            };
 
             if (pagoSocio == true)
             {
@@ -367,17 +348,39 @@ namespace DSOO_Grupo4_TP1.Forms
                     try
                     {
                         conn.Open();
-                        string query = "INSERT INTO Pago (Cliente_Id, Monto, FechaPago, ProximoVencimiento, Id_tipo_de_pago) " +
-                                       "VALUES (@Cliente_Id, @Monto, @FechaPago, @ProximoVencimiento, @Id_tipo_de_pago)";
-                        using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                        {
-                            cmd.Parameters.AddWithValue("@Cliente_Id", clienteId);
-                            cmd.Parameters.AddWithValue("@Monto", monto);
-                            cmd.Parameters.AddWithValue("@FechaPago", fechaPago);
-                            cmd.Parameters.AddWithValue("@ProximoVencimiento", proximoVencimiento);
-                            cmd.Parameters.AddWithValue("@Id_tipo_de_pago", tipoDePagoId);
 
-                            cmd.ExecuteNonQuery();
+                        // Consulta para obtener el Id del cliente a partir del DNI
+                        string querySelectClienteId = "SELECT Id FROM Cliente WHERE DNI = @DNI";
+                        int clienteId = 0;
+
+                        using (MySqlCommand cmdSelect = new MySqlCommand(querySelectClienteId, conn))
+                        {
+                            cmdSelect.Parameters.AddWithValue("@DNI", clienteDni);
+                            object result = cmdSelect.ExecuteScalar();
+
+                            if (result != null)
+                            {
+                                clienteId = Convert.ToInt32(result);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Cliente no encontrado.");
+                                return;
+                            }
+                        }
+
+                        // Inserción del pago en la base de datos
+                        string queryInsert = "INSERT INTO Pago (Cliente_Id, Monto, FechaPago, ProximoVencimiento, Id_tipo_de_pago) " +
+                                             "VALUES (@Cliente_Id, @Monto, @FechaPago, @ProximoVencimiento, @Id_tipo_de_pago)";
+                        using (MySqlCommand cmdInsert = new MySqlCommand(queryInsert, conn))
+                        {
+                            cmdInsert.Parameters.AddWithValue("@Cliente_Id", clienteId);
+                            cmdInsert.Parameters.AddWithValue("@Monto", montoDecimal);
+                            cmdInsert.Parameters.AddWithValue("@FechaPago", fechaPago);
+                            cmdInsert.Parameters.AddWithValue("@ProximoVencimiento", proximoVencimiento);
+                            cmdInsert.Parameters.AddWithValue("@Id_tipo_de_pago", tipoDePagoId);
+
+                            cmdInsert.ExecuteNonQuery();
                             MessageBox.Show("Pago procesado correctamente.");
                         }
                     }
@@ -392,6 +395,7 @@ namespace DSOO_Grupo4_TP1.Forms
                 // Lógica para pagos de no socios
             }
         }
+
 
 
         private DateTime CalcularProximoVencimiento(DateTime fechaPago, string tipoDePago)
