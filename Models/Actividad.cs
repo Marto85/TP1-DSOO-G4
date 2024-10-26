@@ -10,15 +10,17 @@ namespace DSOO_Grupo4_TP1.Models
 {
     public class Actividad
     {
-        public int Id { get; private set; }
-        public string Nombre { get; private set; }
-        public string Descripcion { get; private set; }
-        public decimal Precio { get; private set; } 
-        public string Horario { get; private set; }
-        public int CuposDisponibles { get; private set; }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public decimal Precio { get; set; } 
+        public string Horario { get; set; }
+        public int CuposDisponibles { get; set; }
         public string Profesor { get; set; }
-        public DateTime FechaVencimiento { get; private set; }
+        public DateTime FechaVencimiento { get; set; }
 
+
+        public Actividad() { }
 
         public Actividad(int id, string nombre, string descripcion, decimal precio, string horario, int cuposDisponibles, string profesor)
         {

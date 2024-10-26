@@ -20,6 +20,8 @@ namespace DSOO_Grupo4_TP1.Forms
     {
         private Cliente clienteActual;
         private Conexion conexion;
+        List<string> actividades_seleccionadas = new List<string>();
+        private List<Actividad> actividadesDisponibles;
 
         private Boolean pagoSocio; // variable bandera para para controlar que tipo de pago procesar en el ultimo metodo de clase
         public Pago_Form()
@@ -164,7 +166,12 @@ namespace DSOO_Grupo4_TP1.Forms
             }
         }
 
-        private void CalcularTotalSocios()
+        public void CargarActividades()
+        {
+            actividadesDisponibles = ObtenerActividadesDesdeDB();
+        }
+
+        private void CalcularMontoTotalSocios()
         {
             if (Txt_EsSocio.Text != "SI")
             {
@@ -289,7 +296,6 @@ namespace DSOO_Grupo4_TP1.Forms
 
                     totalPagar += precioConFrecuencia;
                 }
-
                 total_pago.Text = totalPagar.ToString("C");
             }
             else
@@ -303,7 +309,7 @@ namespace DSOO_Grupo4_TP1.Forms
             total_pago.Text = "0.00";
             if (Txt_EsSocio.Text == "SI")
             {
-                CalcularTotalSocios();
+                CalcularMontoTotalSocios();
                 pagoSocio = true;
             }
             else if (Txt_EsSocio.Text == "NO")
@@ -317,8 +323,61 @@ namespace DSOO_Grupo4_TP1.Forms
             }
         }
 
+        // Método para obtener las actividades desde la base de datos
+        public List<Actividad> ObtenerActividadesDesdeDB()
+        {
+            List<Actividad> actividades = new List<Actividad>();
+
+            Conexion conexion = Conexion.getInstancia();
+            string connectionString = conexion.CrearConexion().ConnectionString;
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    string query = "SELECT Id, Nombre, Descripcion, PrecioNoSocio, Horario, CuposDisponibles, Profesor FROM Actividad";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Actividad actividad = new Actividad
+                            {
+                                Id = reader.GetInt32("Id"),
+                                Nombre = reader.GetString("Nombre"),
+                                Descripcion = reader.GetString("Descripcion"),
+                                Precio = reader.GetDecimal("PrecioNoSocio"),
+                                Horario = reader.GetString("Horario"),
+                                CuposDisponibles = reader.GetInt32("CuposDisponibles"),
+                                Profesor = reader.GetString("Profesor")
+                            };
+
+                            actividades.Add(actividad);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al obtener actividades: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            return actividadesDisponibles = actividades;
+        }
+
         private void Btn_Pagar_Click(object sender, EventArgs e)
         {
+            // Llama a ObtenerActividadesDesdeDB para cargar la lista
+            List<Actividad> actividadesDisponibles = ObtenerActividadesDesdeDB();
+
+            if (actividadesDisponibles == null || actividadesDisponibles.Count == 0)
+            {
+                MessageBox.Show("No se encontraron actividades disponibles.");
+                return;
+            }
             Conexion conexion = Conexion.getInstancia();
             string connectionString = conexion.CrearConexion().ConnectionString;
 
@@ -341,34 +400,34 @@ namespace DSOO_Grupo4_TP1.Forms
                 _ => 0
             };
 
-            if (pagoSocio == true)
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                try
                 {
-                    try
+                    conn.Open();
+
+                    // Consulta para obtener el Id del cliente a partir del DNI
+                    string querySelectClienteId = "SELECT Id FROM Cliente WHERE DNI = @DNI";
+                    int clienteId = 0;
+
+                    using (MySqlCommand cmdSelect = new MySqlCommand(querySelectClienteId, conn))
                     {
-                        conn.Open();
+                        cmdSelect.Parameters.AddWithValue("@DNI", clienteDni);
+                        object result = cmdSelect.ExecuteScalar();
 
-                        // Consulta para obtener el Id del cliente a partir del DNI
-                        string querySelectClienteId = "SELECT Id FROM Cliente WHERE DNI = @DNI";
-                        int clienteId = 0;
-
-                        using (MySqlCommand cmdSelect = new MySqlCommand(querySelectClienteId, conn))
+                        if (result != null)
                         {
-                            cmdSelect.Parameters.AddWithValue("@DNI", clienteDni);
-                            object result = cmdSelect.ExecuteScalar();
-
-                            if (result != null)
-                            {
-                                clienteId = Convert.ToInt32(result);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Cliente no encontrado.");
-                                return;
-                            }
+                            clienteId = Convert.ToInt32(result);
                         }
+                        else
+                        {
+                            MessageBox.Show("Cliente no encontrado.");
+                            return;
+                        }
+                    }
 
+                    if (pagoSocio == true)
+                    {
                         // Inserción del pago en la base de datos
                         string queryInsert = "INSERT INTO Pago (Cliente_Id, Monto, FechaPago, ProximoVencimiento, Id_tipo_de_pago) " +
                                              "VALUES (@Cliente_Id, @Monto, @FechaPago, @ProximoVencimiento, @Id_tipo_de_pago)";
@@ -384,20 +443,91 @@ namespace DSOO_Grupo4_TP1.Forms
                             MessageBox.Show("Pago procesado correctamente.");
                         }
                     }
-                    catch (Exception ex)
+
+                    else if (pagoSocio == false)
                     {
-                        MessageBox.Show("Error al realizar el pago: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        List<int> actividadesSeleccionadasIds = new List<int>();
+
+                        foreach (var actividadNombre in lista_actividades.CheckedItems)
+                        {
+                            // Supongamos que tienes una lista o diccionario de actividades por nombre
+                            Actividad actividadSeleccionada = actividadesDisponibles.FirstOrDefault(a => a.Nombre == actividadNombre.ToString());
+
+                            if (actividadSeleccionada != null)
+                            {
+                                actividadesSeleccionadasIds.Add(actividadSeleccionada.Id);
+                            }
+                            else
+                            {
+                                MessageBox.Show($"Actividad {actividadNombre} no encontrada en la lista de actividades disponibles.");
+                            }
+                        }
+
+                        // Recorrer cada actividad seleccionada y procesar el pago para cada una
+                        foreach (int actividadId in actividadesSeleccionadasIds)
+                        {
+                            // Recuperar el precio de la actividad
+                            string queryPrecioActividad = "SELECT PrecioNoSocio FROM Actividad WHERE Id = @Id";
+                            decimal precioActividad;
+
+                            using (MySqlCommand cmdPrecio = new MySqlCommand(queryPrecioActividad, conn))
+                            {
+                                cmdPrecio.Parameters.AddWithValue("@Id", actividadId);
+                                object result = cmdPrecio.ExecuteScalar();
+
+                                if (result != null)
+                                {
+                                    precioActividad = Convert.ToDecimal(result);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Actividad no encontrada.");
+                                    continue;
+                                }
+                            }
+
+                            // Calcular el próximo vencimiento basado en el tipo de pago seleccionado
+                            //DateTime proximoVencimiento = CalcularProximoVencimiento(DateTime.Now, tipoDePagoSeleccionado);
+
+                            // Insertar el pago en la tabla Pago_Actividad
+                            string queryInsertPagoActividad = @"INSERT INTO Pago_Actividad 
+                                                    (Cliente_id, Actividad_id, Monto, FechaPago, ProximoVencimiento) 
+                                                    VALUES 
+                                                    (@ClienteId, @ActividadId, @Monto, @FechaPago, @ProximoVencimiento)";
+
+                            using (MySqlCommand cmdInsertPago = new MySqlCommand(queryInsertPagoActividad, conn))
+                            {
+                                cmdInsertPago.Parameters.AddWithValue("@ClienteId", clienteId);
+                                cmdInsertPago.Parameters.AddWithValue("@ActividadId", actividadId);
+                                cmdInsertPago.Parameters.AddWithValue("@Monto", precioActividad);
+                                cmdInsertPago.Parameters.AddWithValue("@FechaPago", fechaPago);
+                                cmdInsertPago.Parameters.AddWithValue("@ProximoVencimiento", proximoVencimiento);
+
+                                cmdInsertPago.ExecuteNonQuery();
+                            }
+
+                            // Actualizar la disponibilidad de cupos para la actividad
+                            string queryActualizarCupos = "UPDATE Actividad SET CuposDisponibles = CuposDisponibles - 1 WHERE Id = @Id AND CuposDisponibles > 0";
+
+                            using (MySqlCommand cmdActualizarCupos = new MySqlCommand(queryActualizarCupos, conn))
+                            {
+                                cmdActualizarCupos.Parameters.AddWithValue("@Id", actividadId);
+                                cmdActualizarCupos.ExecuteNonQuery();
+                            }
+                        }
+
+                        MessageBox.Show("Pago de actividades procesado correctamente.");
                     }
                 }
-            }
-            else if (pagoSocio == false)
-            {
-                // Lógica para pagos de no socios
+
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al realizar el pago: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
-
-
-
+          
         private DateTime CalcularProximoVencimiento(DateTime fechaPago, string tipoDePago)
         {
             DateTime proximoVencimiento = fechaPago;
@@ -429,6 +559,9 @@ namespace DSOO_Grupo4_TP1.Forms
 
             return proximoVencimiento;
         }
+
+
+        
 
     }
 }
