@@ -486,8 +486,6 @@ namespace DSOO_Grupo4_TP1.Forms
                                 }
                             }
 
-                            // Calcular el próximo vencimiento basado en el tipo de pago seleccionado
-                            //DateTime proximoVencimiento = CalcularProximoVencimiento(DateTime.Now, tipoDePagoSeleccionado);
 
                             // Insertar el pago en la tabla Pago_Actividad
                             string queryInsertPagoActividad = @"INSERT INTO Pago_Actividad 

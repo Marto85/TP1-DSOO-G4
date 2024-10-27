@@ -46,8 +46,8 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void Btn_Atras_Click(object sender, EventArgs e)
         {
-            // Mostrar el formulario de login nuevamente
-            Form loginForm = Application.OpenForms["Login_Form"];
+            // Mostrar el formulario de menu nuevamente
+            Form loginForm = Application.OpenForms["Menu_Form"];
             if (loginForm != null)
             {
                 loginForm.Show();
