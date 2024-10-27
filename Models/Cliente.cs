@@ -11,7 +11,7 @@ namespace DSOO_Grupo4_TP1.Models
 {
     public class Cliente
     {
-        public int IdCliente { get; private set; }
+        public int IdCliente { get; set; }
         public DateTime FechaIngreso { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -28,6 +28,7 @@ namespace DSOO_Grupo4_TP1.Models
 
         private List<Cliente> listaDeClientes = new List<Cliente>();
 
+        public Cliente() { }
 
         public Cliente(DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, string imagenPerfil, decimal? abonoMensualSocios = null, bool esSocio = false, bool esApto = true)
         {

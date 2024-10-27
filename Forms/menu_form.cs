@@ -12,6 +12,7 @@ using DSOO_Grupo4_TP1.Forms;
 using DSOO_Grupo4_TP1.Models;
 using DSOO_Grupo4_TP1.Datos;
 using MySql.Data.MySqlClient;
+using Microsoft.Win32.SafeHandles;
 
 namespace DSOO_Grupo4_TP1
 {
@@ -21,6 +22,15 @@ namespace DSOO_Grupo4_TP1
         {
             InitializeComponent();
         }
+
+        private ClubDeportivo _clubDeportivo;
+
+        public menu_form(ClubDeportivo clubDeportivo)
+        {
+            InitializeComponent();
+            _clubDeportivo = clubDeportivo;
+        }
+
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -92,8 +102,22 @@ namespace DSOO_Grupo4_TP1
 
         private void Morosos_Menu_Button_Click(object sender, EventArgs e)
         {
+            List<dynamic> clientesVencidos = _clubDeportivo.ObtenerClientesConPagoVencido();
 
+            if (clientesVencidos.Count == 0)
+            {
+                MessageBox.Show("No hay clientes con pagos vencidos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                // Crear y mostrar el formulario ClientesMorosos_Form con la lista de clientes vencidos
+                ClientesMorosos_Form formulario = new ClientesMorosos_Form(clientesVencidos);
+                this.Hide();
+                formulario.ShowDialog();
+                this.Show();
+            }
         }
+
 
         private void Cobrar_Click(object sender, EventArgs e)
         {

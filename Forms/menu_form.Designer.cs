@@ -90,7 +90,7 @@ namespace DSOO_Grupo4_TP1
             Inscribir_Actividad.Location = new Point(820, 276);
             Inscribir_Actividad.Margin = new Padding(7, 8, 7, 8);
             Inscribir_Actividad.Name = "Inscribir_Actividad";
-            Inscribir_Actividad.Size = new Size(434, 108);
+            Inscribir_Actividad.Size = new Size(434, 110);
             Inscribir_Actividad.TabIndex = 3;
             Inscribir_Actividad.Text = "Inscribir en Actividad";
             Inscribir_Actividad.UseVisualStyleBackColor = false;
@@ -103,7 +103,7 @@ namespace DSOO_Grupo4_TP1
             Cobrar.Location = new Point(504, 464);
             Cobrar.Margin = new Padding(7, 8, 7, 8);
             Cobrar.Name = "Cobrar";
-            Cobrar.Size = new Size(434, 108);
+            Cobrar.Size = new Size(434, 110);
             Cobrar.TabIndex = 4;
             Cobrar.Text = "Cobrar";
             Cobrar.UseVisualStyleBackColor = false;

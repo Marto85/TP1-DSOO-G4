@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DSOO_Grupo4_TP1.Datos;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,34 +16,114 @@ namespace DSOO_Grupo4_TP1.Models
         private string Password;
         private decimal abonoMensualSocios = 5000; // abono inicial socios
         private List<Cliente> clientes;
-        private List<Actividad> actividades;
 
         public ClubDeportivo()
         {
             clientes = new List<Cliente>();
-            actividades = new List<Actividad>
-            {
-                new Actividad(1, "Yoga", "Clase de yoga para todos los niveles", 500, "Lunes 18:00", 10, "Ana López"),
-                new Actividad(2, "Pilates", "Pilates intermedio", 600, "Martes 17:00", 8, "Carlos Pérez"),
-                new Actividad(3, "Zumba", "Clase de zumba energizante", 400, "Miércoles 19:00", 12, "María Gómez"),
-                new Actividad(4, "Crossfit", "Entrenamiento de alta intensidad", 700, "Jueves 18:00", 5, "Juan Martínez"),
-                new Actividad(5, "Natacion", "Clase de natación", 800, "Viernes 17:00", 6, "Lucía Fernández"),
-                new Actividad(6, "Futbol", "Partido de fútbol amistoso", 300, "Sábado 16:00", 20, "Pedro González")
-            };
+
         }
 
         public ClubDeportivo(string id, string nombreUsuario, string password)
-            : this() // llamada al constructor anterior para que aca tambien inicialice listas
+            : this() // llamada al constructor anterior para que aca tambien inicialice lista de cliente
         {
             Id = id;
             NombreUsuario = nombreUsuario;
             Password = password;
         }
 
+        public List<dynamic> ObtenerClientesConPagoVencido()
+        {
+            List<dynamic> clientesVencidos = new List<dynamic>();
+            Conexion conexion = Conexion.getInstancia();
+            string connectionString = conexion.CrearConexion().ConnectionString;
+            DateTime fechaActual = DateTime.Now;
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    string query = @"
+                                SELECT 
+                            c.Id AS Id,
+                            c.Nombre,
+                            c.Apellido,
+                            c.DNI,
+                            c.EsSocio,
+                            COALESCE(MAX(p.FechaPago), MAX(pa.FechaPago)) AS FechaUltimoPago,
+                            CASE 
+                                WHEN c.EsSocio = 1 AND COALESCE(GROUP_CONCAT(a.Nombre SEPARATOR ', '), '') = '' 
+                                THEN '----'  -- Mostrar '----' si es socio y no tiene actividades vencidas
+                                ELSE COALESCE(GROUP_CONCAT(a.Nombre SEPARATOR ', '), '') 
+                            END AS ActividadesVencidas,
+                            COALESCE(MAX(p.ProximoVencimiento), MAX(pa.ProximoVencimiento)) AS FechaVencimiento
+                        FROM Cliente AS c
+                        LEFT JOIN (
+                            SELECT Cliente_Id, MAX(FechaPago) AS FechaPago, MAX(ProximoVencimiento) AS ProximoVencimiento, Id_tipo_de_pago
+                            FROM Pago
+                            WHERE ProximoVencimiento < CURDATE()
+                            GROUP BY Cliente_Id, Id_tipo_de_pago  -- Incluir Id_tipo_de_pago en el GROUP BY
+                        ) AS p ON c.Id = p.Cliente_Id
+                        LEFT JOIN (
+                            SELECT Cliente_id, MAX(FechaPago) AS FechaPago, MAX(ProximoVencimiento) AS ProximoVencimiento, Actividad_id
+                            FROM Pago_Actividad
+                            WHERE ProximoVencimiento < CURDATE()
+                            GROUP BY Cliente_id, Actividad_id
+                        ) AS pa ON c.Id = pa.Cliente_id
+                        LEFT JOIN Actividad AS a ON pa.Actividad_id = a.Id
+                        WHERE p.FechaPago IS NOT NULL OR pa.FechaPago IS NOT NULL
+                        GROUP BY c.Id, c.Nombre, c.Apellido, c.DNI, c.EsSocio;";
+
+
+
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@FechaActual", fechaActual);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var clienteVencido = new
+                                {
+                                    Id = reader.GetInt32("Id"),
+                                    Nombre = reader.GetString("Nombre"),
+                                    Apellido = reader.GetString("Apellido"),
+                                    DNI = reader.GetInt32("DNI"),
+                                    EsSocio = reader.GetBoolean("EsSocio"),
+                                    FechaUltimoPago = reader.IsDBNull(reader.GetOrdinal("FechaUltimoPago"))
+                                    ? (DateTime?)null
+                                    : reader.GetDateTime("FechaUltimoPago"),
+                                                ActividadesVencidas = reader.IsDBNull(reader.GetOrdinal("ActividadesVencidas"))
+                                    ? "----"  
+                                    : reader.GetString("ActividadesVencidas"),
+                                                FechaVencimiento = reader.IsDBNull(reader.GetOrdinal("FechaVencimiento"))
+                                    ? (DateTime?)null
+                                    : reader.GetDateTime("FechaVencimiento"),
+                                };
+
+                                clientesVencidos.Add(clienteVencido);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al obtener clientes con pagos vencidos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            return clientesVencidos;
+        }
+
+
+
         public decimal ObtenerAbonoMensualSociosBase()
         {
             return abonoMensualSocios;
-        }   
+        }
 
         public void ModificarAbonoMensualSocios(decimal nuevoAbono)
         {
@@ -59,11 +141,11 @@ namespace DSOO_Grupo4_TP1.Models
                 case 3:
                     return abonoMensualSocios * 0.85m;
                 case 4:
-                    return abonoMensualSocios  * 0.75m;
+                    return abonoMensualSocios * 0.75m;
                 default:
                     return abonoMensualSocios;
             }
-        }        
+        }
 
 
 
@@ -117,10 +199,10 @@ namespace DSOO_Grupo4_TP1.Models
             return "INSCRIPCIÓN EXITOSA";
         }*/
 
-        public List<Actividad> ObtenerActividades()
+        /*public List<Actividad> ObtenerActividades()
         {
             return actividades;
-        }
+        }*/
         /*public List<Cliente> ObtenerClientesFiltrados(bool soloSocios = false, bool soloNoSocios = false)
         {
             if(soloSocios && !soloNoSocios) return clientes.Where(c => c is Socio).ToList();
@@ -130,10 +212,10 @@ namespace DSOO_Grupo4_TP1.Models
             else return clientes.ToList();
         }*/
 
-        public Cliente ObtenerClientePorId(int id)
+        /*public Cliente ObtenerClientePorId(int id)
         {
             return clientes.Find(c => c.IdCliente == id);
-        }
+        }*/
 
         /*public List<Cliente> ObtenerMorosos()
         {

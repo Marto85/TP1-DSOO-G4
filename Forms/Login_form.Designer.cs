@@ -251,8 +251,10 @@ namespace DSOO_Grupo4_TP1
 
             if (this.verificarDatos(username_login.Text, password_login.Text))
             {
+                ClubDeportivo clubDeportivo = new ClubDeportivo();
+
                 this.Hide();
-                Form formulario = new menu_form();
+                Form formulario = new menu_form(clubDeportivo);
                 formulario.ShowDialog();
                 
             }
@@ -276,12 +278,12 @@ namespace DSOO_Grupo4_TP1
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        // Agregar parámetros para evitar inyecciones SQL
                         cmd.Parameters.AddWithValue("@username", username);
                         cmd.Parameters.AddWithValue("@password", password);
 
                         // Ejecuta la consulta y obtiene el resultado
                         int count = Convert.ToInt32(cmd.ExecuteScalar());
+
 
                         // Devuelve verdadero si hay coincidencias, falso en caso contrario
                         return count > 0;
@@ -290,7 +292,7 @@ namespace DSOO_Grupo4_TP1
                 catch (Exception ex)
                 {
                     // Manejo de errores
-                    Console.WriteLine("Error en la conexión: " + ex.Message);
+                    MessageBox.Show("Error en la conexion: " + ex.Message);
                     return false; // O maneja el error como prefieras
                 }
                 finally
