@@ -55,6 +55,8 @@
             label5 = new Label();
             total_pago = new TextBox();
             Btn_Calcular_Total = new Button();
+            label_FormaDePago = new Label();
+            formas_de_pago = new CheckedListBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Btn_Atras).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Btn_minimizar).BeginInit();
@@ -250,7 +252,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(871, 332);
+            label2.Location = new Point(1144, 332);
             label2.Name = "label2";
             label2.Size = new Size(222, 44);
             label2.TabIndex = 19;
@@ -271,7 +273,7 @@
             // 
             label_AbonoMensual.AutoSize = true;
             label_AbonoMensual.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label_AbonoMensual.Location = new Point(871, 243);
+            label_AbonoMensual.Location = new Point(843, 243);
             label_AbonoMensual.Name = "label_AbonoMensual";
             label_AbonoMensual.Size = new Size(517, 44);
             label_AbonoMensual.TabIndex = 21;
@@ -287,13 +289,12 @@
             // 
             // label_Pagar_Actividades
             // 
-            label_Pagar_Actividades.AutoSize = true;
             label_Pagar_Actividades.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label_Pagar_Actividades.Location = new Point(871, 430);
+            label_Pagar_Actividades.Location = new Point(1489, 507);
             label_Pagar_Actividades.Name = "label_Pagar_Actividades";
-            label_Pagar_Actividades.Size = new Size(347, 44);
+            label_Pagar_Actividades.Size = new Size(250, 112);
             label_Pagar_Actividades.TabIndex = 23;
-            label_Pagar_Actividades.Text = "Pagar Actividades";
+            label_Pagar_Actividades.Text = "Seleccionar actividades";
             label_Pagar_Actividades.Visible = false;
             // 
             // lista_actividades
@@ -301,7 +302,7 @@
             lista_actividades.Cursor = Cursors.Hand;
             lista_actividades.FormattingEnabled = true;
             lista_actividades.Items.AddRange(new object[] { "Yoga", "Pilates", "Zumba", "Crossfit", "Natacion", "Escuela de Futbol" });
-            lista_actividades.Location = new Point(1449, 430);
+            lista_actividades.Location = new Point(1460, 622);
             lista_actividades.Name = "lista_actividades";
             lista_actividades.Size = new Size(300, 268);
             lista_actividades.TabIndex = 24;
@@ -312,7 +313,7 @@
             Btn_Pagar.BackColor = SystemColors.Highlight;
             Btn_Pagar.Cursor = Cursors.Hand;
             Btn_Pagar.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Pagar.Location = new Point(871, 782);
+            Btn_Pagar.Location = new Point(843, 932);
             Btn_Pagar.Name = "Btn_Pagar";
             Btn_Pagar.Size = new Size(878, 83);
             Btn_Pagar.TabIndex = 25;
@@ -324,7 +325,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(871, 546);
+            label5.Location = new Point(843, 658);
             label5.Name = "label5";
             label5.Size = new Size(262, 44);
             label5.TabIndex = 26;
@@ -334,7 +335,7 @@
             // 
             total_pago.BackColor = Color.DimGray;
             total_pago.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            total_pago.Location = new Point(1139, 539);
+            total_pago.Location = new Point(1143, 658);
             total_pago.Name = "total_pago";
             total_pago.Size = new Size(262, 57);
             total_pago.TabIndex = 27;
@@ -344,7 +345,7 @@
             Btn_Calcular_Total.BackColor = SystemColors.Highlight;
             Btn_Calcular_Total.Cursor = Cursors.Hand;
             Btn_Calcular_Total.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Calcular_Total.Location = new Point(1139, 623);
+            Btn_Calcular_Total.Location = new Point(1143, 735);
             Btn_Calcular_Total.Name = "Btn_Calcular_Total";
             Btn_Calcular_Total.Size = new Size(261, 58);
             Btn_Calcular_Total.TabIndex = 28;
@@ -352,12 +353,34 @@
             Btn_Calcular_Total.UseVisualStyleBackColor = false;
             Btn_Calcular_Total.Click += Btn_Calcular_Total_Click;
             // 
+            // label_FormaDePago
+            // 
+            label_FormaDePago.AutoSize = true;
+            label_FormaDePago.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            label_FormaDePago.Location = new Point(834, 455);
+            label_FormaDePago.Name = "label_FormaDePago";
+            label_FormaDePago.Size = new Size(293, 44);
+            label_FormaDePago.TabIndex = 29;
+            label_FormaDePago.Text = "Forma de Pago";
+            label_FormaDePago.Visible = false;
+            // 
+            // formas_de_pago
+            // 
+            formas_de_pago.FormattingEnabled = true;
+            formas_de_pago.Items.AddRange(new object[] { "Tarjeta de Credito", "Efectivo" });
+            formas_de_pago.Location = new Point(1144, 457);
+            formas_de_pago.Name = "formas_de_pago";
+            formas_de_pago.Size = new Size(312, 92);
+            formas_de_pago.TabIndex = 30;
+            // 
             // Pago_Form
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
-            ClientSize = new Size(1806, 901);
+            ClientSize = new Size(1806, 1089);
+            Controls.Add(formas_de_pago);
+            Controls.Add(label_FormaDePago);
             Controls.Add(Btn_Calcular_Total);
             Controls.Add(total_pago);
             Controls.Add(label5);
@@ -416,5 +439,7 @@
         private Button Btn_Calcular_Total;
         private TextBox Txt_DNI;
         private Label DNI;
+        private Label label_FormaDePago;
+        private CheckedListBox formas_de_pago;
     }
 }
