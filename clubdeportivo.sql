@@ -95,4 +95,28 @@ INSERT INTO Tipo_de_pago (Nombre) VALUES
 ('Anual');
 
 
+Agrego unas querys para insertar clientes y pagos, de modo de verificar que funciona
+
+INSERT INTO Cliente (FechaIngreso, Nombre, Apellido, DNI, Direccion, Telefono, Email, EsSocio, EsApto, Imagen_Perfil, AbonoMensualSocios)
+VALUES 
+('2024-08-01', 'Juan', 'Perez', 10000001, 'Direccion 1', '111-1111', 'juan@example.com', TRUE, TRUE, 'imagen1.jpg', 150.00),  -- Socio
+('2024-09-01', 'Ana', 'Gomez', 10000002, 'Direccion 2', '222-2222', 'ana@example.com', TRUE, TRUE, 'imagen2.jpg', 150.00),  -- Socio
+('2024-08-01', 'Pedro', 'Sanchez', 10000003, 'Direccion 3', '333-3333', 'pedro@example.com', FALSE, TRUE, 'imagen3.jpg', NULL), -- No socio
+('2024-09-01', 'Laura', 'Garcia', 10000004, 'Direccion 4', '444-4444', 'laura@example.com', FALSE, TRUE, 'imagen4.jpg', NULL);  -- No socio
+
+
+-- Pagos para socios en la tabla Pago
+INSERT INTO Pago (Cliente_Id, Monto, FechaPago, ProximoVencimiento, Id_tipo_de_pago)
+VALUES
+(1, 150.00, '2024-08-01', '2024-09-01', 3, 'Tarjeta de Credito'), -- Vencido
+(2, 150.00, '2024-09-01', '2024-12-01', 3, 'Efectivo'); -- Vigente
+
+-- Pagos para no socios en la tabla Pago_Actividad
+INSERT INTO Pago_Actividad (Cliente_id, Actividad_id, Monto, FechaPago, ProximoVencimiento)
+VALUES
+(3, 1, 5000.00, '2024-08-01', '2024-09-01', 'Efectivo'), -- Vencido, para la actividad "Yoga"
+(4, 2, 6000.00, '2024-09-01', '2024-12-01', 'Tarjeta de Credito'); -- Vigente, para la actividad "Pilates"
+
+
+
 */
