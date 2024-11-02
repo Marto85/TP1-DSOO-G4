@@ -551,6 +551,7 @@ namespace DSOO_Grupo4_TP1.Forms
         }
 
 
+
         private DateTime CalcularProximoVencimiento(DateTime fechaPago, string tipoDePago)
         {
             DateTime proximoVencimiento = fechaPago;

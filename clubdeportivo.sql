@@ -15,7 +15,7 @@ CREATE TABLE Cliente (
     Email VARCHAR(100),
     EsSocio BOOLEAN NOT NULL,
     EsApto BOOLEAN NOT NULL,
-    Imagen_Perfil VARCHAR(255)
+    Imagen_Perfil VARCHAR(255),
     AbonoMensualSocios DECIMAL(10, 2)
 );
 
@@ -32,6 +32,7 @@ CREATE TABLE Pago (
     FechaPago DATE NOT NULL,
     ProximoVencimiento DATE NOT NULL,
 	Id_tipo_de_pago INT NOT NULL,
+    formaPago VARCHAR(50),
     FOREIGN KEY (Cliente_Id) REFERENCES Cliente(Id) ON DELETE CASCADE,
 	FOREIGN KEY (Id_tipo_de_pago) REFERENCES Tipo_de_pago(Id) ON DELETE CASCADE
 );
@@ -65,6 +66,7 @@ CREATE TABLE Pago_Actividad (
     Monto DECIMAL(10, 2) NOT NULL,
     FechaPago DATE NOT NULL,
     ProximoVencimiento DATE NOT NULL,
+    formaPago VARCHAR(50) NOT NULL,
     FOREIGN KEY (Cliente_id) REFERENCES Cliente(Id) ON DELETE CASCADE,
     FOREIGN KEY (Actividad_id) REFERENCES Actividad(Id) ON DELETE CASCADE
 );
@@ -95,7 +97,7 @@ INSERT INTO Tipo_de_pago (Nombre) VALUES
 ('Anual');
 
 
-Agrego unas querys para insertar clientes y pagos, de modo de verificar que funciona
+# Agrego unas querys para insertar clientes y pagos, de modo de verificar que funciona
 
 INSERT INTO Cliente (FechaIngreso, Nombre, Apellido, DNI, Direccion, Telefono, Email, EsSocio, EsApto, Imagen_Perfil, AbonoMensualSocios)
 VALUES 
@@ -106,13 +108,13 @@ VALUES
 
 
 -- Pagos para socios en la tabla Pago
-INSERT INTO Pago (Cliente_Id, Monto, FechaPago, ProximoVencimiento, Id_tipo_de_pago)
+INSERT INTO Pago (id, Cliente_Id, Monto, FechaPago, ProximoVencimiento, Id_tipo_de_pago, formaPago)
 VALUES
-(1, 150.00, '2024-08-01', '2024-09-01', 3, 'Tarjeta de Credito'), -- Vencido
-(2, 150.00, '2024-09-01', '2024-12-01', 3, 'Efectivo'); -- Vigente
+(1, 1, 150.00, '2024-08-01', '2024-09-01', 3, 'Tarjeta de Credito'), -- Vencido
+(2, 2, 150.00, '2024-09-01', '2024-12-01', 3, 'Efectivo'); -- Vigente
 
 -- Pagos para no socios en la tabla Pago_Actividad
-INSERT INTO Pago_Actividad (Cliente_id, Actividad_id, Monto, FechaPago, ProximoVencimiento)
+INSERT INTO Pago_Actividad (Cliente_id, Actividad_id, Monto, FechaPago, ProximoVencimiento, formaPago)
 VALUES
 (3, 1, 5000.00, '2024-08-01', '2024-09-01', 'Efectivo'), -- Vencido, para la actividad "Yoga"
 (4, 2, 6000.00, '2024-09-01', '2024-12-01', 'Tarjeta de Credito'); -- Vigente, para la actividad "Pilates"
