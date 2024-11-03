@@ -290,7 +290,7 @@
             // label_Pagar_Actividades
             // 
             label_Pagar_Actividades.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label_Pagar_Actividades.Location = new Point(1489, 507);
+            label_Pagar_Actividades.Location = new Point(1486, 542);
             label_Pagar_Actividades.Name = "label_Pagar_Actividades";
             label_Pagar_Actividades.Size = new Size(250, 112);
             label_Pagar_Actividades.TabIndex = 23;
@@ -302,7 +302,7 @@
             lista_actividades.Cursor = Cursors.Hand;
             lista_actividades.FormattingEnabled = true;
             lista_actividades.Items.AddRange(new object[] { "Yoga", "Pilates", "Zumba", "Crossfit", "Natacion", "Escuela de Futbol" });
-            lista_actividades.Location = new Point(1460, 622);
+            lista_actividades.Location = new Point(1449, 667);
             lista_actividades.Name = "lista_actividades";
             lista_actividades.Size = new Size(300, 268);
             lista_actividades.TabIndex = 24;
@@ -313,7 +313,7 @@
             Btn_Pagar.BackColor = SystemColors.Highlight;
             Btn_Pagar.Cursor = Cursors.Hand;
             Btn_Pagar.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Pagar.Location = new Point(843, 932);
+            Btn_Pagar.Location = new Point(843, 968);
             Btn_Pagar.Name = "Btn_Pagar";
             Btn_Pagar.Size = new Size(878, 83);
             Btn_Pagar.TabIndex = 25;
@@ -325,7 +325,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(843, 658);
+            label5.Location = new Point(843, 690);
             label5.Name = "label5";
             label5.Size = new Size(262, 44);
             label5.TabIndex = 26;
@@ -335,7 +335,7 @@
             // 
             total_pago.BackColor = Color.DimGray;
             total_pago.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            total_pago.Location = new Point(1143, 658);
+            total_pago.Location = new Point(1144, 700);
             total_pago.Name = "total_pago";
             total_pago.Size = new Size(262, 57);
             total_pago.TabIndex = 27;
@@ -345,7 +345,7 @@
             Btn_Calcular_Total.BackColor = SystemColors.Highlight;
             Btn_Calcular_Total.Cursor = Cursors.Hand;
             Btn_Calcular_Total.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Calcular_Total.Location = new Point(1143, 735);
+            Btn_Calcular_Total.Location = new Point(1144, 777);
             Btn_Calcular_Total.Name = "Btn_Calcular_Total";
             Btn_Calcular_Total.Size = new Size(261, 58);
             Btn_Calcular_Total.TabIndex = 28;
@@ -357,7 +357,7 @@
             // 
             label_FormaDePago.AutoSize = true;
             label_FormaDePago.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label_FormaDePago.Location = new Point(834, 455);
+            label_FormaDePago.Location = new Point(843, 439);
             label_FormaDePago.Name = "label_FormaDePago";
             label_FormaDePago.Size = new Size(293, 44);
             label_FormaDePago.TabIndex = 29;
@@ -368,10 +368,11 @@
             // 
             formas_de_pago.FormattingEnabled = true;
             formas_de_pago.Items.AddRange(new object[] { "Tarjeta de Credito", "Efectivo" });
-            formas_de_pago.Location = new Point(1144, 457);
+            formas_de_pago.Location = new Point(1144, 439);
             formas_de_pago.Name = "formas_de_pago";
             formas_de_pago.Size = new Size(312, 92);
             formas_de_pago.TabIndex = 30;
+            formas_de_pago.ItemCheck += formas_de_pago_ItemCheck;
             // 
             // Pago_Form
             // 

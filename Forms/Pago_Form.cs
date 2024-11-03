@@ -386,6 +386,7 @@ namespace DSOO_Grupo4_TP1.Forms
             DateTime fechaPago = DateTime.Now;
             string tipoDePagoSeleccionado = Frecuencia_Pago.SelectedItem?.ToString();
             DateTime proximoVencimiento = CalcularProximoVencimiento(fechaPago, tipoDePagoSeleccionado);
+            string formaPago = formas_de_pago.SelectedItem?.ToString();
 
             int tipoDePagoId = tipoDePagoSeleccionado switch
             {
@@ -426,8 +427,8 @@ namespace DSOO_Grupo4_TP1.Forms
 
                     if (pagoSocio)
                     {
-                        string queryInsert = "INSERT INTO Pago (Cliente_Id, Monto, FechaPago, ProximoVencimiento, Id_tipo_de_pago) " +
-                                             "VALUES (@Cliente_Id, @Monto, @FechaPago, @ProximoVencimiento, @Id_tipo_de_pago)";
+                        string queryInsert = "INSERT INTO Pago (Cliente_Id, Monto, FechaPago, ProximoVencimiento, Id_tipo_de_pago, formaPago) " +
+                                              "VALUES (@Cliente_Id, @Monto, @FechaPago, @ProximoVencimiento, @Id_tipo_de_pago, @formaPago)";
                         using (MySqlCommand cmdInsert = new MySqlCommand(queryInsert, conn))
                         {
                             cmdInsert.Parameters.AddWithValue("@Cliente_Id", clienteId);
@@ -435,6 +436,7 @@ namespace DSOO_Grupo4_TP1.Forms
                             cmdInsert.Parameters.AddWithValue("@FechaPago", fechaPago);
                             cmdInsert.Parameters.AddWithValue("@ProximoVencimiento", proximoVencimiento);
                             cmdInsert.Parameters.AddWithValue("@Id_tipo_de_pago", tipoDePagoId);
+                            cmdInsert.Parameters.AddWithValue("@formaPago", formaPago);
 
                             cmdInsert.ExecuteNonQuery();
                             MessageBox.Show("Pago procesado correctamente.");
@@ -445,12 +447,15 @@ namespace DSOO_Grupo4_TP1.Forms
                         datosComprobante["FechaPago"] = fechaPago;
                         datosComprobante["ProximoVencimiento"] = proximoVencimiento;
                         datosComprobante["TipoDePago"] = tipoDePagoSeleccionado;
+                        datosComprobante["FormaDePago"] = formaPago;
                     }
                     else
                     {
                         decimal totalMontoActividades = 0;
                         decimal descuento = CalcularDescuento(tipoDePagoSeleccionado);
                         List<int> actividadesSeleccionadasIds = new List<int>();
+
+                        datosComprobante["Actividades"] = new List<Dictionary<string, object>>();
 
                         foreach (var actividadNombre in lista_actividades.CheckedItems)
                         {
@@ -459,6 +464,58 @@ namespace DSOO_Grupo4_TP1.Forms
                             if (actividadSeleccionada != null)
                             {
                                 actividadesSeleccionadasIds.Add(actividadSeleccionada.Id);
+
+                                string queryPrecioActividad = "SELECT PrecioNoSocio FROM Actividad WHERE Id = @Id";
+                                decimal precioActividad;
+
+                                using (MySqlCommand cmdPrecio = new MySqlCommand(queryPrecioActividad, conn))
+                                {
+                                    cmdPrecio.Parameters.AddWithValue("@Id", actividadSeleccionada.Id);
+                                    object result = cmdPrecio.ExecuteScalar();
+
+                                    if (result != null)
+                                    {
+                                        precioActividad = Convert.ToDecimal(result) * descuento;
+                                        totalMontoActividades += precioActividad;
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Actividad no encontrada.");
+                                        continue;
+                                    }
+                                }
+
+                                string queryInsertPagoActividad = @"INSERT INTO Pago_Actividad 
+                                 (Cliente_id, Actividad_id, Monto, FechaPago, ProximoVencimiento, formaPago)
+                                 VALUES 
+                                 (@ClienteId, @ActividadId, @Monto, @FechaPago, @ProximoVencimiento, @formaPago)";
+
+                                using (MySqlCommand cmdInsertPago = new MySqlCommand(queryInsertPagoActividad, conn))
+                                {
+                                    cmdInsertPago.Parameters.AddWithValue("@ClienteId", clienteId);
+                                    cmdInsertPago.Parameters.AddWithValue("@ActividadId", actividadSeleccionada.Id);
+                                    cmdInsertPago.Parameters.AddWithValue("@Monto", precioActividad);
+                                    cmdInsertPago.Parameters.AddWithValue("@FechaPago", fechaPago);
+                                    cmdInsertPago.Parameters.AddWithValue("@ProximoVencimiento", proximoVencimiento);
+                                    cmdInsertPago.Parameters.AddWithValue("@formaPago", formaPago);
+
+                                    cmdInsertPago.ExecuteNonQuery();
+                                }
+
+                                string queryActualizarCupos = "UPDATE Actividad SET CuposDisponibles = CuposDisponibles - 1 WHERE Id = @Id AND CuposDisponibles > 0";
+
+                                using (MySqlCommand cmdActualizarCupos = new MySqlCommand(queryActualizarCupos, conn))
+                                {
+                                    cmdActualizarCupos.Parameters.AddWithValue("@Id", actividadSeleccionada.Id);
+                                    cmdActualizarCupos.ExecuteNonQuery();
+                                }
+
+                                ((List<Dictionary<string, object>>)datosComprobante["Actividades"]).Add(new Dictionary<string, object>
+                                {
+                            { "ActividadId", actividadSeleccionada.Id },
+                            { "Nombre", actividadSeleccionada.Nombre },
+                            { "Precio", precioActividad }
+                                });
                             }
                             else
                             {
@@ -466,65 +523,11 @@ namespace DSOO_Grupo4_TP1.Forms
                             }
                         }
 
-                        datosComprobante["Actividades"] = new List<Dictionary<string, object>>();
-
-                        foreach (int actividadId in actividadesSeleccionadasIds)
-                        {
-                            string queryPrecioActividad = "SELECT PrecioNoSocio FROM Actividad WHERE Id = @Id";
-                            decimal precioActividad;
-
-                            using (MySqlCommand cmdPrecio = new MySqlCommand(queryPrecioActividad, conn))
-                            {
-                                cmdPrecio.Parameters.AddWithValue("@Id", actividadId);
-                                object result = cmdPrecio.ExecuteScalar();
-
-                                if (result != null)
-                                {
-                                    precioActividad = Convert.ToDecimal(result) * descuento;
-                                    totalMontoActividades += precioActividad;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Actividad no encontrada.");
-                                    continue;
-                                }
-                            }
-
-                            string queryInsertPagoActividad = @"INSERT INTO Pago_Actividad 
-                                    (Cliente_id, Actividad_id, Monto, FechaPago, ProximoVencimiento) 
-                                    VALUES 
-                                    (@ClienteId, @ActividadId, @Monto, @FechaPago, @ProximoVencimiento)";
-
-                            using (MySqlCommand cmdInsertPago = new MySqlCommand(queryInsertPagoActividad, conn))
-                            {
-                                cmdInsertPago.Parameters.AddWithValue("@ClienteId", clienteId);
-                                cmdInsertPago.Parameters.AddWithValue("@ActividadId", actividadId);
-                                cmdInsertPago.Parameters.AddWithValue("@Monto", precioActividad);
-                                cmdInsertPago.Parameters.AddWithValue("@FechaPago", fechaPago);
-                                cmdInsertPago.Parameters.AddWithValue("@ProximoVencimiento", proximoVencimiento);
-
-                                cmdInsertPago.ExecuteNonQuery();
-                            }
-
-                            string queryActualizarCupos = "UPDATE Actividad SET CuposDisponibles = CuposDisponibles - 1 WHERE Id = @Id AND CuposDisponibles > 0";
-
-                            using (MySqlCommand cmdActualizarCupos = new MySqlCommand(queryActualizarCupos, conn))
-                            {
-                                cmdActualizarCupos.Parameters.AddWithValue("@Id", actividadId);
-                                cmdActualizarCupos.ExecuteNonQuery();
-                            }
-
-                            ((List<Dictionary<string, object>>)datosComprobante["Actividades"]).Add(new Dictionary<string, object>
-                            {
-                        { "ActividadId", actividadId },
-                        { "Precio", precioActividad }
-                            });
-                        }
-
                         datosComprobante["Monto"] = totalMontoActividades;
                         datosComprobante["FechaPago"] = fechaPago;
                         datosComprobante["ProximoVencimiento"] = proximoVencimiento;
                         datosComprobante["TipoDePago"] = tipoDePagoSeleccionado;
+                        datosComprobante["FormaDePago"] = formaPago;
 
                         MessageBox.Show("Pago de actividades procesado correctamente.");
                     }
@@ -538,6 +541,9 @@ namespace DSOO_Grupo4_TP1.Forms
                 }
             }
         }
+
+
+
 
         private decimal CalcularDescuento(string tipoDePagoSeleccionado)
         {
@@ -584,8 +590,22 @@ namespace DSOO_Grupo4_TP1.Forms
             return proximoVencimiento;
         }
 
-
-        
-
+        private void formas_de_pago_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            {
+                // Verificar si se está marcando un nuevo elemento
+                if (e.NewValue == CheckState.Checked)
+                {
+                    // Desmarcar todos los elementos excepto el que se está seleccionando
+                    for (int i = 0; i < formas_de_pago.Items.Count; i++)
+                    {
+                        if (i != e.Index)
+                        {
+                            formas_de_pago.SetItemChecked(i, false);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

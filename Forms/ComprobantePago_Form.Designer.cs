@@ -33,6 +33,7 @@
             lblProximoVencimiento = new Label();
             lblTipoPago = new Label();
             lstActividades = new ListBox();
+            lbl_formaPago = new Label();
             SuspendLayout();
             // 
             // lblMonto
@@ -77,14 +78,24 @@
             lstActividades.ItemHeight = 41;
             lstActividades.Location = new Point(745, 130);
             lstActividades.Name = "lstActividades";
-            lstActividades.Size = new Size(449, 332);
+            lstActividades.Size = new Size(697, 332);
             lstActividades.TabIndex = 4;
+            // 
+            // lbl_formaPago
+            // 
+            lbl_formaPago.AutoSize = true;
+            lbl_formaPago.Location = new Point(196, 494);
+            lbl_formaPago.Name = "lbl_formaPago";
+            lbl_formaPago.Size = new Size(219, 41);
+            lbl_formaPago.TabIndex = 5;
+            lbl_formaPago.Text = "Forma de Pago";
             // 
             // ComprobantePago_Form
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1523, 678);
+            ClientSize = new Size(1536, 678);
+            Controls.Add(lbl_formaPago);
             Controls.Add(lstActividades);
             Controls.Add(lblTipoPago);
             Controls.Add(lblProximoVencimiento);
@@ -104,5 +115,6 @@
         private Label lblProximoVencimiento;
         private Label lblTipoPago;
         private ListBox lstActividades;
+        private Label lbl_formaPago;
     }
 }
