@@ -49,10 +49,9 @@ namespace DSOO_Grupo4_TP1.Forms
                 List<Dictionary<string, object>> actividadesList = (List<Dictionary<string, object>>)actividades;
                 foreach (var actividad in actividadesList)
                 {
-                    if (actividad.TryGetValue("ActividadId", out var actividadId) &&
-                        actividad.TryGetValue("Nombre", out var nombreActividad) &&
+                    if (actividad.TryGetValue("Nombre", out var nombreActividad) &&
                         actividad.TryGetValue("Precio", out var precio))
-                        
+
                     {
                         lstActividades.Items.Add("Actividades que fueron abonadas");
                         lstActividades.Items.Add($"{nombreActividad} - Precio con Descuento: ${precio}");
@@ -62,15 +61,15 @@ namespace DSOO_Grupo4_TP1.Forms
 
             if (_datosComprobante.TryGetValue("FormaDePago", out var formaPago))
             {
-                lbl_formaPago.Text =  $"Forma de Pago: {formaPago}";
+                lbl_formaPago.Text = $"Forma de Pago: {formaPago}";
             }
-       
+
             else
             {
                 lstActividades.Visible = false;
             }
         }
-    }
 
+    }
 
 }
