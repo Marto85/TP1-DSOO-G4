@@ -61,7 +61,10 @@
             CondIVACliente = new TextBox();
             lbl_NombreCliente = new Label();
             lbl_CodAct = new TextBox();
-            this.textBox1 = new TextBox();
+            textBox1 = new TextBox();
+            Lbl_Bonificacion = new TextBox();
+            lbl_PrecioUnit = new TextBox();
+            lbl_Subtotal = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -437,27 +440,68 @@
             lbl_CodAct.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_CodAct.Location = new Point(69, 765);
             lbl_CodAct.Name = "lbl_CodAct";
-            lbl_CodAct.Size = new Size(146, 57);
+            lbl_CodAct.Size = new Size(177, 57);
             lbl_CodAct.TabIndex = 13;
             lbl_CodAct.Text = "Codigo";
+            lbl_CodAct.TextAlign = HorizontalAlignment.Center;
             // 
             // textBox1
             // 
-            this.textBox1.BackColor = SystemColors.ScrollBar;
-            this.textBox1.BorderStyle = BorderStyle.FixedSingle;
-            this.textBox1.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            this.textBox1.Location = new Point(221, 765);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new Size(146, 57);
-            this.textBox1.TabIndex = 14;
-            this.textBox1.Text = "Codigo";
+            textBox1.BackColor = SystemColors.ScrollBar;
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            textBox1.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            textBox1.Location = new Point(239, 765);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(296, 57);
+            textBox1.TabIndex = 14;
+            textBox1.Text = "  Clase abonada";
+            textBox1.TextAlign = HorizontalAlignment.Center;
+            // 
+            // Lbl_Bonificacion
+            // 
+            Lbl_Bonificacion.BackColor = SystemColors.ScrollBar;
+            Lbl_Bonificacion.BorderStyle = BorderStyle.FixedSingle;
+            Lbl_Bonificacion.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            Lbl_Bonificacion.Location = new Point(836, 765);
+            Lbl_Bonificacion.Name = "Lbl_Bonificacion";
+            Lbl_Bonificacion.Size = new Size(308, 57);
+            Lbl_Bonificacion.TabIndex = 15;
+            Lbl_Bonificacion.Text = "   Bonificacion";
+            Lbl_Bonificacion.TextAlign = HorizontalAlignment.Center;
+            // 
+            // lbl_PrecioUnit
+            // 
+            lbl_PrecioUnit.BackColor = SystemColors.ScrollBar;
+            lbl_PrecioUnit.BorderStyle = BorderStyle.FixedSingle;
+            lbl_PrecioUnit.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_PrecioUnit.Location = new Point(532, 765);
+            lbl_PrecioUnit.Name = "lbl_PrecioUnit";
+            lbl_PrecioUnit.Size = new Size(321, 57);
+            lbl_PrecioUnit.TabIndex = 16;
+            lbl_PrecioUnit.Text = "  Precio Unitario";
+            lbl_PrecioUnit.TextAlign = HorizontalAlignment.Center;
+            // 
+            // lbl_Subtotal
+            // 
+            lbl_Subtotal.BackColor = SystemColors.ScrollBar;
+            lbl_Subtotal.BorderStyle = BorderStyle.FixedSingle;
+            lbl_Subtotal.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_Subtotal.Location = new Point(1138, 765);
+            lbl_Subtotal.Name = "lbl_Subtotal";
+            lbl_Subtotal.Size = new Size(335, 57);
+            lbl_Subtotal.TabIndex = 17;
+            lbl_Subtotal.Text = "   Subtotal";
+            lbl_Subtotal.TextAlign = HorizontalAlignment.Center;
             // 
             // ComprobantePago_Form
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1536, 1129);
-            Controls.Add(this.textBox1);
+            Controls.Add(lbl_Subtotal);
+            Controls.Add(lbl_PrecioUnit);
+            Controls.Add(Lbl_Bonificacion);
+            Controls.Add(textBox1);
             Controls.Add(lbl_CodAct);
             Controls.Add(panel1);
             Controls.Add(TipoFct);
@@ -517,5 +561,9 @@
         private Label lbl_NombreCliente;
         private Label lbl_IdActividad;
         private TextBox lbl_CodAct;
+        private TextBox textBox1;
+        private TextBox Lbl_Bonificacion;
+        private TextBox lbl_PrecioUnit;
+        private TextBox lbl_Subtotal;
     }
 }
