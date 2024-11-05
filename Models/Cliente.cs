@@ -148,7 +148,7 @@ namespace DSOO_Grupo4_TP1.Models
             }
         }
 
-        public void RegistrarPagoSocio(int clienteId, int mesesAbonados)
+        /*public void RegistrarPagoSocio(int clienteId, int mesesAbonados)
         {
             Conexion conexion = Conexion.getInstancia();
             using (MySqlConnection conn = conexion.CrearConexion())
@@ -208,10 +208,10 @@ namespace DSOO_Grupo4_TP1.Models
                     MessageBox.Show($"Error al registrar pago: {ex.Message}\nCódigo del error: {ex.Number}");
                 }
             }
-        }
+        }*/
 
 
-        public void RegistrarPagoNoSocio(int clienteId, int actividadId, string duracion)
+        /*public void RegistrarPagoNoSocio(int clienteId, int actividadId, string duracion)
         {
             Conexion conexion = Conexion.getInstancia();
             using (MySqlConnection conn = conexion.CrearConexion())
@@ -285,7 +285,7 @@ namespace DSOO_Grupo4_TP1.Models
                     MessageBox.Show($"Error al registrar pago: {ex.Message}\nCódigo del error: {ex.Number}");
                 }
             }
-        }
+        }*/
 
         private int ObtenerTipoDePagoId(int meses)
         {

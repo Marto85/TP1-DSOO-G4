@@ -14,7 +14,7 @@ namespace DSOO_Grupo4_TP1.Models
         public string NombreUsuario { get; set; }
 
         private string Password;
-        private decimal abonoMensualSocios = 5000; // abono inicial socios
+        //private decimal abonoMensualSocios = 5000; // abono inicial socios
         private List<Cliente> clientes;
 
         public ClubDeportivo()
@@ -120,7 +120,7 @@ namespace DSOO_Grupo4_TP1.Models
 
 
 
-        public decimal ObtenerAbonoMensualSociosBase()
+        /*public decimal ObtenerAbonoMensualSociosBase()
         {
             return abonoMensualSocios;
         }
@@ -128,9 +128,9 @@ namespace DSOO_Grupo4_TP1.Models
         public void ModificarAbonoMensualSocios(decimal nuevoAbono)
         {
             abonoMensualSocios = nuevoAbono;
-        }
+        }*/
 
-        public decimal ObtenerAbonoMensualSociosConDescuento(int frecuenciaPago)
+        /*public decimal ObtenerAbonoMensualSociosConDescuento(int frecuenciaPago)
         {
             switch (frecuenciaPago)
             {
@@ -145,7 +145,7 @@ namespace DSOO_Grupo4_TP1.Models
                 default:
                     return abonoMensualSocios;
             }
-        }
+        }*/
 
 
 

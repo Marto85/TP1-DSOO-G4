@@ -60,9 +60,40 @@ namespace DSOO_Grupo4_TP1
             string mail = Mail_Registro.Text;
             bool esSocio = Socio.Checked;
             string? imagenPerfil = imgPath;
+            decimal? abonoMensual = esSocio ? 10000 : null;
+
+            Cliente nuevoCliente;
 
 
-            Cliente nuevoCliente = new Cliente(fechaIngreso, nombre, apellido, dni, domicilio, telefono, mail, imagenPerfil, esSocio: esSocio);
+            if (esSocio)
+            {
+                nuevoCliente = new Cliente(
+                    fechaIngreso,
+                    nombre,
+                    apellido,
+                    dni,
+                    domicilio,
+                    telefono,
+                    mail,
+                    imagenPerfil,
+                    abonoMensualSocios: abonoMensual,
+                    esSocio: esSocio
+                );
+            }
+            else
+            {
+                nuevoCliente = new Cliente(
+                    fechaIngreso,
+                    nombre,
+                    apellido,
+                    dni,
+                    domicilio,
+                    telefono,
+                    mail,
+                    imagenPerfil,
+                    esSocio: esSocio
+                );
+            }
 
             nuevoCliente.AltaCliente();
             GenerarCarnet(nuevoCliente.IdCliente);
