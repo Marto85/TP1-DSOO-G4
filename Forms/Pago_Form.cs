@@ -542,9 +542,6 @@ namespace DSOO_Grupo4_TP1.Forms
             }
         }
 
-
-
-
         private decimal CalcularDescuento(string tipoDePagoSeleccionado)
         {
             return tipoDePagoSeleccionado switch
