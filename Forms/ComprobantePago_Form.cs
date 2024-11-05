@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DSOO_Grupo4_TP1.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,6 +43,16 @@ namespace DSOO_Grupo4_TP1.Forms
                     dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = precio; // REVISAR ESTO DPS DE VER BONIFICACION
                 }
             }
+            else
+            {
+                int rowIndex = dgvActividades.Rows.Add();
+                dgvActividades.Rows[rowIndex].Cells["Codigo"].Value = "--";
+                dgvActividades.Rows[rowIndex].Cells["Clase"].Value = "Abono Mensual";
+                dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = _datosComprobante["Monto"];
+                dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = 0; // REVISAR ESTO
+                dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = _datosComprobante["Monto"]; // REVISAR ESTO DPS DE VER BONIFICACION
+            }
+
         }
 
     }
