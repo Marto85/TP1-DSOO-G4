@@ -34,18 +34,14 @@ namespace DSOO_Grupo4_TP1.Forms
                     string nombreActividad = actividad["Nombre"].ToString();
                     decimal precio = Convert.ToDecimal(actividad["Precio"]);
 
-                    // Agrega una nueva fila en el DataGridView y asigna los valores
                     int rowIndex = dgvActividades.Rows.Add();
                     dgvActividades.Rows[rowIndex].Cells["Codigo"].Value = actividadId;
                     dgvActividades.Rows[rowIndex].Cells["Clase"].Value = nombreActividad;
                     dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = precio;
-                    dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = 0; // Asigna un valor si corresponde
-                    dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = precio; // Ajusta el valor si tienes un cálculo
+                    dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = 0; // REVISAR ESTO
+                    dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = precio; // REVISAR ESTO DPS DE VER BONIFICACION
                 }
             }
-
-            // Configura otras etiquetas como lblMonto, lblFechaPago, etc.
-            // ...
         }
 
     }
