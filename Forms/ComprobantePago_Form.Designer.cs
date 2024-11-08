@@ -77,7 +77,7 @@
             Lbl_Bonificacion = new TextBox();
             lbl_PrecioUnit = new TextBox();
             lbl_Subtotal = new TextBox();
-            ImprimirComprobante = new Button();
+            Btn_ImprimirComprobante = new Button();
             Btn_cerrar = new PictureBox();
             Btn_minimizar = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -329,7 +329,7 @@
             txt_NroComp.BackColor = SystemColors.Control;
             txt_NroComp.BorderStyle = BorderStyle.None;
             txt_NroComp.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            txt_NroComp.Location = new Point(549, 29);
+            txt_NroComp.Location = new Point(559, 27);
             txt_NroComp.Name = "txt_NroComp";
             txt_NroComp.Size = new Size(145, 37);
             txt_NroComp.TabIndex = 15;
@@ -605,19 +605,20 @@
             lbl_Subtotal.Text = "   Subtotal";
             lbl_Subtotal.TextAlign = HorizontalAlignment.Center;
             // 
-            // ImprimirComprobante
+            // Btn_ImprimirComprobante
             // 
-            ImprimirComprobante.BackColor = SystemColors.Control;
-            ImprimirComprobante.Cursor = Cursors.Hand;
-            ImprimirComprobante.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            ImprimirComprobante.Location = new Point(560, 1134);
-            ImprimirComprobante.Name = "ImprimirComprobante";
-            ImprimirComprobante.Size = new Size(354, 58);
-            ImprimirComprobante.TabIndex = 19;
-            ImprimirComprobante.Text = "Imprimir";
-            ImprimirComprobante.UseVisualStyleBackColor = false;
-            ImprimirComprobante.MouseEnter += ImprimirComprobante_MouseEnter;
-            ImprimirComprobante.MouseLeave += ImprimirComprobante_MouseLeave;
+            Btn_ImprimirComprobante.BackColor = SystemColors.Control;
+            Btn_ImprimirComprobante.Cursor = Cursors.Hand;
+            Btn_ImprimirComprobante.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            Btn_ImprimirComprobante.Location = new Point(560, 1134);
+            Btn_ImprimirComprobante.Name = "Btn_ImprimirComprobante";
+            Btn_ImprimirComprobante.Size = new Size(354, 58);
+            Btn_ImprimirComprobante.TabIndex = 19;
+            Btn_ImprimirComprobante.Text = "Imprimir";
+            Btn_ImprimirComprobante.UseVisualStyleBackColor = false;
+            Btn_ImprimirComprobante.Click += Btn_ImprimirComprobante_Click;
+            Btn_ImprimirComprobante.MouseEnter += ImprimirComprobante_MouseEnter;
+            Btn_ImprimirComprobante.MouseLeave += ImprimirComprobante_MouseLeave;
             // 
             // Btn_cerrar
             // 
@@ -652,7 +653,7 @@
             ClientSize = new Size(1552, 1231);
             Controls.Add(Btn_minimizar);
             Controls.Add(Btn_cerrar);
-            Controls.Add(ImprimirComprobante);
+            Controls.Add(Btn_ImprimirComprobante);
             Controls.Add(dgvActividades);
             Controls.Add(lbl_Subtotal);
             Controls.Add(lbl_PrecioUnit);
@@ -728,7 +729,7 @@
         private DataGridViewTextBoxColumn PrecioUnitario;
         private DataGridViewTextBoxColumn Bonificacion;
         private DataGridViewTextBoxColumn Subtotal;
-        private Button ImprimirComprobante;
+        private Button Btn_ImprimirComprobante;
         private PictureBox Btn_cerrar;
         private PictureBox Btn_minimizar;
         private TextBox txt_nombreCliente;
