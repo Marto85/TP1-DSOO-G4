@@ -47,29 +47,30 @@ namespace DSOO_Grupo4_TP1.Forms
         private void BuscarClienteButton_Click(object sender, EventArgs e)
         {
             conexion = Conexion.getInstancia();
-            string connectionString = conexion.CrearConexion().ConnectionString; // Obtiene la cadena de conexión
-            id_usuario = int.Parse(ID_Registro.Text); // Almacena el id del cliente
+            string connectionString = conexion.CrearConexion().ConnectionString;
+            int dni_usuario = int.Parse(DNI_Registro.Text); // Almacena el dni del cliente
             esSocio = false; // Inicializa el estado del socio como falso
 
-            if (id_usuario > 0)
+            if (dni_usuario > 0)
             {
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
                     try
                     {
                         conn.Open();
-                        string query = "SELECT Nombre, Apellido, EsSocio FROM cliente WHERE Id = @id_usuario";
+                        string query = "SELECT Id, Nombre, Apellido, EsSocio FROM cliente WHERE DNI = @dni_usuario";
 
                         using (MySqlCommand cmd = new MySqlCommand(query, conn))
                         {
                             // Definir el parámetro
-                            cmd.Parameters.AddWithValue("@id_usuario", id_usuario);
+                            cmd.Parameters.AddWithValue("@dni_usuario", dni_usuario);
 
                             // Ejecuta la consulta y obtiene el resultado
                             using (MySqlDataReader reader = cmd.ExecuteReader())
                             {
                                 if (reader.Read()) // Lee la primera fila del resultado
                                 {
+                                    id_usuario = reader.GetInt32("Id"); // Almacena el id del cliente
                                     string Nombre = reader.GetString("Nombre");
                                     string Apellido = reader.GetString("Apellido");
                                     esSocio = reader.GetBoolean("EsSocio"); // Almacena si es socio
@@ -85,11 +86,10 @@ namespace DSOO_Grupo4_TP1.Forms
                                 }
                                 else
                                 {
-                                    label1.Text = "No se ha encontrado el cliente con el ID indicado";
+                                    label1.Text = "No se ha encontrado el cliente con el DNI indicado";
                                 }
 
                                 label1.Left = (this.ClientSize.Width - label1.Width) / 2;
-
                             }
                         }
                     }
@@ -100,8 +100,10 @@ namespace DSOO_Grupo4_TP1.Forms
                     finally
                     {
                         conn.Close();
-                        ObtenerActividadesRegistradas(id_usuario);
-
+                        if (id_usuario > 0)
+                        {
+                            ObtenerActividadesRegistradas(id_usuario);
+                        }
                     }
                 }
             }
@@ -280,19 +282,19 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void ID_Registro_Enter(object sender, EventArgs e)
         {
-            if (ID_Registro.Text == "ID de cliente")
+            if (DNI_Registro.Text == "ID de cliente")
             {
-                ID_Registro.Text = "";
-                ID_Registro.ForeColor = Color.White;
+                DNI_Registro.Text = "";
+                DNI_Registro.ForeColor = Color.White;
             }
         }
 
         private void ID_Registro_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(ID_Registro.Text))
+            if (string.IsNullOrWhiteSpace(DNI_Registro.Text))
             {
-                ID_Registro.Text = "ID de cliente";
-                ID_Registro.ForeColor = Color.DarkGray;
+                DNI_Registro.Text = "ID de cliente";
+                DNI_Registro.ForeColor = Color.DarkGray;
             }
         }
 

@@ -34,7 +34,7 @@
             panel2 = new Panel();
             Btn_Atras = new PictureBox();
             convertLabel = new Label();
-            ID_Registro = new TextBox();
+            DNI_Registro = new TextBox();
             Buscar_Cliente_Button = new Button();
             label1 = new Label();
             label2 = new Label();
@@ -116,20 +116,20 @@
             convertLabel.Text = "Buscar Cliente";
             convertLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // ID_Registro
+            // DNI_Registro
             // 
-            ID_Registro.BackColor = Color.FromArgb(15, 15, 15);
-            ID_Registro.Cursor = Cursors.Hand;
-            ID_Registro.Font = new Font("Century Gothic", 11.1F, FontStyle.Italic, GraphicsUnit.Point);
-            ID_Registro.ForeColor = Color.Gray;
-            ID_Registro.Location = new Point(668, 251);
-            ID_Registro.Margin = new Padding(7, 8, 7, 8);
-            ID_Registro.Name = "ID_Registro";
-            ID_Registro.Size = new Size(380, 53);
-            ID_Registro.TabIndex = 16;
-            ID_Registro.Text = "ID de cliente";
-            ID_Registro.Enter += ID_Registro_Enter;
-            ID_Registro.Leave += ID_Registro_Leave;
+            DNI_Registro.BackColor = Color.FromArgb(15, 15, 15);
+            DNI_Registro.Cursor = Cursors.Hand;
+            DNI_Registro.Font = new Font("Century Gothic", 11.1F, FontStyle.Italic, GraphicsUnit.Point);
+            DNI_Registro.ForeColor = Color.Gray;
+            DNI_Registro.Location = new Point(668, 251);
+            DNI_Registro.Margin = new Padding(7, 8, 7, 8);
+            DNI_Registro.Name = "DNI_Registro";
+            DNI_Registro.Size = new Size(380, 53);
+            DNI_Registro.TabIndex = 16;
+            DNI_Registro.Text = "Ingresar DNI";
+            DNI_Registro.Enter += ID_Registro_Enter;
+            DNI_Registro.Leave += ID_Registro_Leave;
             // 
             // Buscar_Cliente_Button
             // 
@@ -274,7 +274,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(Buscar_Cliente_Button);
-            Controls.Add(ID_Registro);
+            Controls.Add(DNI_Registro);
             Controls.Add(convertLabel);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
@@ -298,7 +298,7 @@
         private PictureBox btn_cerrar;
         private Panel panel2;
         private Label convertLabel;
-        private TextBox ID_Registro;
+        private TextBox DNI_Registro;
         private Button Buscar_Cliente_Button;
         private Label label1;
         private Label label2;
