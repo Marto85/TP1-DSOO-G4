@@ -409,6 +409,30 @@ namespace DSOO_Grupo4_TP1.Forms
                 try
                 {
                     conn.Open();
+                    string queryMaxIdPago = "SELECT MAX(Id) FROM Pago";
+                    string queryMaxIdPagoActividad = "SELECT MAX(Id) FROM Pago_Actividad";
+
+                    int maxIdPago = 0;
+                    int maxIdPagoActividad = 0;
+
+                    using (MySqlCommand cmdMaxPago = new MySqlCommand(queryMaxIdPago, conn))
+                    {
+                        object result = cmdMaxPago.ExecuteScalar();
+                        maxIdPago = result != DBNull.Value ? Convert.ToInt32(result) : 0;
+                    }
+
+                    using (MySqlCommand cmdMaxPagoActividad = new MySqlCommand(queryMaxIdPagoActividad, conn))
+                    {
+                        object result = cmdMaxPagoActividad.ExecuteScalar();
+                        maxIdPagoActividad = result != DBNull.Value ? Convert.ToInt32(result) : 0;
+                    }
+
+                    // Siguiente número de comprobante
+                    int numeroComprobante = Math.Max(maxIdPago, maxIdPagoActividad) + 1;
+                    string numeroComprobanteFormateado = numeroComprobante.ToString("D8"); // se da formato 8 de digitos
+
+                    datosComprobante["NumeroComprobante"] = numeroComprobanteFormateado;
+
                     string querySelectClienteId = "SELECT Id FROM Cliente WHERE DNI = @DNI";
                     int clienteId = 0;
 
@@ -443,6 +467,8 @@ namespace DSOO_Grupo4_TP1.Forms
 
                             cmdInsert.ExecuteNonQuery();
                             MessageBox.Show("Pago procesado correctamente.");
+                            int pagoId = (int)cmdInsert.LastInsertedId;
+                            datosComprobante["PagoId"] = pagoId;
                         }
 
                         datosComprobante["ClienteId"] = clienteId;
@@ -489,9 +515,11 @@ namespace DSOO_Grupo4_TP1.Forms
                                 }
 
                                 string queryInsertPagoActividad = @"INSERT INTO Pago_Actividad 
-                                 (Cliente_id, Actividad_id, Monto, FechaPago, ProximoVencimiento, formaPago)
-                                 VALUES 
-                                 (@ClienteId, @ActividadId, @Monto, @FechaPago, @ProximoVencimiento, @formaPago)";
+                         (Cliente_id, Actividad_id, Monto, FechaPago, ProximoVencimiento, formaPago)
+                         VALUES 
+                         (@ClienteId, @ActividadId, @Monto, @FechaPago, @ProximoVencimiento, @formaPago)";
+
+                                int pagoId; // Declara pagoId fuera del bloque using
 
                                 using (MySqlCommand cmdInsertPago = new MySqlCommand(queryInsertPagoActividad, conn))
                                 {
@@ -503,6 +531,7 @@ namespace DSOO_Grupo4_TP1.Forms
                                     cmdInsertPago.Parameters.AddWithValue("@formaPago", formaPago);
 
                                     cmdInsertPago.ExecuteNonQuery();
+                                    pagoId = (int)cmdInsertPago.LastInsertedId; // Asigna el valor a pagoId
                                 }
 
                                 string queryActualizarCupos = "UPDATE Actividad SET CuposDisponibles = CuposDisponibles - 1 WHERE Id = @Id AND CuposDisponibles > 0";
@@ -515,9 +544,10 @@ namespace DSOO_Grupo4_TP1.Forms
 
                                 ((List<Dictionary<string, object>>)datosComprobante["Actividades"]).Add(new Dictionary<string, object>
                                 {
-                            { "ActividadId", actividadSeleccionada.Id },
-                            { "Nombre", actividadSeleccionada.Nombre },
-                            { "Precio", precioActividad }
+                                    { "ActividadId", actividadSeleccionada.Id },
+                                    { "Nombre", actividadSeleccionada.Nombre },
+                                    { "Precio", precioActividad },
+                                    { "PagoActividadId", pagoId }
                                 });
                             }
                             else
@@ -537,6 +567,7 @@ namespace DSOO_Grupo4_TP1.Forms
 
                     ComprobantePago_Form comprobante = new ComprobantePago_Form(datosComprobante, clienteActual, proximoVencimiento, tipoDePagoSeleccionado, formaPago);
                     comprobante.ShowDialog();
+
                 }
                 catch (Exception ex)
                 {

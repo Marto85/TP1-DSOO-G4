@@ -45,10 +45,11 @@
             lbl_DomComercial = new Label();
             NombreFantasia = new TextBox();
             lbl_RazonSocial = new Label();
+            txt_fechaComprobante = new TextBox();
             CUIT = new TextBox();
             FechaInicioAct = new TextBox();
             IIBB = new TextBox();
-            NroComp = new TextBox();
+            txt_NroComp = new TextBox();
             lbl_NroComp = new Label();
             PtoVenta = new TextBox();
             lbl_FechaInicioAct = new Label();
@@ -56,6 +57,7 @@
             lbl_CUIT = new Label();
             lbl_PuntoVenta = new Label();
             panel1 = new Panel();
+            txt_formaPago = new TextBox();
             txt_proximoVencimiento = new TextBox();
             txt_frecuenciaPago = new TextBox();
             txt_dni = new TextBox();
@@ -78,8 +80,6 @@
             ImprimirComprobante = new Button();
             Btn_cerrar = new PictureBox();
             Btn_minimizar = new PictureBox();
-            txt_formaPago = new TextBox();
-            txt_fechaComprobante = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -207,7 +207,7 @@
             splitContainer1.Panel2.Controls.Add(CUIT);
             splitContainer1.Panel2.Controls.Add(FechaInicioAct);
             splitContainer1.Panel2.Controls.Add(IIBB);
-            splitContainer1.Panel2.Controls.Add(NroComp);
+            splitContainer1.Panel2.Controls.Add(txt_NroComp);
             splitContainer1.Panel2.Controls.Add(lbl_NroComp);
             splitContainer1.Panel2.Controls.Add(PtoVenta);
             splitContainer1.Panel2.Controls.Add(lbl_FechaInicioAct);
@@ -283,6 +283,14 @@
             lbl_RazonSocial.TabIndex = 9;
             lbl_RazonSocial.Text = "Razon Social:";
             // 
+            // txt_fechaComprobante
+            // 
+            txt_fechaComprobante.BackColor = SystemColors.Control;
+            txt_fechaComprobante.Location = new Point(348, 105);
+            txt_fechaComprobante.Name = "txt_fechaComprobante";
+            txt_fechaComprobante.Size = new Size(332, 47);
+            txt_fechaComprobante.TabIndex = 20;
+            // 
             // CUIT
             // 
             CUIT.BackColor = SystemColors.Control;
@@ -316,16 +324,15 @@
             IIBB.TabIndex = 14;
             IIBB.Text = "Exento";
             // 
-            // NroComp
+            // txt_NroComp
             // 
-            NroComp.BackColor = SystemColors.Control;
-            NroComp.BorderStyle = BorderStyle.None;
-            NroComp.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            NroComp.Location = new Point(549, 29);
-            NroComp.Name = "NroComp";
-            NroComp.Size = new Size(145, 37);
-            NroComp.TabIndex = 15;
-            NroComp.Text = "00000001";
+            txt_NroComp.BackColor = SystemColors.Control;
+            txt_NroComp.BorderStyle = BorderStyle.None;
+            txt_NroComp.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            txt_NroComp.Location = new Point(549, 29);
+            txt_NroComp.Name = "txt_NroComp";
+            txt_NroComp.Size = new Size(145, 37);
+            txt_NroComp.TabIndex = 15;
             // 
             // lbl_NroComp
             // 
@@ -406,6 +413,15 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1407, 250);
             panel1.TabIndex = 11;
+            // 
+            // txt_formaPago
+            // 
+            txt_formaPago.BackColor = SystemColors.Control;
+            txt_formaPago.Location = new Point(336, 86);
+            txt_formaPago.Name = "txt_formaPago";
+            txt_formaPago.Size = new Size(332, 47);
+            txt_formaPago.TabIndex = 19;
+            txt_formaPago.TextChanged += txt_formaPago_TextChanged;
             // 
             // txt_proximoVencimiento
             // 
@@ -629,23 +645,6 @@
             Btn_minimizar.TabStop = false;
             Btn_minimizar.Click += Btn_minimizar_Click;
             // 
-            // txt_formaPago
-            // 
-            txt_formaPago.BackColor = SystemColors.Control;
-            txt_formaPago.Location = new Point(336, 86);
-            txt_formaPago.Name = "txt_formaPago";
-            txt_formaPago.Size = new Size(332, 47);
-            txt_formaPago.TabIndex = 19;
-            txt_formaPago.TextChanged += txt_formaPago_TextChanged;
-            // 
-            // txt_fechaComprobante
-            // 
-            txt_fechaComprobante.BackColor = SystemColors.Control;
-            txt_fechaComprobante.Location = new Point(348, 105);
-            txt_fechaComprobante.Name = "txt_fechaComprobante";
-            txt_fechaComprobante.Size = new Size(332, 47);
-            txt_fechaComprobante.TabIndex = 20;
-            // 
             // ComprobantePago_Form
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
@@ -706,7 +705,7 @@
         private Label lbl_IIBB;
         private Label lbl_CUIT;
         private Label lbl_PuntoVenta;
-        private TextBox NroComp;
+        private TextBox txt_NroComp;
         private Label lbl_NroComp;
         private TextBox PtoVenta;
         private TextBox CUIT;

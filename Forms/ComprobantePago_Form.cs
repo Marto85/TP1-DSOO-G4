@@ -41,6 +41,8 @@ namespace DSOO_Grupo4_TP1.Forms
             txt_fechaComprobante.Text = DateTime.Now.ToString("dd/MM/yyyy");
             _datosComprobante.TryGetValue("FormaDePago", out var formaPago);
             txt_formaPago.Text = formaPago?.ToString();
+            _datosComprobante.TryGetValue("NumeroComprobante", out var numeroComprobante);
+            txt_NroComp.Text = numeroComprobante?.ToString();
 
             if (_datosComprobante.TryGetValue("Actividades", out var actividades))
             {
