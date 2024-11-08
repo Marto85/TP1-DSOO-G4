@@ -23,6 +23,7 @@ namespace DSOO_Grupo4_TP1
         public Convert_form(Form formularioPrincipal)
         {
             InitializeComponent();
+            this.AcceptButton = Buscar_Cliente;
             _formularioPrincipal = formularioPrincipal;
         }
 

@@ -19,6 +19,7 @@ namespace DSOO_Grupo4_TP1.Forms
         public Carnet_Form()
         {
             InitializeComponent();
+            this.AcceptButton = Btn_Imprimir_Carnet;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]

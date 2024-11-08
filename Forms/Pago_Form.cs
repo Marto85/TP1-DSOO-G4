@@ -27,6 +27,7 @@ namespace DSOO_Grupo4_TP1.Forms
         public Pago_Form()
         {
             InitializeComponent();
+            this.AcceptButton = Btn_Pagar;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]

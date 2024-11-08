@@ -25,6 +25,7 @@ namespace DSOO_Grupo4_TP1
         {
             InitializeComponent();
             _formularioPrincipal = formularioPrincipal;
+            this.AcceptButton = Enviar_Registro;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]

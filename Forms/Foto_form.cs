@@ -23,6 +23,7 @@ namespace DSOO_Grupo4_TP1.Forms
         {
             InitializeComponent();
             CargarDispositivosDeVideo();
+            this.AcceptButton = BtnCapturarFoto;
             _formularioAltaCliente = formularioAltaCliente;
         }
 

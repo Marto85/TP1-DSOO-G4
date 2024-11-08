@@ -26,6 +26,7 @@ namespace DSOO_Grupo4_TP1.Forms
         public Inscribir_Actividad_Form(Form formularioPrincipal)
         {
             InitializeComponent();
+            this.AcceptButton = Inscripcion_Actividades_Button;
             _formularioPrincipal = formularioPrincipal;
         }
 

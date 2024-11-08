@@ -23,6 +23,7 @@ namespace DSOO_Grupo4_TP1.Forms
         public ComprobantePago_Form(Dictionary<string, object> datosComprobante, Cliente clienteActual, DateTime proximoVencimiento, string tipoDePagoSeleccionado, string formaPago)
         {
             InitializeComponent();
+            this.AcceptButton = Btn_ImprimirComprobante;
             _datosComprobante = datosComprobante;
             _clienteActual = clienteActual;
             _proximoVencimiento = proximoVencimiento;
