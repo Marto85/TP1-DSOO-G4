@@ -17,14 +17,16 @@ namespace DSOO_Grupo4_TP1.Forms
         private Cliente _clienteActual;
         private DateTime _proximoVencimiento;
         private string _tipoDePagoSeleccionado;
+        private string _formaPago;
 
-        public ComprobantePago_Form(Dictionary<string, object> datosComprobante, Cliente clienteActual, DateTime proximoVencimiento, string tipoDePagoSeleccionado)
+        public ComprobantePago_Form(Dictionary<string, object> datosComprobante, Cliente clienteActual, DateTime proximoVencimiento, string tipoDePagoSeleccionado, string formaPago)
         {
             InitializeComponent();
             _datosComprobante = datosComprobante;
             _clienteActual = clienteActual;
             _proximoVencimiento = proximoVencimiento;
             _tipoDePagoSeleccionado = tipoDePagoSeleccionado;
+            _formaPago = formaPago;
 
             MostrarDatosComprobante();
         }
@@ -36,6 +38,10 @@ namespace DSOO_Grupo4_TP1.Forms
             txt_dni.Text = _clienteActual.DNI.ToString();
             txt_frecuenciaPago.Text = _tipoDePagoSeleccionado;
             txt_proximoVencimiento.Text = _proximoVencimiento.ToString("dd/MM/yyyy");
+            txt_fechaComprobante.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            _datosComprobante.TryGetValue("FormaDePago", out var formaPago);
+            txt_formaPago.Text = formaPago?.ToString();
+
             if (_datosComprobante.TryGetValue("Actividades", out var actividades))
             {
                 List<Dictionary<string, object>> actividadesList = (List<Dictionary<string, object>>)actividades;
@@ -84,6 +90,11 @@ namespace DSOO_Grupo4_TP1.Forms
         private void Btn_minimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void txt_formaPago_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

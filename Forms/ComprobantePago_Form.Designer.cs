@@ -56,6 +56,7 @@
             lbl_CUIT = new Label();
             lbl_PuntoVenta = new Label();
             panel1 = new Panel();
+            txt_proximoVencimiento = new TextBox();
             txt_frecuenciaPago = new TextBox();
             txt_dni = new TextBox();
             txt_nombreCliente = new TextBox();
@@ -77,7 +78,8 @@
             ImprimirComprobante = new Button();
             Btn_cerrar = new PictureBox();
             Btn_minimizar = new PictureBox();
-            txt_proximoVencimiento = new TextBox();
+            txt_formaPago = new TextBox();
+            txt_fechaComprobante = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -122,7 +124,7 @@
             // 
             lblTipoPago.AutoSize = true;
             lblTipoPago.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTipoPago.Location = new Point(13, 168);
+            lblTipoPago.Location = new Point(13, 171);
             lblTipoPago.Name = "lblTipoPago";
             lblTipoPago.Size = new Size(296, 41);
             lblTipoPago.TabIndex = 3;
@@ -132,7 +134,7 @@
             // 
             lbl_formaPago.AutoSize = true;
             lbl_formaPago.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_formaPago.Location = new Point(13, 109);
+            lbl_formaPago.Location = new Point(13, 89);
             lbl_formaPago.Name = "lbl_formaPago";
             lbl_formaPago.Size = new Size(289, 41);
             lbl_formaPago.TabIndex = 5;
@@ -201,6 +203,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(txt_fechaComprobante);
             splitContainer1.Panel2.Controls.Add(CUIT);
             splitContainer1.Panel2.Controls.Add(FechaInicioAct);
             splitContainer1.Panel2.Controls.Add(IIBB);
@@ -387,6 +390,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(txt_formaPago);
             panel1.Controls.Add(txt_proximoVencimiento);
             panel1.Controls.Add(txt_frecuenciaPago);
             panel1.Controls.Add(txt_dni);
@@ -403,10 +407,18 @@
             panel1.Size = new Size(1407, 250);
             panel1.TabIndex = 11;
             // 
+            // txt_proximoVencimiento
+            // 
+            txt_proximoVencimiento.BackColor = SystemColors.Control;
+            txt_proximoVencimiento.Location = new Point(1093, 165);
+            txt_proximoVencimiento.Name = "txt_proximoVencimiento";
+            txt_proximoVencimiento.Size = new Size(286, 47);
+            txt_proximoVencimiento.TabIndex = 18;
+            // 
             // txt_frecuenciaPago
             // 
             txt_frecuenciaPago.BackColor = SystemColors.Control;
-            txt_frecuenciaPago.Location = new Point(336, 162);
+            txt_frecuenciaPago.Location = new Point(336, 165);
             txt_frecuenciaPago.Name = "txt_frecuenciaPago";
             txt_frecuenciaPago.Size = new Size(332, 47);
             txt_frecuenciaPago.TabIndex = 17;
@@ -442,7 +454,7 @@
             CondIVACliente.BackColor = SystemColors.Control;
             CondIVACliente.BorderStyle = BorderStyle.None;
             CondIVACliente.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            CondIVACliente.Location = new Point(371, 48);
+            CondIVACliente.Location = new Point(371, 26);
             CondIVACliente.Name = "CondIVACliente";
             CondIVACliente.Size = new Size(320, 37);
             CondIVACliente.TabIndex = 14;
@@ -452,7 +464,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(13, 46);
+            label1.Location = new Point(13, 24);
             label1.Name = "label1";
             label1.Size = new Size(352, 41);
             label1.TabIndex = 13;
@@ -617,13 +629,22 @@
             Btn_minimizar.TabStop = false;
             Btn_minimizar.Click += Btn_minimizar_Click;
             // 
-            // txt_proximoVencimiento
+            // txt_formaPago
             // 
-            txt_proximoVencimiento.BackColor = SystemColors.Control;
-            txt_proximoVencimiento.Location = new Point(1093, 165);
-            txt_proximoVencimiento.Name = "txt_proximoVencimiento";
-            txt_proximoVencimiento.Size = new Size(286, 47);
-            txt_proximoVencimiento.TabIndex = 18;
+            txt_formaPago.BackColor = SystemColors.Control;
+            txt_formaPago.Location = new Point(336, 86);
+            txt_formaPago.Name = "txt_formaPago";
+            txt_formaPago.Size = new Size(332, 47);
+            txt_formaPago.TabIndex = 19;
+            txt_formaPago.TextChanged += txt_formaPago_TextChanged;
+            // 
+            // txt_fechaComprobante
+            // 
+            txt_fechaComprobante.BackColor = SystemColors.Control;
+            txt_fechaComprobante.Location = new Point(348, 105);
+            txt_fechaComprobante.Name = "txt_fechaComprobante";
+            txt_fechaComprobante.Size = new Size(332, 47);
+            txt_fechaComprobante.TabIndex = 20;
             // 
             // ComprobantePago_Form
             // 
@@ -715,5 +736,7 @@
         private TextBox txt_dni;
         private TextBox txt_frecuenciaPago;
         private TextBox txt_proximoVencimiento;
+        private TextBox txt_formaPago;
+        private TextBox txt_fechaComprobante;
     }
 }

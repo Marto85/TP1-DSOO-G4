@@ -535,7 +535,7 @@ namespace DSOO_Grupo4_TP1.Forms
                         MessageBox.Show("Pago de actividades procesado correctamente.");
                     }
 
-                    ComprobantePago_Form comprobante = new ComprobantePago_Form(datosComprobante, clienteActual, proximoVencimiento, tipoDePagoSeleccionado);
+                    ComprobantePago_Form comprobante = new ComprobantePago_Form(datosComprobante, clienteActual, proximoVencimiento, tipoDePagoSeleccionado, formaPago);
                     comprobante.ShowDialog();
                 }
                 catch (Exception ex)
