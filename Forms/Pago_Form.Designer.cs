@@ -73,7 +73,7 @@
             panel2.Location = new Point(0, 2);
             panel2.Margin = new Padding(2, 3, 2, 3);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1803, 55);
+            panel2.Size = new Size(1803, 60);
             panel2.TabIndex = 12;
             panel2.MouseDown += panel2_MouseDown;
             // 
@@ -81,7 +81,7 @@
             // 
             Btn_Atras.Cursor = Cursors.Hand;
             Btn_Atras.Image = (Image)resources.GetObject("Btn_Atras.Image");
-            Btn_Atras.Location = new Point(2, -3);
+            Btn_Atras.Location = new Point(2, 2);
             Btn_Atras.Margin = new Padding(2, 3, 2, 3);
             Btn_Atras.Name = "Btn_Atras";
             Btn_Atras.Size = new Size(78, 55);
@@ -94,7 +94,7 @@
             // 
             Btn_minimizar.Cursor = Cursors.Hand;
             Btn_minimizar.Image = (Image)resources.GetObject("Btn_minimizar.Image");
-            Btn_minimizar.Location = new Point(1643, -3);
+            Btn_minimizar.Location = new Point(1643, 3);
             Btn_minimizar.Margin = new Padding(2, 3, 2, 3);
             Btn_minimizar.Name = "Btn_minimizar";
             Btn_minimizar.Size = new Size(78, 55);
@@ -107,7 +107,7 @@
             // 
             Btn_cerrar.Cursor = Cursors.Hand;
             Btn_cerrar.Image = (Image)resources.GetObject("Btn_cerrar.Image");
-            Btn_cerrar.Location = new Point(1725, -3);
+            Btn_cerrar.Location = new Point(1725, 3);
             Btn_cerrar.Margin = new Padding(2, 3, 2, 3);
             Btn_cerrar.Name = "Btn_cerrar";
             Btn_cerrar.Size = new Size(78, 55);

@@ -14,17 +14,28 @@ namespace DSOO_Grupo4_TP1.Forms
     public partial class ComprobantePago_Form : Form
     {
         private Dictionary<string, object> _datosComprobante;
+        private Cliente _clienteActual;
+        private DateTime _proximoVencimiento;
+        private string _tipoDePagoSeleccionado;
 
-        public ComprobantePago_Form(Dictionary<string, object> datosComprobante)
+        public ComprobantePago_Form(Dictionary<string, object> datosComprobante, Cliente clienteActual, DateTime proximoVencimiento, string tipoDePagoSeleccionado)
         {
             InitializeComponent();
             _datosComprobante = datosComprobante;
+            _clienteActual = clienteActual;
+            _proximoVencimiento = proximoVencimiento;
+            _tipoDePagoSeleccionado = tipoDePagoSeleccionado;
 
             MostrarDatosComprobante();
         }
 
+
         private void MostrarDatosComprobante()
         {
+            txt_nombreCliente.Text = _clienteActual.Nombre + " " + _clienteActual.Apellido;
+            txt_dni.Text = _clienteActual.DNI.ToString();
+            txt_frecuenciaPago.Text = _tipoDePagoSeleccionado;
+            txt_proximoVencimiento.Text = _proximoVencimiento.ToString("dd/MM/yyyy");
             if (_datosComprobante.TryGetValue("Actividades", out var actividades))
             {
                 List<Dictionary<string, object>> actividadesList = (List<Dictionary<string, object>>)actividades;
@@ -55,6 +66,25 @@ namespace DSOO_Grupo4_TP1.Forms
 
         }
 
+        private void ImprimirComprobante_MouseEnter(object sender, EventArgs e)
+        {
+            ImprimirComprobante.BackColor = SystemColors.Highlight;
+        }
+
+        private void ImprimirComprobante_MouseLeave(object sender, EventArgs e)
+        {
+            ImprimirComprobante.BackColor = SystemColors.Control;
+        }
+
+        private void Btn_cerrar_Click(object sender, EventArgs e)
+        {
+            Utils.ConfirmarCierre();
+        }
+
+        private void Btn_minimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 
 }

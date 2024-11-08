@@ -68,7 +68,7 @@ namespace DSOO_Grupo4_TP1.Forms
             Utils.ConfirmarCierre();
         }
 
-        private void Buscar_Cliente_Click(object sender, EventArgs e)
+        public void Buscar_Cliente_Click(object sender, EventArgs e)
         {
             conexion = Conexion.getInstancia();
             string connectionString = conexion.CrearConexion().ConnectionString;
@@ -153,6 +153,7 @@ namespace DSOO_Grupo4_TP1.Forms
                                 }
                             }
                         }
+                       
                     }
                     catch (Exception ex)
                     {
@@ -164,6 +165,7 @@ namespace DSOO_Grupo4_TP1.Forms
                     }
                 }
             }
+
         }
 
         public void CargarActividades()
@@ -370,13 +372,14 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void Btn_Pagar_Click(object sender, EventArgs e)
         {
+
             List<Actividad> actividadesDisponibles = ObtenerActividadesDesdeDB();
 
             if (actividadesDisponibles == null || actividadesDisponibles.Count == 0)
             {
                 MessageBox.Show("No se encontraron actividades disponibles.");
                 return;
-            }
+            }   
 
             Conexion conexion = Conexion.getInstancia();
             string connectionString = conexion.CrearConexion().ConnectionString;
@@ -532,7 +535,7 @@ namespace DSOO_Grupo4_TP1.Forms
                         MessageBox.Show("Pago de actividades procesado correctamente.");
                     }
 
-                    ComprobantePago_Form comprobante = new ComprobantePago_Form(datosComprobante);
+                    ComprobantePago_Form comprobante = new ComprobantePago_Form(datosComprobante, clienteActual, proximoVencimiento, tipoDePagoSeleccionado);
                     comprobante.ShowDialog();
                 }
                 catch (Exception ex)

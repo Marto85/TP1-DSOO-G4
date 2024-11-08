@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComprobantePago_Form));
             lblMonto = new Label();
             lblFechaPago = new Label();
             lblProximoVencimiento = new Label();
@@ -55,6 +56,9 @@
             lbl_CUIT = new Label();
             lbl_PuntoVenta = new Label();
             panel1 = new Panel();
+            txt_frecuenciaPago = new TextBox();
+            txt_dni = new TextBox();
+            txt_nombreCliente = new TextBox();
             lbl_NombreCliente = new Label();
             CondIVACliente = new TextBox();
             label1 = new Label();
@@ -70,6 +74,10 @@
             Lbl_Bonificacion = new TextBox();
             lbl_PrecioUnit = new TextBox();
             lbl_Subtotal = new TextBox();
+            ImprimirComprobante = new Button();
+            Btn_cerrar = new PictureBox();
+            Btn_minimizar = new PictureBox();
+            txt_proximoVencimiento = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -77,12 +85,14 @@
             splitContainer1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvActividades).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Btn_cerrar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Btn_minimizar).BeginInit();
             SuspendLayout();
             // 
             // lblMonto
             // 
             lblMonto.AutoSize = true;
-            lblMonto.Location = new Point(120, 668);
+            lblMonto.Location = new Point(123, 707);
             lblMonto.Name = "lblMonto";
             lblMonto.Size = new Size(108, 41);
             lblMonto.TabIndex = 0;
@@ -143,7 +153,7 @@
             FctOriginal.BackColor = SystemColors.Control;
             FctOriginal.BorderStyle = BorderStyle.FixedSingle;
             FctOriginal.Font = new Font("Century Gothic", 20.1F, FontStyle.Bold, GraphicsUnit.Point);
-            FctOriginal.Location = new Point(66, 43);
+            FctOriginal.Location = new Point(69, 82);
             FctOriginal.Name = "FctOriginal";
             FctOriginal.Size = new Size(1407, 90);
             FctOriginal.TabIndex = 7;
@@ -166,7 +176,7 @@
             TipoFct.BackColor = SystemColors.Control;
             TipoFct.BorderStyle = BorderStyle.FixedSingle;
             TipoFct.Font = new Font("Century Gothic", 21.9F, FontStyle.Bold, GraphicsUnit.Point);
-            TipoFct.Location = new Point(690, 129);
+            TipoFct.Location = new Point(693, 168);
             TipoFct.Name = "TipoFct";
             TipoFct.Size = new Size(120, 97);
             TipoFct.TabIndex = 9;
@@ -175,7 +185,7 @@
             // 
             // splitContainer1
             // 
-            splitContainer1.Location = new Point(66, 129);
+            splitContainer1.Location = new Point(69, 168);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -377,6 +387,10 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(txt_proximoVencimiento);
+            panel1.Controls.Add(txt_frecuenciaPago);
+            panel1.Controls.Add(txt_dni);
+            panel1.Controls.Add(txt_nombreCliente);
             panel1.Controls.Add(lbl_NombreCliente);
             panel1.Controls.Add(CondIVACliente);
             panel1.Controls.Add(label1);
@@ -384,10 +398,34 @@
             panel1.Controls.Add(lbl_formaPago);
             panel1.Controls.Add(lblTipoPago);
             panel1.Controls.Add(lblProximoVencimiento);
-            panel1.Location = new Point(69, 509);
+            panel1.Location = new Point(72, 548);
             panel1.Name = "panel1";
             panel1.Size = new Size(1407, 250);
             panel1.TabIndex = 11;
+            // 
+            // txt_frecuenciaPago
+            // 
+            txt_frecuenciaPago.BackColor = SystemColors.Control;
+            txt_frecuenciaPago.Location = new Point(336, 162);
+            txt_frecuenciaPago.Name = "txt_frecuenciaPago";
+            txt_frecuenciaPago.Size = new Size(332, 47);
+            txt_frecuenciaPago.TabIndex = 17;
+            // 
+            // txt_dni
+            // 
+            txt_dni.BackColor = SystemColors.Control;
+            txt_dni.Location = new Point(867, 83);
+            txt_dni.Name = "txt_dni";
+            txt_dni.Size = new Size(332, 47);
+            txt_dni.TabIndex = 16;
+            // 
+            // txt_nombreCliente
+            // 
+            txt_nombreCliente.BackColor = SystemColors.Control;
+            txt_nombreCliente.Location = new Point(1047, 18);
+            txt_nombreCliente.Name = "txt_nombreCliente";
+            txt_nombreCliente.Size = new Size(332, 47);
+            txt_nombreCliente.TabIndex = 15;
             // 
             // lbl_NombreCliente
             // 
@@ -436,7 +474,7 @@
             dgvActividades.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvActividades.ColumnHeadersVisible = false;
             dgvActividades.Columns.AddRange(new DataGridViewColumn[] { Codigo, Clase, PrecioUnitario, Bonificacion, Subtotal });
-            dgvActividades.Location = new Point(69, 808);
+            dgvActividades.Location = new Point(72, 847);
             dgvActividades.Name = "dgvActividades";
             dgvActividades.RowHeadersVisible = false;
             dgvActividades.RowHeadersWidth = 102;
@@ -484,7 +522,7 @@
             lbl_CodAct.BackColor = SystemColors.ScrollBar;
             lbl_CodAct.BorderStyle = BorderStyle.FixedSingle;
             lbl_CodAct.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_CodAct.Location = new Point(69, 754);
+            lbl_CodAct.Location = new Point(72, 793);
             lbl_CodAct.Name = "lbl_CodAct";
             lbl_CodAct.Size = new Size(181, 57);
             lbl_CodAct.TabIndex = 13;
@@ -496,7 +534,7 @@
             textBox1.BackColor = SystemColors.ScrollBar;
             textBox1.BorderStyle = BorderStyle.FixedSingle;
             textBox1.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            textBox1.Location = new Point(239, 754);
+            textBox1.Location = new Point(242, 793);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(300, 57);
             textBox1.TabIndex = 14;
@@ -508,7 +546,7 @@
             Lbl_Bonificacion.BackColor = SystemColors.ScrollBar;
             Lbl_Bonificacion.BorderStyle = BorderStyle.FixedSingle;
             Lbl_Bonificacion.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Lbl_Bonificacion.Location = new Point(845, 754);
+            Lbl_Bonificacion.Location = new Point(848, 793);
             Lbl_Bonificacion.Name = "Lbl_Bonificacion";
             Lbl_Bonificacion.Size = new Size(312, 57);
             Lbl_Bonificacion.TabIndex = 15;
@@ -520,7 +558,7 @@
             lbl_PrecioUnit.BackColor = SystemColors.ScrollBar;
             lbl_PrecioUnit.BorderStyle = BorderStyle.FixedSingle;
             lbl_PrecioUnit.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_PrecioUnit.Location = new Point(532, 754);
+            lbl_PrecioUnit.Location = new Point(535, 793);
             lbl_PrecioUnit.Name = "lbl_PrecioUnit";
             lbl_PrecioUnit.Size = new Size(325, 57);
             lbl_PrecioUnit.TabIndex = 16;
@@ -532,18 +570,69 @@
             lbl_Subtotal.BackColor = SystemColors.ScrollBar;
             lbl_Subtotal.BorderStyle = BorderStyle.FixedSingle;
             lbl_Subtotal.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_Subtotal.Location = new Point(1138, 754);
+            lbl_Subtotal.Location = new Point(1141, 793);
             lbl_Subtotal.Name = "lbl_Subtotal";
             lbl_Subtotal.Size = new Size(339, 57);
             lbl_Subtotal.TabIndex = 17;
             lbl_Subtotal.Text = "   Subtotal";
             lbl_Subtotal.TextAlign = HorizontalAlignment.Center;
             // 
+            // ImprimirComprobante
+            // 
+            ImprimirComprobante.BackColor = SystemColors.Control;
+            ImprimirComprobante.Cursor = Cursors.Hand;
+            ImprimirComprobante.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
+            ImprimirComprobante.Location = new Point(560, 1134);
+            ImprimirComprobante.Name = "ImprimirComprobante";
+            ImprimirComprobante.Size = new Size(354, 58);
+            ImprimirComprobante.TabIndex = 19;
+            ImprimirComprobante.Text = "Imprimir";
+            ImprimirComprobante.UseVisualStyleBackColor = false;
+            ImprimirComprobante.MouseEnter += ImprimirComprobante_MouseEnter;
+            ImprimirComprobante.MouseLeave += ImprimirComprobante_MouseLeave;
+            // 
+            // Btn_cerrar
+            // 
+            Btn_cerrar.Cursor = Cursors.Hand;
+            Btn_cerrar.Image = (Image)resources.GetObject("Btn_cerrar.Image");
+            Btn_cerrar.Location = new Point(1473, 0);
+            Btn_cerrar.Margin = new Padding(2, 3, 2, 3);
+            Btn_cerrar.Name = "Btn_cerrar";
+            Btn_cerrar.Size = new Size(78, 55);
+            Btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
+            Btn_cerrar.TabIndex = 20;
+            Btn_cerrar.TabStop = false;
+            Btn_cerrar.Click += Btn_cerrar_Click;
+            // 
+            // Btn_minimizar
+            // 
+            Btn_minimizar.Cursor = Cursors.Hand;
+            Btn_minimizar.Image = (Image)resources.GetObject("Btn_minimizar.Image");
+            Btn_minimizar.Location = new Point(1398, 0);
+            Btn_minimizar.Margin = new Padding(2, 3, 2, 3);
+            Btn_minimizar.Name = "Btn_minimizar";
+            Btn_minimizar.Size = new Size(78, 55);
+            Btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
+            Btn_minimizar.TabIndex = 21;
+            Btn_minimizar.TabStop = false;
+            Btn_minimizar.Click += Btn_minimizar_Click;
+            // 
+            // txt_proximoVencimiento
+            // 
+            txt_proximoVencimiento.BackColor = SystemColors.Control;
+            txt_proximoVencimiento.Location = new Point(1093, 165);
+            txt_proximoVencimiento.Name = "txt_proximoVencimiento";
+            txt_proximoVencimiento.Size = new Size(286, 47);
+            txt_proximoVencimiento.TabIndex = 18;
+            // 
             // ComprobantePago_Form
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1552, 1133);
+            ClientSize = new Size(1552, 1231);
+            Controls.Add(Btn_minimizar);
+            Controls.Add(Btn_cerrar);
+            Controls.Add(ImprimirComprobante);
             Controls.Add(dgvActividades);
             Controls.Add(lbl_Subtotal);
             Controls.Add(lbl_PrecioUnit);
@@ -568,6 +657,8 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvActividades).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Btn_cerrar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Btn_minimizar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -617,5 +708,12 @@
         private DataGridViewTextBoxColumn PrecioUnitario;
         private DataGridViewTextBoxColumn Bonificacion;
         private DataGridViewTextBoxColumn Subtotal;
+        private Button ImprimirComprobante;
+        private PictureBox Btn_cerrar;
+        private PictureBox Btn_minimizar;
+        private TextBox txt_nombreCliente;
+        private TextBox txt_dni;
+        private TextBox txt_frecuenciaPago;
+        private TextBox txt_proximoVencimiento;
     }
 }
