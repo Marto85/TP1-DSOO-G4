@@ -55,13 +55,56 @@ namespace DSOO_Grupo4_TP1
             DateTime fechaIngreso = DateTime.Now;
             string nombre = Nombre_Registro.Text;
             string apellido = Apellido_Registro.Text;
-            int dni = int.Parse(DNI_Registro.Text);
             string domicilio = Domicilio_Registro.Text;
             string telefono = Telefono_Registro.Text;
             string mail = Mail_Registro.Text;
             bool esSocio = Socio.Checked;
             string? imagenPerfil = imgPath;
             decimal? abonoMensual = esSocio ? 10000 : null;
+
+            // Validar DNI
+            if (!int.TryParse(DNI_Registro.Text, out int dni) || dni <= 0)
+            {
+                MessageBox.Show("Por favor ingresa un DNI válido.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validar nombre
+            if (string.IsNullOrWhiteSpace(nombre) || nombre == "Nombre")
+            {
+                MessageBox.Show("El nombre no puede estar vacío.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validar apellido
+            if (string.IsNullOrWhiteSpace(apellido) || apellido == "Apellido")
+            {
+                MessageBox.Show("El apellido no puede estar vacío.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validar domicilio
+            if (string.IsNullOrWhiteSpace(domicilio) || domicilio == "Domicilio")
+            {
+                MessageBox.Show("El domicilio no puede estar vacío.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validar teléfono
+            if (string.IsNullOrWhiteSpace(telefono) || telefono.Length < 8 || telefono == "Telefono")
+            {
+                MessageBox.Show("Por favor ingresa un teléfono válido.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validar email
+            if (string.IsNullOrWhiteSpace(mail) || !System.Text.RegularExpressions.Regex.IsMatch(mail, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                MessageBox.Show("Por favor ingresa un correo electrónico válido.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
 
             Cliente nuevoCliente;
 
