@@ -194,15 +194,16 @@ namespace DSOO_Grupo4_TP1
         {
             string input = Microsoft.VisualBasic.Interaction.InputBox("Ingrese el nuevo valor del abono mensual para socios:", "Modificar Abono Mensual", "10000");
 
-            if (decimal.TryParse(input, out decimal nuevoAbono))
-            {
-                ActualizarAbonoSociosEnBaseDeDatos(nuevoAbono);
-
-                MessageBox.Show("El abono mensual se ha actualizado correctamente.", "Actualización exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("El valor ingresado no es válido. Intente nuevamente.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (!string.IsNullOrEmpty(input)) { 
+                if (decimal.TryParse(input, out decimal nuevoAbono))
+                {
+                    ActualizarAbonoSociosEnBaseDeDatos(nuevoAbono);
+                    MessageBox.Show("El abono mensual se ha actualizado correctamente.", "Actualización exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("El valor ingresado no es válido. Intente nuevamente.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

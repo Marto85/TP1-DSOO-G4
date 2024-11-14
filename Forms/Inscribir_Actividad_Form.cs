@@ -84,10 +84,27 @@ namespace DSOO_Grupo4_TP1.Forms
                                     {
                                         label1.Text = $"{Nombre} {Apellido} - Paga por actividades individuales";
                                     }
+
+                                    this.label2.Visible = true;
+                                    this.checkBoxCrossfit.Visible = true;
+                                    this.checkBoxFutbol.Visible = true;
+                                    this.checkBoxNatacion.Visible = true;
+                                    this.checkBoxPilates.Visible = true;
+                                    this.checkBoxYoga.Visible = true;
+                                    this.checkBoxZumba.Visible = true;
+                                    this.Inscripcion_Actividades_Button.Visible = true;
                                 }
                                 else
                                 {
                                     label1.Text = "No se ha encontrado el cliente con el DNI indicado";
+                                    this.label2.Visible = false;
+                                    this.checkBoxCrossfit.Visible = false;
+                                    this.checkBoxFutbol.Visible = false;
+                                    this.checkBoxNatacion.Visible = false;
+                                    this.checkBoxPilates.Visible = false;
+                                    this.checkBoxYoga.Visible = false;
+                                    this.checkBoxZumba.Visible = false;
+                                    this.Inscripcion_Actividades_Button.Visible = false;
                                 }
 
                                 label1.Left = (this.ClientSize.Width - label1.Width) / 2;
