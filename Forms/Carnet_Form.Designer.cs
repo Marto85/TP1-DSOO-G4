@@ -53,9 +53,9 @@
             panel2.Controls.Add(btn_minimizar);
             panel2.Controls.Add(btn_cerrar);
             panel2.Location = new Point(0, 0);
-            panel2.Margin = new Padding(2, 3, 2, 3);
+            panel2.Margin = new Padding(1, 1, 1, 1);
             panel2.Name = "panel2";
-            panel2.Size = new Size(907, 61);
+            panel2.Size = new Size(373, 22);
             panel2.TabIndex = 12;
             panel2.MouseDown += panel2_MouseDown;
             // 
@@ -64,9 +64,9 @@
             Btn_Atras.Cursor = Cursors.Hand;
             Btn_Atras.Image = (Image)resources.GetObject("Btn_Atras.Image");
             Btn_Atras.Location = new Point(0, 0);
-            Btn_Atras.Margin = new Padding(2, 3, 2, 3);
+            Btn_Atras.Margin = new Padding(1, 1, 1, 1);
             Btn_Atras.Name = "Btn_Atras";
-            Btn_Atras.Size = new Size(78, 55);
+            Btn_Atras.Size = new Size(32, 20);
             Btn_Atras.SizeMode = PictureBoxSizeMode.Zoom;
             Btn_Atras.TabIndex = 13;
             Btn_Atras.TabStop = false;
@@ -76,10 +76,10 @@
             // 
             btn_minimizar.Cursor = Cursors.Hand;
             btn_minimizar.Image = (Image)resources.GetObject("btn_minimizar.Image");
-            btn_minimizar.Location = new Point(747, 0);
-            btn_minimizar.Margin = new Padding(2, 3, 2, 3);
+            btn_minimizar.Location = new Point(308, 0);
+            btn_minimizar.Margin = new Padding(1, 1, 1, 1);
             btn_minimizar.Name = "btn_minimizar";
-            btn_minimizar.Size = new Size(78, 55);
+            btn_minimizar.Size = new Size(32, 20);
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_minimizar.TabIndex = 8;
             btn_minimizar.TabStop = false;
@@ -89,10 +89,10 @@
             // 
             btn_cerrar.Cursor = Cursors.Hand;
             btn_cerrar.Image = (Image)resources.GetObject("btn_cerrar.Image");
-            btn_cerrar.Location = new Point(829, 0);
-            btn_cerrar.Margin = new Padding(2, 3, 2, 3);
+            btn_cerrar.Location = new Point(341, 0);
+            btn_cerrar.Margin = new Padding(1, 1, 1, 1);
             btn_cerrar.Name = "btn_cerrar";
-            btn_cerrar.Size = new Size(78, 55);
+            btn_cerrar.Size = new Size(32, 20);
             btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_cerrar.TabIndex = 7;
             btn_cerrar.TabStop = false;
@@ -100,53 +100,60 @@
             // 
             // pictureBoxPerfil
             // 
-            pictureBoxPerfil.Location = new Point(43, 181);
+            pictureBoxPerfil.Location = new Point(18, 66);
+            pictureBoxPerfil.Margin = new Padding(1, 1, 1, 1);
             pictureBoxPerfil.Name = "pictureBoxPerfil";
-            pictureBoxPerfil.Size = new Size(270, 250);
+            pictureBoxPerfil.Size = new Size(111, 91);
+            pictureBoxPerfil.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBoxPerfil.TabIndex = 13;
             pictureBoxPerfil.TabStop = false;
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(438, 181);
+            lblNombre.Location = new Point(180, 66);
+            lblNombre.Margin = new Padding(1, 0, 1, 0);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(97, 41);
+            lblNombre.Size = new Size(38, 15);
             lblNombre.TabIndex = 14;
             lblNombre.Text = "label1";
             // 
             // lblApellido
             // 
             lblApellido.AutoSize = true;
-            lblApellido.Location = new Point(695, 181);
+            lblApellido.Location = new Point(286, 66);
+            lblApellido.Margin = new Padding(1, 0, 1, 0);
             lblApellido.Name = "lblApellido";
-            lblApellido.Size = new Size(97, 41);
+            lblApellido.Size = new Size(38, 15);
             lblApellido.TabIndex = 15;
             lblApellido.Text = "label2";
             // 
             // lblDNI
             // 
             lblDNI.AutoSize = true;
-            lblDNI.Location = new Point(438, 377);
+            lblDNI.Location = new Point(180, 138);
+            lblDNI.Margin = new Padding(1, 0, 1, 0);
             lblDNI.Name = "lblDNI";
-            lblDNI.Size = new Size(97, 41);
+            lblDNI.Size = new Size(38, 15);
             lblDNI.TabIndex = 16;
             lblDNI.Text = "label3";
             // 
             // lblSocio
             // 
             lblSocio.AutoSize = true;
-            lblSocio.Location = new Point(695, 377);
+            lblSocio.Location = new Point(286, 138);
+            lblSocio.Margin = new Padding(1, 0, 1, 0);
             lblSocio.Name = "lblSocio";
-            lblSocio.Size = new Size(97, 41);
+            lblSocio.Size = new Size(38, 15);
             lblSocio.TabIndex = 17;
             lblSocio.Text = "label4";
             // 
             // Btn_Imprimir_Carnet
             // 
-            Btn_Imprimir_Carnet.Location = new Point(508, 461);
+            Btn_Imprimir_Carnet.Location = new Point(209, 169);
+            Btn_Imprimir_Carnet.Margin = new Padding(1, 1, 1, 1);
             Btn_Imprimir_Carnet.Name = "Btn_Imprimir_Carnet";
-            Btn_Imprimir_Carnet.Size = new Size(188, 58);
+            Btn_Imprimir_Carnet.Size = new Size(77, 21);
             Btn_Imprimir_Carnet.TabIndex = 18;
             Btn_Imprimir_Carnet.Text = "Imprimir";
             Btn_Imprimir_Carnet.UseVisualStyleBackColor = true;
@@ -154,9 +161,9 @@
             // 
             // Carnet_Form
             // 
-            AutoScaleDimensions = new SizeF(17F, 41F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(905, 535);
+            ClientSize = new Size(373, 196);
             Controls.Add(Btn_Imprimir_Carnet);
             Controls.Add(lblSocio);
             Controls.Add(lblDNI);
@@ -165,6 +172,7 @@
             Controls.Add(pictureBoxPerfil);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(1, 1, 1, 1);
             Name = "Carnet_Form";
             Text = "Carnet_Form";
             MouseDown += Carnet_Form_MouseDown;

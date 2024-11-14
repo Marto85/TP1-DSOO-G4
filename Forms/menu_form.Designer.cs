@@ -47,12 +47,10 @@ namespace DSOO_Grupo4_TP1
             Salir_Menu_Button = new Button();
             Morosos_Menu_Button = new Button();
             Menu_Form_Panel = new Panel();
-            Btn_Atras = new PictureBox();
             btn_cerrar = new PictureBox();
             btn_minimizar = new PictureBox();
             Btn_Modifica_Abono = new Button();
             Menu_Form_Panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)Btn_Atras).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).BeginInit();
             SuspendLayout();
@@ -61,10 +59,9 @@ namespace DSOO_Grupo4_TP1
             // 
             AltaCliente.BackColor = SystemColors.Highlight;
             AltaCliente.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            AltaCliente.Location = new Point(201, 115);
-            AltaCliente.Margin = new Padding(7, 8, 7, 8);
+            AltaCliente.Location = new Point(83, 42);
             AltaCliente.Name = "AltaCliente";
-            AltaCliente.Size = new Size(434, 110);
+            AltaCliente.Size = new Size(179, 40);
             AltaCliente.TabIndex = 0;
             AltaCliente.Text = "Dar de alta un socio o cliente";
             AltaCliente.UseVisualStyleBackColor = false;
@@ -74,10 +71,9 @@ namespace DSOO_Grupo4_TP1
             // 
             ConvertirEnSocio.BackColor = SystemColors.Highlight;
             ConvertirEnSocio.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            ConvertirEnSocio.Location = new Point(201, 274);
-            ConvertirEnSocio.Margin = new Padding(7, 8, 7, 8);
+            ConvertirEnSocio.Location = new Point(83, 100);
             ConvertirEnSocio.Name = "ConvertirEnSocio";
-            ConvertirEnSocio.Size = new Size(434, 110);
+            ConvertirEnSocio.Size = new Size(179, 40);
             ConvertirEnSocio.TabIndex = 2;
             ConvertirEnSocio.Text = "Convertir Cliente/Socio";
             ConvertirEnSocio.UseVisualStyleBackColor = false;
@@ -87,10 +83,9 @@ namespace DSOO_Grupo4_TP1
             // 
             Inscribir_Actividad.BackColor = SystemColors.Highlight;
             Inscribir_Actividad.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Inscribir_Actividad.Location = new Point(820, 276);
-            Inscribir_Actividad.Margin = new Padding(7, 8, 7, 8);
+            Inscribir_Actividad.Location = new Point(338, 101);
             Inscribir_Actividad.Name = "Inscribir_Actividad";
-            Inscribir_Actividad.Size = new Size(434, 110);
+            Inscribir_Actividad.Size = new Size(179, 40);
             Inscribir_Actividad.TabIndex = 3;
             Inscribir_Actividad.Text = "Inscribir en Actividad";
             Inscribir_Actividad.UseVisualStyleBackColor = false;
@@ -100,10 +95,9 @@ namespace DSOO_Grupo4_TP1
             // 
             Cobrar.BackColor = SystemColors.Highlight;
             Cobrar.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Cobrar.Location = new Point(504, 464);
-            Cobrar.Margin = new Padding(7, 8, 7, 8);
+            Cobrar.Location = new Point(208, 170);
             Cobrar.Name = "Cobrar";
-            Cobrar.Size = new Size(434, 110);
+            Cobrar.Size = new Size(179, 40);
             Cobrar.TabIndex = 4;
             Cobrar.Text = "Cobrar";
             Cobrar.UseVisualStyleBackColor = false;
@@ -114,10 +108,9 @@ namespace DSOO_Grupo4_TP1
             Salir_Menu_Button.BackColor = Color.RosyBrown;
             Salir_Menu_Button.FlatStyle = FlatStyle.Flat;
             Salir_Menu_Button.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Salir_Menu_Button.Location = new Point(850, 645);
-            Salir_Menu_Button.Margin = new Padding(7, 8, 7, 8);
+            Salir_Menu_Button.Location = new Point(350, 236);
             Salir_Menu_Button.Name = "Salir_Menu_Button";
-            Salir_Menu_Button.Size = new Size(415, 98);
+            Salir_Menu_Button.Size = new Size(171, 36);
             Salir_Menu_Button.TabIndex = 5;
             Salir_Menu_Button.Text = "Salir";
             Salir_Menu_Button.UseVisualStyleBackColor = false;
@@ -128,10 +121,9 @@ namespace DSOO_Grupo4_TP1
             Morosos_Menu_Button.BackColor = Color.RosyBrown;
             Morosos_Menu_Button.FlatStyle = FlatStyle.Flat;
             Morosos_Menu_Button.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Morosos_Menu_Button.Location = new Point(185, 645);
-            Morosos_Menu_Button.Margin = new Padding(7, 8, 7, 8);
+            Morosos_Menu_Button.Location = new Point(76, 236);
             Morosos_Menu_Button.Name = "Morosos_Menu_Button";
-            Morosos_Menu_Button.Size = new Size(418, 98);
+            Morosos_Menu_Button.Size = new Size(172, 36);
             Morosos_Menu_Button.TabIndex = 6;
             Morosos_Menu_Button.Text = "Ver Morosos";
             Morosos_Menu_Button.UseVisualStyleBackColor = false;
@@ -140,36 +132,23 @@ namespace DSOO_Grupo4_TP1
             // Menu_Form_Panel
             // 
             Menu_Form_Panel.BackColor = SystemColors.Highlight;
-            Menu_Form_Panel.Controls.Add(Btn_Atras);
             Menu_Form_Panel.Controls.Add(btn_cerrar);
             Menu_Form_Panel.Controls.Add(btn_minimizar);
-            Menu_Form_Panel.Location = new Point(0, 3);
-            Menu_Form_Panel.Margin = new Padding(2, 3, 2, 3);
+            Menu_Form_Panel.Location = new Point(0, 1);
+            Menu_Form_Panel.Margin = new Padding(1, 1, 1, 1);
             Menu_Form_Panel.Name = "Menu_Form_Panel";
-            Menu_Form_Panel.Size = new Size(1508, 63);
+            Menu_Form_Panel.Size = new Size(621, 23);
             Menu_Form_Panel.TabIndex = 7;
             Menu_Form_Panel.MouseDown += panel1_MouseDown;
-            // 
-            // Btn_Atras
-            // 
-            Btn_Atras.Image = (Image)resources.GetObject("Btn_Atras.Image");
-            Btn_Atras.Location = new Point(12, 3);
-            Btn_Atras.Margin = new Padding(2, 3, 2, 3);
-            Btn_Atras.Name = "Btn_Atras";
-            Btn_Atras.Size = new Size(78, 55);
-            Btn_Atras.SizeMode = PictureBoxSizeMode.Zoom;
-            Btn_Atras.TabIndex = 11;
-            Btn_Atras.TabStop = false;
-            Btn_Atras.Click += Btn_Atras_Click;
             // 
             // btn_cerrar
             // 
             btn_cerrar.Cursor = Cursors.Hand;
             btn_cerrar.Image = (Image)resources.GetObject("btn_cerrar.Image");
-            btn_cerrar.Location = new Point(1430, 5);
-            btn_cerrar.Margin = new Padding(2, 3, 2, 3);
+            btn_cerrar.Location = new Point(589, 2);
+            btn_cerrar.Margin = new Padding(1, 1, 1, 1);
             btn_cerrar.Name = "btn_cerrar";
-            btn_cerrar.Size = new Size(78, 55);
+            btn_cerrar.Size = new Size(32, 20);
             btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_cerrar.TabIndex = 9;
             btn_cerrar.TabStop = false;
@@ -179,10 +158,10 @@ namespace DSOO_Grupo4_TP1
             // 
             btn_minimizar.Cursor = Cursors.Hand;
             btn_minimizar.Image = (Image)resources.GetObject("btn_minimizar.Image");
-            btn_minimizar.Location = new Point(1348, 5);
-            btn_minimizar.Margin = new Padding(2, 3, 2, 3);
+            btn_minimizar.Location = new Point(555, 2);
+            btn_minimizar.Margin = new Padding(1, 1, 1, 1);
             btn_minimizar.Name = "btn_minimizar";
-            btn_minimizar.Size = new Size(78, 55);
+            btn_minimizar.Size = new Size(32, 20);
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_minimizar.TabIndex = 10;
             btn_minimizar.TabStop = false;
@@ -192,9 +171,10 @@ namespace DSOO_Grupo4_TP1
             // 
             Btn_Modifica_Abono.BackColor = SystemColors.Highlight;
             Btn_Modifica_Abono.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Modifica_Abono.Location = new Point(820, 115);
+            Btn_Modifica_Abono.Location = new Point(338, 42);
+            Btn_Modifica_Abono.Margin = new Padding(1, 1, 1, 1);
             Btn_Modifica_Abono.Name = "Btn_Modifica_Abono";
-            Btn_Modifica_Abono.Size = new Size(434, 110);
+            Btn_Modifica_Abono.Size = new Size(179, 40);
             Btn_Modifica_Abono.TabIndex = 8;
             Btn_Modifica_Abono.Text = "Modificar Abono Socios";
             Btn_Modifica_Abono.UseVisualStyleBackColor = false;
@@ -202,10 +182,10 @@ namespace DSOO_Grupo4_TP1
             // 
             // menu_form
             // 
-            AutoScaleDimensions = new SizeF(17F, 41F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
-            ClientSize = new Size(1508, 801);
+            ClientSize = new Size(621, 293);
             Controls.Add(Btn_Modifica_Abono);
             Controls.Add(Menu_Form_Panel);
             Controls.Add(Morosos_Menu_Button);
@@ -216,13 +196,11 @@ namespace DSOO_Grupo4_TP1
             Controls.Add(AltaCliente);
             Cursor = Cursors.Hand;
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(7, 8, 7, 8);
             Name = "menu_form";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu de Opciones";
             MouseDown += menu_form_MouseDown;
             Menu_Form_Panel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)Btn_Atras).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).EndInit();
             ResumeLayout(false);

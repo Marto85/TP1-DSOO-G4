@@ -96,10 +96,12 @@ namespace DSOO_Grupo4_TP1
                 );
             }
 
-            nuevoCliente.AltaCliente();
-            GenerarCarnet(nuevoCliente.IdCliente);
 
-            this.Close();
+            if (nuevoCliente.AltaCliente()) { 
+                GenerarCarnet(nuevoCliente.IdCliente);
+                this.Close();
+            }
+
         }
 
         private void Btn_cerrar_Click(object sender, EventArgs e)

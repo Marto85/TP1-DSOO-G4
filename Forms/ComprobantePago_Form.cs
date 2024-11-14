@@ -88,7 +88,8 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void Btn_cerrar_Click(object sender, EventArgs e)
         {
-            Utils.ConfirmarCierre();
+            this.Close();
+
         }
 
         private void Btn_minimizar_Click(object sender, EventArgs e)

@@ -47,7 +47,7 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void Btn_cerrar_Click(object sender, EventArgs e)
         {
-            Utils.ConfirmarCierre();
+            this.Close();
         }
 
         public void SetDatosCliente(string nombre, string apellido, int dni, string imagenPerfil, bool esSocio)
@@ -75,11 +75,32 @@ namespace DSOO_Grupo4_TP1.Forms
 
             if (resultado == DialogResult.Yes)
             {
+                this.Btn_Imprimir_Carnet.Visible = false;
+                this.panel2.Visible = false;
+                this.btn_cerrar.Visible = false;
+                this.btn_minimizar.Visible = false;
+                this.Btn_Atras.Visible = false; 
                 ImprimirCarnet();
+                this.Btn_Imprimir_Carnet.Visible = true;
+                this.panel2.Visible = true;
+                this.btn_cerrar.Visible = true;
+                this.btn_minimizar.Visible = true;
+                this.Btn_Atras.Visible = true;
             }
             else if (resultado == DialogResult.No)
             {
+                this.Btn_Imprimir_Carnet.Visible = false;
+                this.panel2.Visible = false;
+                this.btn_cerrar.Visible = false;
+                this.btn_minimizar.Visible = false;
+                this.Btn_Atras.Visible = false;
                 GuardarComoJPG();
+                this.Btn_Imprimir_Carnet.Visible = true;
+                this.panel2.Visible = true;
+                this.btn_cerrar.Visible = true;
+                this.btn_minimizar.Visible = true;
+                this.Btn_Atras.Visible = true;
+
             }
             else if (resultado == DialogResult.Cancel)
             {
@@ -99,6 +120,7 @@ namespace DSOO_Grupo4_TP1.Forms
                 {
                     this.DrawToBitmap(bitmap, new Rectangle(0, 0, this.Width, this.Height));
                     e.Graphics.DrawImage(bitmap, 0, 0);
+
                 }
             };
 
@@ -125,7 +147,7 @@ namespace DSOO_Grupo4_TP1.Forms
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    using (Bitmap bitmap = new Bitmap(905, 535))
+                    using (Bitmap bitmap = new Bitmap(373, 196))
                     {
                         this.DrawToBitmap(bitmap, new Rectangle(0, 0, this.Width, this.Height));
 

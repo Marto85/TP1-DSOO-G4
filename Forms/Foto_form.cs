@@ -125,7 +125,7 @@ namespace DSOO_Grupo4_TP1.Forms
                     videoSource.WaitForStop();
                     videoSource = null;
                 }
-                Application.Exit();
+                this.Close();            
             }
         }
 

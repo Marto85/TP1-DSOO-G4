@@ -60,7 +60,7 @@ namespace DSOO_Grupo4_TP1.Models
             AbonoMensualSocios = abonoMensualSocios;
         }
 
-        public void AltaCliente()
+        public bool AltaCliente()
         {
             Conexion conexion = Conexion.getInstancia();
 
@@ -81,7 +81,7 @@ namespace DSOO_Grupo4_TP1.Models
                         if (count > 0)
                         {
                             MessageBox.Show("Error: El cliente con este DNI ya existe.", "Error de duplicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return; 
+                            return false; 
                         }
                     }
 
@@ -139,10 +139,12 @@ namespace DSOO_Grupo4_TP1.Models
                             MessageBox.Show($"Se procede a entregar al Cliente con nombre {Nombre} {Apellido} el carnet que lo acredita a ingresar a las actividades.");
                         }
                     }
+                        return true;
                 }
                 catch (MySqlException ex)
                 {
                     MessageBox.Show($"{ImagenPerfil}Error al registrar cliente: {ex.Message}\nCódigo del error: {ex.Number}");
+                    return false;
                 }
 
             }
