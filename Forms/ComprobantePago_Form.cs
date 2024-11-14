@@ -59,9 +59,11 @@ namespace DSOO_Grupo4_TP1.Forms
                     int rowIndex = dgvActividades.Rows.Add();
                     dgvActividades.Rows[rowIndex].Cells["Codigo"].Value = actividadId;
                     dgvActividades.Rows[rowIndex].Cells["Clase"].Value = nombreActividad;
-                    dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = precio;
-                    dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = 0; // REVISAR ESTO
-                    dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = precio; // REVISAR ESTO DPS DE VER BONIFICACION
+                    dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = _datosComprobante["totalSinDescuento"];
+                    decimal descuento = Convert.ToDecimal(_datosComprobante["descuento"]);
+                    dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = descuento.ToString("F2");
+                    //dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = precio;
+                    dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = _datosComprobante["Monto"];
                 }
             }
             else
@@ -69,9 +71,10 @@ namespace DSOO_Grupo4_TP1.Forms
                 int rowIndex = dgvActividades.Rows.Add();
                 dgvActividades.Rows[rowIndex].Cells["Codigo"].Value = "--";
                 dgvActividades.Rows[rowIndex].Cells["Clase"].Value = "Abono Mensual";
-                dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = _datosComprobante["Monto"];
-                dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = 0; // REVISAR ESTO
-                dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = _datosComprobante["Monto"]; // REVISAR ESTO DPS DE VER BONIFICACION
+                dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = _datosComprobante["totalSinDescuento"];
+                decimal descuento = Convert.ToDecimal(_datosComprobante["descuento"]);
+                dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = descuento.ToString("F2");
+                dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = _datosComprobante["Monto"];
             }
 
         }

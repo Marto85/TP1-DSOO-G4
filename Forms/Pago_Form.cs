@@ -24,6 +24,8 @@ namespace DSOO_Grupo4_TP1.Forms
         private List<Actividad> actividadesDisponibles;
 
         private Boolean pagoSocio; // variable bandera para para controlar que tipo de pago procesar en el ultimo metodo de clase
+        decimal totalSinDescuento = 0;
+        decimal descuento = 0;
         public Pago_Form()
         {
             InitializeComponent();
@@ -205,20 +207,87 @@ namespace DSOO_Grupo4_TP1.Forms
                     break;
                 case "Trimestral":
                     totalPagar = abonoMensual * 3 * 0.95m; // 5% de descuento
+                    totalSinDescuento = abonoMensual * 3;
                     break;
                 case "Semestral":
                     totalPagar = abonoMensual * 6 * 0.90m; // 10% de descuento
+                    totalSinDescuento = abonoMensual * 6;
                     break;
                 case "Anual":
                     totalPagar = abonoMensual * 12 * 0.75m; // 25% de descuento
+                    totalSinDescuento = abonoMensual * 12;
                     break;
                 default:
                     MessageBox.Show("Por favor selecciona una frecuencia de pago válida.");
                     return;
             }
+            descuento = totalSinDescuento - totalPagar;
+           
             // Mostrar el total calculado como moneda
             total_pago.Text = totalPagar.ToString("F2");
         }
+
+        private void CalcularTotalNoSocios()
+        {
+            decimal totalPagar = 0;
+
+            if (Frecuencia_Pago.SelectedItem != null)
+            {
+                string frecuenciaPago = Frecuencia_Pago.SelectedItem.ToString();
+
+                foreach (var item in lista_actividades.CheckedItems)
+                {
+                    string nombreActividad = item.ToString();
+                    decimal precioActividad = ObtenerPrecioActividad(nombreActividad);
+                    decimal precioConFrecuencia = 0;
+
+                    switch (frecuenciaPago)
+                    {
+                        case "Semanal":
+                            precioConFrecuencia = (precioActividad / 4) * 1.10m; // Recargo del 10%
+                            descuento = 0;
+                            totalSinDescuento = precioConFrecuencia;
+                            break;
+                        case "Quincenal":
+                            precioConFrecuencia = (precioActividad / 2) * 1.05m; // Recargo del 5%
+                            descuento = 0;
+                            totalSinDescuento = precioConFrecuencia;
+                            break;
+                        case "Mensual":
+                            precioConFrecuencia = precioActividad; // Precio mensual sin recargo/bonificación
+                            descuento = 0;
+                            totalSinDescuento = precioConFrecuencia;
+                            break;
+                        case "Trimestral":
+                            precioConFrecuencia = (precioActividad * 3) * 0.95m; // Descuento del 5%
+                            totalSinDescuento = precioActividad * 3;
+                            descuento = totalSinDescuento - precioConFrecuencia;
+                            break;
+                        case "Semestral":
+                            precioConFrecuencia = (precioActividad * 6) * 0.90m; // Descuento del 10%
+                            totalSinDescuento = precioActividad * 6;
+                            descuento = totalSinDescuento - precioConFrecuencia;
+                            break;
+                        case "Anual":
+                            precioConFrecuencia = (precioActividad * 12) * 0.75m; // Descuento del 25%
+                            totalSinDescuento = precioActividad * 12;
+                            descuento = totalSinDescuento - precioConFrecuencia;
+                            break;
+                        default:
+                            MessageBox.Show("Por favor selecciona una frecuencia de pago válida.");
+                            return;
+                    }
+
+                    totalPagar += precioConFrecuencia;
+                }
+                total_pago.Text = totalPagar.ToString("C");
+            }
+            else
+            {
+                MessageBox.Show("Por favor selecciona una frecuencia de pago.");
+            }
+        }
+
 
 
         private decimal ObtenerPrecioActividad(string nombreActividad)
@@ -257,57 +326,10 @@ namespace DSOO_Grupo4_TP1.Forms
             return precioActividad;
         }
 
-        private void CalcularTotalNoSocios()
-        {
-            decimal totalPagar = 0;
-
-            if (Frecuencia_Pago.SelectedItem != null)
-            {
-                string frecuenciaPago = Frecuencia_Pago.SelectedItem.ToString();
-
-                foreach (var item in lista_actividades.CheckedItems)
-                {
-                    string nombreActividad = item.ToString();
-                    decimal precioActividad = ObtenerPrecioActividad(nombreActividad);
-                    decimal precioConFrecuencia = 0;
-
-                    switch (frecuenciaPago)
-                    {
-                        case "Semanal":
-                            precioConFrecuencia = (precioActividad / 4) * 1.10m; // Recargo del 10%
-                            break;
-                        case "Quincenal":
-                            precioConFrecuencia = (precioActividad / 2) * 1.05m; // Recargo del 5%
-                            break;
-                        case "Mensual":
-                            precioConFrecuencia = precioActividad; // Precio mensual sin recargo/bonificación
-                            break;
-                        case "Trimestral":
-                            precioConFrecuencia = (precioActividad * 3) * 0.95m; // Descuento del 5%
-                            break;
-                        case "Semestral":
-                            precioConFrecuencia = (precioActividad * 6) * 0.90m; // Descuento del 10%
-                            break;
-                        case "Anual":
-                            precioConFrecuencia = (precioActividad * 12) * 0.75m; // Descuento del 25%
-                            break;
-                        default:
-                            MessageBox.Show("Por favor selecciona una frecuencia de pago válida.");
-                            return;
-                    }
-
-                    totalPagar += precioConFrecuencia;
-                }
-                total_pago.Text = totalPagar.ToString("C");
-            }
-            else
-            {
-                MessageBox.Show("Por favor selecciona una frecuencia de pago.");
-            }
-        }
-
+        
         private void Btn_Calcular_Total_Click(object sender, EventArgs e)
         {
+           
             total_pago.Text = "0.00";
             if (Txt_EsSocio.Text == "SI")
             {
@@ -382,10 +404,11 @@ namespace DSOO_Grupo4_TP1.Forms
             {
                 MessageBox.Show("No se encontraron actividades disponibles.");
                 return;
-            }   
+            }
 
             Conexion conexion = Conexion.getInstancia();
             string connectionString = conexion.CrearConexion().ConnectionString;
+            Btn_Calcular_Total_Click(sender, e);
 
             int clienteDni = Txt_DNI.Text == "" ? 0 : int.Parse(Txt_DNI.Text);
             decimal montoDecimal = decimal.Parse(total_pago.Text.Replace("$", ""));
@@ -476,6 +499,8 @@ namespace DSOO_Grupo4_TP1.Forms
 
                         datosComprobante["ClienteId"] = clienteId;
                         datosComprobante["Monto"] = montoDecimal;
+                        datosComprobante["totalSinDescuento"] = totalSinDescuento;
+                        datosComprobante["descuento"] = descuento;
                         datosComprobante["FechaPago"] = fechaPago;
                         datosComprobante["ProximoVencimiento"] = proximoVencimiento;
                         datosComprobante["TipoDePago"] = tipoDePagoSeleccionado;
@@ -561,6 +586,8 @@ namespace DSOO_Grupo4_TP1.Forms
 
                         datosComprobante["Monto"] = totalMontoActividades;
                         datosComprobante["FechaPago"] = fechaPago;
+                        datosComprobante["totalSinDescuento"] = totalSinDescuento;
+                        datosComprobante["descuento"] = this.descuento;
                         datosComprobante["ProximoVencimiento"] = proximoVencimiento;
                         datosComprobante["TipoDePago"] = tipoDePagoSeleccionado;
                         datosComprobante["FormaDePago"] = formaPago;
