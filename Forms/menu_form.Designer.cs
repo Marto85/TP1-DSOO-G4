@@ -61,7 +61,7 @@ namespace DSOO_Grupo4_TP1
             AltaCliente.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
             AltaCliente.Location = new Point(83, 42);
             AltaCliente.Name = "AltaCliente";
-            AltaCliente.Size = new Size(179, 40);
+            AltaCliente.Size = new Size(179, 52);
             AltaCliente.TabIndex = 0;
             AltaCliente.Text = "Dar de alta un socio o cliente";
             AltaCliente.UseVisualStyleBackColor = false;
@@ -73,7 +73,7 @@ namespace DSOO_Grupo4_TP1
             ConvertirEnSocio.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
             ConvertirEnSocio.Location = new Point(83, 100);
             ConvertirEnSocio.Name = "ConvertirEnSocio";
-            ConvertirEnSocio.Size = new Size(179, 40);
+            ConvertirEnSocio.Size = new Size(179, 51);
             ConvertirEnSocio.TabIndex = 2;
             ConvertirEnSocio.Text = "Convertir Cliente/Socio";
             ConvertirEnSocio.UseVisualStyleBackColor = false;
@@ -85,7 +85,7 @@ namespace DSOO_Grupo4_TP1
             Inscribir_Actividad.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
             Inscribir_Actividad.Location = new Point(338, 101);
             Inscribir_Actividad.Name = "Inscribir_Actividad";
-            Inscribir_Actividad.Size = new Size(179, 40);
+            Inscribir_Actividad.Size = new Size(179, 50);
             Inscribir_Actividad.TabIndex = 3;
             Inscribir_Actividad.Text = "Inscribir en Actividad";
             Inscribir_Actividad.UseVisualStyleBackColor = false;
@@ -135,7 +135,7 @@ namespace DSOO_Grupo4_TP1
             Menu_Form_Panel.Controls.Add(btn_cerrar);
             Menu_Form_Panel.Controls.Add(btn_minimizar);
             Menu_Form_Panel.Location = new Point(0, 1);
-            Menu_Form_Panel.Margin = new Padding(1, 1, 1, 1);
+            Menu_Form_Panel.Margin = new Padding(1);
             Menu_Form_Panel.Name = "Menu_Form_Panel";
             Menu_Form_Panel.Size = new Size(621, 23);
             Menu_Form_Panel.TabIndex = 7;
@@ -146,7 +146,7 @@ namespace DSOO_Grupo4_TP1
             btn_cerrar.Cursor = Cursors.Hand;
             btn_cerrar.Image = (Image)resources.GetObject("btn_cerrar.Image");
             btn_cerrar.Location = new Point(589, 2);
-            btn_cerrar.Margin = new Padding(1, 1, 1, 1);
+            btn_cerrar.Margin = new Padding(1);
             btn_cerrar.Name = "btn_cerrar";
             btn_cerrar.Size = new Size(32, 20);
             btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -159,7 +159,7 @@ namespace DSOO_Grupo4_TP1
             btn_minimizar.Cursor = Cursors.Hand;
             btn_minimizar.Image = (Image)resources.GetObject("btn_minimizar.Image");
             btn_minimizar.Location = new Point(555, 2);
-            btn_minimizar.Margin = new Padding(1, 1, 1, 1);
+            btn_minimizar.Margin = new Padding(1);
             btn_minimizar.Name = "btn_minimizar";
             btn_minimizar.Size = new Size(32, 20);
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -172,9 +172,9 @@ namespace DSOO_Grupo4_TP1
             Btn_Modifica_Abono.BackColor = SystemColors.Highlight;
             Btn_Modifica_Abono.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
             Btn_Modifica_Abono.Location = new Point(338, 42);
-            Btn_Modifica_Abono.Margin = new Padding(1, 1, 1, 1);
+            Btn_Modifica_Abono.Margin = new Padding(1);
             Btn_Modifica_Abono.Name = "Btn_Modifica_Abono";
-            Btn_Modifica_Abono.Size = new Size(179, 40);
+            Btn_Modifica_Abono.Size = new Size(179, 52);
             Btn_Modifica_Abono.TabIndex = 8;
             Btn_Modifica_Abono.Text = "Modificar Abono Socios";
             Btn_Modifica_Abono.UseVisualStyleBackColor = false;

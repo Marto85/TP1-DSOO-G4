@@ -40,7 +40,7 @@ namespace DSOO_Grupo4_TP1
 
         private void ID_Registro_Enter(object sender, EventArgs e)
         {
-            if (ID_Registro.Text == "ID de cliente")
+            if (ID_Registro.Text == "DNI de cliente")
             {
                 ID_Registro.Text = "";
                 ID_Registro.ForeColor = Color.White;
@@ -50,12 +50,11 @@ namespace DSOO_Grupo4_TP1
 
         private void ID_Registro_Leave(object sender, EventArgs e)
         {
-            if (ID_Registro.Text == "ID de cliente")
+            if (string.IsNullOrWhiteSpace(ID_Registro.Text))
             {
-                ID_Registro.Text = "";
-                ID_Registro.ForeColor = Color.White;
+                ID_Registro.Text = "DNI de cliente";
+                ID_Registro.ForeColor = Color.DarkGray;
             }
-
         }
 
         private void ID_Registro_TextChanged(object sender, EventArgs e)
@@ -66,21 +65,21 @@ namespace DSOO_Grupo4_TP1
         {
             conexion = Conexion.getInstancia();
             string connectionString = conexion.CrearConexion().ConnectionString; // Obtiene la cadena de conexión
-            int id_usuario = int.Parse(ID_Registro.Text);
+            int dni_usuario = int.Parse(ID_Registro.Text);
 
-            if (id_usuario > 0)
+            if (dni_usuario > 0)
             {
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
                     try
                     {
                         conn.Open();
-                        string query = "SELECT Nombre, Apellido, EsSocio FROM cliente WHERE Id = @id_usuario";
+                        string query = "SELECT Nombre, Apellido, EsSocio FROM cliente WHERE DNI = @dni_usuario";
 
                         using (MySqlCommand cmd = new MySqlCommand(query, conn))
                         {
                             // Definir el parámetro
-                            cmd.Parameters.AddWithValue("@id_usuario", id_usuario);
+                            cmd.Parameters.AddWithValue("@dni_usuario", dni_usuario);
 
                             // Ejecuta la consulta y obtiene el resultado
                             using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -129,9 +128,9 @@ namespace DSOO_Grupo4_TP1
         private void Convert_button_Click(object sender, EventArgs e)
         {
             // Obtener el ID del usuario seleccionado
-            int id_usuario = int.Parse(ID_Registro.Text);
+            int dni_usuario = int.Parse(ID_Registro.Text);
 
-            if (id_usuario > 0)
+            if (dni_usuario > 0)
             {
                 conexion = Conexion.getInstancia();
                 string connectionString = conexion.CrearConexion().ConnectionString; // Obtiene la cadena de conexión
@@ -143,25 +142,33 @@ namespace DSOO_Grupo4_TP1
                         conn.Open(); // Abre la conexión
 
                         // query para obtener el valor actual de EsSocio
-                        string querySelect = "SELECT EsSocio FROM cliente WHERE Id = @id_usuario";
+                        string querySelect = "SELECT EsSocio FROM cliente WHERE DNI = @dni_usuario";
 
                         using (MySqlCommand cmdSelect = new MySqlCommand(querySelect, conn))
                         {
-                            cmdSelect.Parameters.AddWithValue("@id_usuario", id_usuario);
+                            cmdSelect.Parameters.AddWithValue("@dni_usuario", dni_usuario);
 
                             // Ejecuta la query para obtener el valor actual de EsSocio
                             int EsSocioActual = Convert.ToInt32(cmdSelect.ExecuteScalar());
 
                             // Calcula el valor inverso
                             int nuevoEsSocio = (EsSocioActual == 1) ? 0 : 1;
+                            string queryUpdate = "";
 
                             // Actualizamos el valor de EsSocio en la base de datos
-                            string queryUpdate = "UPDATE cliente SET EsSocio = @nuevoEsSocio WHERE Id = @id_usuario";
+                            if (nuevoEsSocio == 0)
+                            {
+                                queryUpdate = "UPDATE cliente SET EsSocio = @nuevoEsSocio, AbonoMensualSocios = NULL WHERE DNI = @dni_usuario";
+                            }
+                            else {
+                                queryUpdate = "UPDATE cliente SET EsSocio = @nuevoEsSocio, AbonoMensualSocios = 10000 WHERE DNI = @dni_usuario";
+
+                            }
 
                             using (MySqlCommand cmdUpdate = new MySqlCommand(queryUpdate, conn))
                             {
                                 cmdUpdate.Parameters.AddWithValue("@nuevoEsSocio", nuevoEsSocio);
-                                cmdUpdate.Parameters.AddWithValue("@id_usuario", id_usuario);
+                                cmdUpdate.Parameters.AddWithValue("@dni_usuario", dni_usuario);
 
                                 // Ejecuta la actualización
                                 cmdUpdate.ExecuteNonQuery();
