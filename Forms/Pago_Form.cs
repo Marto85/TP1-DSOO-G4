@@ -216,9 +216,8 @@ namespace DSOO_Grupo4_TP1.Forms
                     MessageBox.Show("Por favor selecciona una frecuencia de pago válida.");
                     return;
             }
-
             // Mostrar el total calculado como moneda
-            total_pago.Text = totalPagar.ToString("C");
+            total_pago.Text = totalPagar.ToString("F2");
         }
 
 
@@ -373,7 +372,10 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void Btn_Pagar_Click(object sender, EventArgs e)
         {
-
+            if (formas_de_pago.CheckedItems.Count == 0) {
+                MessageBox.Show("Debe seleccionar una forma de pago");
+                return;
+            }
             List<Actividad> actividadesDisponibles = ObtenerActividadesDesdeDB();
 
             if (actividadesDisponibles == null || actividadesDisponibles.Count == 0)

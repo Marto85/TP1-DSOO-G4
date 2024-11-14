@@ -70,10 +70,10 @@
             panel2.Controls.Add(Btn_Atras);
             panel2.Controls.Add(Btn_minimizar);
             panel2.Controls.Add(Btn_cerrar);
-            panel2.Location = new Point(0, 2);
-            panel2.Margin = new Padding(2, 3, 2, 3);
+            panel2.Location = new Point(0, 1);
+            panel2.Margin = new Padding(1);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1803, 60);
+            panel2.Size = new Size(742, 22);
             panel2.TabIndex = 12;
             panel2.MouseDown += panel2_MouseDown;
             // 
@@ -81,10 +81,10 @@
             // 
             Btn_Atras.Cursor = Cursors.Hand;
             Btn_Atras.Image = (Image)resources.GetObject("Btn_Atras.Image");
-            Btn_Atras.Location = new Point(2, 2);
-            Btn_Atras.Margin = new Padding(2, 3, 2, 3);
+            Btn_Atras.Location = new Point(1, 1);
+            Btn_Atras.Margin = new Padding(1);
             Btn_Atras.Name = "Btn_Atras";
-            Btn_Atras.Size = new Size(78, 55);
+            Btn_Atras.Size = new Size(32, 20);
             Btn_Atras.SizeMode = PictureBoxSizeMode.Zoom;
             Btn_Atras.TabIndex = 13;
             Btn_Atras.TabStop = false;
@@ -94,10 +94,10 @@
             // 
             Btn_minimizar.Cursor = Cursors.Hand;
             Btn_minimizar.Image = (Image)resources.GetObject("Btn_minimizar.Image");
-            Btn_minimizar.Location = new Point(1643, 3);
-            Btn_minimizar.Margin = new Padding(2, 3, 2, 3);
+            Btn_minimizar.Location = new Point(677, 1);
+            Btn_minimizar.Margin = new Padding(1);
             Btn_minimizar.Name = "Btn_minimizar";
-            Btn_minimizar.Size = new Size(78, 55);
+            Btn_minimizar.Size = new Size(32, 20);
             Btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
             Btn_minimizar.TabIndex = 8;
             Btn_minimizar.TabStop = false;
@@ -107,10 +107,10 @@
             // 
             Btn_cerrar.Cursor = Cursors.Hand;
             Btn_cerrar.Image = (Image)resources.GetObject("Btn_cerrar.Image");
-            Btn_cerrar.Location = new Point(1725, 3);
-            Btn_cerrar.Margin = new Padding(2, 3, 2, 3);
+            Btn_cerrar.Location = new Point(710, 1);
+            Btn_cerrar.Margin = new Padding(1);
             Btn_cerrar.Name = "Btn_cerrar";
-            Btn_cerrar.Size = new Size(78, 55);
+            Btn_cerrar.Size = new Size(32, 20);
             Btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
             Btn_cerrar.TabIndex = 7;
             Btn_cerrar.TabStop = false;
@@ -120,9 +120,10 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Century Gothic", 14.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(1111, 92);
+            label1.Location = new Point(457, 34);
+            label1.Margin = new Padding(1, 0, 1, 0);
             label1.Name = "label1";
-            label1.Size = new Size(429, 56);
+            label1.Size = new Size(175, 23);
             label1.TabIndex = 13;
             label1.Text = "Registro de Pagos";
             // 
@@ -131,10 +132,9 @@
             Buscar_Cliente.BackColor = SystemColors.Highlight;
             Buscar_Cliente.Cursor = Cursors.Hand;
             Buscar_Cliente.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Buscar_Cliente.Location = new Point(189, 195);
-            Buscar_Cliente.Margin = new Padding(7, 8, 7, 8);
+            Buscar_Cliente.Location = new Point(78, 71);
             Buscar_Cliente.Name = "Buscar_Cliente";
-            Buscar_Cliente.Size = new Size(388, 67);
+            Buscar_Cliente.Size = new Size(160, 25);
             Buscar_Cliente.TabIndex = 17;
             Buscar_Cliente.Text = "Buscar";
             Buscar_Cliente.UseVisualStyleBackColor = false;
@@ -146,10 +146,9 @@
             DNI_Pagos.Cursor = Cursors.Hand;
             DNI_Pagos.Font = new Font("Century Gothic", 11.1F, FontStyle.Italic, GraphicsUnit.Point);
             DNI_Pagos.ForeColor = Color.Gray;
-            DNI_Pagos.Location = new Point(188, 95);
-            DNI_Pagos.Margin = new Padding(7, 8, 7, 8);
+            DNI_Pagos.Location = new Point(77, 35);
             DNI_Pagos.Name = "DNI_Pagos";
-            DNI_Pagos.Size = new Size(389, 53);
+            DNI_Pagos.Size = new Size(163, 26);
             DNI_Pagos.TabIndex = 16;
             DNI_Pagos.Text = "DNI de cliente";
             // 
@@ -165,9 +164,10 @@
             panel1.Controls.Add(EsSocio);
             panel1.Controls.Add(Apellido);
             panel1.Controls.Add(Nombre);
-            panel1.Location = new Point(67, 325);
+            panel1.Location = new Point(28, 119);
+            panel1.Margin = new Padding(1);
             panel1.Name = "panel1";
-            panel1.Size = new Size(655, 409);
+            panel1.Size = new Size(272, 152);
             panel1.TabIndex = 18;
             // 
             // Txt_DNI
@@ -175,18 +175,20 @@
             Txt_DNI.BackColor = SystemColors.Highlight;
             Txt_DNI.BorderStyle = BorderStyle.None;
             Txt_DNI.Font = new Font("Century Gothic", 9.900001F, FontStyle.Regular, GraphicsUnit.Point);
-            Txt_DNI.Location = new Point(306, 45);
+            Txt_DNI.Location = new Point(126, 16);
+            Txt_DNI.Margin = new Padding(1);
             Txt_DNI.Name = "Txt_DNI";
-            Txt_DNI.Size = new Size(250, 41);
+            Txt_DNI.Size = new Size(103, 17);
             Txt_DNI.TabIndex = 29;
             // 
             // DNI
             // 
             DNI.AutoSize = true;
             DNI.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            DNI.Location = new Point(52, 42);
+            DNI.Location = new Point(21, 15);
+            DNI.Margin = new Padding(1, 0, 1, 0);
             DNI.Name = "DNI";
-            DNI.Size = new Size(92, 44);
+            DNI.Size = new Size(38, 18);
             DNI.TabIndex = 29;
             DNI.Text = "DNI:";
             // 
@@ -194,18 +196,20 @@
             // 
             Txt_EsSocio.BackColor = SystemColors.Highlight;
             Txt_EsSocio.BorderStyle = BorderStyle.None;
-            Txt_EsSocio.Location = new Point(306, 331);
+            Txt_EsSocio.Location = new Point(126, 121);
+            Txt_EsSocio.Margin = new Padding(1);
             Txt_EsSocio.Name = "Txt_EsSocio";
-            Txt_EsSocio.Size = new Size(250, 40);
+            Txt_EsSocio.Size = new Size(103, 16);
             Txt_EsSocio.TabIndex = 5;
             // 
             // Txt_Apellido
             // 
             Txt_Apellido.BackColor = SystemColors.Highlight;
             Txt_Apellido.BorderStyle = BorderStyle.None;
-            Txt_Apellido.Location = new Point(306, 229);
+            Txt_Apellido.Location = new Point(126, 84);
+            Txt_Apellido.Margin = new Padding(1);
             Txt_Apellido.Name = "Txt_Apellido";
-            Txt_Apellido.Size = new Size(250, 40);
+            Txt_Apellido.Size = new Size(103, 16);
             Txt_Apellido.TabIndex = 4;
             // 
             // Txt_Nombre
@@ -213,18 +217,20 @@
             Txt_Nombre.BackColor = SystemColors.Highlight;
             Txt_Nombre.BorderStyle = BorderStyle.None;
             Txt_Nombre.Font = new Font("Century Gothic", 9.900001F, FontStyle.Regular, GraphicsUnit.Point);
-            Txt_Nombre.Location = new Point(306, 130);
+            Txt_Nombre.Location = new Point(126, 48);
+            Txt_Nombre.Margin = new Padding(1);
             Txt_Nombre.Name = "Txt_Nombre";
-            Txt_Nombre.Size = new Size(250, 41);
+            Txt_Nombre.Size = new Size(103, 17);
             Txt_Nombre.TabIndex = 3;
             // 
             // EsSocio
             // 
             EsSocio.AutoSize = true;
             EsSocio.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            EsSocio.Location = new Point(52, 327);
+            EsSocio.Location = new Point(21, 120);
+            EsSocio.Margin = new Padding(1, 0, 1, 0);
             EsSocio.Name = "EsSocio";
-            EsSocio.Size = new Size(174, 44);
+            EsSocio.Size = new Size(72, 18);
             EsSocio.TabIndex = 2;
             EsSocio.Text = "Es Socio:";
             // 
@@ -232,9 +238,10 @@
             // 
             Apellido.AutoSize = true;
             Apellido.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Apellido.Location = new Point(52, 225);
+            Apellido.Location = new Point(21, 82);
+            Apellido.Margin = new Padding(1, 0, 1, 0);
             Apellido.Name = "Apellido";
-            Apellido.Size = new Size(179, 44);
+            Apellido.Size = new Size(75, 18);
             Apellido.TabIndex = 1;
             Apellido.Text = "Apellido:";
             // 
@@ -242,9 +249,10 @@
             // 
             Nombre.AutoSize = true;
             Nombre.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Nombre.Location = new Point(51, 127);
+            Nombre.Location = new Point(21, 46);
+            Nombre.Margin = new Padding(1, 0, 1, 0);
             Nombre.Name = "Nombre";
-            Nombre.Size = new Size(175, 44);
+            Nombre.Size = new Size(72, 18);
             Nombre.TabIndex = 0;
             Nombre.Text = "Nombre:";
             // 
@@ -252,9 +260,10 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(1144, 332);
+            label2.Location = new Point(471, 121);
+            label2.Margin = new Padding(1, 0, 1, 0);
             label2.Name = "label2";
-            label2.Size = new Size(222, 44);
+            label2.Size = new Size(92, 18);
             label2.TabIndex = 19;
             label2.Text = "Frecuencia";
             // 
@@ -264,35 +273,39 @@
             Frecuencia_Pago.Font = new Font("Segoe UI", 11.1F, FontStyle.Regular, GraphicsUnit.Point);
             Frecuencia_Pago.FormattingEnabled = true;
             Frecuencia_Pago.Items.AddRange(new object[] { "Semanal", "Quincenal", "Mensual", "Trimestral", "Semestral", "Anual" });
-            Frecuencia_Pago.Location = new Point(1447, 325);
+            Frecuencia_Pago.Location = new Point(596, 119);
+            Frecuencia_Pago.Margin = new Padding(1);
             Frecuencia_Pago.Name = "Frecuencia_Pago";
-            Frecuencia_Pago.Size = new Size(302, 58);
+            Frecuencia_Pago.Size = new Size(127, 28);
             Frecuencia_Pago.TabIndex = 20;
             // 
             // label_AbonoMensual
             // 
             label_AbonoMensual.AutoSize = true;
             label_AbonoMensual.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label_AbonoMensual.Location = new Point(843, 243);
+            label_AbonoMensual.Location = new Point(347, 89);
+            label_AbonoMensual.Margin = new Padding(1, 0, 1, 0);
             label_AbonoMensual.Name = "label_AbonoMensual";
-            label_AbonoMensual.Size = new Size(517, 44);
+            label_AbonoMensual.Size = new Size(213, 18);
             label_AbonoMensual.TabIndex = 21;
             label_AbonoMensual.Text = "Abono Mensual para socios";
             // 
             // txt_AbonoMensual
             // 
             txt_AbonoMensual.Font = new Font("Segoe UI", 11.1F, FontStyle.Regular, GraphicsUnit.Point);
-            txt_AbonoMensual.Location = new Point(1447, 243);
+            txt_AbonoMensual.Location = new Point(596, 89);
+            txt_AbonoMensual.Margin = new Padding(1);
             txt_AbonoMensual.Name = "txt_AbonoMensual";
-            txt_AbonoMensual.Size = new Size(302, 57);
+            txt_AbonoMensual.Size = new Size(127, 27);
             txt_AbonoMensual.TabIndex = 22;
             // 
             // label_Pagar_Actividades
             // 
             label_Pagar_Actividades.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label_Pagar_Actividades.Location = new Point(1486, 542);
+            label_Pagar_Actividades.Location = new Point(612, 198);
+            label_Pagar_Actividades.Margin = new Padding(1, 0, 1, 0);
             label_Pagar_Actividades.Name = "label_Pagar_Actividades";
-            label_Pagar_Actividades.Size = new Size(250, 112);
+            label_Pagar_Actividades.Size = new Size(103, 41);
             label_Pagar_Actividades.TabIndex = 23;
             label_Pagar_Actividades.Text = "Seleccionar actividades";
             label_Pagar_Actividades.Visible = false;
@@ -302,9 +315,10 @@
             lista_actividades.Cursor = Cursors.Hand;
             lista_actividades.FormattingEnabled = true;
             lista_actividades.Items.AddRange(new object[] { "Yoga", "Pilates", "Zumba", "Crossfit", "Natacion", "Escuela de Futbol" });
-            lista_actividades.Location = new Point(1449, 667);
+            lista_actividades.Location = new Point(597, 244);
+            lista_actividades.Margin = new Padding(1);
             lista_actividades.Name = "lista_actividades";
-            lista_actividades.Size = new Size(300, 268);
+            lista_actividades.Size = new Size(126, 94);
             lista_actividades.TabIndex = 24;
             lista_actividades.Visible = false;
             // 
@@ -313,9 +327,10 @@
             Btn_Pagar.BackColor = SystemColors.Highlight;
             Btn_Pagar.Cursor = Cursors.Hand;
             Btn_Pagar.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Pagar.Location = new Point(843, 968);
+            Btn_Pagar.Location = new Point(347, 354);
+            Btn_Pagar.Margin = new Padding(1);
             Btn_Pagar.Name = "Btn_Pagar";
-            Btn_Pagar.Size = new Size(878, 83);
+            Btn_Pagar.Size = new Size(362, 30);
             Btn_Pagar.TabIndex = 25;
             Btn_Pagar.Text = "Pagar";
             Btn_Pagar.UseVisualStyleBackColor = false;
@@ -325,19 +340,21 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(843, 690);
+            label5.Location = new Point(348, 260);
+            label5.Margin = new Padding(1, 0, 1, 0);
             label5.Name = "label5";
-            label5.Size = new Size(262, 44);
+            label5.Size = new Size(119, 18);
             label5.TabIndex = 26;
-            label5.Text = "Total a Pagar:";
+            label5.Text = "Total a Pagar: $";
             // 
             // total_pago
             // 
             total_pago.BackColor = Color.DimGray;
             total_pago.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            total_pago.Location = new Point(1144, 700);
+            total_pago.Location = new Point(471, 256);
+            total_pago.Margin = new Padding(1);
             total_pago.Name = "total_pago";
-            total_pago.Size = new Size(262, 57);
+            total_pago.Size = new Size(110, 27);
             total_pago.TabIndex = 27;
             // 
             // Btn_Calcular_Total
@@ -345,9 +362,10 @@
             Btn_Calcular_Total.BackColor = SystemColors.Highlight;
             Btn_Calcular_Total.Cursor = Cursors.Hand;
             Btn_Calcular_Total.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Calcular_Total.Location = new Point(1144, 777);
+            Btn_Calcular_Total.Location = new Point(471, 284);
+            Btn_Calcular_Total.Margin = new Padding(1);
             Btn_Calcular_Total.Name = "Btn_Calcular_Total";
-            Btn_Calcular_Total.Size = new Size(261, 58);
+            Btn_Calcular_Total.Size = new Size(110, 38);
             Btn_Calcular_Total.TabIndex = 28;
             Btn_Calcular_Total.Text = "Calcular";
             Btn_Calcular_Total.UseVisualStyleBackColor = false;
@@ -357,9 +375,10 @@
             // 
             label_FormaDePago.AutoSize = true;
             label_FormaDePago.Font = new Font("Century Gothic", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            label_FormaDePago.Location = new Point(843, 439);
+            label_FormaDePago.Location = new Point(347, 161);
+            label_FormaDePago.Margin = new Padding(1, 0, 1, 0);
             label_FormaDePago.Name = "label_FormaDePago";
-            label_FormaDePago.Size = new Size(293, 44);
+            label_FormaDePago.Size = new Size(120, 18);
             label_FormaDePago.TabIndex = 29;
             label_FormaDePago.Text = "Forma de Pago";
             label_FormaDePago.Visible = false;
@@ -368,18 +387,19 @@
             // 
             formas_de_pago.FormattingEnabled = true;
             formas_de_pago.Items.AddRange(new object[] { "Tarjeta de Credito", "Efectivo" });
-            formas_de_pago.Location = new Point(1144, 439);
+            formas_de_pago.Location = new Point(471, 161);
+            formas_de_pago.Margin = new Padding(1);
             formas_de_pago.Name = "formas_de_pago";
-            formas_de_pago.Size = new Size(312, 92);
+            formas_de_pago.Size = new Size(131, 40);
             formas_de_pago.TabIndex = 30;
             formas_de_pago.ItemCheck += formas_de_pago_ItemCheck;
             // 
             // Pago_Form
             // 
-            AutoScaleDimensions = new SizeF(17F, 41F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
-            ClientSize = new Size(1806, 1089);
+            ClientSize = new Size(744, 398);
             Controls.Add(formas_de_pago);
             Controls.Add(label_FormaDePago);
             Controls.Add(Btn_Calcular_Total);
@@ -398,6 +418,7 @@
             Controls.Add(label1);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(1);
             Name = "Pago_Form";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Pago_Form";
