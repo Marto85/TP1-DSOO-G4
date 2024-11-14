@@ -198,15 +198,6 @@ namespace DSOO_Grupo4_TP1
             {
                 ActualizarAbonoSociosEnBaseDeDatos(nuevoAbono);
 
-                List<Cliente> listaDeClientes = CargarClientes();
-                foreach (Cliente cliente in listaDeClientes)
-                {
-                    if (cliente.EsSocio)
-                    {
-                        cliente.SetAbonoMensualSocios(nuevoAbono);
-                    }
-                }
-
                 MessageBox.Show("El abono mensual se ha actualizado correctamente.", "Actualización exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
