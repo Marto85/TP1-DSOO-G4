@@ -59,11 +59,14 @@ namespace DSOO_Grupo4_TP1.Forms
                     int rowIndex = dgvActividades.Rows.Add();
                     dgvActividades.Rows[rowIndex].Cells["Codigo"].Value = actividadId;
                     dgvActividades.Rows[rowIndex].Cells["Clase"].Value = nombreActividad;
-                    dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = _datosComprobante["totalSinDescuento"];
-                    decimal descuento = Convert.ToDecimal(_datosComprobante["descuento"]);
-                    dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = descuento.ToString("F2");
+                    //dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = _datosComprobante["TotalSinDescuento"];
+                    //decimal descuento = Convert.ToDecimal(_datosComprobante["Descuento"]);
                     //dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = precio;
-                    dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = _datosComprobante["Monto"];
+                    //decimal subtotal = Convert.ToDecimal(_datosComprobante["Monto"]);
+                    dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = $"${Convert.ToDecimal(_datosComprobante["TotalSinDescuento"]):F2}";
+                    dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = $"${Convert.ToDecimal(_datosComprobante["Descuento"]):F2}";
+                    dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = $"${Convert.ToDecimal(_datosComprobante["Monto"]):F2}";
+
                 }
             }
             else

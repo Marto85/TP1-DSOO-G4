@@ -584,10 +584,10 @@ namespace DSOO_Grupo4_TP1.Forms
                             }
                         }
 
-                        datosComprobante["Monto"] = totalMontoActividades;
+                        datosComprobante["Monto"] = totalSinDescuento - this.descuento;
                         datosComprobante["FechaPago"] = fechaPago;
-                        datosComprobante["totalSinDescuento"] = totalSinDescuento;
-                        datosComprobante["descuento"] = this.descuento;
+                        datosComprobante["TotalSinDescuento"] = totalSinDescuento;
+                        datosComprobante["Descuento"] = this.descuento;
                         datosComprobante["ProximoVencimiento"] = proximoVencimiento;
                         datosComprobante["TipoDePago"] = tipoDePagoSeleccionado;
                         datosComprobante["FormaDePago"] = formaPago;
