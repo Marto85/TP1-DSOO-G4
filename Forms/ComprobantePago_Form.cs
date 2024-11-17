@@ -54,16 +54,16 @@ namespace DSOO_Grupo4_TP1.Forms
                 {
                     int actividadId = Convert.ToInt32(actividad["ActividadId"]);
                     string nombreActividad = actividad["Nombre"].ToString();
-                    decimal precio = Convert.ToDecimal(actividad["Precio"]);
+                    decimal totalSinDescuento = Convert.ToDecimal(actividad["totalSinDescuento"]);
+                    decimal totalConDescuento = Convert.ToDecimal(actividad["total"]);
+                    decimal descuentoParcial = Convert.ToDecimal(actividad["descuento"]);
 
                     int rowIndex = dgvActividades.Rows.Add();
                     dgvActividades.Rows[rowIndex].Cells["Codigo"].Value = actividadId;
                     dgvActividades.Rows[rowIndex].Cells["Clase"].Value = nombreActividad;
-                    dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = _datosComprobante["totalSinDescuento"];
-                    decimal descuento = Convert.ToDecimal(_datosComprobante["descuento"]);
-                    dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = descuento.ToString("F2");
-                    //dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = precio;
-                    dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = _datosComprobante["Monto"];
+                    dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = totalSinDescuento.ToString("F2"); ;
+                    dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = descuentoParcial.ToString("F2"); ;
+                    dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = totalConDescuento.ToString("F2"); ;
                 }
             }
             else

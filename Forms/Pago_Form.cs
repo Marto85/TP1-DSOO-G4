@@ -22,6 +22,7 @@ namespace DSOO_Grupo4_TP1.Forms
         private Conexion conexion;
         List<string> actividades_seleccionadas = new List<string>();
         private List<Actividad> actividadesDisponibles;
+        Dictionary<string, object> datosComprobante = new Dictionary<string, object>();
 
         private Boolean pagoSocio; // variable bandera para para controlar que tipo de pago procesar en el ultimo metodo de clase
         decimal totalSinDescuento = 0;
@@ -229,58 +230,87 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void CalcularTotalNoSocios()
         {
+            datosComprobante.Clear();
             decimal totalPagar = 0;
+            totalSinDescuento = 0;
+            descuento = 0;
 
             if (Frecuencia_Pago.SelectedItem != null)
             {
                 string frecuenciaPago = Frecuencia_Pago.SelectedItem.ToString();
 
                 foreach (var item in lista_actividades.CheckedItems)
-                {
+                {   
                     string nombreActividad = item.ToString();
                     decimal precioActividad = ObtenerPrecioActividad(nombreActividad);
                     decimal precioConFrecuencia = 0;
+                    decimal descuentoParcial = 0;
+                    decimal parcialSinDescuento = 0;
 
                     switch (frecuenciaPago)
                     {
                         case "Semanal":
                             precioConFrecuencia = (precioActividad / 4) * 1.10m; // Recargo del 10%
-                            descuento = 0;
-                            totalSinDescuento = precioConFrecuencia;
+                            descuentoParcial = 0;
+                            parcialSinDescuento = precioConFrecuencia;
+                            totalSinDescuento += precioConFrecuencia;
                             break;
                         case "Quincenal":
                             precioConFrecuencia = (precioActividad / 2) * 1.05m; // Recargo del 5%
-                            descuento = 0;
-                            totalSinDescuento = precioConFrecuencia;
+                            descuentoParcial = 0;
+                            parcialSinDescuento = precioConFrecuencia;
+                            totalSinDescuento += precioConFrecuencia;
                             break;
                         case "Mensual":
                             precioConFrecuencia = precioActividad; // Precio mensual sin recargo/bonificación
-                            descuento = 0;
-                            totalSinDescuento = precioConFrecuencia;
+                            descuentoParcial = 0;
+                            parcialSinDescuento = precioConFrecuencia;
+                            totalSinDescuento += precioConFrecuencia;
                             break;
                         case "Trimestral":
                             precioConFrecuencia = (precioActividad * 3) * 0.95m; // Descuento del 5%
-                            totalSinDescuento = precioActividad * 3;
-                            descuento = totalSinDescuento - precioConFrecuencia;
+                            parcialSinDescuento = precioActividad * 3;
+                            totalSinDescuento += parcialSinDescuento;
+                            descuentoParcial = precioActividad * 3 - precioConFrecuencia;
+                            descuento += descuentoParcial;
+                            ;
+
                             break;
                         case "Semestral":
                             precioConFrecuencia = (precioActividad * 6) * 0.90m; // Descuento del 10%
-                            totalSinDescuento = precioActividad * 6;
-                            descuento = totalSinDescuento - precioConFrecuencia;
+                            parcialSinDescuento = precioActividad * 6;
+                            totalSinDescuento += parcialSinDescuento;
+                            descuentoParcial = precioActividad * 6 - precioConFrecuencia;
+                            descuento += descuentoParcial;
                             break;
                         case "Anual":
                             precioConFrecuencia = (precioActividad * 12) * 0.75m; // Descuento del 25%
-                            totalSinDescuento = precioActividad * 12;
-                            descuento = totalSinDescuento - precioConFrecuencia;
+                            parcialSinDescuento = precioActividad * 12;
+                            totalSinDescuento += parcialSinDescuento;
+                            descuentoParcial = precioActividad * 12 - precioConFrecuencia;
+                            descuento += descuentoParcial;
                             break;
                         default:
                             MessageBox.Show("Por favor selecciona una frecuencia de pago válida.");
                             return;
                     }
 
+                    if (!datosComprobante.ContainsKey("Actividades") || datosComprobante["Actividades"] == null)
+                    {
+                        datosComprobante["Actividades"] = new List<Dictionary<string, object>>();
+                    }
+
+                      ((List<Dictionary<string, object>>)datosComprobante["Actividades"]).Add(new Dictionary<string, object>
+                        {
+                            { "Nombre", nombreActividad },
+                            { "totalSinDescuento", parcialSinDescuento },
+                            { "total", precioConFrecuencia },
+                            { "descuento", descuentoParcial },
+                        });
+
                     totalPagar += precioConFrecuencia;
                 }
-                total_pago.Text = totalPagar.ToString("C");
+                total_pago.Text = totalPagar.ToString("F2");
             }
             else
             {
@@ -406,12 +436,14 @@ namespace DSOO_Grupo4_TP1.Forms
                 return;
             }
 
+            datosComprobante.Clear();
+
             Conexion conexion = Conexion.getInstancia();
             string connectionString = conexion.CrearConexion().ConnectionString;
             Btn_Calcular_Total_Click(sender, e);
 
             int clienteDni = Txt_DNI.Text == "" ? 0 : int.Parse(Txt_DNI.Text);
-            decimal montoDecimal = decimal.Parse(total_pago.Text.Replace("$", ""));
+            decimal montoDecimal = decimal.Parse(total_pago.Text);
             DateTime fechaPago = DateTime.Now;
             string tipoDePagoSeleccionado = Frecuencia_Pago.SelectedItem?.ToString();
             DateTime proximoVencimiento = CalcularProximoVencimiento(fechaPago, tipoDePagoSeleccionado);
@@ -428,7 +460,6 @@ namespace DSOO_Grupo4_TP1.Forms
                 _ => 0
             };
 
-            Dictionary<string, object> datosComprobante = new Dictionary<string, object>();
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -508,44 +539,20 @@ namespace DSOO_Grupo4_TP1.Forms
                     }
                     else
                     {
-                        decimal totalMontoActividades = 0;
-                        decimal descuento = CalcularDescuento(tipoDePagoSeleccionado);
                         List<int> actividadesSeleccionadasIds = new List<int>();
 
-                        datosComprobante["Actividades"] = new List<Dictionary<string, object>>();
-
-                        foreach (var actividadNombre in lista_actividades.CheckedItems)
+                        foreach (var actividad in (List<Dictionary<string, object>>)datosComprobante["Actividades"])
                         {
-                            Actividad actividadSeleccionada = actividadesDisponibles.FirstOrDefault(a => a.Nombre == actividadNombre.ToString());
+                            Actividad actividadSeleccionada = actividadesDisponibles.FirstOrDefault(a => a.Nombre == actividad["Nombre"].ToString());
 
                             if (actividadSeleccionada != null)
                             {
                                 actividadesSeleccionadasIds.Add(actividadSeleccionada.Id);
-
-                                string queryPrecioActividad = "SELECT PrecioNoSocio FROM Actividad WHERE Id = @Id";
-                                decimal precioActividad;
-
-                                using (MySqlCommand cmdPrecio = new MySqlCommand(queryPrecioActividad, conn))
-                                {
-                                    cmdPrecio.Parameters.AddWithValue("@Id", actividadSeleccionada.Id);
-                                    object result = cmdPrecio.ExecuteScalar();
-
-                                    if (result != null)
-                                    {
-                                        precioActividad = Convert.ToDecimal(result) * descuento;
-                                        totalMontoActividades += precioActividad;
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Actividad no encontrada.");
-                                        continue;
-                                    }
-                                }
+                                actividad["ActividadId"] = actividadSeleccionada.Id;
 
                                 string queryInsertPagoActividad = @"INSERT INTO Pago_Actividad 
                          (Cliente_id, Actividad_id, Monto, FechaPago, ProximoVencimiento, formaPago)
-                         VALUES 
-                         (@ClienteId, @ActividadId, @Monto, @FechaPago, @ProximoVencimiento, @formaPago)";
+                         VALUES (@ClienteId, @ActividadId, @Monto, @FechaPago, @ProximoVencimiento, @formaPago)";
 
                                 int pagoId; // Declara pagoId fuera del bloque using
 
@@ -553,7 +560,7 @@ namespace DSOO_Grupo4_TP1.Forms
                                 {
                                     cmdInsertPago.Parameters.AddWithValue("@ClienteId", clienteId);
                                     cmdInsertPago.Parameters.AddWithValue("@ActividadId", actividadSeleccionada.Id);
-                                    cmdInsertPago.Parameters.AddWithValue("@Monto", precioActividad);
+                                    cmdInsertPago.Parameters.AddWithValue("@Monto", Convert.ToDecimal(actividad["total"]));
                                     cmdInsertPago.Parameters.AddWithValue("@FechaPago", fechaPago);
                                     cmdInsertPago.Parameters.AddWithValue("@ProximoVencimiento", proximoVencimiento);
                                     cmdInsertPago.Parameters.AddWithValue("@formaPago", formaPago);
@@ -570,21 +577,14 @@ namespace DSOO_Grupo4_TP1.Forms
                                     cmdActualizarCupos.ExecuteNonQuery();
                                 }
 
-                                ((List<Dictionary<string, object>>)datosComprobante["Actividades"]).Add(new Dictionary<string, object>
-                                {
-                                    { "ActividadId", actividadSeleccionada.Id },
-                                    { "Nombre", actividadSeleccionada.Nombre },
-                                    { "Precio", precioActividad },
-                                    { "PagoActividadId", pagoId }
-                                });
                             }
                             else
                             {
-                                MessageBox.Show($"Actividad {actividadNombre} no encontrada en la lista de actividades disponibles.");
+                                MessageBox.Show($"Actividad {actividad["Nombre"]} no encontrada en la lista de actividades disponibles.");
                             }
                         }
 
-                        datosComprobante["Monto"] = totalMontoActividades;
+                        datosComprobante["Monto"] = total_pago.Text;
                         datosComprobante["FechaPago"] = fechaPago;
                         datosComprobante["totalSinDescuento"] = totalSinDescuento;
                         datosComprobante["descuento"] = this.descuento;
