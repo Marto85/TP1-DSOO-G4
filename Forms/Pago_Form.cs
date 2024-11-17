@@ -444,9 +444,7 @@ namespace DSOO_Grupo4_TP1.Forms
 
             int clienteDni = Txt_DNI.Text == "" ? 0 : int.Parse(Txt_DNI.Text);
             decimal montoDecimal = decimal.Parse(total_pago.Text);
-            DateTime fechaPago = DateTime.Now;
             string tipoDePagoSeleccionado = Frecuencia_Pago.SelectedItem?.ToString();
-            DateTime proximoVencimiento = CalcularProximoVencimiento(fechaPago, tipoDePagoSeleccionado);
             string formaPago = formas_de_pago.SelectedItem?.ToString();
 
             int tipoDePagoId = tipoDePagoSeleccionado switch
@@ -509,8 +507,12 @@ namespace DSOO_Grupo4_TP1.Forms
                         }
                     }
 
+                    DateTime fechaPago = DateTime.Now;
+                    DateTime proximoVencimiento = DateTime.Now;
+
                     if (pagoSocio)
                     {
+                        proximoVencimiento = CalcularProximoVencimiento(fechaPago, clienteId, null);
                         string queryInsert = "INSERT INTO Pago (Cliente_Id, Monto, FechaPago, ProximoVencimiento, Id_tipo_de_pago, formaPago) " +
                                               "VALUES (@Cliente_Id, @Monto, @FechaPago, @ProximoVencimiento, @Id_tipo_de_pago, @formaPago)";
                         using (MySqlCommand cmdInsert = new MySqlCommand(queryInsert, conn))
@@ -540,7 +542,7 @@ namespace DSOO_Grupo4_TP1.Forms
                     else
                     {
                         List<int> actividadesSeleccionadasIds = new List<int>();
-
+                        proximoVencimiento= proximoVencimiento.AddYears(99);
                         foreach (var actividad in (List<Dictionary<string, object>>)datosComprobante["Actividades"])
                         {
                             Actividad actividadSeleccionada = actividadesDisponibles.FirstOrDefault(a => a.Nombre == actividad["Nombre"].ToString());
@@ -555,6 +557,7 @@ namespace DSOO_Grupo4_TP1.Forms
                          VALUES (@ClienteId, @ActividadId, @Monto, @FechaPago, @ProximoVencimiento, @formaPago)";
 
                                 int pagoId; // Declara pagoId fuera del bloque using
+                                DateTime vencimiento = CalcularProximoVencimiento(fechaPago, clienteId, actividadSeleccionada.Id);
 
                                 using (MySqlCommand cmdInsertPago = new MySqlCommand(queryInsertPagoActividad, conn))
                                 {
@@ -562,7 +565,7 @@ namespace DSOO_Grupo4_TP1.Forms
                                     cmdInsertPago.Parameters.AddWithValue("@ActividadId", actividadSeleccionada.Id);
                                     cmdInsertPago.Parameters.AddWithValue("@Monto", Convert.ToDecimal(actividad["total"]));
                                     cmdInsertPago.Parameters.AddWithValue("@FechaPago", fechaPago);
-                                    cmdInsertPago.Parameters.AddWithValue("@ProximoVencimiento", proximoVencimiento);
+                                    cmdInsertPago.Parameters.AddWithValue("@ProximoVencimiento", vencimiento);
                                     cmdInsertPago.Parameters.AddWithValue("@formaPago", formaPago);
 
                                     cmdInsertPago.ExecuteNonQuery();
@@ -577,6 +580,10 @@ namespace DSOO_Grupo4_TP1.Forms
                                     cmdActualizarCupos.ExecuteNonQuery();
                                 }
 
+                                if (vencimiento < proximoVencimiento)
+                                {
+                                    proximoVencimiento = vencimiento;
+                                }
                             }
                             else
                             {
@@ -618,33 +625,73 @@ namespace DSOO_Grupo4_TP1.Forms
         }
 
 
-
-        private DateTime CalcularProximoVencimiento(DateTime fechaPago, string tipoDePago)
+        private DateTime CalcularProximoVencimiento(DateTime fechaPago, int clienteId, int ? actividadId)
         {
-            DateTime proximoVencimiento = fechaPago;
-            string? frecuenciaPago = Frecuencia_Pago.SelectedItem.ToString();
+            string queryUltimoVencimiento = "";
+            if (actividadId.HasValue)
+            {
+                queryUltimoVencimiento = "SELECT ProximoVencimiento FROM Pago_Actividad WHERE Cliente_Id = @clienteId AND Actividad_id = @actividadId ORDER BY ProximoVencimiento DESC LIMIT 1";
+
+            }
+            else { 
+                queryUltimoVencimiento = "SELECT ProximoVencimiento FROM pago WHERE Cliente_Id =  @clienteId ORDER BY ProximoVencimiento DESC LIMIT 1";
+            }
+
+            DateTime ultimoVencimiento = DateTime.Now;
+            Conexion conexion = Conexion.getInstancia();
+            string connectionString = conexion.CrearConexion().ConnectionString;
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(queryUltimoVencimiento, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@clienteId", clienteId);
+                        if (actividadId.HasValue)
+                        {
+                            cmd.Parameters.AddWithValue("@actividadId", actividadId.Value);
+                        }
+
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            ultimoVencimiento = Convert.ToDateTime(result);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al obtener el último vencimiento: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            DateTime proximoVencimiento = ultimoVencimiento != DateTime.MinValue ? ultimoVencimiento : fechaPago;
+            string frecuenciaPago = Frecuencia_Pago.SelectedItem?.ToString();
+
             switch (frecuenciaPago)
             {
                 case "Semanal":
-                    proximoVencimiento = fechaPago.AddDays(7);
+                    proximoVencimiento = ultimoVencimiento.AddDays(7);
                     break;
                 case "Quincenal":
-                    proximoVencimiento = fechaPago.AddDays(15);
+                    proximoVencimiento = ultimoVencimiento.AddDays(15);
                     break;
                 case "Mensual":
-                    proximoVencimiento = fechaPago.AddMonths(1);
+                    proximoVencimiento = ultimoVencimiento.AddMonths(1);
                     break;
                 case "Trimestral":
-                    proximoVencimiento = fechaPago.AddMonths(3);
+                    proximoVencimiento = ultimoVencimiento.AddMonths(3);
                     break;
                 case "Semestral":
-                    proximoVencimiento = fechaPago.AddMonths(6);
+                    proximoVencimiento = ultimoVencimiento.AddMonths(6);
                     break;
                 case "Anual":
-                    proximoVencimiento = fechaPago.AddYears(1);
+                    proximoVencimiento = ultimoVencimiento.AddYears(1);
                     break;
                 default:
-                    proximoVencimiento = fechaPago;
+                    proximoVencimiento = ultimoVencimiento;
                     break;
             }
 

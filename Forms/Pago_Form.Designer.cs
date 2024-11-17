@@ -314,7 +314,7 @@
             // 
             lista_actividades.Cursor = Cursors.Hand;
             lista_actividades.FormattingEnabled = true;
-            lista_actividades.Items.AddRange(new object[] { "Yoga", "Pilates", "Zumba", "Crossfit", "Natacion", "Escuela de Futbol" });
+            lista_actividades.Items.AddRange(new object[] { "Yoga", "Pilates", "Zumba", "Crossfit", "Natacion", "Futbol" });
             lista_actividades.Location = new Point(597, 244);
             lista_actividades.Margin = new Padding(1);
             lista_actividades.Name = "lista_actividades";

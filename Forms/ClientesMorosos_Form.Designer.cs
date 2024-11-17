@@ -47,20 +47,20 @@
             panel2.Controls.Add(Btn_Atras);
             panel2.Controls.Add(btn_minimizar);
             panel2.Controls.Add(btn_cerrar);
-            panel2.Location = new Point(1, 2);
-            panel2.Margin = new Padding(2, 3, 2, 3);
+            panel2.Location = new Point(0, 1);
+            panel2.Margin = new Padding(1, 1, 1, 1);
             panel2.Name = "panel2";
-            panel2.Size = new Size(2362, 55);
+            panel2.Size = new Size(973, 20);
             panel2.TabIndex = 12;
             // 
             // Btn_Atras
             // 
             Btn_Atras.Cursor = Cursors.Hand;
             Btn_Atras.Image = (Image)resources.GetObject("Btn_Atras.Image");
-            Btn_Atras.Location = new Point(2, 0);
-            Btn_Atras.Margin = new Padding(2, 3, 2, 3);
+            Btn_Atras.Location = new Point(1, 0);
+            Btn_Atras.Margin = new Padding(1, 1, 1, 1);
             Btn_Atras.Name = "Btn_Atras";
-            Btn_Atras.Size = new Size(78, 55);
+            Btn_Atras.Size = new Size(32, 20);
             Btn_Atras.SizeMode = PictureBoxSizeMode.Zoom;
             Btn_Atras.TabIndex = 13;
             Btn_Atras.TabStop = false;
@@ -70,10 +70,10 @@
             // 
             btn_minimizar.Cursor = Cursors.Hand;
             btn_minimizar.Image = (Image)resources.GetObject("btn_minimizar.Image");
-            btn_minimizar.Location = new Point(2216, 0);
-            btn_minimizar.Margin = new Padding(2, 3, 2, 3);
+            btn_minimizar.Location = new Point(912, 0);
+            btn_minimizar.Margin = new Padding(1, 1, 1, 1);
             btn_minimizar.Name = "btn_minimizar";
-            btn_minimizar.Size = new Size(78, 55);
+            btn_minimizar.Size = new Size(32, 20);
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_minimizar.TabIndex = 8;
             btn_minimizar.TabStop = false;
@@ -83,10 +83,10 @@
             // 
             btn_cerrar.Cursor = Cursors.Hand;
             btn_cerrar.Image = (Image)resources.GetObject("btn_cerrar.Image");
-            btn_cerrar.Location = new Point(2284, 0);
-            btn_cerrar.Margin = new Padding(2, 3, 2, 3);
+            btn_cerrar.Location = new Point(940, 0);
+            btn_cerrar.Margin = new Padding(1, 1, 1, 1);
             btn_cerrar.Name = "btn_cerrar";
-            btn_cerrar.Size = new Size(78, 55);
+            btn_cerrar.Size = new Size(32, 20);
             btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_cerrar.TabIndex = 7;
             btn_cerrar.TabStop = false;
@@ -95,21 +95,23 @@
             // dgvClientesVencidos
             // 
             dgvClientesVencidos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientesVencidos.Location = new Point(63, 162);
+            dgvClientesVencidos.Location = new Point(26, 59);
+            dgvClientesVencidos.Margin = new Padding(1, 1, 1, 1);
             dgvClientesVencidos.Name = "dgvClientesVencidos";
             dgvClientesVencidos.RowHeadersWidth = 102;
             dgvClientesVencidos.RowTemplate.Height = 49;
-            dgvClientesVencidos.Size = new Size(2223, 554);
+            dgvClientesVencidos.Size = new Size(744, 203);
             dgvClientesVencidos.TabIndex = 14;
             // 
             // ClientesMorosos_Form
             // 
-            AutoScaleDimensions = new SizeF(17F, 41F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2362, 1044);
+            ClientSize = new Size(799, 382);
             Controls.Add(dgvClientesVencidos);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(1, 1, 1, 1);
             Name = "ClientesMorosos_Form";
             Text = "ClientesMorosos_Form";
             panel2.ResumeLayout(false);
