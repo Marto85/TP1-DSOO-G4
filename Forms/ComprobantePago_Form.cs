@@ -61,11 +61,9 @@ namespace DSOO_Grupo4_TP1.Forms
                     int rowIndex = dgvActividades.Rows.Add();
                     dgvActividades.Rows[rowIndex].Cells["Codigo"].Value = actividadId;
                     dgvActividades.Rows[rowIndex].Cells["Clase"].Value = nombreActividad;
-                    dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = totalSinDescuento.ToString("F2"); ;
-                    dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = descuentoParcial.ToString("F2"); ;
-                    dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = totalConDescuento.ToString("F2"); ;
-                    dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = _datosComprobante["Monto"];
-                    dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = _datosComprobante["Monto"];
+                    dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = "$ " + totalSinDescuento.ToString("F2"); ;
+                    dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = "$ " + descuentoParcial.ToString("F2"); ;
+                    dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = "$ " + totalConDescuento.ToString("F2"); ;
                 }
             }
             else
@@ -73,11 +71,14 @@ namespace DSOO_Grupo4_TP1.Forms
                 int rowIndex = dgvActividades.Rows.Add();
                 dgvActividades.Rows[rowIndex].Cells["Codigo"].Value = "--";
                 dgvActividades.Rows[rowIndex].Cells["Clase"].Value = "Abono Mensual";
-                dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = _datosComprobante["totalSinDescuento"];
+                dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = "$ "+_datosComprobante["totalSinDescuento"];
                 decimal descuento = Convert.ToDecimal(_datosComprobante["descuento"]);
-                dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = descuento.ToString("F2");
-                dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = _datosComprobante["Monto"];
+                dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = "$ " +  descuento.ToString("F2");
+                dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = "$ " + _datosComprobante["Monto"];
             }
+
+            _datosComprobante.TryGetValue("Monto", out var Monto);
+            textBox_total.Text = Monto?.ToString();
 
         }
 
