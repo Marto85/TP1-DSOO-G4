@@ -64,6 +64,8 @@ namespace DSOO_Grupo4_TP1.Forms
                     dgvActividades.Rows[rowIndex].Cells["PrecioUnitario"].Value = totalSinDescuento.ToString("F2"); ;
                     dgvActividades.Rows[rowIndex].Cells["Bonificacion"].Value = descuentoParcial.ToString("F2"); ;
                     dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = totalConDescuento.ToString("F2"); ;
+                    dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = _datosComprobante["Monto"];
+                    dgvActividades.Rows[rowIndex].Cells["Subtotal"].Value = _datosComprobante["Monto"];
                 }
             }
             else
