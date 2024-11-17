@@ -189,6 +189,17 @@ namespace DSOO_Grupo4_TP1.Forms
             return actividadesSeleccionadas;
         }
 
+        private void destildarActividad(int actividadId) {
+            switch (actividadId)
+            {
+                case 1: checkBoxYoga.Checked = false; break;
+                case 2: checkBoxPilates.Checked = false; break;
+                case 3: checkBoxZumba.Checked = false; break;
+                case 4: checkBoxCrossfit.Checked = false; break;
+                case 5: checkBoxNatacion.Checked = false; break;
+                case 6: checkBoxFutbol.Checked = false; break;
+            }
+        }
 
         private void ObtenerActividadesRegistradas(int IdCliente)
         {
@@ -257,35 +268,76 @@ namespace DSOO_Grupo4_TP1.Forms
         {
             List<int> actividadesSeleccionadas = ObtenerActividadesSeleccionadas();
 
-            // Verifica si hay cupos disponibles antes de inscribir
-            foreach (int idActividad in actividadesSeleccionadas)
+            // Obtén todas las relaciones actuales del cliente con las actividades
+            string queryRelacionesExistentes = "SELECT IdActividad FROM Actividad_Cliente WHERE IdCliente = @IdCliente";
+            List<int> actividadesRelacionadas = new List<int>();
+            using (MySqlCommand cmdRelaciones = new MySqlCommand(queryRelacionesExistentes, conn))
             {
-                string queryCupos = "SELECT CuposDisponibles FROM Actividad WHERE Id = @idActividad";
-                using (MySqlCommand cmdCupos = new MySqlCommand(queryCupos, conn))
+                cmdRelaciones.Parameters.AddWithValue("@IdCliente", idCliente);
+                using (MySqlDataReader reader = cmdRelaciones.ExecuteReader())
                 {
-                    cmdCupos.Parameters.AddWithValue("@idActividad", idActividad);
-                    int cuposDisponibles = Convert.ToInt32(cmdCupos.ExecuteScalar());
-
-                    if (cuposDisponibles <= 0)
+                    while (reader.Read())
                     {
-                        MessageBox.Show($"No hay cupos disponibles para la actividad con Id {idActividad}");
-                        return;
+                        actividadesRelacionadas.Add(reader.GetInt32("IdActividad"));
                     }
                 }
             }
 
-            // Insertar la inscripción en la tabla Actividad_Cliente
+            // Procesar actividades seleccionadas y relaciones existentes
+            foreach (int idActividad in actividadesRelacionadas)
+            {
+                // Si no está seleccionada y existe la relación, eliminarla
+                if (!actividadesSeleccionadas.Contains(idActividad))
+                {
+                    string queryEliminar = "DELETE FROM Actividad_Cliente WHERE IdCliente = @IdCliente AND IdActividad = @IdActividad";
+                    using (MySqlCommand cmdEliminar = new MySqlCommand(queryEliminar, conn))
+                    {
+                        cmdEliminar.Parameters.AddWithValue("@IdCliente", idCliente);
+                        cmdEliminar.Parameters.AddWithValue("@IdActividad", idActividad);
+                        cmdEliminar.ExecuteNonQuery();
+                    }
+
+                    // Incrementar cupos disponibles
+                    string queryIncrementarCupos = "UPDATE Actividad SET CuposDisponibles = CuposDisponibles + 1 WHERE Id = @idActividad";
+                    using (MySqlCommand cmdIncrementarCupos = new MySqlCommand(queryIncrementarCupos, conn))
+                    {
+                        cmdIncrementarCupos.Parameters.AddWithValue("@idActividad", idActividad);
+                        cmdIncrementarCupos.ExecuteNonQuery();
+                    }
+                }
+            }
+
             foreach (int idActividad in actividadesSeleccionadas)
             {
-                string queryInscribir = "INSERT INTO Actividad_Cliente (IdCliente, IdActividad, EsSocio) VALUES (@IdCliente, @IdActividad, @EsSocio)";
-                using (MySqlCommand cmdInscribir = new MySqlCommand(queryInscribir, conn))
+                // Si está seleccionada pero no existe la relación, crearla
+                if (!actividadesRelacionadas.Contains(idActividad))
                 {
-                    cmdInscribir.Parameters.AddWithValue("@IdCliente", idCliente);
-                    cmdInscribir.Parameters.AddWithValue("@IdActividad", idActividad);
-                    cmdInscribir.Parameters.AddWithValue("@EsSocio", esSocio ? 1 : 0);
-                    cmdInscribir.ExecuteNonQuery();
+                    // Verificar cupos antes de inscribir
+                    string queryCupos = "SELECT CuposDisponibles FROM Actividad WHERE Id = @idActividad";
+                    using (MySqlCommand cmdCupos = new MySqlCommand(queryCupos, conn))
+                    {
+                        cmdCupos.Parameters.AddWithValue("@idActividad", idActividad);
+                        int cuposDisponibles = Convert.ToInt32(cmdCupos.ExecuteScalar());
 
-                    // Actualiza cupos disponibles en las actividades a las cuales se inscribio el cliente
+                        if (cuposDisponibles <= 0)
+                        {
+                            MessageBox.Show($"No hay cupos disponibles para la actividad con Id {idActividad}, se procederá con las siguientes");
+                            destildarActividad(idActividad);
+                            continue;
+                        }
+                    }
+
+                    // Insertar inscripción
+                    string queryInscribir = "INSERT INTO Actividad_Cliente (IdCliente, IdActividad, EsSocio) VALUES (@IdCliente, @IdActividad, @EsSocio)";
+                    using (MySqlCommand cmdInscribir = new MySqlCommand(queryInscribir, conn))
+                    {
+                        cmdInscribir.Parameters.AddWithValue("@IdCliente", idCliente);
+                        cmdInscribir.Parameters.AddWithValue("@IdActividad", idActividad);
+                        cmdInscribir.Parameters.AddWithValue("@EsSocio", esSocio ? 1 : 0);
+                        cmdInscribir.ExecuteNonQuery();
+                    }
+
+                    // Reducir cupos disponibles
                     string queryReducirCupos = "UPDATE Actividad SET CuposDisponibles = CuposDisponibles - 1 WHERE Id = @idActividad";
                     using (MySqlCommand cmdReducirCupos = new MySqlCommand(queryReducirCupos, conn))
                     {
@@ -295,8 +347,10 @@ namespace DSOO_Grupo4_TP1.Forms
                 }
             }
 
-            MessageBox.Show("Cliente inscripto correctamente en las actividades seleccionadas.");
+            MessageBox.Show("Proceso completado: inscripciones actualizadas correctamente.");
         }
+
+
 
         private void ID_Registro_Enter(object sender, EventArgs e)
         {

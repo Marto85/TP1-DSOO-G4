@@ -571,14 +571,57 @@ namespace DSOO_Grupo4_TP1.Forms
                                     cmdInsertPago.ExecuteNonQuery();
                                     pagoId = (int)cmdInsertPago.LastInsertedId; // Asigna el valor a pagoId
                                 }
-
-                                string queryActualizarCupos = "UPDATE Actividad SET CuposDisponibles = CuposDisponibles - 1 WHERE Id = @Id AND CuposDisponibles > 0";
-
-                                using (MySqlCommand cmdActualizarCupos = new MySqlCommand(queryActualizarCupos, conn))
+                                //CHEQUEAR SI TIENE LA ACTIVIDAD ASIGNADA
+                                
+                                string queryActividadCliente = "SELECT COUNT(*) FROM Actividad_cliente WHERE IdCliente = @IdCliente AND IdActividad = @IdActividad";
+                                Boolean tieneActividad = false;
+                                using (MySqlCommand cmdCheck = new MySqlCommand(queryActividadCliente, conn))
                                 {
-                                    cmdActualizarCupos.Parameters.AddWithValue("@Id", actividadSeleccionada.Id);
-                                    cmdActualizarCupos.ExecuteNonQuery();
+                                    cmdCheck.Parameters.AddWithValue("@IdCliente", clienteId);
+                                    cmdCheck.Parameters.AddWithValue("@IdActividad", actividadSeleccionada.Id);
+                                    int count = Convert.ToInt32(cmdCheck.ExecuteScalar());
+                                    if (count > 0)
+                                    {
+                                        tieneActividad = true;
+                                    }
                                 }
+                                if (!tieneActividad)
+                                {
+                                    // CHEQUEAR SI HAY CUPOS SI NO TIENE LA ACTIVIDAD ASIGNADA,
+                                    string chequearCuposQuery = "SELECT CuposDisponibles FROM actividad WHERE id = @IdActividad";
+                                    using (MySqlCommand checkCupo = new MySqlCommand(chequearCuposQuery, conn))
+                                    {
+                                        checkCupo.Parameters.AddWithValue("@IdCliente", clienteId);
+                                        checkCupo.Parameters.AddWithValue("@IdActividad", actividadSeleccionada.Id);
+                                        int count = Convert.ToInt32(checkCupo.ExecuteScalar());
+                                        // SE LE ASIGNA LA ACTIVIDAD y SE RESTA CUPO (si hay);
+                                        if (count > 0)
+                                        {
+                                            string queryInscribir = "INSERT INTO Actividad_Cliente (IdCliente, IdActividad, EsSocio) VALUES (@IdCliente, @IdActividad, @EsSocio)";
+                                            using (MySqlCommand cmdInscribir = new MySqlCommand(queryInscribir, conn))
+                                            {
+                                                cmdInscribir.Parameters.AddWithValue("@IdCliente", clienteId);
+                                                cmdInscribir.Parameters.AddWithValue("@IdActividad", actividadSeleccionada.Id);
+                                                cmdInscribir.Parameters.AddWithValue("@EsSocio", 0);
+                                                cmdInscribir.ExecuteNonQuery();
+
+                                                // Actualiza cupos disponibles en las actividades a las cuales se inscribio el cliente
+                                                string queryReducirCupos = "UPDATE Actividad SET CuposDisponibles = CuposDisponibles - 1 WHERE Id = @idActividad";
+                                                using (MySqlCommand cmdReducirCupos = new MySqlCommand(queryReducirCupos, conn))
+                                                {
+                                                    cmdReducirCupos.Parameters.AddWithValue("@idActividad", actividadSeleccionada.Id);
+                                                    cmdReducirCupos.ExecuteNonQuery();
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("No hay cupo para ingresar en la actividad" + actividadSeleccionada.Nombre);
+                                            return;
+                                        }
+                                    }
+                                }
+
 
                                 if (vencimiento < proximoVencimiento)
                                 {
