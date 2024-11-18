@@ -75,7 +75,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(742, 22);
             panel2.TabIndex = 12;
-            panel2.MouseDown += panel2_MouseDown;
+            panel2.MouseDown += Panel2_MouseDown;
             // 
             // Btn_Atras
             // 
@@ -327,10 +327,10 @@
             Btn_Pagar.BackColor = SystemColors.Highlight;
             Btn_Pagar.Cursor = Cursors.Hand;
             Btn_Pagar.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Pagar.Location = new Point(347, 354);
+            Btn_Pagar.Location = new Point(348, 349);
             Btn_Pagar.Margin = new Padding(1);
             Btn_Pagar.Name = "Btn_Pagar";
-            Btn_Pagar.Size = new Size(362, 30);
+            Btn_Pagar.Size = new Size(375, 30);
             Btn_Pagar.TabIndex = 25;
             Btn_Pagar.Text = "Pagar";
             Btn_Pagar.UseVisualStyleBackColor = false;
@@ -392,7 +392,7 @@
             formas_de_pago.Name = "formas_de_pago";
             formas_de_pago.Size = new Size(131, 40);
             formas_de_pago.TabIndex = 30;
-            formas_de_pago.ItemCheck += formas_de_pago_ItemCheck;
+            formas_de_pago.ItemCheck += Formas_de_pago_ItemCheck;
             // 
             // Pago_Form
             // 

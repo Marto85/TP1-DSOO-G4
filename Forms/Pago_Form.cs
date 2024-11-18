@@ -8,17 +8,20 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace DSOO_Grupo4_TP1.Forms
 {
     public partial class Pago_Form : Form
     {
         private Cliente clienteActual;
+        private int clienteId = -1;
         private Conexion conexion;
         List<string> actividades_seleccionadas = new List<string>();
         private List<Actividad> actividadesDisponibles;
@@ -45,7 +48,7 @@ namespace DSOO_Grupo4_TP1.Forms
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void panel2_MouseDown(object sender, MouseEventArgs e)
+        private void Panel2_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
@@ -81,101 +84,81 @@ namespace DSOO_Grupo4_TP1.Forms
 
             if (dni_usuario > 0)
             {
-                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                try
                 {
-                    try
-                    {
-                        conn.Open();
-                        string query = "SELECT Nombre, Apellido, DNI, Direccion, Telefono, Email, EsSocio, Imagen_Perfil, AbonoMensualSocios FROM cliente WHERE DNI = @dni_usuario";
+                    clienteActual = new Cliente(dni_usuario);
 
-                        using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    if (clienteActual.EsSocio)
+                    {
+                        label_AbonoMensual.Visible = true;
+                        txt_AbonoMensual.Visible = true;
+                        label_Pagar_Actividades.Visible = false;
+                        lista_actividades.Visible = false;
+                        if (Frecuencia_Pago.Items.Contains("Semanal"))
                         {
-                            cmd.Parameters.AddWithValue("@dni_usuario", dni_usuario);
-
-                            // Ejecuta la consulta y obtiene el resultado
-                            using (MySqlDataReader reader = cmd.ExecuteReader())
-                            {
-                                if (reader.Read())
-                                {
-                                    // Verificar si los campos son NULL antes de obtener su valor
-                                    string nombre = reader.IsDBNull(reader.GetOrdinal("Nombre")) ? string.Empty : reader.GetString("Nombre");
-                                    string apellido = reader.IsDBNull(reader.GetOrdinal("Apellido")) ? string.Empty : reader.GetString("Apellido");
-                                    int dni = reader.IsDBNull(reader.GetOrdinal("DNI")) ? 0 : reader.GetInt32("DNI");
-                                    string direccion = reader.IsDBNull(reader.GetOrdinal("Direccion")) ? string.Empty : reader.GetString("Direccion");
-                                    string telefono = reader.IsDBNull(reader.GetOrdinal("Telefono")) ? string.Empty : reader.GetString("Telefono");
-                                    string email = reader.IsDBNull(reader.GetOrdinal("Email")) ? string.Empty : reader.GetString("Email");
-                                    string imagenPerfil = reader.IsDBNull(reader.GetOrdinal("Imagen_Perfil")) ? string.Empty : reader.GetString("Imagen_Perfil");
-                                    bool esSocio = !reader.IsDBNull(reader.GetOrdinal("EsSocio")) && reader.GetBoolean("EsSocio");
-                                    decimal abonoMensualSocios = reader.IsDBNull(reader.GetOrdinal("AbonoMensualSocios")) ? 0 : reader.GetDecimal("AbonoMensualSocios");
-
-
-                                    clienteActual = new Cliente(DateTime.Now, nombre, apellido, dni, direccion, telefono, email, imagenPerfil, esSocio: esSocio);
-                                    if (esSocio)
-                                    {
-                                        label_AbonoMensual.Visible = true;
-                                        txt_AbonoMensual.Visible = true;
-                                        label_Pagar_Actividades.Visible = false;
-                                        lista_actividades.Visible = false;
-                                        if (Frecuencia_Pago.Items.Contains("Semanal"))
-                                        {
-                                            Frecuencia_Pago.Items.Remove("Semanal");
-                                        }
-
-                                        if (Frecuencia_Pago.Items.Contains("Quincenal"))
-                                        {
-                                            Frecuencia_Pago.Items.Remove("Quincenal");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        label_AbonoMensual.Visible = false;
-                                        txt_AbonoMensual.Visible = false;
-                                        label_Pagar_Actividades.Visible = true;
-                                        lista_actividades.Visible = true;
-
-                                        // Restauramos las opciones si no es socio
-                                        if (!Frecuencia_Pago.Items.Contains("Semanal"))
-                                        {
-                                            Frecuencia_Pago.Items.Insert(0, "Semanal");
-                                        }
-
-                                        if (!Frecuencia_Pago.Items.Contains("Quincenal"))
-                                        {
-                                            Frecuencia_Pago.Items.Insert(0, "Quincenal");
-                                        }
-                                    }
-                                    Txt_DNI.Text = dni.ToString();
-                                    Txt_Nombre.Text = nombre;
-                                    Txt_Apellido.Text = apellido;
-                                    Txt_EsSocio.Text = esSocio ? "SI" : "NO";
-                                    txt_AbonoMensual.Text = abonoMensualSocios.ToString();
-
-                                }
-                                else
-                                {
-                                    MessageBox.Show("No se encontró ningún cliente con el DNI proporcionado.");
-                                }
-                            }
+                            Frecuencia_Pago.Items.Remove("Semanal");
                         }
-                       
+
+                        if (Frecuencia_Pago.Items.Contains("Quincenal"))
+                        {
+                            Frecuencia_Pago.Items.Remove("Quincenal");
+                        }
+
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("Error en la conexión: " + ex.Message);
+                        label_AbonoMensual.Visible = false;
+                        txt_AbonoMensual.Visible = false;
+                        label_Pagar_Actividades.Visible = true;
+                        lista_actividades.Visible = true;
+
+                        // Restauramos las opciones si no es socio
+                        if (!Frecuencia_Pago.Items.Contains("Semanal"))
+                        {
+                            Frecuencia_Pago.Items.Insert(0, "Semanal");
+                        }
+
+                        if (!Frecuencia_Pago.Items.Contains("Quincenal"))
+                        {
+                            Frecuencia_Pago.Items.Insert(0, "Quincenal");
+                        }
                     }
-                    finally
-                    {
-                        conn.Close();
-                    }
+                    clienteId = clienteActual.IdCliente;
+                    Txt_DNI.Text = clienteActual.DNI.ToString();
+                    Txt_Nombre.Text = clienteActual.Nombre;
+                    Txt_Apellido.Text = clienteActual.Apellido;
+                    Txt_EsSocio.Text = clienteActual.EsSocio ? "SI" : "NO";
+                    txt_AbonoMensual.Text = clienteActual.AbonoMensualSocios.ToString();
+
+                }
+                catch (Exception ex) {
+                    clienteId = -1;
+                    ClearForm();
+                    MessageBox.Show("No se encontró ningún cliente con el DNI proporcionado.");
                 }
             }
+            else
+            {
+                clienteId = -1;
+                ClearForm();
+                MessageBox.Show("No se encontró ningún cliente con el DNI proporcionado.");
+            }
+            }
 
-        }
-
-        public void CargarActividades()
+        public void ClearForm()
         {
-            actividadesDisponibles = ObtenerActividadesDesdeDB();
+            Txt_DNI.Text = "";
+            Txt_Nombre.Text = "";
+            Txt_Apellido.Text = "";
+            Txt_EsSocio.Text = "";
+            txt_AbonoMensual.Text = "";
+            label_AbonoMensual.Visible = false;
+            txt_AbonoMensual.Visible = false;
+            label_Pagar_Actividades.Visible = false;
+            lista_actividades.Visible = false;
+            total_pago.Text = "0.00";
         }
+            
 
         private void CalcularMontoTotalSocios()
         {
@@ -317,8 +300,6 @@ namespace DSOO_Grupo4_TP1.Forms
                 MessageBox.Show("Por favor selecciona una frecuencia de pago.");
             }
         }
-
-
 
         private decimal ObtenerPrecioActividad(string nombreActividad)
         {
@@ -656,18 +637,6 @@ namespace DSOO_Grupo4_TP1.Forms
             }
         }
 
-        private decimal CalcularDescuento(string tipoDePagoSeleccionado)
-        {
-            return tipoDePagoSeleccionado switch
-            {
-                "Trimestral" => 0.95m,
-                "Semestral" => 0.90m,
-                "Anual" => 0.80m,
-                _ => 1m,
-            };
-        }
-
-
         private DateTime CalcularProximoVencimiento(DateTime fechaPago, int clienteId, int ? actividadId)
         {
             string queryUltimoVencimiento = "";
@@ -741,7 +710,7 @@ namespace DSOO_Grupo4_TP1.Forms
             return proximoVencimiento;
         }
 
-        private void formas_de_pago_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void Formas_de_pago_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             {
                 // Verificar si se está marcando un nuevo elemento
