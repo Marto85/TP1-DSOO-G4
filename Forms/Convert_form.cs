@@ -54,7 +54,6 @@ namespace DSOO_Grupo4_TP1
 
         private void Btn_search(object sender, EventArgs e)
         {
-          
             int dni_usuario = int.Parse(ID_Registro.Text);
 
             if (dni_usuario > 0)
@@ -71,7 +70,6 @@ namespace DSOO_Grupo4_TP1
                     convert_button.Text = "Convertir en Socio";
                     label1.Text = $"{cliente.Nombre} {cliente.Apellido} - No Socio";
                 }
-
                 convert_button.Visible = true;
             }
             else
@@ -80,85 +78,65 @@ namespace DSOO_Grupo4_TP1
                 convert_button.Visible = false;
 
             }
-         
         }
     
-
-
         private void Convert_button_Click(object sender, EventArgs e)
         {
-            // Obtener el ID del usuario seleccionado
-            int dni_usuario = int.Parse(ID_Registro.Text);
+            conexion = Conexion.getInstancia();
+            string connectionString = conexion.CrearConexion().ConnectionString; // Obtiene la cadena de conexión
 
-            if (dni_usuario > 0)
+            // Calcula el valor inverso
+            int nuevoEsSocio = (cliente.EsSocio) ? 0 : 1;
+            string queryUpdate = "";
+
+            // Actualizamos el valor de EsSocio en la base de datos
+            if (nuevoEsSocio == 0)
             {
-                conexion = Conexion.getInstancia();
-                string connectionString = conexion.CrearConexion().ConnectionString; // Obtiene la cadena de conexión
+                queryUpdate = "UPDATE cliente SET EsSocio = @nuevoEsSocio, AbonoMensualSocios = NULL WHERE Id = @Id";
+            }
+            else
+            {
+                queryUpdate = "UPDATE cliente SET EsSocio = @nuevoEsSocio, AbonoMensualSocios = 10000 WHERE Id = @Id";
+            }
 
-                using (MySqlConnection conn = new MySqlConnection(connectionString))
-                {
-                    try
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try {
+                    conn.Open(); // Abre la conexión
+
+                    using (MySqlCommand cmdUpdate = new MySqlCommand(queryUpdate, conn))
                     {
-                        conn.Open(); // Abre la conexión
+                        cmdUpdate.Parameters.AddWithValue("@nuevoEsSocio", nuevoEsSocio);
+                        cmdUpdate.Parameters.AddWithValue("@Id", cliente.IdCliente);
 
-                        // query para obtener el valor actual de EsSocio
-                        string querySelect = "SELECT EsSocio FROM cliente WHERE DNI = @dni_usuario";
+                        // Ejecuta la actualización
+                        cmdUpdate.ExecuteNonQuery();
 
-                        using (MySqlCommand cmdSelect = new MySqlCommand(querySelect, conn))
+                        if (nuevoEsSocio == 1)
                         {
-                            cmdSelect.Parameters.AddWithValue("@dni_usuario", dni_usuario);
-
-                            // Ejecuta la query para obtener el valor actual de EsSocio
-                            int EsSocioActual = Convert.ToInt32(cmdSelect.ExecuteScalar());
-
-                            // Calcula el valor inverso
-                            int nuevoEsSocio = (EsSocioActual == 1) ? 0 : 1;
-                            string queryUpdate = "";
-
-                            // Actualizamos el valor de EsSocio en la base de datos
-                            if (nuevoEsSocio == 0)
-                            {
-                                queryUpdate = "UPDATE cliente SET EsSocio = @nuevoEsSocio, AbonoMensualSocios = NULL WHERE DNI = @dni_usuario";
-                            }
-                            else {
-                                queryUpdate = "UPDATE cliente SET EsSocio = @nuevoEsSocio, AbonoMensualSocios = 10000 WHERE DNI = @dni_usuario";
-
-                            }
-
-                            using (MySqlCommand cmdUpdate = new MySqlCommand(queryUpdate, conn))
-                            {
-                                cmdUpdate.Parameters.AddWithValue("@nuevoEsSocio", nuevoEsSocio);
-                                cmdUpdate.Parameters.AddWithValue("@dni_usuario", dni_usuario);
-
-                                // Ejecuta la actualización
-                                cmdUpdate.ExecuteNonQuery();
-
-                                if (nuevoEsSocio == 1)
-                                {
-                                    label1.Text = "El usuario ahora es Socio";
-                                    convert_button.Text = "Convertir en Cliente";
-                                }
-                                else
-                                {
-                                    label1.Text = "El usuario ahora es No Socio";
-                                    convert_button.Text = "Convertir en Socio";
-                                }
-                            }
+                            label1.Text = "El usuario ahora es Socio";
+                            convert_button.Text = "Convertir en Cliente";
+                        }
+                        else
+                        {
+                            label1.Text = "El usuario ahora es No Socio";
+                            convert_button.Text = "Convertir en Socio";
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Error en la conexión: " + ex.Message);
-                    }
-                    finally
-                    {
-                        conn.Close();
-                    }
+                        
                 }
-
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error en la conexión: " + ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
             }
-        }
 
+        }
+        
         private void Btn_cerrar_Click(object sender, EventArgs e)
         {
             Utils.ConfirmarCierre();

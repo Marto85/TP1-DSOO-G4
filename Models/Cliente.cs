@@ -206,6 +206,7 @@ namespace DSOO_Grupo4_TP1.Models
             }
         }
 
+
         private int ObtenerTipoDePagoId(int meses)
         {
             switch (meses)
