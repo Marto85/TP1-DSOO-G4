@@ -135,7 +135,7 @@ namespace DSOO_Grupo4_TP1.Forms
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void panel2_MouseDown(object sender, MouseEventArgs e)
+        private void Panel2_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);

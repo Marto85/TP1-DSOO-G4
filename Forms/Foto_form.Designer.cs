@@ -63,7 +63,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1729, 55);
             panel2.TabIndex = 12;
-            panel2.MouseDown += panel2_MouseDown;
+            panel2.MouseDown += Panel2_MouseDown;
             // 
             // Btn_Atras
             // 
