@@ -340,7 +340,12 @@ namespace DSOO_Grupo4_TP1.Forms
         
         private void Btn_Calcular_Total_Click(object sender, EventArgs e)
         {
-           
+            if (clienteId == -1)
+            {
+                MessageBox.Show("Debe seleccionar un cliente");
+                return;
+            }
+
             total_pago.Text = "0.00";
             if (Txt_EsSocio.Text == "SI")
             {

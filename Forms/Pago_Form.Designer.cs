@@ -130,13 +130,14 @@
             // Buscar_Cliente
             // 
             Buscar_Cliente.BackColor = SystemColors.Highlight;
+            Buscar_Cliente.BackgroundImage = Properties.Resources.search;
+            Buscar_Cliente.BackgroundImageLayout = ImageLayout.Zoom;
             Buscar_Cliente.Cursor = Cursors.Hand;
             Buscar_Cliente.Font = new Font("Segoe UI", 11.1F, FontStyle.Bold, GraphicsUnit.Point);
-            Buscar_Cliente.Location = new Point(78, 71);
+            Buscar_Cliente.Location = new Point(210, 60);
             Buscar_Cliente.Name = "Buscar_Cliente";
-            Buscar_Cliente.Size = new Size(160, 25);
+            Buscar_Cliente.Size = new Size(49, 36);
             Buscar_Cliente.TabIndex = 17;
-            Buscar_Cliente.Text = "Buscar";
             Buscar_Cliente.UseVisualStyleBackColor = false;
             Buscar_Cliente.Click += Buscar_Cliente_Click;
             // 
@@ -146,7 +147,7 @@
             DNI_Pagos.Cursor = Cursors.Hand;
             DNI_Pagos.Font = new Font("Century Gothic", 11.1F, FontStyle.Italic, GraphicsUnit.Point);
             DNI_Pagos.ForeColor = Color.Gray;
-            DNI_Pagos.Location = new Point(77, 35);
+            DNI_Pagos.Location = new Point(28, 66);
             DNI_Pagos.Name = "DNI_Pagos";
             DNI_Pagos.Size = new Size(163, 26);
             DNI_Pagos.TabIndex = 16;

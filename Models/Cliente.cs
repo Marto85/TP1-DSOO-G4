@@ -95,13 +95,15 @@ namespace DSOO_Grupo4_TP1.Models
                             else
                             {
                                 MessageBox.Show("No se ha encontrado el cliente con el DNI " + dniCliente);
+                                throw new Exception("No hay cliente");
                             }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error en la conexión: " + ex.Message);
+                    MessageBox.Show("Ha ocurrido un error en la conexión con la base de datos");
+                    throw;
                 }
                 finally
                 {
