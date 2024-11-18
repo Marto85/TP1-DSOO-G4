@@ -81,9 +81,8 @@ namespace DSOO_Grupo4_TP1
             username_login.Size = new Size(928, 46);
             username_login.TabIndex = 2;
             username_login.Text = "Nombre de usuario";
-            username_login.TextChanged += username_login_TextChanged;
-            username_login.Enter += username_Enter;
-            username_login.Leave += username_Leave;
+            username_login.Enter += Username_Enter;
+            username_login.Leave += Username_Leave;
             // 
             // password_login
             // 
@@ -98,9 +97,8 @@ namespace DSOO_Grupo4_TP1
             password_login.Size = new Size(928, 46);
             password_login.TabIndex = 3;
             password_login.Text = "Contraseña";
-            password_login.TextChanged += password_login_TextChanged;
-            password_login.Enter += password_Enter;
-            password_login.Leave += password_Leave;
+            password_login.Enter += Password_Enter;
+            password_login.Leave += Password_Leave;
             // 
             // Login_Button
             // 
@@ -132,7 +130,7 @@ namespace DSOO_Grupo4_TP1
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(500, 848);
             flowLayoutPanel1.TabIndex = 5;
-            flowLayoutPanel1.MouseDown += flowLayoutPanel1_MouseDown;
+            flowLayoutPanel1.MouseDown += FlowLayoutPanel1_MouseDown;
             // 
             // mySqlCommand1
             // 
@@ -152,7 +150,7 @@ namespace DSOO_Grupo4_TP1
             label1.Size = new Size(765, 70);
             label1.TabIndex = 6;
             label1.Text = "Bienvenido a Club Sports";
-            label1.Click += label1_Click;
+
             // 
             // btn_cerrar
             // 
@@ -165,7 +163,7 @@ namespace DSOO_Grupo4_TP1
             btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_cerrar.TabIndex = 7;
             btn_cerrar.TabStop = false;
-            btn_cerrar.Click += btn_cerrar_Click;
+            btn_cerrar.Click += Btn_cerrar_Click;
             // 
             // btn_minimizar
             // 
@@ -178,7 +176,7 @@ namespace DSOO_Grupo4_TP1
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_minimizar.TabIndex = 8;
             btn_minimizar.TabStop = false;
-            btn_minimizar.Click += btn_minimizar_Click;
+            btn_minimizar.Click += Btn_minimizar_Click;
             // 
             // panel1
             // 
@@ -191,7 +189,7 @@ namespace DSOO_Grupo4_TP1
             panel1.Name = "panel1";
             panel1.Size = new Size(1695, 55);
             panel1.TabIndex = 9;
-            panel1.MouseDown += panel1_MouseDown;
+            panel1.MouseDown += Panel1_MouseDown;
             // 
             // panel2
             // 
@@ -234,7 +232,6 @@ namespace DSOO_Grupo4_TP1
             Padding = new Padding(5);
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
-            Load += Form1_Load;
             KeyPress += Login_Form_KeyPress;
             MouseDown += Login_form_MouseDown;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

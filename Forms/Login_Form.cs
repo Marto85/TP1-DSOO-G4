@@ -26,14 +26,7 @@ namespace DSOO_Grupo4_TP1
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
 
-
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void username_Enter(object sender, EventArgs e)
+        private void Username_Enter(object sender, EventArgs e)
         {
             if (username_login.Text == "Nombre de usuario")
             {
@@ -42,7 +35,7 @@ namespace DSOO_Grupo4_TP1
             }
         }
 
-        private void username_Leave(object sender, EventArgs e)
+        private void Username_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(username_login.Text))
             {
@@ -51,7 +44,7 @@ namespace DSOO_Grupo4_TP1
             }
         }
 
-        private void password_Enter(object sender, EventArgs e)
+        private void Password_Enter(object sender, EventArgs e)
         {
             if (password_login.Text == "Contraseña")
             {
@@ -61,7 +54,7 @@ namespace DSOO_Grupo4_TP1
             }
         }
 
-        private void password_Leave(object sender, EventArgs e)
+        private void Password_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(password_login.Text))
             {
@@ -71,17 +64,12 @@ namespace DSOO_Grupo4_TP1
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_cerrar_Click(object sender, EventArgs e)
+        private void Btn_cerrar_Click(object sender, EventArgs e)
         {
             Utils.ConfirmarCierre();
         }
 
-        private void btn_minimizar_Click(object sender, EventArgs e)
+        private void Btn_minimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
@@ -92,23 +80,11 @@ namespace DSOO_Grupo4_TP1
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void flowLayoutPanel1_MouseDown(object sender, MouseEventArgs e)
+        private void FlowLayoutPanel1_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
-
-        private void username_login_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void password_login_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
 
         private void Login_Form_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -118,8 +94,7 @@ namespace DSOO_Grupo4_TP1
                 e.Handled = true;        // Evita que el evento continúe propagándose
             }
         }
-
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        private void Panel1_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
