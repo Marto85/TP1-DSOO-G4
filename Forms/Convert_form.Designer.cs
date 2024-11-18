@@ -55,7 +55,7 @@
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_minimizar.TabIndex = 8;
             btn_minimizar.TabStop = false;
-            btn_minimizar.Click += btn_minimizar_Click;
+            btn_minimizar.Click += Btn_minimizar_Click;
             // 
             // btn_cerrar
             // 
@@ -68,7 +68,7 @@
             btn_cerrar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_cerrar.TabIndex = 7;
             btn_cerrar.TabStop = false;
-            btn_cerrar.Click += btn_cerrar_Click;
+            btn_cerrar.Click += Btn_cerrar_Click;
             // 
             // panel2
             // 
@@ -81,7 +81,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(712, 20);
             panel2.TabIndex = 12;
-            panel2.MouseDown += panel2_MouseDown;
+            panel2.MouseDown += Panel2_MouseDown;
             // 
             // Btn_Atras
             // 
@@ -107,7 +107,6 @@
             ID_Registro.Size = new Size(159, 26);
             ID_Registro.TabIndex = 13;
             ID_Registro.Text = "DNI de cliente";
-            ID_Registro.TextChanged += ID_Registro_TextChanged;
             ID_Registro.Enter += ID_Registro_Enter;
             ID_Registro.Leave += ID_Registro_Leave;
             // 
@@ -136,7 +135,7 @@
             Buscar_Cliente.Size = new Size(42, 31);
             Buscar_Cliente.TabIndex = 15;
             Buscar_Cliente.UseVisualStyleBackColor = false;
-            Buscar_Cliente.Click += button1_Click;
+            Buscar_Cliente.Click += Btn_search;
             // 
             // label1
             // 
@@ -177,7 +176,6 @@
             Name = "Convert_form";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
-            Load += Form1_Load;
             MouseDown += Convert_form_MouseDown;
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).EndInit();

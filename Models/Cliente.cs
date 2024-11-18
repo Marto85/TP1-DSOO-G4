@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace DSOO_Grupo4_TP1.Models
 {
@@ -23,13 +25,12 @@ namespace DSOO_Grupo4_TP1.Models
         public bool EsSocio { get; set; }
         public bool EsApto { get; set; }
 
-        public decimal AbonoMensualSocios { get; set; }
+        public decimal? AbonoMensualSocios { get; set; }
+
 
         public string ImagenPerfil { get; set; }
 
         private List<Cliente> listaDeClientes = new List<Cliente>();
-
-        public Cliente() { }
 
         public Cliente(DateTime fechaIngreso, string nombre, string apellido, int dni, string direccion, string telefono, string email, string imagenPerfil, decimal? abonoMensualSocios = null, bool esSocio = false, bool esApto = true)
         {
@@ -51,9 +52,63 @@ namespace DSOO_Grupo4_TP1.Models
             }
         }
 
+        public Cliente(int dniCliente)
+        {
+            Conexion conexion = Conexion.getInstancia();
+            string connectionString = conexion.CrearConexion().ConnectionString; // Obtiene la cadena de conexión
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM cliente WHERE DNI = @dni_usuario";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        // Definir el parámetro
+                        cmd.Parameters.AddWithValue("@dni_usuario", dniCliente);
+
+                        // Ejecuta la consulta y obtiene el resultado
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read()) // Lee la primera fila del resultado
+                            {   
+                                IdCliente = reader.GetInt32("Id");
+                                FechaIngreso = reader.GetDateTime("FechaIngreso");
+                                Nombre = reader.GetString("Nombre");
+                                Apellido = reader.GetString("Apellido");
+                                DNI = reader.GetInt32("DNI");
+                                Direccion = reader.GetString("Direccion");
+                                Telefono = reader.GetString("Telefono");
+                                Email = reader.GetString("Email");
+                                EsSocio = reader.GetBoolean("EsSocio");
+                                EsApto = reader.GetBoolean("EsApto");
+                                ImagenPerfil = reader.GetString("Imagen_Perfil");
+
+                                // Solo asignar abono si es un socio
+                                if (EsSocio && !reader.IsDBNull(reader.GetOrdinal("AbonoMensualSocios")))
+                                {
+                                    AbonoMensualSocios = reader.GetDecimal("AbonoMensualSocios");
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error en la conexión: " + ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         public decimal GetAbonoMensualSocios()
         {
-            return AbonoMensualSocios;
+            return AbonoMensualSocios?? 0;
         }
 
         public void SetAbonoMensualSocios(decimal abonoMensualSocios)
