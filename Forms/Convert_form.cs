@@ -58,23 +58,30 @@ namespace DSOO_Grupo4_TP1
 
             if (dni_usuario > 0)
             {
-                cliente = new Cliente(dni_usuario);
-              
-                if (cliente.EsSocio)
+                try
                 {
-                    label1.Text = $"{cliente.Nombre} {cliente.Apellido} - Socio";
-                    convert_button.Text = "Convertir en Cliente";
+                    cliente = new Cliente(dni_usuario);
+
+                    if (cliente.EsSocio)
+                    {
+                        label1.Text = $"{cliente.Nombre} {cliente.Apellido} - Socio";
+                        convert_button.Text = "Convertir en Cliente";
+                    }
+                    else
+                    {
+                        convert_button.Text = "Convertir en Socio";
+                        label1.Text = $"{cliente.Nombre} {cliente.Apellido} - No Socio";
+                    }
+                    convert_button.Visible = true;
                 }
-                else
-                {
-                    convert_button.Text = "Convertir en Socio";
-                    label1.Text = $"{cliente.Nombre} {cliente.Apellido} - No Socio";
+                catch {
+                    label1.Text = "No se ha encontrado el cliente con el DNI indicado";
+                    convert_button.Visible = false;
                 }
-                convert_button.Visible = true;
             }
             else
             {
-                label1.Text = "No se ha encontrado el cliente con el ID indicado";
+                label1.Text = "No se ha encontrado el cliente con el DNI indicado";
                 convert_button.Visible = false;
 
             }
