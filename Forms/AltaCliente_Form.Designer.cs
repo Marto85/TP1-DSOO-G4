@@ -157,7 +157,7 @@
             label1.Size = new Size(416, 46);
             label1.TabIndex = 0;
             label1.Text = "Registro de Clientes";
-            label1.Click += label1_Click;
+
             // 
             // Nombre_Registro
             // 
@@ -171,9 +171,7 @@
             Nombre_Registro.Size = new Size(380, 53);
             Nombre_Registro.TabIndex = 1;
             Nombre_Registro.Text = "Nombre";
-            Nombre_Registro.TextChanged += Nombre_Registro_TextChanged;
-            Nombre_Registro.Enter += Nombre_Registro_Enter;
-            Nombre_Registro.Leave += Nombre_Registro_Leave;
+
             // 
             // Apellido_Registro
             // 
@@ -247,7 +245,6 @@
             Mail_Registro.Size = new Size(854, 53);
             Mail_Registro.TabIndex = 8;
             Mail_Registro.Text = "Correo Electronico";
-            Mail_Registro.TextChanged += Mail_Registro_TextChanged;
             Mail_Registro.Enter += Mail_Registro_Enter;
             Mail_Registro.Leave += Mail_Registro_Leave;
             // 
@@ -278,7 +275,7 @@
             Socio.TabIndex = 12;
             Socio.Text = "Socio";
             Socio.UseVisualStyleBackColor = true;
-            Socio.CheckedChanged += checkBox1_CheckedChanged;
+
             // 
             // AltaCliente_Form
             // 

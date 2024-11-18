@@ -1,4 +1,5 @@
 ﻿using DSOO_Grupo4_TP1.Datos;
+using DSOO_Grupo4_TP1.Forms;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -149,7 +150,6 @@ namespace DSOO_Grupo4_TP1.Models
 
             }
         }
-
 
         private int ObtenerTipoDePagoId(int meses)
         {

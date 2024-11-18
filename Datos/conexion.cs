@@ -52,7 +52,7 @@ namespace DSOO_Grupo4_TP1.Datos
                 MessageBox.Show("Error al conectar: " + ex.Message);
                 throw;
             }
-
+            cadena.Close();
             return cadena;
         }
 

@@ -20,6 +20,7 @@ namespace DSOO_Grupo4_TP1
     {
         private Form _formularioPrincipal;
         private string? imgPath;
+        Cliente nuevoCliente;
 
         public AltaCliente_Form(Form formularioPrincipal)
         {
@@ -33,22 +34,6 @@ namespace DSOO_Grupo4_TP1
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
 
         private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Mail_Registro_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Tipo_Cliente_Form_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-
-        }
 
         private void Enviar_Registro_Click(object sender, EventArgs e)
         {
@@ -105,10 +90,6 @@ namespace DSOO_Grupo4_TP1
             }
 
 
-
-            Cliente nuevoCliente;
-
-
             if (esSocio)
             {
                 nuevoCliente = new Cliente(
@@ -141,11 +122,11 @@ namespace DSOO_Grupo4_TP1
 
 
             if (nuevoCliente.AltaCliente()) { 
-                GenerarCarnet(nuevoCliente.IdCliente);
+                GenerarCarnet();
                 this.Close();
             }
-
         }
+
 
         private void Btn_cerrar_Click(object sender, EventArgs e)
         {
@@ -156,17 +137,6 @@ namespace DSOO_Grupo4_TP1
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Nombre_Registro_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void Nombre_Registro_Enter(object sender, EventArgs e)
         {
@@ -321,48 +291,16 @@ namespace DSOO_Grupo4_TP1
             formulario.ShowDialog();
         }
 
-        private void GenerarCarnet(int clienteId)
+        private void GenerarCarnet()
         {
-            Conexion conexion = Conexion.getInstancia();
-
-            using (MySqlConnection conn = conexion.CrearConexion())
-            {
-                try
-                {
-                    conn.Open();
-
-                    MySqlCommand cmd = new MySqlCommand(
-                        "SELECT Nombre, Apellido, DNI, Imagen_Perfil, EsSocio FROM Cliente WHERE Id = @Id", conn
-                    );
-                    cmd.Parameters.AddWithValue("@Id", clienteId);
-
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            string nombre = reader.GetString("Nombre");
-                            string apellido = reader.GetString("Apellido");
-                            int dni = reader.GetInt32("DNI");
-                            string imagenPerfil = reader["Imagen_Perfil"] != DBNull.Value ? reader.GetString("Imagen_Perfil") : null;
-                            bool esSocio = reader.GetBoolean("EsSocio");
-
-                            Carnet_Form formularioCarnet = new Carnet_Form();
-
-                            formularioCarnet.SetDatosCliente(nombre, apellido, dni, imagenPerfil, esSocio);
-
-                            formularioCarnet.ShowDialog();
-                        }
-                        else
-                        {
-                            MessageBox.Show("No se encontraron datos para el cliente.");
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error al recuperar los datos: {ex.Message}");
-                }
-            }
+            string nombre = nuevoCliente.Nombre;
+            string apellido = nuevoCliente.Apellido;
+            int dni = nuevoCliente.DNI;
+            string imagenPerfil = nuevoCliente.ImagenPerfil ?? null;
+            bool esSocio = nuevoCliente.EsSocio;
+            Carnet_Form formularioCarnet = new Carnet_Form();
+            formularioCarnet.SetDatosCliente(nombre, apellido, dni, imagenPerfil, esSocio);
+            formularioCarnet.ShowDialog();
         }
 
         private void AltaCliente_Form_MouseDown(object sender, MouseEventArgs e)
