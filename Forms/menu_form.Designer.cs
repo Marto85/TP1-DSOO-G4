@@ -4,11 +4,11 @@ using System.Reflection;
 
 namespace DSOO_Grupo4_TP1
 {
-    partial class menu_form : Form
+    partial class Menu_form : Form
     {
         private Conexion conexion;
 
-        public menu_form(Conexion conexionActiva)
+        public Menu_form(Conexion conexionActiva)
         {
             InitializeComponent();
             this.conexion = conexionActiva; // Guarda la conexión activa
@@ -39,7 +39,7 @@ namespace DSOO_Grupo4_TP1
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(menu_form));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu_form));
             AltaCliente = new Button();
             ConvertirEnSocio = new Button();
             Inscribir_Actividad = new Button();
@@ -139,7 +139,7 @@ namespace DSOO_Grupo4_TP1
             Menu_Form_Panel.Name = "Menu_Form_Panel";
             Menu_Form_Panel.Size = new Size(621, 23);
             Menu_Form_Panel.TabIndex = 7;
-            Menu_Form_Panel.MouseDown += panel1_MouseDown;
+            Menu_Form_Panel.MouseDown += Panel1_MouseDown;
             // 
             // btn_cerrar
             // 
@@ -199,7 +199,7 @@ namespace DSOO_Grupo4_TP1
             Name = "menu_form";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu de Opciones";
-            MouseDown += menu_form_MouseDown;
+            MouseDown += Menu_form_MouseDown;
             Menu_Form_Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)btn_cerrar).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_minimizar).EndInit();

@@ -251,7 +251,7 @@ namespace DSOO_Grupo4_TP1
                 ClubDeportivo clubDeportivo = new ClubDeportivo();
 
                 this.Hide();
-                Form formulario = new menu_form(clubDeportivo);
+                Form formulario = new Menu_form(clubDeportivo);
                 formulario.ShowDialog();
                 
             }

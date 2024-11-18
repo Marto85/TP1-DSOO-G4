@@ -16,16 +16,16 @@ using Microsoft.Win32.SafeHandles;
 
 namespace DSOO_Grupo4_TP1
 {
-    public partial class menu_form : Form
+    public partial class Menu_form : Form
     {
-        public menu_form()
+        public Menu_form()
         {
             InitializeComponent();
         }
 
         private ClubDeportivo _clubDeportivo;
 
-        public menu_form(ClubDeportivo clubDeportivo)
+        public Menu_form(ClubDeportivo clubDeportivo)
         {
             InitializeComponent();
             _clubDeportivo = clubDeportivo;
@@ -56,13 +56,13 @@ namespace DSOO_Grupo4_TP1
             Utils.ConfirmarCierre();
         }
 
-        private void menu_form_MouseDown(object sender, MouseEventArgs e)
+        private void Menu_form_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        private void Panel1_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
@@ -71,18 +71,6 @@ namespace DSOO_Grupo4_TP1
         private void Salir_Menu_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void Btn_Atras_Click(object sender, EventArgs e)
-        {
-            // Mostrar el formulario de login nuevamente
-            Form loginForm = Application.OpenForms["Login_Form"];
-            if (loginForm != null)
-            {
-                loginForm.Show();
-            }
-
-            this.Close();
         }
 
         private void ConvertirEnSocio_Click(object sender, EventArgs e)
@@ -118,77 +106,12 @@ namespace DSOO_Grupo4_TP1
             }
         }
 
-
         private void Cobrar_Click(object sender, EventArgs e)
         {
             this.Hide();
             Form formulario = new Pago_Form();
             formulario.ShowDialog();
         }
-
-        public List<Cliente> CargarClientes()
-        {
-            List<Cliente> listaClientes = new List<Cliente>();
-            Conexion conexion = Conexion.getInstancia();
-
-            using (MySqlConnection conn = conexion.CrearConexion())
-            {
-                try
-                {
-                    conn.Open();
-                    string query = "SELECT * FROM cliente";
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                // Verificamos si las columnas son NULL antes de asignar los valores
-                                DateTime fechaIngreso = reader.IsDBNull(reader.GetOrdinal("FechaIngreso")) ? DateTime.MinValue : reader.GetDateTime("FechaIngreso");
-                                string nombre = reader.IsDBNull(reader.GetOrdinal("Nombre")) ? string.Empty : reader.GetString("Nombre");
-                                string apellido = reader.IsDBNull(reader.GetOrdinal("Apellido")) ? string.Empty : reader.GetString("Apellido");
-                                int dni = reader.IsDBNull(reader.GetOrdinal("DNI")) ? 0 : reader.GetInt32("DNI");
-                                string direccion = reader.IsDBNull(reader.GetOrdinal("Direccion")) ? string.Empty : reader.GetString("Direccion");
-                                string telefono = reader.IsDBNull(reader.GetOrdinal("Telefono")) ? string.Empty : reader.GetString("Telefono");
-                                string email = reader.IsDBNull(reader.GetOrdinal("Email")) ? string.Empty : reader.GetString("Email");
-                                string imagenPerfil = reader.IsDBNull(reader.GetOrdinal("Imagen_Perfil")) ? string.Empty : reader.GetString("Imagen_Perfil");
-                                bool esSocio = !reader.IsDBNull(reader.GetOrdinal("EsSocio")) && reader.GetBoolean("EsSocio");
-                                bool esApto = !reader.IsDBNull(reader.GetOrdinal("EsApto")) && reader.GetBoolean("EsApto");
-
-                                decimal abonoMensual = reader.IsDBNull(reader.GetOrdinal("AbonoMensualSocios")) ? 10000 : reader.GetDecimal("AbonoMensualSocios");
-                                MessageBox.Show($"Cargando cliente: {nombre} con abono {reader["AbonoMensualSocios"]}");
-                                Cliente cliente = new Cliente(
-                                    fechaIngreso,
-                                    nombre,
-                                    apellido,
-                                    dni,
-                                    direccion,
-                                    telefono,
-                                    email,
-                                    imagenPerfil,
-                                    abonoMensual,
-                                    esSocio,
-                                    esApto
-                                );
-
-                                if (esSocio)
-                                {
-                                    cliente.SetAbonoMensualSocios(reader.IsDBNull(reader.GetOrdinal("AbonoMensualSocios")) ? 10000 : reader.GetDecimal("AbonoMensualSocios"));
-                                }
-
-                                listaClientes.Add(cliente);
-                            }
-                        }
-                    }
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show($"Error al cargar clientes: {ex.Message}", "Error de base de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            return listaClientes;
-        }
-
 
         private void Btn_Modifica_Abono_Click(object sender, EventArgs e)
         {
