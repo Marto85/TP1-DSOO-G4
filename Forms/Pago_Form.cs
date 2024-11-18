@@ -405,6 +405,11 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void Btn_Pagar_Click(object sender, EventArgs e)
         {
+            if (clienteId == -1) {
+                MessageBox.Show("Debe seleccionar un cliente");
+                return;
+            }
+
             if (formas_de_pago.CheckedItems.Count == 0) {
                 MessageBox.Show("Debe seleccionar una forma de pago");
                 return;
