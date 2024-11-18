@@ -62,7 +62,7 @@
             btn_minimizar.SizeMode = PictureBoxSizeMode.Zoom;
             btn_minimizar.TabIndex = 8;
             btn_minimizar.TabStop = false;
-            btn_minimizar.Click += btn_minimizar_Click;
+            btn_minimizar.Click += Btn_minimizar_Click;
             // 
             // btn_cerrar
             // 
@@ -88,7 +88,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(712, 20);
             panel2.TabIndex = 13;
-            panel2.MouseDown += panel2_MouseDown;
+            panel2.MouseDown += Panel2_MouseDown;
             // 
             // Btn_Atras
             // 

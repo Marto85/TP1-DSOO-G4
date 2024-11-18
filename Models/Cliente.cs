@@ -92,6 +92,10 @@ namespace DSOO_Grupo4_TP1.Models
                                     AbonoMensualSocios = reader.GetDecimal("AbonoMensualSocios");
                                 }
                             }
+                            else
+                            {
+                                MessageBox.Show("No se ha encontrado el cliente con el DNI " + dniCliente);
+                            }
                         }
                     }
                 }

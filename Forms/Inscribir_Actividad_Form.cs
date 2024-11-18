@@ -22,6 +22,7 @@ namespace DSOO_Grupo4_TP1.Forms
         private bool esSocio = false;
         private Conexion conexion;
         private Form _formularioPrincipal;
+        private Cliente cliente;
 
         public Inscribir_Actividad_Form(Form formularioPrincipal)
         {
@@ -40,91 +41,55 @@ namespace DSOO_Grupo4_TP1.Forms
             Utils.ConfirmarCierre();
         }
 
-        private void btn_minimizar_Click(object sender, EventArgs e)
+        private void Btn_minimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
         private void BuscarClienteButton_Click(object sender, EventArgs e)
         {
-            conexion = Conexion.getInstancia();
-            string connectionString = conexion.CrearConexion().ConnectionString;
             int dni_usuario = int.Parse(DNI_Registro.Text); // Almacena el dni del cliente
-            esSocio = false; // Inicializa el estado del socio como falso
-
             if (dni_usuario > 0)
             {
-                using (MySqlConnection conn = new MySqlConnection(connectionString))
-                {
-                    try
-                    {
-                        conn.Open();
-                        string query = "SELECT Id, Nombre, Apellido, EsSocio FROM cliente WHERE DNI = @dni_usuario";
+                try { 
+                    cliente = new Cliente(dni_usuario);
 
-                        using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                        {
-                            // Definir el parámetro
-                            cmd.Parameters.AddWithValue("@dni_usuario", dni_usuario);
+                    id_usuario = cliente.IdCliente; // Almacena el id del cliente
+                    string Nombre = cliente.Nombre;
+                    string Apellido = cliente.Apellido;
 
-                            // Ejecuta la consulta y obtiene el resultado
-                            using (MySqlDataReader reader = cmd.ExecuteReader())
-                            {
-                                if (reader.Read()) // Lee la primera fila del resultado
-                                {
-                                    id_usuario = reader.GetInt32("Id"); // Almacena el id del cliente
-                                    string Nombre = reader.GetString("Nombre");
-                                    string Apellido = reader.GetString("Apellido");
-                                    esSocio = reader.GetBoolean("EsSocio"); // Almacena si es socio
+                    if (cliente.EsSocio) label1.Text = $"{Nombre} {Apellido} - es socio con abono. Puede inscribirse hasta en 3 actividades diferentes.";
+                    else label1.Text = $"{Nombre} {Apellido} - Paga por actividades individuales";
 
-                                    if (esSocio)
-                                    {
-                                        label1.Text = $"{Nombre} {Apellido} - es socio con abono. Puede inscribirse hasta en 3 actividades diferentes.";
-                                    }
-                                    else
-                                    {
-                                        label1.Text = $"{Nombre} {Apellido} - Paga por actividades individuales";
-                                    }
+                    ToggleVisibleFields(true);
 
-                                    this.label2.Visible = true;
-                                    this.checkBoxCrossfit.Visible = true;
-                                    this.checkBoxFutbol.Visible = true;
-                                    this.checkBoxNatacion.Visible = true;
-                                    this.checkBoxPilates.Visible = true;
-                                    this.checkBoxYoga.Visible = true;
-                                    this.checkBoxZumba.Visible = true;
-                                    this.Inscripcion_Actividades_Button.Visible = true;
-                                }
-                                else
-                                {
-                                    label1.Text = "No se ha encontrado el cliente con el DNI indicado";
-                                    this.label2.Visible = false;
-                                    this.checkBoxCrossfit.Visible = false;
-                                    this.checkBoxFutbol.Visible = false;
-                                    this.checkBoxNatacion.Visible = false;
-                                    this.checkBoxPilates.Visible = false;
-                                    this.checkBoxYoga.Visible = false;
-                                    this.checkBoxZumba.Visible = false;
-                                    this.Inscripcion_Actividades_Button.Visible = false;
-                                }
+                    if (id_usuario > 0) ObtenerActividadesRegistradas(id_usuario);
 
-                                label1.Left = (this.ClientSize.Width - label1.Width) / 2;
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error al conectarse a la base de datos: {ex.Message}");
-                    }
-                    finally
-                    {
-                        conn.Close();
-                        if (id_usuario > 0)
-                        {
-                            ObtenerActividadesRegistradas(id_usuario);
-                        }
-                    }
+                } catch {
+
+                    label1.Text = "No se ha encontrado el cliente con el DNI indicado";
+                    ToggleVisibleFields(false);
+                    id_usuario = -1;
                 }
             }
+            else {
+                label1.Text = "No se ha encontrado el cliente con el DNI indicado";
+                ToggleVisibleFields(false);
+                id_usuario = -1;
+            }
+            
+            label1.Left = (this.ClientSize.Width - label1.Width) / 2;
+        }
+
+        private void ToggleVisibleFields(bool value) {
+            this.label2.Visible = value;
+            this.checkBoxCrossfit.Visible = value;
+            this.checkBoxFutbol.Visible = value;
+            this.checkBoxNatacion.Visible = value;
+            this.checkBoxPilates.Visible = value;
+            this.checkBoxYoga.Visible = value;
+            this.checkBoxZumba.Visible = value;
+            this.Inscripcion_Actividades_Button.Visible = value;
         }
 
         private void Inscripcion_Actividades_Button_Click(object sender, EventArgs e)
@@ -151,7 +116,7 @@ namespace DSOO_Grupo4_TP1.Forms
                     int actividadesRegistradas = ObtenerCantidadActividadesRegistradas(conn, id_usuario);
 
                     // Para el caso de ser socio, se verifica cantidad de actividades en las que se quiere inscribir y en las que ya este inscripto para no superar el limite de 3
-                    if (esSocio)
+                    if (cliente.EsSocio)
                     {
                         if (actividadesRegistradas + actividadesSeleccionadas.Count > 3)
                         {
@@ -161,7 +126,7 @@ namespace DSOO_Grupo4_TP1.Forms
                     }
 
                     // Registrar las actividades
-                    RegistrarActividadesCliente(conn, id_usuario, esSocio);
+                    RegistrarActividadesCliente(conn, cliente.IdCliente, cliente.EsSocio);
                 }
                 catch (Exception ex)
                 {
@@ -189,15 +154,15 @@ namespace DSOO_Grupo4_TP1.Forms
             return actividadesSeleccionadas;
         }
 
-        private void destildarActividad(int actividadId) {
+        private void TildarActividad(int actividadId, bool value) {
             switch (actividadId)
             {
-                case 1: checkBoxYoga.Checked = false; break;
-                case 2: checkBoxPilates.Checked = false; break;
-                case 3: checkBoxZumba.Checked = false; break;
-                case 4: checkBoxCrossfit.Checked = false; break;
-                case 5: checkBoxNatacion.Checked = false; break;
-                case 6: checkBoxFutbol.Checked = false; break;
+                case 1: checkBoxYoga.Checked = value; break;
+                case 2: checkBoxPilates.Checked = value; break;
+                case 3: checkBoxZumba.Checked = value; break;
+                case 4: checkBoxCrossfit.Checked = value; break;
+                case 5: checkBoxNatacion.Checked = value; break;
+                case 6: checkBoxFutbol.Checked = value; break;
             }
         }
 
@@ -228,15 +193,7 @@ namespace DSOO_Grupo4_TP1.Forms
                             while (reader.Read())
                             {
                                 int actividadId = reader.GetInt32("IdActividad");
-                                switch (actividadId)
-                                {
-                                    case 1: checkBoxYoga.Checked = true; break;
-                                    case 2: checkBoxPilates.Checked = true; break;
-                                    case 3: checkBoxZumba.Checked = true; break;
-                                    case 4: checkBoxCrossfit.Checked = true; break;
-                                    case 5: checkBoxNatacion.Checked = true; break;
-                                    case 6: checkBoxFutbol.Checked = true; break;
-                                }
+                                TildarActividad(actividadId, true);
                             }
                         }
                     }
@@ -262,7 +219,6 @@ namespace DSOO_Grupo4_TP1.Forms
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
-
 
         private void RegistrarActividadesCliente(MySqlConnection conn, int idCliente, bool esSocio)
         {
@@ -322,7 +278,7 @@ namespace DSOO_Grupo4_TP1.Forms
                         if (cuposDisponibles <= 0)
                         {
                             MessageBox.Show($"No hay cupos disponibles para la actividad con Id {idActividad}, se procederá con las siguientes");
-                            destildarActividad(idActividad);
+                            TildarActividad(idActividad, false);
                             continue;
                         }
                     }
@@ -387,7 +343,7 @@ namespace DSOO_Grupo4_TP1.Forms
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void panel2_MouseDown(object sender, MouseEventArgs e)
+        private void Panel2_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
