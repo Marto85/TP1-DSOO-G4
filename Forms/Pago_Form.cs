@@ -132,7 +132,6 @@ namespace DSOO_Grupo4_TP1.Forms
                 catch (Exception ex) {
                     clienteId = -1;
                     ClearForm();
-                    MessageBox.Show("No se encontró ningún cliente con el DNI proporcionado.");
                 }
             }
             else
