@@ -47,7 +47,7 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void Btn_cerrar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Utils.ConfirmarCierre();
         }
 
         public void SetDatosCliente(string nombre, string apellido, int dni, string imagenPerfil, bool esSocio)

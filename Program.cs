@@ -17,8 +17,19 @@ namespace DSOO_Grupo4_TP1
 
             try
             {
-                // Inicializar la conexión a la base de datos
-                Conexion conexion = Conexion.getInstancia();
+                // Intentar obtener la conexión a la base de datos
+                Conexion? conexion = Conexion.getInstancia();
+
+                // Verificar si la conexión fue exitosa
+                if (conexion == null)
+                {
+                    MessageBox.Show("No se pudo establecer la conexión a la base de datos. La aplicación se cerrará.",
+                                    "Error",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    Application.Exit(); // Salir de la aplicación
+                    return;
+                }
 
                 // Si la conexión es exitosa, iniciar la aplicación
                 Application.Run(new Login_form());

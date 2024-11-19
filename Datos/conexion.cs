@@ -57,7 +57,7 @@ namespace DSOO_Grupo4_TP1.Datos
         }
 
         // Método para evaluar la instancia de la conectividad
-        public static Conexion getInstancia()
+        public static Conexion? getInstancia()
         {
             if (con == null) // Si no hay una conexión existente
             {
@@ -97,7 +97,8 @@ namespace DSOO_Grupo4_TP1.Datos
                                                                   MessageBoxButtons.YesNo);
                         if (resultado == DialogResult.No)
                         {
-                            break; // Salir del ciclo si el usuario no quiere intentar nuevamente
+                            return null;
+                            //break; // Salir del ciclo si el usuario no quiere intentar nuevamente
                         }
                     }
                 }
