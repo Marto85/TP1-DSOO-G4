@@ -118,7 +118,7 @@ namespace DSOO_Grupo4_TP1.Forms
                     // Para el caso de ser socio, se verifica cantidad de actividades en las que se quiere inscribir y en las que ya este inscripto para no superar el limite de 3
                     if (cliente.EsSocio)
                     {
-                        if (actividadesRegistradas + actividadesSeleccionadas.Count > 3)
+                        if (actividadesSeleccionadas.Count > 3)
                         {
                             MessageBox.Show("Un socio solo puede inscribirse en un máximo de 3 actividades.");
                             return;
