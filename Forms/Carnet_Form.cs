@@ -47,7 +47,13 @@ namespace DSOO_Grupo4_TP1.Forms
 
         private void Btn_cerrar_Click(object sender, EventArgs e)
         {
-            Utils.ConfirmarCierre();
+            Form menuForm = Application.OpenForms["Menu_Form"];
+            if (menuForm != null)
+            {
+                menuForm.Show();
+            }
+
+            this.Close();
         }
 
         public void SetDatosCliente(string nombre, string apellido, int dni, string imagenPerfil, bool esSocio)
