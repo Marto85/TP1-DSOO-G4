@@ -77,8 +77,6 @@ namespace DSOO_Grupo4_TP1.Forms
 
         public void Buscar_Cliente_Click(object sender, EventArgs e)
         {
-            conexion = Conexion.getInstancia();
-            string connectionString = conexion.CrearConexion().ConnectionString;
             int dni_usuario = int.Parse(DNI_Pagos.Text);
             total_pago.Text = "0.00";
 
@@ -129,7 +127,7 @@ namespace DSOO_Grupo4_TP1.Forms
                     Txt_Apellido.Text = clienteActual.Apellido;
                     Txt_EsSocio.Text = clienteActual.EsSocio ? "SI" : "NO";
                     txt_AbonoMensual.Text = clienteActual.AbonoMensualSocios.ToString();
-
+                    ObtenerActividadesRegistradas(clienteActual.IdCliente);
                 }
                 catch (Exception ex) {
                     clienteId = -1;
@@ -158,8 +156,65 @@ namespace DSOO_Grupo4_TP1.Forms
             lista_actividades.Visible = false;
             total_pago.Text = "0.00";
         }
-            
 
+        private void ObtenerActividadesRegistradas(int IdCliente)
+        {
+            conexion = Conexion.getInstancia();
+            string connectionString = conexion.CrearConexion().ConnectionString; // Obtiene la cadena de conexión           
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Actividad_Cliente ac JOIN actividad a ON ac.IdActividad= a.id WHERE IdCliente = @IdCliente";
+                    // Destildar todos los checkboxes antes de leer los datos
+
+                    for (int i = 0; i < lista_actividades.Items.Count; i++)
+                    {
+                        lista_actividades.SetItemChecked(i, false);
+                    }
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@IdCliente", IdCliente);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            List<string> actividadesSelect = new List<string>();
+                            while (reader.Read())
+                            {
+                                actividadesSelect.Add(reader.GetString("Nombre"));
+                            }
+                            TildarActividades(actividadesSelect);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al conectarse a la base de datos: {ex.Message}");
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+
+        }
+
+        private void TildarActividades(List<string> actividadesSelect)
+        {
+            foreach (string Nombre in actividadesSelect)
+            {
+                for (int i = 0; i < lista_actividades.Items.Count; i++)
+                {
+                    if (lista_actividades.Items[i] as string == Nombre)
+                    {
+                        lista_actividades.SetItemChecked(i, true);
+                        break;
+                    }
+                }
+            }
+        }
         private void CalcularMontoTotalSocios()
         {
             if (Txt_EsSocio.Text != "SI")
