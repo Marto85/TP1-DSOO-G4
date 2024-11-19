@@ -129,12 +129,13 @@ namespace DSOO_Grupo4_TP1
                             label1.Text = "El usuario ahora es No Socio";
                             convert_button.Text = "Convertir en Socio";
                         }
+                        convert_button.Visible = false;
                     }
-                        
+
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error en la conexión: " + ex.Message);
+                    MessageBox.Show("Error en la conexión: " + ex.Message);
                 }
                 finally
                 {
