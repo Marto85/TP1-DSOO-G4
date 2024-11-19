@@ -98,7 +98,6 @@ namespace DSOO_Grupo4_TP1.Datos
                         if (resultado == DialogResult.No)
                         {
                             return null;
-                            //break; // Salir del ciclo si el usuario no quiere intentar nuevamente
                         }
                     }
                 }
